@@ -1,1 +1,2 @@
-plotly.graph_objects
+plotly==5.3.1
+cycler==0.10.0 
