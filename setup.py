@@ -258,12 +258,12 @@ def main():
         return figa
 
     # Your streamlit code
-     st.set_page_config(
+    st.set_page_config(
         page_title="Dados Estatísticos",
         page_icon="✅",
         layout="wide",
      )
-     hide_streamlit_style = """
+    hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
