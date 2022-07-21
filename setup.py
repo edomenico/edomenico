@@ -53,13 +53,7 @@ def main():
 
     @st.cache(allow_output_mutation=True)
    # @st.cache(allow_output_mutation=True)
-    hide_streamlit_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    </style>
-    """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+   
 
     def consulta_dado_grafico(areasel,estacao, datainicio, datafim,area):
         if area == 'Área 2':
@@ -269,6 +263,13 @@ def main():
         page_icon="✅",
         layout="wide",
     )
+     hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
     barra_lateral = st.sidebar.empty()
     area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
     if area_seleciona == 'Área 1':
