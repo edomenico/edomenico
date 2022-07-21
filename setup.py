@@ -49,7 +49,12 @@ def main():
 
     @st.cache(allow_output_mutation=True)
    # @st.cache(allow_output_mutation=True)
-
+    hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    </style>
+    """
 
     def consulta_dado_grafico(areasel,estacao, datainicio, datafim,area):
         if area == 'Área 2':
