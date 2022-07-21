@@ -28,7 +28,6 @@ import streamlit
 
 
 
-import streamlit_book as stb
 
 
 def main():
