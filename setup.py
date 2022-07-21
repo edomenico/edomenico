@@ -27,6 +27,10 @@ from streamlit import cli as stcli
 import streamlit
 
 
+
+import streamlit_book as stb
+
+
 def main():
     import pandas as pd
     from datetime import datetime, timedelta
@@ -55,6 +59,7 @@ def main():
     footer {visibility: hidden;}
     </style>
     """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
     def consulta_dado_grafico(areasel,estacao, datainicio, datafim,area):
         if area == 'Área 2':
