@@ -40,6 +40,13 @@ def main():
     # dashboard title
 
     st.title("Dados Estatísticos")
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
     # top-level filters
     job_filter = st.selectbox("Selecione o aeródromo", pd.unique(df["estacao"]))
