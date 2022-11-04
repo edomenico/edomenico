@@ -23,8 +23,8 @@
 # estacao_seleciona=st.sidebar.selectbox("Seleciona o Aeródromo",areasel)
 
 import sys
-from streamlit import cli as stcli
-#from streamlit.web import cli as stcli
+#from streamlit import cli as stcli
+from streamlit.web import cli as stcli
 import streamlit
 
 
