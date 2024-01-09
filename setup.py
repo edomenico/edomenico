@@ -26,16 +26,16 @@
 
 
 
-    if from_data < to_data:
-        st.sidebar.error('Data de ínicio maior do que data final')
-    else:
-        df = consulta_dado_grafico(areasel, estacao_seleciona, to_data, from_data, area_seleciona)
-        if carregar_dados:
-            st.subheader('Dados')
-            dados = st.dataframe(df)
-            stock_select = st.sidebar.selectbox
-        figura=graficos(to_data,from_data)
-        grafico_line = st.plotly_chart(figura)
+if from_data < to_data:
+    st.sidebar.error('Data de ínicio maior do que data final')
+else:
+    df = consulta_dado_grafico(areasel, estacao_seleciona, to_data, from_data, area_seleciona)
+    if carregar_dados:
+        st.subheader('Dados')
+        dados = st.dataframe(df)
+        stock_select = st.sidebar.selectbox
+    figura=graficos(to_data,from_data)
+    grafico_line = st.plotly_chart(figura)
 
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
