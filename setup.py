@@ -227,7 +227,7 @@ def main():
         figa.update_layout(
             height=3000,
             showlegend=False,
-            title_text=df.estacao[0] + ' - ' + str(datainicio),
+            #title_text=df.estacao[0] + ' - ' + str(datainicio),
             # + ' - ' + df.datahora[0][11:16] + ' a ' + df.datahora[aux - 1][
             # 11:16] + 'UTC',
             bargap=0.5,  # gap between bars of adjacent location coordinates
