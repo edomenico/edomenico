@@ -7,6 +7,7 @@ import sys
 #from streamlit import cli as stcli
 from streamlit.web import cli as stcli
 import streamlit
+from PIL import Image
 def main():
     def wind_dir_speed_freq(boundary_lower_speed, boundary_higher_speed, boundary_lower_direction,
                             boundary_higher_direction,wind_rose_data):
