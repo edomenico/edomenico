@@ -47,171 +47,183 @@ def main():
         x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
         # da=x.month
         arqi['data_hora'] = x
+        if len(arqi) == 0:
+            # ---------------------------------------------------------------------------------------------------------
 
-        # ---------------------------------------------------------------------------------------------------------
-        arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
-        # ---------------------------------------------------------------------------------------------------------
-        arqi.sort_values(by=['data_hora'], inplace=True)
-        arqi = arqi.reset_index(drop=True)
-        arqi['ws'] = arqi['wspd']
-        arqi['wd'] = arqi['wdir']
 
-        wind_rose_df = pd.DataFrame(np.zeros((16 * 9, 3)), index=None, columns=('direction', 'strength', 'frequency'))
+#        --------------------------------------------------------------------------------------------------------
+            img = Image.open('sem-dados-pasta.jpg')
+            fig = px.imshow(img)
+            #fig = plt.imread('brasil2.png')
+            #fig = img.imread('brasil2.png')
+            #plt.imshow(fig)fig = px.imshow(img_rgb)
+        else:
+            arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
 
-        directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW',
-                      'NNW']
-        directions_deg = np.array(
-            [0, 22.5, 45, 72.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5])
-        speed_bins = ['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '>16']
+            arqi.sort_values(by=['data_hora'], inplace=True)
+            arqi = arqi.reset_index(drop=True)
+            arqi['ws'] = arqi['wspd']
+            arqi['wd'] = arqi['wdir']
 
-        # filling in the dataframe with directions and speed bins
-        wind_rose_df.direction = directions * 9
-        wind_rose_df.strength = np.repeat(speed_bins, 16)
+            wind_rose_df = pd.DataFrame(np.zeros((16 * 9, 3)), index=None, columns=('direction', 'strength', 'frequency'))
 
-        # creating a multiindex dataframe with frequencies
+            directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW',
+                          'NNW']
+            directions_deg = np.array(
+                [0, 22.5, 45, 72.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5])
+            speed_bins = ['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '>16']
 
-        idx = pd.MultiIndex.from_product([speed_bins,
-                                          directions_deg],
-                                         names=['wind_speed_bins', 'wind_direction_bins'])
-        col = ['frequency']
-        frequencies_df = pd.DataFrame(0, idx, col)
-        df1=arqi
+            # filling in the dataframe with directions and speed bins
+            wind_rose_df.direction = directions * 9
+            wind_rose_df.strength = np.repeat(speed_bins, 16)
 
-        if len(df1) !=0:
-            # print(df1.ws[:],df1.wd[:])
-            wind_rose_data = df1[['ws', 'wd']].to_numpy()
+            # creating a multiindex dataframe with frequencies
 
-            # distance between the centre of the bin and its edge
-            step = 11.25
+            idx = pd.MultiIndex.from_product([speed_bins,
+                                              directions_deg],
+                                             names=['wind_speed_bins', 'wind_direction_bins'])
+            col = ['frequency']
+            frequencies_df = pd.DataFrame(0, idx, col)
+            df1=arqi
 
-            # converting data between 348.75 and 360 to negative
-            for i in range(len(wind_rose_data)):
-                # print(wind_rose_data[i, 1])
-                if directions_deg[-1] + step <= wind_rose_data[i, 1] and wind_rose_data[i, 1] < 360:
-                    wind_rose_data[i, 1] = wind_rose_data[i, 1] - 360
+            if len(df1) !=0:
+                # print(df1.ws[:],df1.wd[:])
+                wind_rose_data = df1[['ws', 'wd']].to_numpy()
 
-            # determining the direction bins
-            bin_edges_dir = directions_deg - step
-            bin_edges_dir = np.append(bin_edges_dir, [directions_deg[-1] + step])
+                # distance between the centre of the bin and its edge
+                step = 11.25
 
-            # determining speed bins ( the last bin is 50 as above those speeds the outliers were removed for the measurements)
-            threshold_outlier_rm = 50
-            bin_edges_speed = np.array([0, 2, 4, 6, 8, 10, 12, 14, 16, threshold_outlier_rm])
+                # converting data between 348.75 and 360 to negative
+                for i in range(len(wind_rose_data)):
+                    # print(wind_rose_data[i, 1])
+                    if directions_deg[-1] + step <= wind_rose_data[i, 1] and wind_rose_data[i, 1] < 360:
+                        wind_rose_data[i, 1] = wind_rose_data[i, 1] - 360
 
-            frequencies = np.array([])
-            # loop selecting given bins and calculating frequencies
-            for i in range(len(bin_edges_speed) - 1):
-                for j in range(len(bin_edges_dir) - 1):
-                    bin_contents = wind_dir_speed_freq(bin_edges_speed[i], bin_edges_speed[i + 1], bin_edges_dir[j],
-                                                       bin_edges_dir[j + 1],wind_rose_data)
+                # determining the direction bins
+                bin_edges_dir = directions_deg - step
+                bin_edges_dir = np.append(bin_edges_dir, [directions_deg[-1] + step])
 
-                    # applying the filtering function for every bin and checking the number of measurements
-                    bin_size = len(bin_contents)
-                    if len(wind_rose_data) !=0:
-                        frequency = bin_size / len(wind_rose_data)
-                    else:
-                        frequency=0.0
-                    # obtaining the final frequencies of bin
-                    frequencies = np.append(frequencies, frequency)
+                # determining speed bins ( the last bin is 50 as above those speeds the outliers were removed for the measurements)
+                threshold_outlier_rm = 50
+                bin_edges_speed = np.array([0, 2, 4, 6, 8, 10, 12, 14, 16, threshold_outlier_rm])
 
-            # updating the frequencies dataframe
-            frequencies_df.frequency = frequencies * 100  # [%]
-            wind_rose_df.frequency = frequencies * 100  # [%]
+                frequencies = np.array([])
+                # loop selecting given bins and calculating frequencies
+                for i in range(len(bin_edges_speed) - 1):
+                    for j in range(len(bin_edges_dir) - 1):
+                        bin_contents = wind_dir_speed_freq(bin_edges_speed[i], bin_edges_speed[i + 1], bin_edges_dir[j],
+                                                           bin_edges_dir[j + 1],wind_rose_data)
 
-            # calling the PLOT function
-            #"""
-            #PLOTTING THE ROSES
-           # """
-            aux = len(df1)
-            # fig1 = wind_rose_fig(frequencies_df,
-            title = str(hora)+"Z"
-            filename = 'fig_wind_rose_WRF.png'
-            open_bool = False
-            # fig2 = wind_rose_fig(frequencies_df,
-            #                               title=df2.estacao[0]+' - '+df2.datahora[0][0:11] +' a '+ df2.datahora[aux-1][0:11]+' - '+df2.datahora[0][11:16] +' a '+ df2.datahora[aux-1][11:16]+'UTC',
-            #                               filename='fig_wind_rose_WRF.png',
-            #                               open_bool=False)
+                        # applying the filtering function for every bin and checking the number of measurements
+                        bin_size = len(bin_contents)
+                        if len(wind_rose_data) !=0:
+                            frequency = bin_size / len(wind_rose_data)
+                        else:
+                            frequency=0.0
+                        # obtaining the final frequencies of bin
+                        frequencies = np.append(frequencies, frequency)
 
-            fig = go.Figure()
+                # updating the frequencies dataframe
+                frequencies_df.frequency = frequencies * 100  # [%]
+                wind_rose_df.frequency = frequencies * 100  # [%]
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('0-2'), 'frequency'],
-                name='0-2',
-                marker_color='#482878'))
+                # calling the PLOT function
+                #"""
+                #PLOTTING THE ROSES
+               # """
+                aux = len(df1)
+                # fig1 = wind_rose_fig(frequencies_df,
+                title = str(hora)+"Z"
+                filename = 'fig_wind_rose_WRF.png'
+                open_bool = False
+                # fig2 = wind_rose_fig(frequencies_df,
+                #                               title=df2.estacao[0]+' - '+df2.datahora[0][0:11] +' a '+ df2.datahora[aux-1][0:11]+' - '+df2.datahora[0][11:16] +' a '+ df2.datahora[aux-1][11:16]+'UTC',
+                #                               filename='fig_wind_rose_WRF.png',
+                #                               open_bool=False)
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('2-4'), 'frequency'],
-                name='2-4',
-                marker_color='#3e4989'))
+                fig = go.Figure()
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('4-6'), 'frequency'],
-                name='4-6',
-                marker_color='#31688e'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('0-2'), 'frequency'],
+                    name='0-2',
+                    marker_color='#482878'))
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('6-8'), 'frequency'],
-                name='6-8',
-                marker_color='#26828e'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('2-4'), 'frequency'],
+                    name='2-4',
+                    marker_color='#3e4989'))
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('8-10'), 'frequency'],
-                name='8-10',
-                marker_color='#1f9e89'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('4-6'), 'frequency'],
+                    name='4-6',
+                    marker_color='#31688e'))
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('10-12'), 'frequency'],
-                name='10-12',
-                marker_color='#35b779'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('6-8'), 'frequency'],
+                    name='6-8',
+                    marker_color='#26828e'))
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('12-14'), 'frequency'],
-                name='12-14',
-                marker_color='#6ece58'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('8-10'), 'frequency'],
+                    name='8-10',
+                    marker_color='#1f9e89'))
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('14-16'), 'frequency'],
-                name='14-16',
-                marker_color='#b5de2b'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('10-12'), 'frequency'],
+                    name='10-12',
+                    marker_color='#35b779'))
 
-            fig.add_trace(go.Barpolar(
-                r=frequencies_df.loc[('>16'), 'frequency'],
-                name='>16',
-                marker_color='#fde725'))
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('12-14'), 'frequency'],
+                    name='12-14',
+                    marker_color='#6ece58'))
 
-            fig.update_traces(
-                text=['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW',
-                      'NNW'])
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('14-16'), 'frequency'],
+                    name='14-16',
+                    marker_color='#b5de2b'))
 
-            fig.update_layout(
-                title=title,
-                title_font_size=20,
-                showlegend=True,
-                legend_title='    Int.vento(kt)',
-                title_x=0.463,
-                legend_font_size=18,
-                polar_radialaxis_ticksuffix='%',
-                polar_angularaxis_rotation=90,
-                polar_angularaxis_direction='clockwise',
-                polar_angularaxis_tickmode='array',
-                polar_angularaxis_tickvals=[0, 22.5, 45, 72.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270,
-                                            292.5,
-                                            315,
-                                            337.5],
-                polar_angularaxis_ticktext=['<b>N</b>', 'NNE', '<b>NE</b>', 'ENE', '<b>E</b>', 'ESE', '<b>SE</b>',
-                                            'SSE',
-                                            '<b>S</b>', 'SSW', '<b>SW</b>', 'WSW', '<b>W</b>', 'WNW', '<b>NW</b>',
-                                            'NNW'],
-                polar_angularaxis_tickfont_size=12,
-                polar_radialaxis_tickmode='linear',
-                polar_radialaxis_angle=45,
-                polar_radialaxis_tick0=5,
-                polar_radialaxis_dtick=5,
-                polar_radialaxis_tickangle=100,
-                polar_radialaxis_tickfont_size=14,
-                hovermode='closest',
-                height=600, width=800)
+                fig.add_trace(go.Barpolar(
+                    r=frequencies_df.loc[('>16'), 'frequency'],
+                    name='>16',
+                    marker_color='#fde725'))
+
+                fig.update_traces(
+                    text=['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW',
+                          'NNW'])
+
+                fig.update_layout(
+                    title=title,
+                    title_font_size=20,
+                    showlegend=True,
+                    legend_title='    Int.vento(kt)',
+                    title_x=0.463,
+                    legend_font_size=18,
+                    polar_radialaxis_ticksuffix='%',
+                    polar_angularaxis_rotation=90,
+                    polar_angularaxis_direction='clockwise',
+                    polar_angularaxis_tickmode='array',
+                    polar_angularaxis_tickvals=[0, 22.5, 45, 72.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270,
+                                                292.5,
+                                                315,
+                                                337.5],
+                    polar_angularaxis_ticktext=['<b>N</b>', 'NNE', '<b>NE</b>', 'ENE', '<b>E</b>', 'ESE', '<b>SE</b>',
+                                                'SSE',
+                                                '<b>S</b>', 'SSW', '<b>SW</b>', 'WSW', '<b>W</b>', 'WNW', '<b>NW</b>',
+                                                'NNW'],
+                    polar_angularaxis_tickfont_size=12,
+                    polar_radialaxis_tickmode='linear',
+                    polar_radialaxis_angle=45,
+                    polar_radialaxis_tick0=5,
+                    polar_radialaxis_dtick=5,
+                    polar_radialaxis_tickangle=100,
+                    polar_radialaxis_tickfont_size=14,
+                    hovermode='closest',
+                    height=600, width=800)
+
+
         return fig
+
 
     import numpy as np  # np mean, np random
     import pandas as pd  # read csv, df manipulation
