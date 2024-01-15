@@ -63,7 +63,7 @@ def main():
         arqzerado=1
         if len(arqi) == 0:
             dado= data = [[np.nan , np.nan]]
-
+            totaldados=0
             dfzerado = pd.DataFrame(dado, columns=['ws', 'wd'])
             arqzerado=0
         else:
@@ -73,6 +73,7 @@ def main():
             arqi = arqi.reset_index(drop=True)
             arqi['ws'] = arqi['wspd']
             arqi['wd'] = arqi['wdir']
+            totaldados=len(arqi)
 
         wind_rose_df = pd.DataFrame(np.zeros((16 * 9, 3)), index=None,
                                     columns=('direction', 'strength', 'frequency'))
@@ -236,7 +237,7 @@ def main():
                 hovermode='closest',
                 height=600, width=800)
 
-        return fig
+        return fig,totaldados
 
 
     import numpy as np  # np mean, np random
@@ -387,119 +388,129 @@ def main():
                 area =1
             else:
                 area=2
-            with tab1:
-                st.header(nomeestacaorosa)
-                fig1=rosa(nomeestacaorosa,0,area)
-                st.write(fig1)
+        with tab1:
+            st.header(nomeestacaorosa)
+            fig1,ndados = rosa(nomeestacaorosa, 0, area)
+            st.write(fig1)
+            st.subheader("Total de dados: "+str(ndados) )
 
+        with tab2:
+            st.header(nomeestacaorosa)
+            fig2,ndados = rosa(nomeestacaorosa, 1, area)
+            st.write(fig2)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab3:
+            st.header(nomeestacaorosa)
+            fig3,ndados = rosa(nomeestacaorosa, 2, area)
+            st.write(fig3)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab4:
+            st.header(nomeestacaorosa)
+            fig4,ndados = rosa(nomeestacaorosa, 3, area)
+            st.write(fig4)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab5:
+            st.header(nomeestacaorosa)
+            fig5,ndados = rosa(nomeestacaorosa, 4, area)
+            st.write(fig5)
+            st.subheader("Total de dados: " + str(ndados))
 
-            with tab2:
-                st.header(nomeestacaorosa)
-                fig2=rosa(nomeestacaorosa,1,area)
-                st.write(fig2)
+        with tab6:
+            st.header(nomeestacaorosa)
+            fig6,ndados = rosa(nomeestacaorosa, 5, area)
+            st.write(fig6)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab7:
+            st.header(nomeestacaorosa)
+            fig7,ndados = rosa(nomeestacaorosa, 6, area)
+            st.write(fig7)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab8:
+            st.header(nomeestacaorosa)
+            fig8,ndados = rosa(nomeestacaorosa, 7, area)
+            st.write(fig8)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab9:
+            st.header(nomeestacaorosa)
+            fig9,ndados = rosa(nomeestacaorosa, 8, area)
+            st.write(fig9)
+        with tab10:
+            st.header(nomeestacaorosa)
+            fig10,ndados = rosa(nomeestacaorosa, 9, area)
+            st.write(fig10)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab11:
+            st.header(nomeestacaorosa)
+            fig11,ndados = rosa(nomeestacaorosa, 10, area)
+            st.write(fig11)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab12:
+            st.header(nomeestacaorosa)
+            fig12,ndados = rosa(nomeestacaorosa, 11, area)
+            st.write(fig12)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab13:
+            st.header(nomeestacaorosa)
+            fig13,ndados = rosa(nomeestacaorosa, 12, area)
+            st.write(fig13)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab14:
+            st.header(nomeestacaorosa)
+            fig14,ndados = rosa(nomeestacaorosa, 13, area)
+            st.write(fig14)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab15:
+            st.header(nomeestacaorosa)
+            fig15,ndados = rosa(nomeestacaorosa, 14, area)
+            st.write(fig15)
+            st.subheader("Total de dados: " + str(ndados))
 
-            with tab3:
-                st.header(nomeestacaorosa)
-                fig3 = rosa(nomeestacaorosa, 2,area)
-                st.write(fig3)
+        with tab16:
+            st.header(nomeestacaorosa)
+            fig16,ndados = rosa(nomeestacaorosa, 15, area)
+            st.write(fig16)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab17:
+            st.header(nomeestacaorosa)
+            fig17,ndados = rosa(nomeestacaorosa, 16, area)
+            st.write(fig17)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab18:
+            st.header(nomeestacaorosa)
+            fig18,ndados = rosa(nomeestacaorosa, 17, area)
+            st.write(fig18)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab19:
+            st.header(nomeestacaorosa)
+            fig19,ndados = rosa(nomeestacaorosa, 18, area)
+            st.write(fig19)
+            st.subheader("Total de dados: " + str(ndados))
 
-            with tab4:
-                st.header(nomeestacaorosa)
-                fig4 = rosa(nomeestacaorosa, 3,area)
-                st.write(fig4)
-
-            with tab5:
-                st.header(nomeestacaorosa)
-                fig5 = rosa(nomeestacaorosa, 4,area)
-                st.write(fig5)
-
-            with tab6:
-                st.header(nomeestacaorosa)
-                fig6 = rosa(nomeestacaorosa, 5,area)
-                st.write(fig6)
-
-            with tab7:
-                st.header(nomeestacaorosa)
-                fig7 = rosa(nomeestacaorosa, 6,area)
-                st.write(fig7)
-
-            with tab8:
-                st.header(nomeestacaorosa)
-                fig8 = rosa(nomeestacaorosa, 7,area)
-                st.write(fig8)
-
-            with tab9:
-                st.header(nomeestacaorosa)
-                fig9 = rosa(nomeestacaorosa, 8,area)
-                st.write(fig9)
-            with tab10:
-                st.header(nomeestacaorosa)
-                fig10 = rosa(nomeestacaorosa, 9,area)
-                st.write(fig10)
-            with tab11:
-                st.header(nomeestacaorosa)
-                fig11 = rosa(nomeestacaorosa, 10,area)
-                st.write(fig11)
-
-            with tab12:
-                st.header(nomeestacaorosa)
-                fig12 = rosa(nomeestacaorosa, 11,area)
-                st.write(fig12)
-
-            with tab13:
-                st.header(nomeestacaorosa)
-                fig13 = rosa(nomeestacaorosa, 12,area)
-                st.write(fig13)
-
-            with tab14:
-                st.header(nomeestacaorosa)
-                fig14 = rosa(nomeestacaorosa, 13,area)
-                st.write(fig14)
-
-            with tab15:
-                st.header(nomeestacaorosa)
-                fig15 = rosa(nomeestacaorosa, 14,area)
-                st.write(fig15)
-
-            with tab16:
-                st.header(nomeestacaorosa)
-                fig16 = rosa(nomeestacaorosa, 15,area)
-                st.write(fig16)
-
-            with tab17:
-                st.header(nomeestacaorosa)
-                fig17 = rosa(nomeestacaorosa, 16,area)
-                st.write(fig17)
-
-            with tab18:
-                st.header(nomeestacaorosa)
-                fig18 = rosa(nomeestacaorosa, 17,area)
-                st.write(fig18)
-            with tab19:
-                st.header(nomeestacaorosa)
-                fig19 = rosa(nomeestacaorosa, 18,area)
-                st.write(fig19)
-
-            with tab20:
-                st.header(nomeestacaorosa)
-                fig20 = rosa(nomeestacaorosa, 19,area)
-                st.write(fig20)
-            with tab21:
-                st.header(nomeestacaorosa)
-                fig21 = rosa(nomeestacaorosa, 20,area)
-                st.write(fig21)
-            with tab22:
-                st.header(nomeestacaorosa)
-                fig22 = rosa(nomeestacaorosa, 21,area)
-                st.write(fig22)
-            with tab23:
-                st.header(nomeestacaorosa)
-                fig23 = rosa(nomeestacaorosa, 22,area)
-                st.write(fig23)
-            with tab24:
-                st.header(nomeestacaorosa)
-                fig24 = rosa(nomeestacaorosa, 23,area)
-                st.write(fig24)
+        with tab20:
+            st.header(nomeestacaorosa)
+            fig20,ndados = rosa(nomeestacaorosa, 19, area)
+            st.write(fig20)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab21:
+            st.header(nomeestacaorosa)
+            fig21,ndados = rosa(nomeestacaorosa, 20, area)
+            st.write(fig21)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab22:
+            st.header(nomeestacaorosa)
+            fig22,ndados = rosa(nomeestacaorosa, 21, area)
+            st.write(fig22)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab23:
+            st.header(nomeestacaorosa)
+            fig23,ndados = rosa(nomeestacaorosa, 22, area)
+            st.write(fig23)
+            st.subheader("Total de dados: " + str(ndados))
+        with tab24:
+            st.header(nomeestacaorosa)
+            fig24,ndados = rosa(nomeestacaorosa, 23, area)
+            st.write(fig24)
+            st.subheader("Total de dados: " + str(ndados))
 
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
