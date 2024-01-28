@@ -4,7 +4,7 @@ import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
-from streamlit import cli as stcli
+from streamlit.web import cli as stcli
 import streamlit
 
 
