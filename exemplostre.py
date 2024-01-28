@@ -11,7 +11,7 @@ from streamlit_toggle import toggle
 
 
 
-from PIL import Image
+#from PIL import Image
 def nomeestacao(nome):
     if nome=='SBJR':
         nomeaerodromo="Aeródromo de Jacarepaguá(RJ)"
