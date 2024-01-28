@@ -1,3 +1,2 @@
-plotly==5.18.0
-streamlit==1.30.0
-pil==1.1.7
+plotly==5.3.1
+Pillow==8.4.0
