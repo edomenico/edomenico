@@ -1,282 +1,149 @@
+import time  # to simulate a real time data, time loop
+
+import numpy as np  # np mean, np random
+import pandas as pd  # read csv, df manipulation
+import plotly.express as px  # interactive charts
 import sys
-from streamlit.web import cli as stcli
+from streamlit import cli as stcli
 import streamlit
 
 
 def main():
-    import pandas as pd
-    from datetime import datetime, timedelta
+    import numpy as np  # np mean, np random
+    import pandas as pd  # read csv, df manipulation
+    import plotly.express as px  # interactive charts
     import plotly.graph_objects as go
-    import streamlit as st
-    import numpy as np
+    import streamlit as st  #
+    from datetime import datetime, timedelta
     from plotly.subplots import make_subplots
-
-    area = ['Área 1', 'Área 2']
-    area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
-              'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
-              'SBPJ']
-    area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
-              'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBTF', 'SBUA', 'SBEG', 'SBBV',
-              'SSKW']
-    start_date = datetime.today() - timedelta(days=365)
-    end_date = datetime.today()
-    hide_streamlit_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    </style>
-    """
-    intervalo=['Diário','Mensal','Sazonal','Anual']
-
-    @st.cache(allow_output_mutation=True)
-   # @st.cache(allow_output_mutation=True)
-
-
-    def consulta_dado_grafico(areasel,estacao, datainicio, datafim,area):
-        
-        if area == 'Área 2':
-            arqi1 = pd.read_csv('metar_trat_teste2.csv')
-        else:
-            arqi1 = pd.read_csv('metar_trat_teste1.csv')
-        arqi1['u'] = -arqi1.wspd * np.sin(np.pi / 180 * arqi1.wdir)
-        arqi1['v'] = -arqi1.wspd * np.cos(np.pi / 180 * arqi1.wdir)
-
-        arqi = arqi1.loc[(arqi1['estacao'] == estacao)]
-        x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
-        arqi['data_hora'] = x
-        arqi = arqi.reset_index(drop=True)
-
-        datainicio=(datainicio.strftime('%Y/%m/%d %H:%M:%S'))
-        arqi = arqi.loc[(arqi['data_hora'] >= datainicio)]
-        arqi = arqi.reset_index(drop=True)
-        df=arqi
-        #first_column = df.pop('data_hora')
-
-        # insert column using insert(position,column_name,
-        # first_column) function
-        #df.insert(0, 'Data_hora', first_column)
-
-
-        #df.drop(columns=[ "metar", "speci", "u", "v", "gust"],inplace=True)
-        df['period']=df['data_hora'].dt.hour
-
-        df.drop(columns=["metar", "speci", "u", "v", "gust", "dewp"], inplace=True)
-       # df = df.reset_index(drop=True)
-        df.sort_values(by=['data_hora'], inplace=True)
-        df = df.reset_index(drop=True)
-        return df
-    def graficos(datainicio,datafim):
-        figa = make_subplots(rows=6, cols=1,
-                             shared_xaxes=False,
-                             vertical_spacing=0.09,
-                             subplot_titles=(
-                             "Intensidade do vento", " Média direção do vento", "Temperatura do ar",
-                             'Media altura nuvens baixas', "Quantidade de nuvens", "Altura da base das nuvens(ft)"),
-
-                             # column_widths=[0.7, 0.3],
-                             specs= [ [{"type": "scatter"}],
-                                    [{"type": "histogram"}],
-                                    [{"type": "histogram"}],
-                                    [{"type": "histogram"}],
-                                    [{"type": "histogram"}],
-                                    [{"type": "histogram"}]]
-                             )
-
-        figa.add_trace(
-            go.Scatter(
-                x=df["data_hora"],
-                y=df["wspd"],
-                mode="lines",
-                name="int(kt)"
-
-            ),
-            row=1, col=1
-        )
-
-        figa.add_trace(
-
-            go.Histogram(
-                x=df["period"],
-                xbins=dict(
-
-                    size=0.5
-                ),
-                # y=df["altn1"],
-                # mode="markers",
-                name="direção do vento(graus)",
-                opacity=0.75,
-                y=df["wdir"],
-                # y=np.mod((np.arctan2(df["u"], df["v"]) * 180/np.pi) + 180, 360),
-                histfunc='avg'
-
-            ),
-            row=2, col=1
-        )
-        figa.add_trace(
-
-            go.Histogram(
-                x=df["period"],
-                xbins=dict(
-
-                    size=0.5
-                ),
-                # y=df["altn1"],
-                # mode="markers",
-                name="temp do ar",
-                opacity=0.75,
-                y=df["dryt"],
-                histfunc='avg'
-
-            ),
-            row=3, col=1
-        )
-        figa.add_trace(
-
-            go.Histogram(
-                x=df["period"],
-                xbins=dict(
-
-                    size=0.5
-                ),
-                # y=df["altn1"],
-                # mode="markers",
-                name="altura base nuvem(ft)",
-                opacity=0.75,
-                y=df["altn1"],
-                histfunc='avg'
-
-            ),
-            row=4, col=1
-        )
-
-        # fig.add_trace(go.Histogram(
-        #     x=df["wdir"],
-        #     #y=df["wspd"],
-        #
-        #     name='dir/média(int) vento',
-        #     marker_color='#330C73',
-        #     xbins=dict(
-        #
-        #         size=0.5
-        #     ),
-        #
-        #     opacity=0.75,
-        #     y=df["wspd"],
-        #     histfunc='avg'
-        # ),
-        #     row=4, col=1
-        # )
-
-        figa.add_trace(go.Histogram2dContour(x=df["period"],
-                                             y=df["qn1"],
-                                             showscale=False,
-                                             colorbar=dict(
-                                                 title='Quantidade',
-                                                 tickfont={'color': '#E90'},
-                                                 titlefont={"color": '#FF0000'},
-                                             ),
-                                             contours=dict(
-                                                 showlabels=True,
-                                                 labelfont=dict(
-                                                     family='Raleway',
-                                                     color='white'
-                                                 )
-
-                                             )),
-
-                       row=5, col=1
-                       )
-        figa.add_trace(go.Histogram2dContour(x=df["period"],
-                                             y=df["altn1"],
-                                             showscale=False,
-                                             colorbar=dict(
-                                                 title='Altura(ft)',
-                                                 tickfont={'color': '#E90'},
-                                                 titlefont={"color": '#FF0000'},
-                                             ),
-                                             contours=dict(
-                                                 showlabels=True,
-                                                 labelfont=dict(
-                                                     family='Raleway',
-                                                     color='white'
-                                                 )
-
-                                             )),
-
-                       row=6, col=1
-                       )
-
-
-        figa.update_xaxes(title_text="datahora", row=1, col=1)
-        figa.update_xaxes(title_text="hora", row=2, col=1)
-        figa.update_xaxes(title_text="hora", row=3, col=1)
-        figa.update_xaxes(title_text="hora", row=4, col=1)
-        figa.update_xaxes(title_text="hora", row=5, col=1)
-        figa.update_xaxes(title_text="hora", row=6, col=1)
-
-        # Update yaxis properties
-
-        figa.update_yaxes(title_text="int vento(kt)", row=1, col=1)
-        figa.update_yaxes(title_text="média dir vento(graus)", row=2, col=1)
-        figa.update_yaxes(title_text="média tar(graus C)", showgrid=False, row=3, col=1)
-        figa.update_yaxes(title_text="média altura nuvens baixas(ft)", row=4, col=1)
-        figa.update_yaxes(title_text="quantidade nuvens", row=5, col=1)
-        figa.update_yaxes(title_text="altura nuvens baixas(ft)", row=6, col=1)
-
-        aux = len(df)
-        figa.update_layout(
-            height=3000,
-            showlegend=False,
-            title_text=df.estacao[0] + ' - ' + str(datainicio),
-            # + ' - ' + df.datahora[0][11:16] + ' a ' + df.datahora[aux - 1][
-            # 11:16] + 'UTC',
-            bargap=0.5,  # gap between bars of adjacent location coordinates
-            bargroupgap=0.3  # gap between bars of the same location coordinates
-        )
-        return figa
-
-    # Your streamlit code
     st.set_page_config(
-        page_title="Dados Estatísticos",
+        page_title="Real-Time Data Science Dashboard",
         page_icon="✅",
         layout="wide",
     )
-    barra_lateral = st.sidebar.empty()
-    area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
-    if area_seleciona == 'Área 1':
-        areasel = area_1
-    else:
-        areasel = area_2
-    estacao_seleciona = st.sidebar.selectbox("Seleciona o Aeródromo", areasel)
 
+    # read csv from a github repo
+    # dataset_url = "https://raw.githubusercontent.com/Lexie88rus/bank-marketing-analysis/master/bank.csv"
 
-    to_data = st.sidebar.date_input('Inicio:', start_date)
-    from_data = st.sidebar.date_input('Fim:', end_date)
-    intervalo_seleciona=st.sidebar.selectbox("Selecione o intervalo",intervalo)
-    carregar_dados=st.sidebar.checkbox("Mostrar dados")
+    # read csv from a URL
+    # @st.experimental_memo
+    # def get_data() -> pd.DataFrame:
+    #     return pd.read_csv(dataset_url)
 
-    grafico_line = st.empty()
-   # grafico_candle = st.empty()
+    st.cache(allow_output_mutation=True)
+    df = pd.read_csv('metar_trat_teste1.csv')
+    x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in df.datahora]
+    df['data_hora'] = x
+    df['period'] = df['data_hora'].dt.hour
+    df.drop(columns=["metar", "speci", "gust"], inplace=True)
+    df.sort_values(by=['data_hora'], inplace=True)
+    df = df.reset_index(drop=True)
+    # dashboard title
 
-    # elementos centrais da página
-    #st.title('Dados Estatísticos')
+    st.title("Dados Estatísticos")
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+    # top-level filters
+    job_filter = st.selectbox("Selecione o aeródromo", pd.unique(df["estacao"]))
 
+    # creating a single-element container
+    placeholder = st.empty()
 
-    if from_data < to_data:
-        st.sidebar.error('Data de ínicio maior do que data final')
-    else:
-        df = consulta_dado_grafico(areasel, estacao_seleciona, to_data, from_data, area_seleciona)
-        if carregar_dados:
-            st.subheader('Dados')
-            dados = st.dataframe(df)
-            stock_select = st.sidebar.selectbox
-        figura=graficos(to_data,from_data)
-        grafico_line = st.plotly_chart(figura)
+    # dataframe filter
+    df = df[df["estacao"] == job_filter]
+
+    # near real-time / live feed simulation
+    for seconds in range(200):
+        df["wspd_new"] = df["wspd"]
+        df["wdir_new"] = df["wdir"]
+        df["dryt_new"] = df["dryt"]
+
+        # creating KPIs
+        avg_wspd = np.mean(df["wspd_new"])
+        avg_dryt = np.mean(df["dryt_new"])
+
+        # count_married = int(
+        #     df[(df["marital"] == "married")]["marital"].count()
+        #     + np.random.choice(range(1, 30))
+        # )
+
+        avg_wdir = np.mean(df["wdir_new"])
+
+        with placeholder.container():
+            # create three columns
+            kpi1, kpi2, kpi3 = st.columns(3)
+
+            # fill in those three columns with respective metrics or KPIs
+            kpi1.metric(
+                label="Int vento(kt) ⏳",
+                value=round(avg_wspd),
+                delta=round(avg_wspd) - 10,
+            )
+
+            kpi2.metric(
+                label="Temperatura(°C) 💍",
+                value=round(avg_dryt),
+                delta=round(avg_dryt) - 10,
+            )
+
+            kpi3.metric(
+                label="Direção do vento ＄",
+                value=round(avg_wdir),
+                delta=round(avg_wdir) - 10,
+            )
+
+            # create two columns for charts
+            fig_col1, fig_col2 = st.columns(2)
+            with fig_col1:
+                st.markdown("### Gráfico 1")
+
+                fig = go.Figure(go.Histogram2dContour(
+                    x=df["period"],
+                    y=df["altn1"],
+                    colorscale='Jet',
+                    contours=dict(
+                        showlabels=True,
+                        labelfont=dict(
+                            family='Raleway',
+                            color='white'
+                        )
+                    ),
+                    hoverlabel=dict(
+                        bgcolor='white',
+                        bordercolor='black',
+                        font=dict(
+                            family='Raleway',
+                            color='black'
+                        )
+                    )
+
+                ))
+                fig.update_xaxes(title_text="hora")
+                fig.update_yaxes(title_text="altura nuvens baixas(ft)")
+
+                st.write(fig)
+
+            with fig_col2:
+                st.markdown("### Gráfico 2")
+                fig2 = px.histogram(data_frame=df, x="dryt")
+
+                st.write(fig2)
+
+            st.markdown("### Dados metar descodificado")
+            st.dataframe(df)
+            time.sleep(1)
+
 
 if __name__ == '__main__':
-    #if streamlit._is_running_with_streamlit:
-    main()
-    #else:
-     #   sys.argv = ["streamlit", "run", sys.argv[0]]
-       # sys.exit(stcli.main())
+    if streamlit._is_running_with_streamlit:
+        main()
+    else:
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        #app.run_server(debug=True, port=8881)
+        sys.exit(stcli.main())
