@@ -4,10 +4,25 @@ import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
-#from streamlit import cli as stcli
-from streamlit.web import cli as stcli
+#from streamlit.web import cli as stcli
+
 import streamlit
+from streamlit import runtime
+from streamlit_toggle import toggle
+from streamlit.web import cli as stcli
+
+
+
 from PIL import Image
+def nomeestacao(nome):
+    if nome=='SBJR':
+        nomeaerodromo="Aeródromo de Jacarepaguá(RJ)"
+    elif nome=='SBES':
+        nomeaerodromo = "Aeródromo de São Pedro da Aldeia(RJ)"
+    elif nome=='SBME':
+        nomeaerodromo = "Aeródromo de Macaé(RJ)"
+
+
 def main():
     def wind_dir_speed_freq(boundary_lower_speed, boundary_higher_speed, boundary_lower_direction,
                             boundary_higher_direction,wind_rose_data):
@@ -19,7 +34,7 @@ def main():
 
         # application of the filter on the wind_rose_data array
         return wind_rose_data[log_mask_speed & log_mask_direction]
-    def rosa(nomeestacaorosa,hora,area):
+    def rosa(nomeestacaorosa,hora,area,frequencia,estacaodoano,mesdoano,horaria):
         #area_value ='ÁREA 2'
         nomeest=nomeestacaorosa
         # if area_value == 'ÁREA 2':
@@ -64,10 +79,51 @@ def main():
         if len(arqi) == 0:
             dado= data = [[np.nan , np.nan]]
             totaldados=0
+
             dfzerado = pd.DataFrame(dado, columns=['ws', 'wd'])
             arqzerado=0
         else:
-            arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
+            if frequencia=="Anual":
+                arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
+            elif frequencia=="Sazonal":
+                if estacaodoano=='Verão':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 12) | (arqi['data_hora'].dt.month <3)]
+                elif estacaodoano=='Outono':
+                    arqi = arqi.loc[(arqi['data_hora']. dt.month >= 3) & (arqi['data_hora'].dt.month < 6)]
+                elif estacaodoano == 'Inverno':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month >= 6) & (arqi['data_hora'].dt.month < 9)]
+                elif estacaodoano == 'Primavera':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month >= 9) & (arqi['data_hora'].dt.month < 12)]
+            elif frequencia == "Mensal":
+                if mesdoano=='JAN':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month ==1)]
+                elif mesdoano=='FEV':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 2)]
+                elif mesdoano=='MAR':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 3)]
+                elif mesdoano=='ABR':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 4)]
+
+                elif mesdoano=='MAI':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 5)]
+                elif mesdoano=='JUN':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 6)]
+                elif mesdoano=='JUL':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 7)]
+
+                elif mesdoano=='AGO':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 8)]
+                elif mesdoano=='SET':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 9)]
+                elif mesdoano=='OUT':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 10)]
+                elif mesdoano=='NOV':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 11)]
+                elif mesdoano=='DEZ':
+                    arqi = arqi.loc[(arqi['data_hora'].dt.month == 12)]
+
+
+
 
             arqi.sort_values(by=['data_hora'], inplace=True)
             arqi = arqi.reset_index(drop=True)
@@ -239,7 +295,6 @@ def main():
 
         return fig,totaldados
 
-
     import numpy as np  # np mean, np random
     import pandas as pd  # read csv, df manipulation
     import plotly.express as px  # interactive charts
@@ -272,245 +327,213 @@ def main():
     df = df.reset_index(drop=True)
     # dashboard title
 
+
     st.title("Rosa dos Ventos - Horária")
 
     # top-level filters
     job_filter = st.selectbox("Selecione o aeródromo", pd.unique(df["estacao"]))
 
+
     # creating a single-element container
     placeholder = st.empty()
+    col1, col2 = st.columns(2)
+
+    with col1:
+        frequencia = st.radio(
+            "Escolha a frequência",
+            ["Anual", "Sazonal", "Mensal", "Horária"])
+    if frequencia == "Sazonal":
+        with col2:
+            estacaodoano= st.radio("Escolha a estação",
+            ["Verão", "Outono", "Inverno", "Primavera"],horizontal=True)
+            horaria=st.toggle('Horária')
+    elif frequencia=="Mensal":
+        with col2:
+            mesdoano = st.radio("Escolha o mês",
+                                    ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"], horizontal=True)
+            horaria = st.toggle('Horária')
+    elif frequencia=="Anual":
+        with col2:
+            horaria = st.toggle('Horária')
+    else:
+        horaria=True
+    if frequencia=="Anual":
+        estacaodoano="Nenhuma"
+        mesdoano="Nenhum"
+        #horaria=False
+    if frequencia == "Sazonal":
+        mesdoano="Nenhum"
+        #horaria = False
+    if frequencia == "Mensal":
+        estacaodoano="Nenhuma"
+        #horaria = False
+
+
+
 
     # dataframe filter
     df = df[df["estacao"] == job_filter]
     df = df.reset_index(drop=True)
+
+    # captions = ["Laugh out loud.", "Get the popcorn.", "Never stop learning."])
     # near real-time / live feed simulation
-    for seconds in range(200):
+    for seconds in range(1):
         df["wspd_new"] = df["wspd"]
         df["wdir_new"] = df["wdir"]
         df["dryt_new"] = df["dryt"]
 
-        # creating KPIs
-        avg_wspd = np.mean(df["wspd_new"])
-        avg_dryt = np.mean(df["dryt_new"])
-
-        # count_married = int(
-        #     df[(df["marital"] == "married")]["marital"].count()
-        #     + np.random.choice(range(1, 30))
-        # )
-
-        avg_wdir = np.mean(df["wdir_new"])
-
-        with placeholder.container():
-            # # create three columns
-            # kpi1, kpi2, kpi3 = st.columns(3)
-            #
-            # # fill in those three columns with respective metrics or KPIs
-            # kpi1.metric(
-            #     label="Int vento(kt) ⏳",
-            #     value=round(avg_wspd),
-            #     delta=round(avg_wspd) - 10,
-            # )
-            #
-            # kpi2.metric(
-            #     label="Temperatura(°C) 💍",
-            #     value=round(avg_dryt),
-            #     delta=round(avg_dryt) - 10,
-            # )
-            #
-            # kpi3.metric(
-            #     label="Direção do vento ＄",
-            #     value=round(avg_wdir),
-            #     delta=round(avg_wdir) - 10,
-            # )
-
-            # create two columns for charts
-            #fig_col1, fig_col2 , fig_col3= st.columns(3)
-
-            #fig_col1, fig_col2 , fig_col3, fig_col4= st.columns(4)
-            # with fig_col1:
-            #     st.markdown("### Gráfico 1")
-            #
-            #     fig = go.Figure(go.Histogram2dContour(
-            #         x=df["period"],
-            #         y=df["altn1"],
-            #         colorscale='Jet',
-            #         contours=dict(
-            #             showlabels=True,
-            #             labelfont=dict(
-            #                 family='Raleway',
-            #                 color='white'
-            #             )
-            #         ),
-            #         hoverlabel=dict(
-            #             bgcolor='white',
-            #             bordercolor='black',
-            #             font=dict(
-            #                 family='Raleway',
-            #                 color='black'
-            #             )
-            #         )
-            #
-            #     ))
-            #     fig.update_xaxes(title_text="hora")
-            #     fig.update_yaxes(title_text="altura nuvens baixas(ft)")
-            #
-            #
-            #
-            #     st.write(fig)
-
-            # with fig_col2:
-            #     st.markdown("### Gráfico 2")
-            #     fig2 = px.histogram(data_frame=df, x="dryt")
-            #
-            #     st.write(fig2)
-            #
-            # st.markdown("### Dados metar descodificado")
-            # st.dataframe(df)
-            # time.sleep(1)
-
-            area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC',
-                      'SBJE',
-                      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
-                      'SBPL',
-                      'SBPJ']
-            area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
-                      'SBHT',
-                      'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
-                      'SBEG', 'SBBV',
-                      'SSKW', 'SWEI', 'SWPI']
-
-
-            tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13\
-            ,tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24\
-                = st.tabs(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"])
-            nomeestacaorosa = df["estacao"][0]
-            if nomeestacaorosa in area_1:
-                area =1
-            else:
-                area=2
-        with tab1:
+        area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC',
+                  'SBJE',
+                  'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
+                  'SBPL',
+                  'SBPJ']
+        area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
+                  'SBHT',
+                  'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
+                  'SBEG', 'SBBV',
+                  'SSKW', 'SWEI', 'SWPI']
+        nomeestacaorosa = df["estacao"][0]
+        if nomeestacaorosa in area_1:
+            area = 1
+        else:
+            area = 2
+        if horaria == False:
             st.header(nomeestacaorosa)
-            fig1,ndados = rosa(nomeestacaorosa, 0, area)
+            fig1, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
             st.write(fig1)
-            st.subheader("Total de dados: "+str(ndados) )
+            st.subheader("Total de dados: " + str(ndados))
+        elif horaria == True:
+            tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
+                , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
+                = st.tabs(
+                ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+                 "19", "20", "21", "22", "23"])
 
-        with tab2:
-            st.header(nomeestacaorosa)
-            fig2,ndados = rosa(nomeestacaorosa, 1, area)
-            st.write(fig2)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab3:
-            st.header(nomeestacaorosa)
-            fig3,ndados = rosa(nomeestacaorosa, 2, area)
-            st.write(fig3)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab4:
-            st.header(nomeestacaorosa)
-            fig4,ndados = rosa(nomeestacaorosa, 3, area)
-            st.write(fig4)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab5:
-            st.header(nomeestacaorosa)
-            fig5,ndados = rosa(nomeestacaorosa, 4, area)
-            st.write(fig5)
-            st.subheader("Total de dados: " + str(ndados))
 
-        with tab6:
-            st.header(nomeestacaorosa)
-            fig6,ndados = rosa(nomeestacaorosa, 5, area)
-            st.write(fig6)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab7:
-            st.header(nomeestacaorosa)
-            fig7,ndados = rosa(nomeestacaorosa, 6, area)
-            st.write(fig7)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab8:
-            st.header(nomeestacaorosa)
-            fig8,ndados = rosa(nomeestacaorosa, 7, area)
-            st.write(fig8)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab9:
-            st.header(nomeestacaorosa)
-            fig9,ndados = rosa(nomeestacaorosa, 8, area)
-            st.write(fig9)
-        with tab10:
-            st.header(nomeestacaorosa)
-            fig10,ndados = rosa(nomeestacaorosa, 9, area)
-            st.write(fig10)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab11:
-            st.header(nomeestacaorosa)
-            fig11,ndados = rosa(nomeestacaorosa, 10, area)
-            st.write(fig11)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab12:
-            st.header(nomeestacaorosa)
-            fig12,ndados = rosa(nomeestacaorosa, 11, area)
-            st.write(fig12)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab13:
-            st.header(nomeestacaorosa)
-            fig13,ndados = rosa(nomeestacaorosa, 12, area)
-            st.write(fig13)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab14:
-            st.header(nomeestacaorosa)
-            fig14,ndados = rosa(nomeestacaorosa, 13, area)
-            st.write(fig14)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab15:
-            st.header(nomeestacaorosa)
-            fig15,ndados = rosa(nomeestacaorosa, 14, area)
-            st.write(fig15)
-            st.subheader("Total de dados: " + str(ndados))
+            with tab1:
+                st.header(nomeestacaorosa)
+                fig1, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig1)
+                st.subheader("Total de dados: " + str(ndados))
 
-        with tab16:
-            st.header(nomeestacaorosa)
-            fig16,ndados = rosa(nomeestacaorosa, 15, area)
-            st.write(fig16)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab17:
-            st.header(nomeestacaorosa)
-            fig17,ndados = rosa(nomeestacaorosa, 16, area)
-            st.write(fig17)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab18:
-            st.header(nomeestacaorosa)
-            fig18,ndados = rosa(nomeestacaorosa, 17, area)
-            st.write(fig18)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab19:
-            st.header(nomeestacaorosa)
-            fig19,ndados = rosa(nomeestacaorosa, 18, area)
-            st.write(fig19)
-            st.subheader("Total de dados: " + str(ndados))
+            with tab2:
+                st.header(nomeestacaorosa)
+                fig2, ndados = rosa(nomeestacaorosa, 1, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig2)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab3:
+                st.header(nomeestacaorosa)
+                fig3, ndados = rosa(nomeestacaorosa, 2, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig3)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab4:
+                st.header(nomeestacaorosa)
+                fig4, ndados = rosa(nomeestacaorosa, 3, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig4)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab5:
+                st.header(nomeestacaorosa)
+                fig5, ndados = rosa(nomeestacaorosa, 4, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig5)
+                st.subheader("Total de dados: " + str(ndados))
 
-        with tab20:
-            st.header(nomeestacaorosa)
-            fig20,ndados = rosa(nomeestacaorosa, 19, area)
-            st.write(fig20)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab21:
-            st.header(nomeestacaorosa)
-            fig21,ndados = rosa(nomeestacaorosa, 20, area)
-            st.write(fig21)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab22:
-            st.header(nomeestacaorosa)
-            fig22,ndados = rosa(nomeestacaorosa, 21, area)
-            st.write(fig22)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab23:
-            st.header(nomeestacaorosa)
-            fig23,ndados = rosa(nomeestacaorosa, 22, area)
-            st.write(fig23)
-            st.subheader("Total de dados: " + str(ndados))
-        with tab24:
-            st.header(nomeestacaorosa)
-            fig24,ndados = rosa(nomeestacaorosa, 23, area)
-            st.write(fig24)
-            st.subheader("Total de dados: " + str(ndados))
+            with tab6:
+                st.header(nomeestacaorosa)
+                fig6, ndados = rosa(nomeestacaorosa, 5, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig6)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab7:
+                st.header(nomeestacaorosa)
+                fig7, ndados = rosa(nomeestacaorosa, 6, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig7)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab8:
+                st.header(nomeestacaorosa)
+                fig8, ndados = rosa(nomeestacaorosa, 7, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig8)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab9:
+                st.header(nomeestacaorosa)
+                fig9, ndados = rosa(nomeestacaorosa, 8, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig9)
+            with tab10:
+                st.header(nomeestacaorosa)
+                fig10, ndados = rosa(nomeestacaorosa, 9, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig10)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab11:
+                st.header(nomeestacaorosa)
+                fig11, ndados = rosa(nomeestacaorosa, 10, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig11)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab12:
+                st.header(nomeestacaorosa)
+                fig12, ndados = rosa(nomeestacaorosa, 11, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig12)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab13:
+                st.header(nomeestacaorosa)
+                fig13, ndados = rosa(nomeestacaorosa, 12, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig13)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab14:
+                st.header(nomeestacaorosa)
+                fig14, ndados = rosa(nomeestacaorosa, 13, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig14)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab15:
+                st.header(nomeestacaorosa)
+                fig15, ndados = rosa(nomeestacaorosa, 14, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig15)
+                st.subheader("Total de dados: " + str(ndados))
+
+            with tab16:
+                st.header(nomeestacaorosa)
+                fig16, ndados = rosa(nomeestacaorosa, 15, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig16)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab17:
+                st.header(nomeestacaorosa)
+                fig17, ndados = rosa(nomeestacaorosa, 16, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig17)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab18:
+                st.header(nomeestacaorosa)
+                fig18, ndados = rosa(nomeestacaorosa, 17, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig18)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab19:
+                st.header(nomeestacaorosa)
+                fig19, ndados = rosa(nomeestacaorosa, 18, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig19)
+                st.subheader("Total de dados: " + str(ndados))
+
+            with tab20:
+                st.header(nomeestacaorosa)
+                fig20, ndados = rosa(nomeestacaorosa, 19, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig20)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab21:
+                st.header(nomeestacaorosa)
+                fig21, ndados = rosa(nomeestacaorosa, 20, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig21)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab22:
+                st.header(nomeestacaorosa)
+                fig22, ndados = rosa(nomeestacaorosa, 21, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig22)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab23:
+                st.header(nomeestacaorosa)
+                fig23, ndados = rosa(nomeestacaorosa, 22, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig23)
+                st.subheader("Total de dados: " + str(ndados))
+            with tab24:
+                st.header(nomeestacaorosa)
+                fig24, ndados = rosa(nomeestacaorosa, 23, area, frequencia, estacaodoano, mesdoano, horaria)
+                st.write(fig24)
+                st.subheader("Total de dados: " + str(ndados))
+
 
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
