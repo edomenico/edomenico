@@ -10,7 +10,8 @@ import streamlit
 from streamlit import runtime
 from streamlit_toggle import toggle
 from streamlit.web import cli as stcli
-
+import os
+import glob
 
 
 from PIL import Image
@@ -21,9 +22,147 @@ def nomeestacao(nome):
         nomeaerodromo = "Aeródromo de São Pedro da Aldeia(RJ)"
     elif nome=='SBME':
         nomeaerodromo = "Aeródromo de Macaé(RJ)"
+    elif nome=='SBFS':
+        nomeaerodromo = "Aeródromo de São Tomé(RJ)"
+    elif nome=='SBCP':
+        nomeaerodromo = "Aeródromo de Campos dos Goytacazes(RJ)"
+    elif nome=='SBRJ':
+        nomeaerodromo = "Aeródromo do Rio de Janeiro - Santos Dumont(RJ)"
+    elif nome=='SBCB':
+        nomeaerodromo = "Aeródromo de Cabo Frio(RJ)"
+    elif nome=='SBVT':
+        nomeaerodromo = "Aeródromo de Vitória(ES)"
+    elif nome=='SBPS':
+        nomeaerodromo = "Aeródromo de Porto Seguro(BA)"
+    elif nome=='SBGL':
+        nomeaerodromo = "Aeródromo do Rio de Janeiro - Galeão(RJ)"
+    elif nome=='SBNT':
+        nomeaerodromo = "Aeródromo de Natal(RN)"
+    elif nome=='SBMS':
+        nomeaerodromo = "Aeródromo de Mossoró(RN)"
+    elif nome=='SBAC':
+        nomeaerodromo = "Aeródromo de Natal(CE)"
+    elif nome=='SBJE':
+        nomeaerodromo = "Aeródromo de Jericoacoara(CE)"
+    elif nome=='SBPB':
+        nomeaerodromo = "Aeródromo de Parnaíba(PI)"
+    elif nome=='SBAR':
+        nomeaerodromo = "Aeródromo de Aracaju(SE)"
+    elif nome=='SBMO':
+        nomeaerodromo = "Aeródromo de Maceió(AL)"
+    elif nome=='SBRF':
+        nomeaerodromo = "Aeródromo de Recife(PE)"
+    elif nome=='SBJP':
+        nomeaerodromo = "Aeródromo de João Pessoa(PB)"
+    elif nome=='SBSG':
+        nomeaerodromo = "Aeródromo de São Gonçalo(RN)"
+    elif nome=='SBFZ':
+        nomeaerodromo = "Aeródromo de Fortaleza(CE)"
+    elif nome=='SBSL':
+        nomeaerodromo = "Aeródromo de São Luis(MA)"
+    elif nome=='SBTE':
+        nomeaerodromo = "Aeródromo de Teresina(PI)"
+    elif nome=='SBJU':
+        nomeaerodromo = "Aeródromo de Juazeiro do Norte(CE)"
+    elif nome=='SBKG':
+        nomeaerodromo = "Aeródromo de Campina Grande(PB)"
+    elif nome=='SBFN':
+        nomeaerodromo = "Aeródromo de Fernando de Noronha(PE)"
+    elif nome=='SBPL':
+        nomeaerodromo = "Aeródromo de Petrolina(PE)"
+    elif nome=='SBPJ':
+        nomeaerodromo = "Aeródromo de Palmas(PJ)"
+    elif nome == 'SBRD':
+        nomeaerodromo = "Aeródromo de Rondonópolis(MT)"
+    elif nome == 'SBVH':
+        nomeaerodromo = "Aeródromo de Vilhena(RO)"
+    elif nome == 'SBJI':
+        nomeaerodromo = "Aeródromo de Ji-Paraná(RO)"
+    elif nome == 'SBRB':
+        nomeaerodromo = "Aeródromo de Rio Branco(AC)"
+    elif nome == 'SSKW':
+        nomeaerodromo = "Aeródromo de Cacoal(RO)"
+    elif nome == 'SBCY':
+        nomeaerodromo = "Aeródromo de Cuiabá(MT)"
+    elif nome == 'SBPV':
+        nomeaerodromo = "Aeródromo de Porto Velho(RO)"
+    elif nome == 'SBCZ':
+        nomeaerodromo = "Aeródromo de Cruzeiro do Sul(AC)"
+    elif nome == 'SBTT':
+        nomeaerodromo = "Aeródromo de Tabatinga(AM)"
+    elif nome == 'SBIZ':
+        nomeaerodromo = "Aeródromo de Imperatriz(MA)"
+    elif nome == 'SBCI':
+        nomeaerodromo = "Aeródromo de Carolina(MA)"
+    elif nome == 'SBMA':
+        nomeaerodromo = "Aeródromo de Marabá(PA)"
+    elif nome == 'SBCJ':
+        nomeaerodromo = "Aeródromo de Carajás(PA)"
+    elif nome == 'SBHT':
+        nomeaerodromo = "Aeródromo de Altamira(PA)"
+    elif nome == 'SBTB':
+        nomeaerodromo = "Aeródromo de Trombetas(PA)"
+    elif nome == 'SBOI':
+        nomeaerodromo = "Aeródromo de Oiapoque(AP)"
+    elif nome == 'SBBE':
+        nomeaerodromo = "Aeródromo de Belém(PA)"
+    elif nome == 'SBMQ':
+        nomeaerodromo = "Aeródromo de Macapá(AP)"
+    elif nome == 'SBSN':
+        nomeaerodromo = "Aeródromo de Santarém(PA)"
+    elif nome == 'SBSO':
+        nomeaerodromo = "Aeródromo de Sorriso(MT)"
+    elif nome == 'SBSI':
+        nomeaerodromo = "Aeródromo de Sinop(MT)"
+    elif nome == 'SBAT':
+        nomeaerodromo = "Aeródromo de Alta Floresta(MT)"
+    elif nome == 'SBIH':
+        nomeaerodromo = "Aeródromo de Itaituba(PA)"
+    elif nome == 'SBMY':
+        nomeaerodromo = "Aeródromo de Manicoré(AM)"
+    elif nome == 'SWPI':
+        nomeaerodromo = "Aeródromo de Parintins(AM)"
+    elif nome == 'SBTF':
+        nomeaerodromo = "Aeródromo de Tefé(AM)"
+
+    elif nome == 'SBUA':
+        nomeaerodromo = "Aeródromo de São Gabriel da Cachoeira(AM)"
+    elif nome == 'SBEG':
+        nomeaerodromo = "Aeródromo de Eduardo Gomes(AM)"
+    elif nome == 'SBBV':
+        nomeaerodromo = "Aeródromo de Boa Vista(RR)"
+    elif nome == 'SWEI':
+        nomeaerodromo = "Aeródromo de Erinepé(AM)"
+
+
+
+
+
+
+
+    return nomeaerodromo
+
+def earea(defarea):
+    if defarea == "Área 1":
+        area_escolhida = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
+                            'SBAC','SBJE', 'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU',
+                            'SBKG', 'SBFN','SBPL', 'SBPJ']
+    else:
+        area_escolhida = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA',
+                           'SBCJ','SBHT', 'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY',
+                            'SBTF', 'SBUA','SBEG', 'SBBV', 'SSKW', 'SWEI', 'SWPI']
+    return area_escolhida
+
+
+
+
+
 
 
 def main():
+
+
+
     def wind_dir_speed_freq(boundary_lower_speed, boundary_higher_speed, boundary_lower_direction,
                             boundary_higher_direction,wind_rose_data):
         # mask for wind speed column
@@ -44,9 +183,16 @@ def main():
 
 
         if area==1:
-            arqi1 = pd.read_csv('metar_trat_teste1.csv')
+            os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area1")
+            # extension = 'csv'
+            # all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+            # arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
+            #arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
-            arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area2")
+        extension = 'csv'
+        all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+        arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
        # nomeest="SBJR"
@@ -60,7 +206,8 @@ def main():
 
             xr.append(int(p[11:13]))
         arqi['hora'] = xr
-        arqi = arqi.loc[(arqi['hora'] == hora)]
+        if horaria == True:
+            arqi = arqi.loc[(arqi['hora'] == hora)]
         arqi = arqi.reset_index(drop=True)
         x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
         # da=x.month
@@ -75,16 +222,18 @@ def main():
 #             #fig = plt.imread('brasil2.png')
 #             #fig = img.imread('brasil2.png')
 #             #plt.imshow(fig)fig = px.imshow(img_rgb)
-        arqzerado=1
+        arqzerado = 1
         if len(arqi) == 0:
-            dado= data = [[np.nan , np.nan]]
+            dado= [[np.nan , np.nan]]
             totaldados=0
 
             dfzerado = pd.DataFrame(dado, columns=['ws', 'wd'])
             arqzerado=0
         else:
+
             if frequencia=="Anual":
-                arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
+               # arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
+                arqi=arqi
             elif frequencia=="Sazonal":
                 if estacaodoano=='Verão':
                     arqi = arqi.loc[(arqi['data_hora'].dt.month == 12) | (arqi['data_hora'].dt.month <3)]
@@ -126,7 +275,10 @@ def main():
 
 
             arqi.sort_values(by=['data_hora'], inplace=True)
+
             arqi = arqi.reset_index(drop=True)
+ #           inicio = arqi.datahora[0]
+         #   fim = arqi.datahora[len(arqi) - 1]
             arqi['ws'] = arqi['wspd']
             arqi['wd'] = arqi['wdir']
             totaldados=len(arqi)
@@ -151,9 +303,14 @@ def main():
                                          names=['wind_speed_bins', 'wind_direction_bins'])
         col = ['frequency']
         frequencies_df = pd.DataFrame(0, idx, col)
-        if arqzerado==1:
+        if len(arqi) !=0:
             df1 = arqi
         else:
+            dado = [[np.nan, np.nan]]
+            totaldados = 0
+
+            dfzerado = pd.DataFrame(dado, columns=['ws', 'wd'])
+            arqzerado = 0
             df1=dfzerado
         if len(df1) != 0:
             # print(df1.ws[:],df1.wd[:])
@@ -202,8 +359,30 @@ def main():
             # """
             aux = len(df1)
             # fig1 = wind_rose_fig(frequencies_df,
+
             if arqzerado==1:
-                title = str(hora) + "Z"
+                if horaria== True:
+                    nestacao=nomeestacao(nomeestacaorosa)
+                    if hora<10:
+                        horas='0'+str(hora)
+                    else:
+                        horas = str(hora)
+                    if frequencia=='Sazonal':
+                        title = estacaodoano + ' - ' +horas + "Z"
+                    elif frequencia== 'Mensal':
+                        title = mesdoano + ' - ' + horas + "Z"
+                    else:
+                        title = 'Anual' + ' - ' + horas + "Z"
+
+                else:
+                    nestacao = nomeestacao(nomeestacaorosa)
+                    if frequencia == 'Sazonal':
+                        title =  estacaodoano
+                    elif frequencia == 'Mensal':
+                        title = mesdoano
+                    else:
+                        title = 'Anual'
+
             else:
                 title="SEM DADOS NESTE HORÁRIO"
             filename = 'fig_wind_rose_WRF.png'
@@ -292,6 +471,7 @@ def main():
                 polar_radialaxis_tickfont_size=14,
                 hovermode='closest',
                 height=600, width=800)
+            print('total: ',totaldados)
 
         return fig,totaldados
 
@@ -318,20 +498,29 @@ def main():
     #     return pd.read_csv(dataset_url)
 
     st.cache(allow_output_mutation=True)
-    df = pd.read_csv('metar_trat_teste1.csv')
-    x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in df.datahora]
-    df['data_hora'] = x
-    df['period'] = df['data_hora'].dt.hour
-    df.drop(columns=["metar", "speci", "gust"], inplace=True)
-    df.sort_values(by=['data_hora'], inplace=True)
-    df = df.reset_index(drop=True)
+    #df = pd.read_csv('metar_trat_teste1.csv')
+    # os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/arqcsv")
+    # extension = 'csv'
+    # all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+    # df = pd.concat([pd.read_csv(f) for f in all_filenames])
+    #
+    #
+    # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in df.datahora]
+    # df['data_hora'] = x
+    # df['period'] = df['data_hora'].dt.hour
+    # df.drop(columns=["metar", "speci", "gust"], inplace=True)
+    # df.sort_values(by=['data_hora'], inplace=True)
+    # df = df.reset_index(drop=True)
     # dashboard title
 
 
-    st.title("Rosa dos Ventos - Horária")
+    st.title("Rosa dos Ventos")
 
     # top-level filters
-    job_filter = st.selectbox("Selecione o aeródromo", pd.unique(df["estacao"]))
+    selarea=st.selectbox("Selecione a área",['Área 1','Área 2'])
+    escolhearea=earea(selarea)
+
+    job_filter = st.selectbox("Selecione o aeródromo",  escolhearea)
 
 
     # creating a single-element container
@@ -341,7 +530,7 @@ def main():
     with col1:
         frequencia = st.radio(
             "Escolha a frequência",
-            ["Anual", "Sazonal", "Mensal", "Horária"])
+            ["Anual", "Sazonal", "Mensal"])
     if frequencia == "Sazonal":
         with col2:
             estacaodoano= st.radio("Escolha a estação",
@@ -355,8 +544,7 @@ def main():
     elif frequencia=="Anual":
         with col2:
             horaria = st.toggle('Horária')
-    else:
-        horaria=True
+
     if frequencia=="Anual":
         estacaodoano="Nenhuma"
         mesdoano="Nenhum"
@@ -372,35 +560,32 @@ def main():
 
 
     # dataframe filter
-    df = df[df["estacao"] == job_filter]
-    df = df.reset_index(drop=True)
+   # df = df[df["estacao"] == job_filter]
+   # df = df.reset_index(drop=True)
 
     # captions = ["Laugh out loud.", "Get the popcorn.", "Never stop learning."])
     # near real-time / live feed simulation
     for seconds in range(1):
-        df["wspd_new"] = df["wspd"]
-        df["wdir_new"] = df["wdir"]
-        df["dryt_new"] = df["dryt"]
+        # df["wspd_new"] = df["wspd"]
+        # df["wdir_new"] = df["wdir"]
+        # df["dryt_new"] = df["dryt"]
 
-        area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC',
-                  'SBJE',
-                  'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
-                  'SBPL',
-                  'SBPJ']
-        area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
-                  'SBHT',
-                  'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
-                  'SBEG', 'SBBV',
-                  'SSKW', 'SWEI', 'SWPI']
-        nomeestacaorosa = df["estacao"][0]
-        if nomeestacaorosa in area_1:
-            area = 1
+
+        nomeestacaorosa = job_filter
+        nomeest = nomeestacao(nomeestacaorosa)
+        st.header(nomeest)
+        # if nomeestacaorosa in area_1:
+        #     area = 1
+        # else:
+        #     area = 2
+        if selarea=='Área 1':
+            area=1
         else:
-            area = 2
+            area=2
         if horaria == False:
-            st.header(nomeestacaorosa)
-            fig1, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
-            st.write(fig1)
+
+            fig0, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
+            st.write(fig0)
             st.subheader("Total de dados: " + str(ndados))
         elif horaria == True:
             tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
@@ -411,129 +596,128 @@ def main():
 
 
             with tab1:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig1, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig1)
                 st.subheader("Total de dados: " + str(ndados))
 
             with tab2:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig2, ndados = rosa(nomeestacaorosa, 1, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig2)
                 st.subheader("Total de dados: " + str(ndados))
             with tab3:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig3, ndados = rosa(nomeestacaorosa, 2, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig3)
                 st.subheader("Total de dados: " + str(ndados))
             with tab4:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig4, ndados = rosa(nomeestacaorosa, 3, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig4)
                 st.subheader("Total de dados: " + str(ndados))
             with tab5:
-                st.header(nomeestacaorosa)
+                #st.header(nomeestacaorosa)
                 fig5, ndados = rosa(nomeestacaorosa, 4, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig5)
                 st.subheader("Total de dados: " + str(ndados))
 
             with tab6:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig6, ndados = rosa(nomeestacaorosa, 5, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig6)
                 st.subheader("Total de dados: " + str(ndados))
             with tab7:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig7, ndados = rosa(nomeestacaorosa, 6, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig7)
                 st.subheader("Total de dados: " + str(ndados))
             with tab8:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig8, ndados = rosa(nomeestacaorosa, 7, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig8)
                 st.subheader("Total de dados: " + str(ndados))
             with tab9:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig9, ndados = rosa(nomeestacaorosa, 8, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig9)
             with tab10:
-                st.header(nomeestacaorosa)
+                #st.header(nomeestacaorosa)
                 fig10, ndados = rosa(nomeestacaorosa, 9, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig10)
                 st.subheader("Total de dados: " + str(ndados))
             with tab11:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig11, ndados = rosa(nomeestacaorosa, 10, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig11)
                 st.subheader("Total de dados: " + str(ndados))
             with tab12:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig12, ndados = rosa(nomeestacaorosa, 11, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig12)
                 st.subheader("Total de dados: " + str(ndados))
             with tab13:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig13, ndados = rosa(nomeestacaorosa, 12, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig13)
                 st.subheader("Total de dados: " + str(ndados))
             with tab14:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig14, ndados = rosa(nomeestacaorosa, 13, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig14)
                 st.subheader("Total de dados: " + str(ndados))
             with tab15:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig15, ndados = rosa(nomeestacaorosa, 14, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig15)
                 st.subheader("Total de dados: " + str(ndados))
 
             with tab16:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig16, ndados = rosa(nomeestacaorosa, 15, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig16)
                 st.subheader("Total de dados: " + str(ndados))
             with tab17:
-                st.header(nomeestacaorosa)
+              #  st.header(nomeestacaorosa)
                 fig17, ndados = rosa(nomeestacaorosa, 16, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig17)
                 st.subheader("Total de dados: " + str(ndados))
             with tab18:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig18, ndados = rosa(nomeestacaorosa, 17, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig18)
                 st.subheader("Total de dados: " + str(ndados))
             with tab19:
-                st.header(nomeestacaorosa)
+              #  st.header(nomeestacaorosa)
                 fig19, ndados = rosa(nomeestacaorosa, 18, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig19)
                 st.subheader("Total de dados: " + str(ndados))
 
             with tab20:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig20, ndados = rosa(nomeestacaorosa, 19, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig20)
                 st.subheader("Total de dados: " + str(ndados))
             with tab21:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig21, ndados = rosa(nomeestacaorosa, 20, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig21)
                 st.subheader("Total de dados: " + str(ndados))
             with tab22:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig22, ndados = rosa(nomeestacaorosa, 21, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig22)
                 st.subheader("Total de dados: " + str(ndados))
             with tab23:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig23, ndados = rosa(nomeestacaorosa, 22, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig23)
                 st.subheader("Total de dados: " + str(ndados))
             with tab24:
-                st.header(nomeestacaorosa)
+               # st.header(nomeestacaorosa)
                 fig24, ndados = rosa(nomeestacaorosa, 23, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig24)
                 st.subheader("Total de dados: " + str(ndados))
-
 
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
