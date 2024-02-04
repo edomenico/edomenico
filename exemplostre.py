@@ -41,7 +41,7 @@ def nomeestacao(nome):
     elif nome=='SBMS':
         nomeaerodromo = "Aeródromo de Mossoró(RN)"
     elif nome=='SBAC':
-        nomeaerodromo = "Aeródromo de Natal(CE)"
+        nomeaerodromo = "Aeródromo de Aracati(CE)"
     elif nome=='SBJE':
         nomeaerodromo = "Aeródromo de Jericoacoara(CE)"
     elif nome=='SBPB':
@@ -142,9 +142,9 @@ def nomeestacao(nome):
 
     return nomeaerodromo
 
-def earea(defarea):
+def eareaprevisor(defarea):
     if defarea == "Área 1":
-        area_escolhida = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
+        area_escolhida = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS','SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
                             'SBAC','SBJE', 'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU',
                             'SBKG', 'SBFN','SBPL', 'SBPJ']
     else:
@@ -152,6 +152,154 @@ def earea(defarea):
                            'SBCJ','SBHT', 'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY',
                             'SBTF', 'SBUA','SBEG', 'SBBV', 'SSKW', 'SWEI', 'SWPI']
     return area_escolhida
+
+def eareausuario(defarea):
+    if defarea == "Área 1":
+        area_escolhida = ['Galeão - RJ', 'Santos Dumont - RJ','Jacarepaguá - RJ', 'São Pedro da Aldeia - RJ', 'Cabo Frio - RJ','Macaé - RJ', 'Farol de São Tomé - RJ',  'Campos - RJ', 'Vitória - ES',
+                          'Porto Seguro - BA', 'Natal - RN', 'São Gonçalo do Amarante - RN',
+                            'Mossoró - RN','Fortaleza - CE',' Aracati - CE','Jericoacoara - CE', 'Aracaju - SE',
+                          'Maceió - AL', 'Recife - PE', 'Petrolina - PE', 'Fernando de Noronha - PE','João Pessoa - PB', 'Campina Grande - PB','Juazeiro do Norte - PB'
+                            'São Luis - MA', 'Teresina - PI', 'Parnaíba - PI','Palmas - TO']
+    else:
+        area_escolhida =['Cuiabá - MT', 'Rondonópolis - MT','Sorriso - MT','Sinop -MT','Alta Floresta - MT',
+                         'Porto Velho - RO', 'Vilhena - RO','Cacoal - RO',' Ji-Paraná - RO', 'Rio Branco - AC',
+                         'Cruzeiro do Sul - AC','Eduardo Gomes - AM', 'Tabatinga - AM','São Gabriel da Cachoeira - AM'
+                         'Tefé - AM','Eurinepé - AM', 'Manicoré - AM', 'Parintins - AM','Imperatriz - MA','Carolina - MA',
+                         'Belém - PA','Santarém - PA','Trombetas - PA', 'Itaituba - PA','Carajás - PA','Marabá - PA',
+                         'Altamira - PA','Macapá - AP', 'Oiapoque - AP','Boa Vista -RR' ]
+    return area_escolhida
+
+def sigla(est):
+    if est=='Galeão - RJ':
+        sigl= 'SBGL'
+    elif est== 'Santos Dumont - RJ':
+        sigl='SBRJ'
+    elif est =='Jacarepaguá - RJ':
+        sigl='SBJR'
+    elif est== 'São Pedro da Aldeia - RJ':
+        sigl='SBES'
+    elif est== 'Cabo Frio - RJ':
+        sigl='SBCB'
+    elif est=='Macaé - RJ':
+        sigl='SBME'
+    elif est== 'Farol de São Tomé - RJ':
+        sigl='SBFS'
+    elif est=='Campos - RJ':
+        sigl='SBCP'
+    elif est == 'Vitória - ES':
+        sigl = 'SBVT'
+    elif est == 'Porto Seguro - BA':
+        sigl = 'SBPS'
+    elif est == 'Natal - RN':
+        sigl = 'SBNT'
+    elif est == 'São Gonçalo do Amarante - RN':
+        sigl = 'SBSG'
+    elif est == 'Mossoró - RN':
+        sigl = 'SBMS'
+    elif est == 'Fortaleza - CE':
+        sigl = 'SBFZ'
+    elif est == 'Aracati - CE':
+        sigl = 'SBAC'
+    elif est == 'Jericoacoara - CE':
+        sigl = 'SBJE'
+    elif est == 'Aracaju - SE':
+        sigl = 'SBAR'
+    elif est == 'Maceió - AL':
+        sigl = 'SBMO'
+    elif est == 'Recife - PE':
+        sigl = 'SBRF'
+    elif est == 'Petrolina - PE':
+        sigl = 'SBPL'
+
+    elif est == 'Fernando de Noronha - PE':
+        sigl = 'SBFN'
+    elif est == 'João Pessoa - PB':
+        sigl = 'SBJP'
+    elif est == 'Campina Grande - PB':
+        sigl = 'SBKG'
+    elif est == 'Juazeiro do Norte - PB':
+        sigl = 'SBJU'
+    elif est == 'São Luis - MA':
+        sigl = 'SBSL'
+
+    elif est == 'Teresina - PI':
+        sigl = 'SBTE'
+    elif est == 'Parnaíba - PI':
+        sigl = 'SBPB'
+
+    elif est == 'Palmas - TO':
+        sigl = 'SBPJ'
+
+
+
+    elif est== 'Cuiabá - MT':
+        sigl='SBCY'
+    elif est =='Rondonópolis - MT':
+        sigl='SBRO'
+    elif est== 'Sinop -MT':
+        sigl='SBSI'
+    elif est== 'Alta Floresta - MT':
+        sigl='SBAT'
+    elif est == 'Sorriso - MT':
+        sigl = 'SBSO'
+    elif est=='Porto Velho - RO':
+        sigl = 'SBPV'
+
+    elif est== 'Vilhena - RO':
+        sigl='SBVH'
+    elif est =='Cacoal - RO':
+        sigl='SSKW'
+    elif est== 'Ji-Paraná - RO':
+        sigl='SBJI'
+    elif est== 'Rio Branco - AC':
+        sigl='SBRB'
+    elif est=='Cruzeiro do Sul - AC':
+        sigl = 'SBCZ'
+
+    elif est== 'Eduardo Gomes - AM':
+        sigl='SBEG'
+    elif est =='Tabatinga - AM':
+        sigl='SBTT'
+    elif est== 'São Gabriel da Cachoeira - AM':
+        sigl='SBUA'
+    elif est== 'Tefé - AM':
+        sigl='SBTF'
+    elif est=='Eurinepé - AM':
+        sigl = 'SWEI'
+
+    elif est== 'Manicoré - AM':
+        sigl='SBMY'
+    elif est =='Parintins - AM':
+        sigl='SWPI'
+    elif est== 'Imperatriz - MA':
+        sigl='SBIZ'
+    elif est== 'Carolina - MA':
+        sigl='SBCI'
+    elif est=='Belém - PA':
+        sigl = 'SBBE'
+
+    elif est== 'Santarém - PA':
+        sigl='SBSN'
+    elif est =='Trombetas - PA':
+        sigl='SBTB'
+    elif est== 'Itaituba - PA':
+        sigl='SBIH'
+    elif est== 'Carajás - PA':
+        sigl='SBCJ'
+    elif est=='Marabá - PA':
+        sigl = 'SBMA'
+
+    elif est == 'Altamira - PA':
+        sigl = 'SBIH'
+    elif est == 'Macapá - AP':
+        sigl = 'SBMQ'
+    elif est == 'Oiapoque - AP':
+        sigl = 'SBOI'
+    elif est == 'Boa Vista -RR':
+        sigl = 'SBBV'
+
+
+    return sigl
 
 
 
@@ -183,13 +331,13 @@ def main():
 
 
         if area==1:
-            os.chdir("/mount/src/edomenico/area1")
+            os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area1")
             # extension = 'csv'
             # all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
             # arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
             #arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
-            os.chdir("/mount/src/edomenico/area2")
+            os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area2")
         extension = 'csv'
         all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
         arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
@@ -483,7 +631,7 @@ def main():
     from datetime import datetime, timedelta
     from plotly.subplots import make_subplots
     st.set_page_config(
-        page_title="Real-Time Data Science Dashboard",
+        page_title="Rosa dos Ventos - CMA-GL",
         page_icon="✅",
         layout="wide",
     )
@@ -516,11 +664,24 @@ def main():
 
     st.title("Rosa dos Ventos")
 
+    col3,col4=st.columns(2)
+    with col3:
+        usuario = st.radio("Escolha o usuário",["Previsor","Usuário"])
+
     # top-level filters
     selarea=st.selectbox("Selecione a área",['Área 1','Área 2'])
-    escolhearea=earea(selarea)
+    if usuario =='Previsor':
+        escolhearea=eareaprevisor(selarea)
+    else:
+        escolhearea = eareausuario(selarea)
+
+
+
 
     job_filter = st.selectbox("Selecione o aeródromo",  escolhearea)
+    if usuario=='Usuário':
+        job_filter=sigla(job_filter)
+
 
 
     # creating a single-element container
