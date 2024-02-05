@@ -235,7 +235,7 @@ def sigla(est):
     elif est== 'Cuiabá - MT':
         sigl='SBCY'
     elif est =='Rondonópolis - MT':
-        sigl='SBRO'
+        sigl='SBRD'
     elif est== 'Sinop -MT':
         sigl='SBSI'
     elif est== 'Alta Floresta - MT':
