@@ -666,7 +666,7 @@ def main():
 
     col3,col4=st.columns(2)
     with col3:
-        usuario = st.radio("Escolha o usuário",["Previsor","Usuário"])
+        usuario = st.radio("Escolha o usuário",["Previsor","Público Geral"])
 
     # top-level filters
     selarea=st.selectbox("Selecione a área",['Área 1','Área 2'])
@@ -679,7 +679,7 @@ def main():
 
 
     job_filter = st.selectbox("Selecione o aeródromo",  escolhearea)
-    if usuario=='Usuário':
+    if usuario=='Público Geral':
         job_filter=sigla(job_filter)
 
 
