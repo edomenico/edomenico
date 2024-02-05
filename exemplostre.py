@@ -379,7 +379,7 @@ def main():
             arqzerado=0
         else:
 
-            if frequencia=="Anual":
+            if frequencia=="Todos os dados":
                # arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
                 arqi=arqi
             elif frequencia=="Sazonal":
@@ -520,7 +520,7 @@ def main():
                     elif frequencia== 'Mensal':
                         title = mesdoano + ' - ' + horas + "Z"
                     else:
-                        title = 'Anual' + ' - ' + horas + "Z"
+                        title = 'Todos os dados' + ' - ' + horas + "Z"
 
                 else:
                     nestacao = nomeestacao(nomeestacaorosa)
@@ -529,7 +529,7 @@ def main():
                     elif frequencia == 'Mensal':
                         title = mesdoano
                     else:
-                        title = 'Anual'
+                        title = 'Todos os dados'
 
             else:
                 title="SEM DADOS NESTE HORÁRIO"
@@ -691,7 +691,7 @@ def main():
     with col1:
         frequencia = st.radio(
             "Escolha a frequência",
-            ["Anual", "Sazonal", "Mensal"])
+            ["Todos os dados", "Sazonal", "Mensal"])
     if frequencia == "Sazonal":
         with col2:
             estacaodoano= st.radio("Escolha a estação",
@@ -702,11 +702,11 @@ def main():
             mesdoano = st.radio("Escolha o mês",
                                     ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"], horizontal=True)
             horaria = st.toggle('Horária')
-    elif frequencia=="Anual":
+    elif frequencia=="Todos os dados":
         with col2:
             horaria = st.toggle('Horária')
 
-    if frequencia=="Anual":
+    if frequencia=="Todos os dados":
         estacaodoano="Nenhuma"
         mesdoano="Nenhum"
         #horaria=False
