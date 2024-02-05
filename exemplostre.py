@@ -331,7 +331,7 @@ def main():
 
 
         if area==1:
-            os.chdir("./area1")
+            os.chdir("edomenico/edomenico/tree/28357db2ae10f1b6ff0e5ef70cbb534eaf388848/area1")
             # extension = 'csv'
             # all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
             # arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
