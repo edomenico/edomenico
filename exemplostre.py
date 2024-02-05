@@ -158,7 +158,7 @@ def eareausuario(defarea):
         area_escolhida = ['Galeão - RJ', 'Santos Dumont - RJ','Jacarepaguá - RJ', 'São Pedro da Aldeia - RJ', 'Cabo Frio - RJ','Macaé - RJ', 'Farol de São Tomé - RJ',  'Campos - RJ', 'Vitória - ES',
                           'Porto Seguro - BA', 'Natal - RN', 'São Gonçalo do Amarante - RN',
                             'Mossoró - RN','Fortaleza - CE',' Aracati - CE','Jericoacoara - CE', 'Aracaju - SE',
-                          'Maceió - AL', 'Recife - PE', 'Petrolina - PE', 'Fernando de Noronha - PE','João Pessoa - PB', 'Campina Grande - PB','Juazeiro do Norte - PB'
+                          'Maceió - AL', 'Recife - PE', 'Petrolina - PE', 'Fernando de Noronha - PE','João Pessoa - PB', 'Campina Grande - PB','Juazeiro do Norte - PB',
                             'São Luis - MA', 'Teresina - PI', 'Parnaíba - PI','Palmas - TO']
     else:
         area_escolhida =['Cuiabá - MT', 'Rondonópolis - MT','Sorriso - MT','Sinop -MT','Alta Floresta - MT',
