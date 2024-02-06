@@ -373,7 +373,7 @@ def main():
 #             #fig = img.imread('brasil2.png')
 #             #plt.imshow(fig)fig = px.imshow(img_rgb)
         arqzerado = 1
-
+        
         if len(arqi) == 0:
             dado= [[np.nan , np.nan]]
             totaldados=0
@@ -383,9 +383,7 @@ def main():
             inicio='Estação fechada neste horário'
             fim='Estação fechada neste horário'
         else:
-            inicio = arqi.datahora[0]
-
-            fim = arqi.datahora[len(arqi) - 1]
+            
 
             if frequencia=="Todos os dados":
                # arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
@@ -433,11 +431,12 @@ def main():
             arqi.sort_values(by=['data_hora'], inplace=True)
 
             arqi = arqi.reset_index(drop=True)
- #           inicio = arqi.datahora[0]
-         #   fim = arqi.datahora[len(arqi) - 1]
+            inicio = arqi.data_hora[0]
+            fim = arqi.data_hora[len(arqi) - 1]
             arqi['ws'] = arqi['wspd']
             arqi['wd'] = arqi['wdir']
             totaldados=len(arqi)
+            
 
         wind_rose_df = pd.DataFrame(np.zeros((16 * 9, 3)), index=None,
                                     columns=('direction', 'strength', 'frequency'))
