@@ -1,7 +1,6 @@
 import time  # to simulate a real time data, time loop
 
 import numpy as np  # np mean, np random
-
 import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
@@ -301,6 +300,13 @@ def sigla(est):
 
 
     return sigl
+
+
+
+
+
+
+
 def main():
 
 
@@ -326,14 +332,12 @@ def main():
 
         if area==1:
             os.chdir("/mount/src/edomenico/area1")
-           # os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area1")
             # extension = 'csv'
             # all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
             # arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
             #arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
             os.chdir("/mount/src/edomenico/area2")
-            #os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area2")
         extension = 'csv'
         all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
         arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
@@ -367,19 +371,13 @@ def main():
 #             #fig = img.imread('brasil2.png')
 #             #plt.imshow(fig)fig = px.imshow(img_rgb)
         arqzerado = 1
-
         if len(arqi) == 0:
             dado= [[np.nan , np.nan]]
             totaldados=0
 
             dfzerado = pd.DataFrame(dado, columns=['ws', 'wd'])
             arqzerado=0
-            inicio='Estação fechada neste horário'
-            fim='Estação fechada neste horário'
         else:
-            inicio = arqi.datahora[0]
-
-            fim = arqi.datahora[len(arqi) - 1]
 
             if frequencia=="Todos os dados":
                # arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
@@ -621,9 +619,9 @@ def main():
                 polar_radialaxis_tickfont_size=14,
                 hovermode='closest',
                 height=600, width=800)
+            print('total: ',totaldados)
 
-
-        return fig,totaldados,inicio,fim
+        return fig,totaldados
 
     import numpy as np  # np mean, np random
     import pandas as pd  # read csv, df manipulation
@@ -747,10 +745,9 @@ def main():
             area=2
         if horaria == False:
 
-            fig0, ndados,inicio,fim = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
+            fig0, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
             st.write(fig0)
-            st.header("Total de dados: " + str(ndados), divider='rainbow')
-            st.subheader('Fonte: METAR ---- Início: '+str(inicio)+' - Fim: '+str(fim)+' :sunglasses:')
+            st.subheader("Total de dados: " + str(ndados))
         elif horaria == True:
             tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
@@ -761,155 +758,232 @@ def main():
 
             with tab1:
                # st.header(nomeestacaorosa)
-                fig1, ndados,inicio,fim = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig1, ndados = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig1)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
 
             with tab2:
                # st.header(nomeestacaorosa)
-                fig2, ndados,inicio,fim = rosa(nomeestacaorosa, 1, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig2, ndados = rosa(nomeestacaorosa, 1, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig2)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab3:
                # st.header(nomeestacaorosa)
-                fig3, ndados,inicio,fim = rosa(nomeestacaorosa, 2, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig3, ndados = rosa(nomeestacaorosa, 2, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig3)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab4:
                # st.header(nomeestacaorosa)
-                fig4, ndados,inicio,fim = rosa(nomeestacaorosa, 3, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig4, ndados = rosa(nomeestacaorosa, 3, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig4)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab5:
                 #st.header(nomeestacaorosa)
-                fig5, ndados,inicio,fim = rosa(nomeestacaorosa, 4, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig5, ndados = rosa(nomeestacaorosa, 4, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig5)
-
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
 
             with tab6:
                # st.header(nomeestacaorosa)
-                fig6, ndados,inicio,fim = rosa(nomeestacaorosa, 5, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig6, ndados = rosa(nomeestacaorosa, 5, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig6)
-
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab7:
                # st.header(nomeestacaorosa)
-                fig7, ndados,inicio,fim = rosa(nomeestacaorosa, 6, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig7, ndados = rosa(nomeestacaorosa, 6, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig7)
-
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab8:
                # st.header(nomeestacaorosa)
-                fig8, ndados,inicio,fim = rosa(nomeestacaorosa, 7, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig8, ndados = rosa(nomeestacaorosa, 7, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig8)
-
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab9:
                # st.header(nomeestacaorosa)
-                fig9, ndados,inicio,fim = rosa(nomeestacaorosa, 8, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig9, ndados = rosa(nomeestacaorosa, 8, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig9)
-
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab10:
                 #st.header(nomeestacaorosa)
-                fig10, ndados,inicio,fim = rosa(nomeestacaorosa, 9, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig10, ndados = rosa(nomeestacaorosa, 9, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig10)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab11:
                # st.header(nomeestacaorosa)
-                fig11, ndados,inicio,fim = rosa(nomeestacaorosa, 10, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig11, ndados = rosa(nomeestacaorosa, 10, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig11)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab12:
                # st.header(nomeestacaorosa)
-                fig12, ndados,inicio,fim = rosa(nomeestacaorosa, 11, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig12, ndados = rosa(nomeestacaorosa, 11, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig12)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab13:
                # st.header(nomeestacaorosa)
-                fig13, ndados,inicio,fim = rosa(nomeestacaorosa, 12, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig13, ndados = rosa(nomeestacaorosa, 12, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig13)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab14:
                # st.header(nomeestacaorosa)
-                fig14, ndados,inicio,fim = rosa(nomeestacaorosa, 13, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig14, ndados = rosa(nomeestacaorosa, 13, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig14)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab15:
                # st.header(nomeestacaorosa)
-                fig15, ndados,inicio,fim = rosa(nomeestacaorosa, 14, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig15, ndados = rosa(nomeestacaorosa, 14, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig15)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
 
             with tab16:
                # st.header(nomeestacaorosa)
-                fig16, ndados,inicio,fim = rosa(nomeestacaorosa, 15, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig16, ndados = rosa(nomeestacaorosa, 15, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig16)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab17:
               #  st.header(nomeestacaorosa)
-                fig17, ndados,inicio,fim = rosa(nomeestacaorosa, 16, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig17, ndados = rosa(nomeestacaorosa, 16, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig17)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab18:
                # st.header(nomeestacaorosa)
-                fig18, ndados,inicio,fim = rosa(nomeestacaorosa, 17, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig18, ndados = rosa(nomeestacaorosa, 17, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig18)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab19:
               #  st.header(nomeestacaorosa)
-                fig19, ndados,inicio,fim = rosa(nomeestacaorosa, 18, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig19, ndados = rosa(nomeestacaorosa, 18, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig19)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
 
             with tab20:
                # st.header(nomeestacaorosa)
-                fig20, ndados,inicio,fim = rosa(nomeestacaorosa, 19, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig20, ndados = rosa(nomeestacaorosa, 19, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig20)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab21:
                # st.header(nomeestacaorosa)
-                fig21, ndados,inicio,fim = rosa(nomeestacaorosa, 20, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig21, ndados = rosa(nomeestacaorosa, 20, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig21)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab22:
                # st.header(nomeestacaorosa)
-                fig22, ndados,inicio,fim = rosa(nomeestacaorosa, 21, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig22, ndados = rosa(nomeestacaorosa, 21, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig22)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab23:
                # st.header(nomeestacaorosa)
-                fig23, ndados,inicio,fim = rosa(nomeestacaorosa, 22, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig23, ndados = rosa(nomeestacaorosa, 22, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig23)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
             with tab24:
                # st.header(nomeestacaorosa)
-                fig24, ndados,inicio,fim = rosa(nomeestacaorosa, 23, area, frequencia, estacaodoano, mesdoano, horaria)
+                fig24, ndados = rosa(nomeestacaorosa, 23, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig24)
-                st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader("Total de dados: " + str(ndados))
+
+if __name__ == '__main__':
+    #if streamlit._is_running_with_streamlit:
+    main()
+    #else:
+    #    sys.argv = ["streamlit", "run", sys.argv[0]]
+    #    #app.run_server(debug=True, port=8881)
+      #  sys.exit(stcli.main())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
