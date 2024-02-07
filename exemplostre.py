@@ -374,7 +374,7 @@ def main():
 #             #plt.imshow(fig)fig = px.imshow(img_rgb)
         arqzerado = 1
         
-        if len(arqi) == 0:
+        if len(arqi) < 10:
             dado= [[np.nan , np.nan]]
             totaldados=0
 
@@ -458,7 +458,7 @@ def main():
                                          names=['wind_speed_bins', 'wind_direction_bins'])
         col = ['frequency']
         frequencies_df = pd.DataFrame(0, idx, col)
-        if len(arqi) !=0:
+        if len(arqi) > 10:
             df1 = arqi
         else:
             dado = [[np.nan, np.nan]]
