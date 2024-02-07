@@ -431,7 +431,7 @@ def main():
             arqi.sort_values(by=['data_hora'], inplace=True)
 
             arqi = arqi.reset_index(drop=True)
-            inicio = arqi.data_hora[0]
+            inicio = arqi.datahora[0]
             fim = arqi.data_hora[len(arqi) - 1]
             arqi['ws'] = arqi['wspd']
             arqi['wd'] = arqi['wdir']
