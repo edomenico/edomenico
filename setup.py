@@ -20,6 +20,16 @@ import glob
 
 def main():
     def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
+        from selenium import webdriver
+        from selenium.common.exceptions import TimeoutException
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.firefox.options import Options
+        from selenium.webdriver.firefox.service import Service
+        from selenium.webdriver.support import expected_conditions as EC
+        from selenium.webdriver.support.ui import WebDriverWait
+        from webdriver_manager.firefox import GeckoDriverManager
+
+        
         from datetime import datetime, timedelta
         import datetime
         import time
@@ -33,6 +43,16 @@ def main():
             from selenium import webdriver
             from bs4 import BeautifulSoup
             from selenium.webdriver.support.select import Select
+
+            URL = "'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/"
+            firefoxOptions = Options()
+            firefoxOptions.add_argument("--headless")
+            service = Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(
+                options=firefoxOptions,
+                service=service,
+            )
+            driver.get(URL)
 
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
@@ -50,15 +70,16 @@ def main():
             for i in range(intervalo + 1):
                 # abre o Firefox
                 #os.chdir("/mount/src/edomenico/")
-                browser = webdriver.Firefox("/mount/src/edomenico/geckodriver.exe")
+                #browser = webdriver.Firefox("/mount/src/edomenico/geckodriver.exe")
                 
                 # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                driver.get(URL)
                 # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                 # if (datahi.day + i)==31:
                 datacori = datahini + timedelta(days=i)
