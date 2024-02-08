@@ -44,15 +44,15 @@ def main():
             from bs4 import BeautifulSoup
             from selenium.webdriver.support.select import Select
 
-          #  URL = "'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/"
-            # firefoxOptions = Options()
-            # firefoxOptions.add_argument("--headless")
-            # service = Service(GeckoDriverManager().install())
-            # driver = webdriver.Firefox(
-            #     options=firefoxOptions,
-             #    service=service,
-            # )
-           #  driver.get(URL)
+            URL = "'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/"
+            firefoxOptions = Options()
+            firefoxOptions.add_argument("--headless")
+            service = Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(
+                options=firefoxOptions,
+                service=service,
+            )
+            driver.get(URL)
 
             
 
