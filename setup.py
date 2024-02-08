@@ -62,7 +62,7 @@ def main():
             st.warning("Timed out waiting for page to load")
             driver.quit()
 
-time.sleep(10)
+        time.sleep(10)
 
             
 
