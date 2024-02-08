@@ -54,6 +54,15 @@ def main():
             )
             driver.get(URL)
 
+            try:
+                WebDriverWait(driver, TIMEOUT).until(
+                    EC.visibility_of_element_located((By.XPATH, XPATH,))
+                )
+
+            except TimeoutException:
+                st.warning("Timed out waiting for page to load")
+                driver.quit()
+
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
             datahi = datetime.strftime(datahini, '%d/%m/%Y %H:%M')
