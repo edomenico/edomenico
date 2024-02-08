@@ -67,6 +67,7 @@ def main():
                 datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
                 datacorf=  datahfim + timedelta(hours=23)
                 datacorfs = datetime.strftime(datacorf, '%d/%m/%Y %H:%M')
+                datacorfs =datacorfs[0:10] + ' 23:00'
 
                 # espera 5s
                 time.sleep(5)
@@ -205,6 +206,9 @@ def main():
 
         redemet_baixa(1, areasel, to_data, from_data,estacao)
        # st.button('Carregar dados')==False
+
+
+
 
 
 
