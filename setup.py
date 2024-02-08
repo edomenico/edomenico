@@ -50,8 +50,8 @@ def main():
             for i in range(intervalo + 1):
                 # abre o Firefox
                 os.chdir("/mount/src/edomenico/")
-                browser = webdriver.Firefox(geckodriver.exe')
-                webdriver.Firefox(executable_path=r'C:\path\to\geckodriver.exe)
+                browser = webdriver.Firefox(geckodriver.exe)
+                
                 # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
