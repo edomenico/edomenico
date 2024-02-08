@@ -25,7 +25,7 @@ def main():
         import time
         if escolha == 1:
             from urllib.request import Request, urlopen
-            import lxml
+            
             import pandas as pd
             import pandas as pd
             import time
