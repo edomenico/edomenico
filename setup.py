@@ -53,6 +53,16 @@ def main():
                 service=service,
             )
             driver.get(URL)
+            try:
+                WebDriverWait(driver, TIMEOUT).until(
+                EC.visibility_of_element_located((By.XPATH, XPATH,))
+            )
+
+        except TimeoutException:
+            st.warning("Timed out waiting for page to load")
+            driver.quit()
+
+time.sleep(10)
 
             
 
