@@ -58,11 +58,11 @@ def main():
                 EC.visibility_of_element_located((By.XPATH, XPATH,))
             )
 
-        except TimeoutException:
-            st.warning("Timed out waiting for page to load")
-            driver.quit()
+            except TimeoutException:
+                st.warning("Timed out waiting for page to load")
+                driver.quit()
 
-        time.sleep(10)
+            time.sleep(10)
 
             
 
