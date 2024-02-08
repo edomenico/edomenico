@@ -49,7 +49,7 @@ def main():
             nome = estacao1
             for i in range(intervalo + 1):
                 # abre o Firefox
-                os.chdir("/mount/src/edomenico/")
+                #os.chdir("/mount/src/edomenico/")
                 browser = webdriver.Firefox("/mount/src/edomenico/geckodriver.exe")
                 
                 # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
