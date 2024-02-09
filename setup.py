@@ -52,7 +52,7 @@ def main():
                 # abre o Firefox
                 os.chdir("/mount/src/edomenico")
                 extension = 'exe'
-                all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+                all_filenames = [ii for ii in glob.glob('*.{}'.format(extension))]
                 browser = webdriver.Firefox(executable_path='all_filenames')
                 # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
