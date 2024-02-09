@@ -14,6 +14,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 import os
 import glob
+from streamlit_file_browser import st_file_browser
 
 
 
@@ -28,6 +29,7 @@ def main():
         from selenium.webdriver.support import expected_conditions as EC
         from selenium.webdriver.support.ui import WebDriverWait
         from webdriver_manager.firefox import GeckoDriverManager
+        from selenium.webdriver import FirefoxOptions
 
         
         from datetime import datetime, timedelta
@@ -69,13 +71,16 @@ def main():
                 # chama a página da redemet para consulta
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                geckodriver_path = '/mount/src/edomenico/geckodriver'
-                browser = webdriver.Firefox(executable_path=geckodriver_path)
-                
+                opts = FirefoxOptions()
+                opts.add_argument("--headless")
+                browser = webdriver.Firefox(options=opts)
+
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                driver.get(URL)
+                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                #driver.get(URL)
                 # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                 # if (datahi.day + i)==31:
                 datacori = datahini + timedelta(days=i)
