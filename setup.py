@@ -50,7 +50,7 @@ def main():
             nome = estacao1
             for i in range(intervalo + 1):
                 # abre o Firefox
-                os.chdir("/mount/src/edomenico/")
+                os.chdir("/mount/src/edomenico")
                 extension = 'exe'
                 all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
                 browser = webdriver.Firefox(executable_path='all_filenames')
