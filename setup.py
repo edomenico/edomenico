@@ -75,7 +75,7 @@ def main():
                 browser = webdriver.Chrome(options=chrome_options)
 
     # Load the page with Selenium
-                browser.get(url)
+                browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
 
     # Wait up to 10 seconds for the page to load
     # Wait for the page to finish loading all JavaScript
