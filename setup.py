@@ -59,12 +59,15 @@ def main():
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
 
-                from selenium.webdriver.chrome.service import Service as ChromeService
-                from webdriver_manager.chrome import ChromeDriverManager
+                
 
-                options = webdriver.ChromeOptions()
-                browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
+
+                from selenium.webdriver.firefox.service import Service
+
+                gecko_path = "C:/geckodriver/geckodriver.exe"
+                service = Service(gecko_path)
+                driver = webdriver.Firefox(service=service)
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
