@@ -65,7 +65,7 @@ def main():
 
                 from selenium.webdriver.firefox.service import Service
 
-                gecko_path = "os.chdir("/mount/src/edomenico/geckodriver.exe")
+                gecko_path = os.chdir("/mount/src/edomenico/geckodriver.exe")
                 service = Service(gecko_path)
                 browser = webdriver.Firefox(service=service)
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
