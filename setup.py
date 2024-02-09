@@ -14,30 +14,19 @@ import streamlit as st
 from datetime import datetime, timedelta
 import os
 import glob
-from streamlit_file_browser import st_file_browser
+
 
 
 
 
 def main():
     def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
-        from selenium import webdriver
-        from selenium.common.exceptions import TimeoutException
-        from selenium.webdriver.common.by import By
-        from selenium.webdriver.firefox.options import Options
-        from selenium.webdriver.firefox.service import Service
-        from selenium.webdriver.support import expected_conditions as EC
-        from selenium.webdriver.support.ui import WebDriverWait
-        from webdriver_manager.firefox import GeckoDriverManager
-        from selenium.webdriver import FirefoxOptions
-
-        
         from datetime import datetime, timedelta
         import datetime
         import time
         if escolha == 1:
             from urllib.request import Request, urlopen
-            
+            #import lxml
             import pandas as pd
             import pandas as pd
             import time
@@ -45,8 +34,6 @@ def main():
             from selenium import webdriver
             from bs4 import BeautifulSoup
             from selenium.webdriver.support.select import Select
-
-                     
 
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
@@ -63,24 +50,17 @@ def main():
             nome = estacao1
             for i in range(intervalo + 1):
                 # abre o Firefox
-                #os.chdir("/mount/src/edomenico/")
-                #browser = webdriver.Firefox("/mount/src/edomenico/geckodriver.exe")
-                
+                os.chdir("/mount/src/edomenico/")
+                extension = 'exe'
+                all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+                browser = webdriver.Firefox(executable_path='all_filenames')
                 # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                opts = FirefoxOptions()
-                opts.add_argument("--headless")
-                browser = webdriver.Firefox(options=opts)
-
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                
-                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                #driver.get(URL)
+                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                 # if (datahi.day + i)==31:
                 datacori = datahini + timedelta(days=i)
@@ -230,7 +210,6 @@ def main():
 
         redemet_baixa(1, areasel, to_data, from_data,estacao)
        # st.button('Carregar dados')==False
-
 
 
 
