@@ -62,7 +62,7 @@ def main():
                 option = webdriver.ChromeOptions()
                 browser = webdriver.Chrome(options = option)
 
-                browser.get(''https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'')
+                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
