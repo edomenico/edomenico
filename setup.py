@@ -15,6 +15,11 @@ from datetime import datetime, timedelta
 import os
 import glob
 
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 
@@ -63,12 +68,19 @@ def main():
 
 
 
-                from selenium.webdriver.firefox.service import Service
+                chrome_options = Options()
+                chrome_options.add_argument("--headless")
 
-                gecko_path = os.chdir("/mount/src/edomenico/geckodriver.exe")
-                service = Service(gecko_path)
-                browser = webdriver.Firefox(service=service)
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+    # Create the driver with the options
+                browser = webdriver.Chrome(options=chrome_options)
+
+    # Load the page with Selenium
+                browser.get(url)
+
+    # Wait up to 10 seconds for the page to load
+    # Wait for the page to finish loading all JavaScript
+                wait = WebDriverWait(browser, 10)
+                wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
