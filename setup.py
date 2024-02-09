@@ -44,27 +44,7 @@ def main():
             from bs4 import BeautifulSoup
             from selenium.webdriver.support.select import Select
 
-            URL = "'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/"
-            firefoxOptions = Options()
-            firefoxOptions.add_argument("--headless")
-            service = Service(GeckoDriverManager().install())
-            driver = webdriver.Firefox(
-                options=firefoxOptions,
-                service=service,
-            )
-            driver.get(URL)
-            try:
-                WebDriverWait(driver, TIMEOUT).until(
-                EC.visibility_of_element_located((By.XPATH, XPATH,))
-            )
-
-            except TimeoutException:
-                st.warning("Timed out waiting for page to load")
-                driver.quit()
-
-            time.sleep(10)
-
-            
+                     
 
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
@@ -89,7 +69,9 @@ def main():
                 # chama a página da redemet para consulta
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                browser= webdriver.Firefox('/mount/src/edomenico/geckodriver.exe')
+                geckodriver_path = '/mount/src/edomenico/geckodriver'
+                browser = webdriver.Firefox(executable_path=geckodriver_path)
+                
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
