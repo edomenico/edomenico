@@ -34,6 +34,7 @@ def main():
             from selenium import webdriver
             from bs4 import BeautifulSoup
             from selenium.webdriver.support.select import Select
+            from selenium.webdriver.chrome.options import Options
 
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
@@ -50,17 +51,22 @@ def main():
             nome = estacao1
             for i in range(intervalo + 1):
                 # abre o Firefox
-                os.chdir("/mount/src/edomenico")
-                extension = 'exe'
-                all_filenames = [ii for ii in glob.glob('*.{}'.format(extension))]
-                browser = webdriver.Firefox(executable_path='all_filenames')
+                #os.chdir("/mount/src/edomenico")
+                #extension = 'exe'
+                #all_filenames = [ii for ii in glob.glob('*.{}'.format(extension))]
+                #browser = webdriver.Firefox(executable_path='all_filenames')
                 # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
 
+                option = webdriver.ChromeOptions()
+                browser = webdriver.Chrome(options = option)
+
+                browser.get(''https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'')
+
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                 # if (datahi.day + i)==31:
                 datacori = datahini + timedelta(days=i)
