@@ -59,8 +59,11 @@ def main():
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
 
-                option = webdriver.ChromeOptions()
-                browser = webdriver.Chrome(options = option)
+                from selenium.webdriver.chrome.service import Service as ChromeService
+                from webdriver_manager.chrome import ChromeDriverManager
+
+                options = webdriver.ChromeOptions()
+                browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
 
