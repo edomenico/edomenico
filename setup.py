@@ -41,6 +41,19 @@ def main():
             from selenium.webdriver.support.select import Select
             from selenium.webdriver.chrome.options import Options
 
+
+            
+            from selenium.common.exceptions import TimeoutException
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.firefox.options import Options
+            from selenium.webdriver.firefox.service import Service
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.support.ui import WebDriverWait
+            from webdriver_manager.firefox import GeckoDriverManager
+
+
+            
+
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
             datahi = datetime.strftime(datahini, '%d/%m/%Y %H:%M')
@@ -64,18 +77,30 @@ def main():
                 # browser = webdriver.Chrome(executable_path='chrome.EXE')
                 # chama a página da redemet para consulta
 
+
+                URL = ""
+                TIMEOUT = 20
+
+
+
+                firefoxOptions = Options()
+                firefoxOptions.add_argument("--headless")
+                service = Service(GeckoDriverManager().install())
+                browser = webdriver.Firefox(
+                options=firefoxOptions,
+                service=service,
+                )
+                browser.get(https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet)
+
                 
 
 
 
-                chrome_options = Options()
-                chrome_options.add_argument("--headless")
-
     # Create the driver with the options
-                browser = webdriver.Chrome(options=chrome_options)
+                
 
     # Load the page with Selenium
-                browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
+               # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
 
     # Wait up to 10 seconds for the page to load
     # Wait for the page to finish loading all JavaScript
