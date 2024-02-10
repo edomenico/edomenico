@@ -433,7 +433,7 @@ def main():
             arqi = arqi.reset_index(drop=True)
             inicio = "20/12/2020"
             fim= "01/01/2024"
-            fim = arqi.data_hora[len(arqi) - 1]
+            #fim = arqi.data_hora[len(arqi) - 1]
             arqi['ws'] = arqi['wspd']
             arqi['wd'] = arqi['wdir']
             totaldados=len(arqi)
