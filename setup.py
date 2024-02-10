@@ -90,7 +90,7 @@ def main():
                 options=firefoxOptions,
                 service=service,
                 )
-                browser.get(https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet)
+                browser.get("https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet")
 
                 
 
