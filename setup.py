@@ -79,7 +79,7 @@ def main():
 
 
                 URL = ""
-                TIMEOUT = 20
+                TIMEOUT = 100
 
 
 
