@@ -339,7 +339,7 @@ def main():
             #arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
             os.chdir("/mount/src/edomenico/area2")
-            #os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area2")
+           # os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area2")
         extension = 'csv'
         all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
         arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
@@ -358,10 +358,11 @@ def main():
         arqi['hora'] = xr
         if horaria == True:
             arqi = arqi.loc[(arqi['hora'] == hora)]
-        arqi = arqi.reset_index(drop=True)
+
         x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
         # da=x.month
         arqi['data_hora'] = x
+        arqi = arqi.reset_index(drop=True)
 #         if len(arqi) == 0:
 #             # ---------------------------------------------------------------------------------------------------------
 #
@@ -373,7 +374,7 @@ def main():
 #             #fig = img.imread('brasil2.png')
 #             #plt.imshow(fig)fig = px.imshow(img_rgb)
         arqzerado = 1
-        
+
         if len(arqi) < 10:
             dado= [[np.nan , np.nan]]
             totaldados=0
@@ -383,7 +384,9 @@ def main():
             inicio='Estação fechada neste horário'
             fim='Estação fechada neste horário'
         else:
-            
+            #inicio = arqi.datahora[0]
+
+            #fim = arqi.datahora[len(arqi) - 1]
 
             if frequencia=="Todos os dados":
                # arqi = arqi.loc[(arqi['data_hora'] >= '2021-01-01 00:00:00')]
@@ -431,13 +434,20 @@ def main():
             arqi.sort_values(by=['data_hora'], inplace=True)
 
             arqi = arqi.reset_index(drop=True)
-            inicio = "20/12/2020"
-            fim= "01/01/2024"
-            #fim = arqi.data_hora[len(arqi) - 1]
-            arqi['ws'] = arqi['wspd']
-            arqi['wd'] = arqi['wdir']
-            totaldados=len(arqi)
-            
+            if len(arqi) < 10:
+                dado = [[np.nan, np.nan]]
+                totaldados = 0
+
+                dfzerado = pd.DataFrame(dado, columns=['ws', 'wd'])
+                arqzerado = 0
+                inicio = 'Estação fechada neste horário'
+                fim = 'Estação fechada neste horário'
+            else:
+                inicio = arqi.data_hora[0]
+                fim = arqi.data_hora[len(arqi) - 1]
+                arqi['ws'] = arqi['wspd']
+                arqi['wd'] = arqi['wdir']
+                totaldados=len(arqi)
 
         wind_rose_df = pd.DataFrame(np.zeros((16 * 9, 3)), index=None,
                                     columns=('direction', 'strength', 'frequency'))
@@ -459,7 +469,7 @@ def main():
                                          names=['wind_speed_bins', 'wind_direction_bins'])
         col = ['frequency']
         frequencies_df = pd.DataFrame(0, idx, col)
-        if len(arqi) > 10:
+        if len(arqi) >10:
             df1 = arqi
         else:
             dado = [[np.nan, np.nan]]
@@ -675,6 +685,9 @@ def main():
     col3,col4=st.columns(2)
     with col3:
         usuario = st.radio("Escolha o usuário",["Previsor","Público Geral"])
+    if usuario== "Público Geral":
+        with col4:
+            opcaovel= st.radio("Escolha a unidade da velocidade",["kt","m/s","km/h"])
 
     # top-level filters
     selarea=st.selectbox("Selecione a área",['Área 1','Área 2'])
@@ -756,7 +769,10 @@ def main():
             fig0, ndados,inicio,fim = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
             st.write(fig0)
             st.header("Total de dados: " + str(ndados), divider='rainbow')
-            st.subheader('Fonte: METAR ---- Início: '+str(inicio)+' - Fim: '+str(fim)+' :sunglasses:')
+            if inicio=='Estação fechada neste horário':
+                st.subheader('Fonte: METAR ---- Início: '+str(inicio)+' - Fim: '+str(fim)+' :disappointed:')
+            else:
+                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
         elif horaria == True:
             tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
@@ -770,33 +786,48 @@ def main():
                 fig1, ndados,inicio,fim = rosa(nomeestacaorosa, 0, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig1)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
 
             with tab2:
                # st.header(nomeestacaorosa)
                 fig2, ndados,inicio,fim = rosa(nomeestacaorosa, 1, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig2)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab3:
                # st.header(nomeestacaorosa)
                 fig3, ndados,inicio,fim = rosa(nomeestacaorosa, 2, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig3)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab4:
                # st.header(nomeestacaorosa)
                 fig4, ndados,inicio,fim = rosa(nomeestacaorosa, 3, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig4)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab5:
                 #st.header(nomeestacaorosa)
                 fig5, ndados,inicio,fim = rosa(nomeestacaorosa, 4, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig5)
 
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
 
             with tab6:
                # st.header(nomeestacaorosa)
@@ -804,120 +835,177 @@ def main():
                 st.write(fig6)
 
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab7:
                # st.header(nomeestacaorosa)
                 fig7, ndados,inicio,fim = rosa(nomeestacaorosa, 6, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig7)
 
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab8:
                # st.header(nomeestacaorosa)
                 fig8, ndados,inicio,fim = rosa(nomeestacaorosa, 7, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig8)
 
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab9:
                # st.header(nomeestacaorosa)
                 fig9, ndados,inicio,fim = rosa(nomeestacaorosa, 8, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig9)
 
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab10:
                 #st.header(nomeestacaorosa)
                 fig10, ndados,inicio,fim = rosa(nomeestacaorosa, 9, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig10)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab11:
                # st.header(nomeestacaorosa)
                 fig11, ndados,inicio,fim = rosa(nomeestacaorosa, 10, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig11)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab12:
                # st.header(nomeestacaorosa)
                 fig12, ndados,inicio,fim = rosa(nomeestacaorosa, 11, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig12)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab13:
                # st.header(nomeestacaorosa)
                 fig13, ndados,inicio,fim = rosa(nomeestacaorosa, 12, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig13)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab14:
                # st.header(nomeestacaorosa)
                 fig14, ndados,inicio,fim = rosa(nomeestacaorosa, 13, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig14)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab15:
                # st.header(nomeestacaorosa)
                 fig15, ndados,inicio,fim = rosa(nomeestacaorosa, 14, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig15)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
 
             with tab16:
                # st.header(nomeestacaorosa)
                 fig16, ndados,inicio,fim = rosa(nomeestacaorosa, 15, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig16)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab17:
               #  st.header(nomeestacaorosa)
                 fig17, ndados,inicio,fim = rosa(nomeestacaorosa, 16, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig17)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab18:
                # st.header(nomeestacaorosa)
                 fig18, ndados,inicio,fim = rosa(nomeestacaorosa, 17, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig18)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab19:
               #  st.header(nomeestacaorosa)
                 fig19, ndados,inicio,fim = rosa(nomeestacaorosa, 18, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig19)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
-
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab20:
                # st.header(nomeestacaorosa)
                 fig20, ndados,inicio,fim = rosa(nomeestacaorosa, 19, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig20)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab21:
                # st.header(nomeestacaorosa)
                 fig21, ndados,inicio,fim = rosa(nomeestacaorosa, 20, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig21)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab22:
                # st.header(nomeestacaorosa)
                 fig22, ndados,inicio,fim = rosa(nomeestacaorosa, 21, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig22)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab23:
                # st.header(nomeestacaorosa)
                 fig23, ndados,inicio,fim = rosa(nomeestacaorosa, 22, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig23)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
             with tab24:
                # st.header(nomeestacaorosa)
                 fig24, ndados,inicio,fim = rosa(nomeestacaorosa, 23, area, frequencia, estacaodoano, mesdoano, horaria)
                 st.write(fig24)
                 st.header("Total de dados: " + str(ndados), divider='rainbow')
-                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                if inicio == 'Estação fechada neste horário':
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
+                else:
+                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
     main()
