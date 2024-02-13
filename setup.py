@@ -58,7 +58,7 @@ def main():
     TIMEOUT = 20
     
     st.title("Test Selenium")
-    st.markdown("You should see some random Football match text below in about 21 seconds")
+    st.markdown("Redemet about 21 seconds")
     
     firefoxOptions = Options()
     firefoxOptions.add_argument("--headless")
