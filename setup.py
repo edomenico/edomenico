@@ -192,6 +192,9 @@ def main():
         x = "https://www.kapruka.com/images/kapruka_logo_square.png"
         df = pd.DataFrame(
             {'Site': '<img src="' + x + '" width="60" >', 'Product Name': names, 'Price': prices, 'Image Link': img_links})
+        os.chdir("/mount/src/edomenico/area1")
+        df.to_csv("metar.csv", header=True)
+        
         return df.iloc[[0]]
     
     
