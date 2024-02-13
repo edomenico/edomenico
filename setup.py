@@ -35,7 +35,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 def main():
-    URL = "https://www.unibet.fr/sport/football/europa-league/europa-league-matchs"
+    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
     XPATH = "//*[@class='ui-mainview-block eventpath-wrapper']"
     TIMEOUT = 20
     
