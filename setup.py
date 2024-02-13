@@ -53,7 +53,7 @@ def main():
 
 
    # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
-    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
+    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/', auth=(username,token))
     datahi = "13/02/2024 00:00"
     datahf = "13/02/2024 00:00"
     #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
