@@ -47,8 +47,8 @@ def main():
     from selenium.webdriver.support.select import Select
 
 
-    
-    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
+   # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
+    URL = username:token  'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
     datahi = "13/02/2024 00:00"
     datahf = "13/02/2024 00:00"
     #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
