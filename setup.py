@@ -44,123 +44,36 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 def main():
 
-    from urllib.request import Request, urlopen
-            #import lxml
-    import pandas as pd
-    import pandas as pd
-    import time
-    from datetime import datetime, timedelta
+  import streamlit as st
+
+"""
+## Web scraping on Streamlit Cloud with Selenium
+
+[![Source](https://img.shields.io/badge/View-Source-<COLOR>.svg)](https://github.com/snehankekre/streamlit-selenium-chrome/)
+
+This is a minimal, reproducible example of how to scrape the web with Selenium and Chrome on Streamlit's Community Cloud.
+
+Fork this repo, and edit `/streamlit_app.py` to customize this app to your heart's desire. :heart:
+"""
+
+with st.echo():
     from selenium import webdriver
-    from bs4 import BeautifulSoup
-    from selenium.webdriver.support.select import Select
-    username = 'edomenico'
-    token = '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'
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+    from webdriver_manager.chrome import ChromeDriverManager
 
-   # login = requests.get('https://api.github.com/search/repositories?q=github+api', auth=(username,token))
+    @st.experimental_singleton
+    def get_driver():
+        return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
+    options = Options()
+    options.add_argument('--disable-gpu')
+    options.add_argument('--headless')
 
-   # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
-    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
-    datahi = "13/02/2024 00:00"
-    datahf = "13/02/2024 00:00"
-    #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
-    #datahf = datetime.strftime(dataf, '%d/%m/%Y %H:%M')
-    tempo = 0
-    
-    TIMEOUT = 20
-    
-    st.title("Test Selenium")
-    st.markdown("Redemet about 21 seconds")
-    
-    option = webdriver.FirefoxOptions()
-    option.binary_location = '/opt/firefox/firefox'
-    browser = webdriver.Firefox(options=option, service=FirefoxService(GeckoDriverManager().install()))
-    #driver.get('http://google.com')
-    if datahi == datahf:
-        intervalo = 0
-    else:
-        intervalo = int((str(tempo)[0:2]))
-    mes = datahini.month
+    driver = get_driver()
+    driver.get("http://example.com")
 
-    
-    
-    try:
-        for i in range(intervalo + 1):
-                
-            #browser = webdriver.Firefox(executable_path='geckodriver.exe')
-               
-            browser.get(URL)
-            browser.get(URL)
-              
-            datacori = datahini + timedelta(days=i)
-                   
-            datacoris = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-            datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-            datacorf=  datahfim + timedelta(hours=23)
-            datacorfs = datetime.strftime(datacorf, '%d/%m/%Y %H:%M')
-            datacorfs =datacorfs[0:10] + ' 23:00'
-            time.sleep(5)
-     # tira a checkbox para mensagem recente
-            browser.find_element_by_id("consulta_recente").click()
-
-                # preenche o nome das estações para consulta
-            element = browser.find_element_by_id("msg_localidade")
-            element.send_keys(nome)
-
-                # preenche a data inicial e final
-
-            element = browser.find_element_by_id("consulta_data_ini").clear()
-            element = browser.find_element_by_id("consulta_data_ini").click()
-            element = browser.find_element_by_id("consulta_data_ini").send_keys(datacoris)
-            element = browser.find_element_by_id("consulta_data_fim").clear()
-            element = browser.find_element_by_id("consulta_data_fim").click()
-            element = browser.find_element_by_id("consulta_data_fim").send_keys(datacorfs)
-            # envia a consulta
-            botao = browser.find_element_by_id("consulta_localidade")
-            time.sleep(20)
-            botao.click()
-
-                # espera 10s
-            time.sleep(20)
-
-                ## coloca todo o resultado numa página
-                # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
-                # select_fr.select_by_index(3)
-
-            table = browser.find_element_by_id('msg_resultado')
-
-                # df = pd.read_html(str(table))
-                # print(table)
-            table_html = table.get_attribute('outerHTML')
-
-
-
-
-            if i == 0:
-                df = pd.read_html(str(table_html))
-                df = df[0]
-            else:
-                df2 = pd.read_html(str(table_html))
-                df2 = df2[0]
-
-                df = df.append(df2, ignore_index=True)
-                    
-
-                # print(df.loc[(df["Localidade"] == 'SBSC')])
-            df.to_csv("metar.csv", header=True)
-            browser.quit()
-            
-            # df = df.drop(columns=['Unnamed: 0'])
-        df.to_csv("metar.csv", header=True)
-    
-    except TimeoutException:
-        st.warning("Timed out waiting for page to load")
-        browser.quit()
-    
-    time.sleep(10)
-    elements = driver.find_elements_by_xpath(XPATH)
-    st.write([el.text for el in elements])
-    browser.quit()
+    st.code(driver.page_source)
 
 
 
