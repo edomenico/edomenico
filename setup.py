@@ -44,6 +44,7 @@ def create_search_page():
             merged_df = merge_dataframes()
 
             html = merged_df.to_html(escape=False)
+            merged_df.to_csv("metar.csv", header=True)
             # Display the prices in a table
 
             st.markdown(
