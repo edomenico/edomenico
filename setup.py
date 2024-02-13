@@ -53,7 +53,7 @@ def main():
     datahf = "13/02/2024 00:00"
     #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
     #datahf = datetime.strftime(dataf, '%d/%m/%Y %H:%M')
-    tempo = datahf - datahi
+    tempo = 0
     
     TIMEOUT = 20
     
