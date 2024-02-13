@@ -49,10 +49,10 @@ def main():
 
     
     URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
-    datai = "13/02/2024"
-    dataf = "13/02/2024"
-    datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
-    datahf = datetime.strftime(dataf, '%d/%m/%Y %H:%M')
+    datahi = "13/02/2024 00:00"
+    datahf = "13/02/2024 00:00"
+    #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
+    #datahf = datetime.strftime(dataf, '%d/%m/%Y %H:%M')
     tempo = datahf - datahi
     
     TIMEOUT = 20
