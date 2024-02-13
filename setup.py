@@ -67,11 +67,12 @@ def main():
     
     firefoxOptions = Options()
     firefoxOptions.add_argument("--headless")
-    service = Service(GeckoDriverManager().install())
-    browser = webdriver.Firefox(
-        options=firefoxOptions,
-        service=service,
-    )
+    browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    #service = Service(GeckoDriverManager().install())
+    #browser = webdriver.Firefox(
+    #    options=firefoxOptions,
+    #    service=service,
+    #)
     if datahi == datahf:
         intervalo = 0
     else:
