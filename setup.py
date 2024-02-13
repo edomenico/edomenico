@@ -48,7 +48,7 @@ def main():
 
 
    # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
-    URL = username:'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'  'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
+    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
     datahi = "13/02/2024 00:00"
     datahf = "13/02/2024 00:00"
     #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
@@ -78,10 +78,10 @@ def main():
     try:
         for i in range(intervalo + 1):
                 
-            browser = webdriver.Firefox(executable_path='geckodriver.exe')
+            #browser = webdriver.Firefox(executable_path='geckodriver.exe')
                
-            browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-            browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+            browser.get(URL)
+            browser.get(URL)
               
             datacori = datahini + timedelta(days=i)
                    
