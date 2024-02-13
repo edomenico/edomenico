@@ -53,7 +53,7 @@ def main():
     from selenium.webdriver.support.ui import WebDriverWait
     from webdriver_manager.firefox import GeckoDriverManager
     
-    URL = ""
+    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
     TIMEOUT = 20
     
     st.title("Test Selenium")
