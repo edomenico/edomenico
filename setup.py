@@ -49,11 +49,11 @@ def main():
     username = 'edomenico'
     token = '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'
 
-    login = requests.get('https://api.github.com/search/repositories?q=github+api', auth=(username,token))
+   # login = requests.get('https://api.github.com/search/repositories?q=github+api', auth=(username,token))
 
 
    # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
-    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/', auth=(username,token))
+    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/&access_token=token'
     datahi = "13/02/2024 00:00"
     datahf = "13/02/2024 00:00"
     #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
