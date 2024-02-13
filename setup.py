@@ -34,6 +34,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.firefox import GeckoDriverManager
 
 
+from selenium import webdriver
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
+
+
+
 
 def main():
 
@@ -53,7 +60,7 @@ def main():
 
 
    # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
-    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/&access_token=token'
+    URL = 'https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/'
     datahi = "13/02/2024 00:00"
     datahf = "13/02/2024 00:00"
     #datahi = datetime.strftime(datai, '%d/%m/%Y %H:%M')
@@ -65,14 +72,10 @@ def main():
     st.title("Test Selenium")
     st.markdown("Redemet about 21 seconds")
     
-    firefoxOptions = Options()
-    firefoxOptions.add_argument("--headless")
-    browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-    #service = Service(GeckoDriverManager().install())
-    #browser = webdriver.Firefox(
-    #    options=firefoxOptions,
-    #    service=service,
-    #)
+    option = webdriver.FirefoxOptions()
+    option.binary_location = '/opt/firefox/firefox'
+    browser = webdriver.Firefox(options=option, service=FirefoxService(GeckoDriverManager().install()))
+    #driver.get('http://google.com')
     if datahi == datahf:
         intervalo = 0
     else:
