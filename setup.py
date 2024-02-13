@@ -44,6 +44,7 @@ def create_search_page():
             merged_df = merge_dataframes()
 
             html = merged_df.to_html(escape=False)
+            os.chdir("/mount/src/edomenico/area1")
             merged_df.to_csv("metar.csv", header=True)
             # Display the prices in a table
 
