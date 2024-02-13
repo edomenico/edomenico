@@ -45,6 +45,10 @@ def main():
     from selenium import webdriver
     from bs4 import BeautifulSoup
     from selenium.webdriver.support.select import Select
+    username = 'edomenico'
+    token = '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'
+
+    login = requests.get('https://api.github.com/search/repositories?q=github+api', auth=(username,token))
 
 
    # curl -u username:token "https://api.github.com/repos/user/repo/issues?state=closed"
