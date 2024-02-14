@@ -17,31 +17,19 @@ def salva():
     import csv
     import pandas as pd
 
-    csvfile = open('eggs.csv', 'w') 
-    writer = csv.writer(csvfile, delimiter=';')
-
-    dados = [
-               ['nome','idade','UF'],
-               ['Maria','19','SP'],
-               ['Jose','40','RJ'],
-               ['Pedro','21','MG'],
-            ]
-    for linha in dados:    
-        writer.writerow(linha)
-
-    csvfile.close()
     
-    url = f'https://api.github.com/repos/edomenico/edomenico/contents/eggs.csv?ref=main'
+    
+    url = f'https://api.github.com/repos/edomenico/edomenico/contents/metar_trat_teste2.csv?ref=main'
     data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
 
 
     
     
-    with open(csvfile, 'a') as f: 
+    with open(metar_trat_teste2.csv, 'a') as f: 
        
         f.write(data.content)
-    #df = pd.read_csv('metar_trat_teste2.csv')
-    #print(df)
+    df = pd.read_csv('metar_trat_teste2.csv')
+    print(df)
 
 
 # Define a function to create the search page
