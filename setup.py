@@ -14,7 +14,7 @@ with open('metar_trat_teste2.csv', 'wb') as f:
     f.write(data.content)
 dff = pd.read_csv('metar_trat_teste2.csv')
 print(dff)
-return
+
 
 
 # Define a function to create the search page
