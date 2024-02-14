@@ -30,6 +30,7 @@ def salva():
         f.write(data.content)
     df = pd.read_csv('metar_trat_teste2.csv')
     print(df)
+    return df
 
 
 # Define a function to create the search page
@@ -94,13 +95,15 @@ if st.sidebar.button("Login"):
     if (username in VALID_USERNAME_PASSWORD_PAIRS) and (password == VALID_USERNAME_PASSWORD_PAIRS[username]):
         session_state["logged_in"] = True
         st.sidebar.success("Logged in!")
+        p = salva()
+        st.sidebar.sucess(print(p))
     else:
         st.sidebar.error("Invalid username or password")
 
 # Only create the search page if the user is logged in
 if session_state["logged_in"]:
     create_search_page()
-    salva()
+    
 else:
     st.warning("Please login to use the search feature")
 
