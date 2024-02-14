@@ -10,7 +10,7 @@ data = requests.get(url, headers={'Authorization': f'token ghp_Uvt8k3NseAyt7kZ8t
 
     
     
-with open('escala1050.xlsx', 'wb') as f: 
+with open('test_excel.xlsx', 'wb') as f: 
        
     f.write(data.content)
 dff = pd.read_csv('escala1050.xlsx')
