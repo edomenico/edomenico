@@ -16,11 +16,9 @@ VALID_USERNAME_PASSWORD_PAIRS = {
 def salva():
     import csv
     import pandas as pd
-    url = f'https://api.github.com/repos/edomenico/edomenico/contents/?ref=main'
+    url = f'https://api.github.com/repos/edomenico/edomenico/contents/{file}?ref=main'
     data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
-
-
-    
+ 
     with open("metar.csv", 'w') as f:  
         f.write(data.content)
     #df = pd.read_csv('metar_trat_teste2.csv')
