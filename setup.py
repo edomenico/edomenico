@@ -31,9 +31,10 @@ def salva():
 
     csvfile.close()
     
-    url = f'https://api.github.com/repos/edomenico/edomenico/contents?ref=main'
+    url = f'https://api.github.com/repos/edomenico/edomenico/contents/eggs.csv?ref=main'
     data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
-   
+
+    
     
     with open(csvfile, 'wb') as f: 
        
