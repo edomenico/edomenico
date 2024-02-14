@@ -18,6 +18,8 @@ def salva():
     import pandas as pd
     url = f'https://api.github.com/repos/edomenico/edomenico/contents/?ref=main'
     data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
+
+
     
     with open("metar.csv", 'w') as f:  
         f.write(data.content)
