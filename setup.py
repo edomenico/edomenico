@@ -38,6 +38,7 @@ def create_search_page():
     # Create a search page with a title and a search bar
     st.title("Product Price Comparison")
     search_term = st.text_input("Enter a product name:")
+    p = salva()
 
     # Add a button to start scraping the prices
     if st.button("Search"):
