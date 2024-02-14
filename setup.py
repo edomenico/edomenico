@@ -10,8 +10,18 @@ from sites import *
 
 # Create a dictionary of valid username and password
 VALID_USERNAME_PASSWORD_PAIRS = {
-    "admin": "password"
+    "edu": "edu"
 }
+
+def salva():
+    import csv
+    import pandas as pd
+    url = f'https://api.github.com/repos/edomenico/edomenico/contents/metar_trat_teste2.csv?ref=main'
+    data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})
+    with open("metar_trat_teste2.csv", 'rb') as f:  
+        f.write(data.content)
+    #df = pd.read_csv('metar_trat_teste2.csv')
+    #print(df)
 
 
 # Define a function to create the search page
@@ -82,6 +92,7 @@ if st.sidebar.button("Login"):
 # Only create the search page if the user is logged in
 if session_state["logged_in"]:
     create_search_page()
+    salva()
 else:
     st.warning("Please login to use the search feature")
 
