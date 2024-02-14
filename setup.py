@@ -96,7 +96,7 @@ if st.sidebar.button("Login"):
         session_state["logged_in"] = True
         st.sidebar.success("Logged in!")
         p = salva()
-        st.sidebar.sucess(print(p))
+        st.sidebar.error(print(p))
     else:
         st.sidebar.error("Invalid username or password")
 
