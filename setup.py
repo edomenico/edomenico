@@ -96,8 +96,11 @@ if st.sidebar.button("Login"):
     # Check if the username and password are valid
     if (username in VALID_USERNAME_PASSWORD_PAIRS) and (password == VALID_USERNAME_PASSWORD_PAIRS[username]):
         session_state["logged_in"] = True
-        st.sidebar.success("Logged in!")
+        #st.sidebar.success("Logged in!")
         p = salva()
+        st.sidebar.success(print(p))
+        
+        
         st.sidebar.error(print(p))
     else:
         st.sidebar.error("Invalid username or password")
