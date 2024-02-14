@@ -1,6 +1,6 @@
 import csv
 import pandas as pd
-
+import requests
     
     
 url = f'https://api.github.com/repos/edomenico/edomenico/contents/metar_trat_teste2.csv?ref=main'
