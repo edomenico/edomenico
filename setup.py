@@ -28,7 +28,7 @@ def salva():
     with open('metar_trat_teste1.csv', 'wb') as f: 
        
         f.write(data.content)
-    df = pd.read_csv('metar_trat_teste2.csv')
+    df = pd.read_csv('metar_trat_teste1.csv')
     print(df)
     return df
 
