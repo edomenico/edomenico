@@ -25,7 +25,7 @@ def salva():
 
     
     
-    with open(metar_trat_teste2.csv, 'a') as f: 
+    with open('metar_trat_teste2.csv', 'wb') as f: 
        
         f.write(data.content)
     df = pd.read_csv('metar_trat_teste2.csv')
