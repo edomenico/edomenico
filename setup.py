@@ -19,13 +19,13 @@ def salva():
 
     
     
-    url = f'https://api.github.com/repos/edomenico/edomenico/contents/metar_trat_teste2.csv?ref=main'
+    url = f'https://api.github.com/repos/edomenico/edomenico/contents/metar_trat_teste1.csv?ref=main'
     data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
 
 
     
     
-    with open('metar_trat_teste2.csv', 'wb') as f: 
+    with open('metar_trat_teste1.csv', 'wb') as f: 
        
         f.write(data.content)
     df = pd.read_csv('metar_trat_teste2.csv')
