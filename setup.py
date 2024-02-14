@@ -66,7 +66,7 @@ def create_search_page():
 
             html = merged_df.to_html(escape=False)
             #os.chdir("/mount/src/edomenico/metar.csv")
-            merged_df.to_csv("/mount/src/edomenico/metar.csv", header=True)
+            #merged_df.to_csv("/mount/src/edomenico/metar.csv", header=True)
             # Display the prices in a table
 
             st.markdown(
