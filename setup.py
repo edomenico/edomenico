@@ -13,7 +13,7 @@ data = requests.get(url, headers={'Authorization': f'token ghp_Uvt8k3NseAyt7kZ8t
 with open('test_excel.xlsx', 'wb') as f: 
        
     f.write(data.content)
-dff = pd.read_csv('test_excel.xlsx')
+dff = pd.read_excel('test_excel.xlsx')
 print(dff)
 
 
