@@ -52,3 +52,4 @@ siphon~=0.9
 pmdarima~=2.0.3
 lxml~=4.6.3
 webdriver-manager
+Github
