@@ -14,6 +14,6 @@ url = 'https://api.github.com/repos/edomenico/edomenico/contents/escala1050.xlsx
 data = requests.get(url, headers={'Authorization': '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', 'Accept': 'application/vnd.github.v3.raw'})
 with open("escala1050.xlsx", 'wb') as f:
   f.write(data.content)
-df = pd.read_csv('escala1050.xlsx')
+df = pd.read_excel('escala1050.xlsx')
 print(df)
 
