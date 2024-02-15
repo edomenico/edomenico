@@ -1,6 +1,6 @@
 from github import Github
 
-g = Github('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')
+g = Github('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')
 
 repo = g.get_repo('edomenico/edomenico')
 
