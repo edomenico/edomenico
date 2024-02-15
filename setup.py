@@ -25,7 +25,7 @@ access_token = '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'
 hub = Github(access_token) # Github(user, pass)
 
 # Displaying all the existing Repositories and files
-for repo in hub.get_user().get_repos():
+for repo in hub.get_user('edomenico').get_repos('edomenico/edomenico'):
     # Displaying repo name
     print("Repository [{}]".format(repo.edomenico))
     print("_" * 50)
