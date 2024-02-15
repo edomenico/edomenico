@@ -1,21 +1,12 @@
-import csv
-import pandas as pd
-import requests
-    
-    
-url = f'https://api.github.com/repos/edomenico/edomenico/contents/escala1050.xlsx?ref=main'
-data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
-#url = f'https://api.github.com/repos/edomenico/edomenico/contents/escala1050.xlsx?ref=main'
-#data = requests.get(url, headers='Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw')
+from github import Github
 
-    
-    
-with open('test_excel.xlsx', 'wb') as f: 
-       
-    f.write(data.content)
-dff = pd.read_excel('test_excel.xlsx')
-print(dff)
+g = Github('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')
+
+repo = g.get_repo('edomenico/gh_api')
+
+with open('metar_trat_teste2.csv', 'r') as file:
+    data = file.read()
+
+repo.create_file('data/dataset.csv', 'upload csv', data, branch='main')
 
 
-
-# Define a function to create the search page
