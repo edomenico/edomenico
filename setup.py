@@ -20,33 +20,26 @@
 
 from github import Github
 
-access_token = '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'
+# Authentication is defined via github.Auth
+from github import Auth
 
-hub = Github(access_token) # Github(user, pass)
+# using an access token
+auth = Auth.Token("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")
 
-# Displaying all the existing Repositories and files
-for repo in hub.get_user('edomenico').get_repos('edomenico/edomenico'):
-    # Displaying repo name
-    print("Repository [{}]".format(repo.edomenico))
-    print("_" * 50)
-    # Displaying Contents
-    print("[Contents]")
-    count = 1
-    for content in repo.get_contents(""):
-        print("{}. {} [{}]".format(count, content.path, content.type))
-        if content.type == 'dir':
-            new_count = 1
-            # Displaying contents of sub-director
-            for sub_content in repo.get_contents(content.path):
-                print("    {}. {} [{}]".format(new_count, sub_content.path, sub_content.type))
-                new_count += 1
-                # Displaying contents of sub directory of sub directory
-                if sub_content.type == 'dir':
-                    another_count = 1
-                    for datain in repo.get_contents(sub_content.path):
-                        print("        {}. {} [{}]".format(another_count, datain.path, datain.type))
-                        another_count += 1
+# Public Web Github
+g = Github(auth=auth)
 
-        count += 1
-    print("-" * 50)
+# Github Enterprise with custom hostname
+g = Github(auth=auth, base_url="https:/edomenico/api/v3")
+
+for repo in g.get_user().get_repos():
+    print(repo.name)
+    repo.edit(has_wiki=False)
+    # to see all the available attributes and methods
+    print(dir(repo))
+
+
+
+
+
 
