@@ -34,6 +34,9 @@ access_token = "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"
 g = Github(access_token, base_url="https://edomenico/api/v3")
 
 
+
+
+
 for repo in g.get_user().get_repos():
     print(repo.name)
     repo.edit(has_wiki=False)
