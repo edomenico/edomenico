@@ -685,9 +685,9 @@ def main():
     col3,col4=st.columns(2)
     with col3:
         usuario = st.radio("Escolha o usuário",["Previsor","Público Geral"])
-    if usuario== "Público Geral":
-        with col4:
-            opcaovel= st.radio("Escolha a unidade da velocidade",["kt","m/s","km/h"])
+   # if usuario== "Público Geral":
+    #    with col4:
+     #       opcaovel= st.radio("Escolha a unidade da velocidade",["kt","m/s","km/h"])
 
     # top-level filters
     selarea=st.selectbox("Selecione a área",['Área 1','Área 2'])
