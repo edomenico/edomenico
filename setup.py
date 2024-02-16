@@ -28,16 +28,17 @@ auth = Auth.Token("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")
 
 # Public Web Github
 g = Github(auth=auth)
+access_token = "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"
 
 # Github Enterprise with custom hostname
-g = Github(auth=auth, base_url="https:/edomenico/api/v3")
+g = Github(access_token, base_url="https://edomenico/api/v3")
+
 
 for repo in g.get_user().get_repos():
     print(repo.name)
     repo.edit(has_wiki=False)
     # to see all the available attributes and methods
     print(dir(repo))
-
 
 
 
