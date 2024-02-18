@@ -15,7 +15,7 @@ VALID_USERNAME_PASSWORD_PAIRS = {
 
 def salva():
     from github import Github
-    g = Github("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")
+    g = Github("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")
     repo = g.get_repo("edomenico/edomenico")
 
     #contents = repo.get_contents("escala1050.xlsx")
