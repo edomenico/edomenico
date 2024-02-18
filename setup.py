@@ -14,30 +14,24 @@ VALID_USERNAME_PASSWORD_PAIRS = {
 }
 
 def salva():
-    import csv
-    import pandas as pd
+    from github import Github
+    g = Github("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")
+    repo = g.get_repo("edomenico/edomenico")
 
-    
-    
-    url = f'https://api.github.com/repos/edomenico/edomenico/contents/metar_trat_teste2.csv?ref=main'
-    data = requests.get(url, headers={'Authorization': f'token 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', 'Accept': 'application/vnd.github.v3.raw'})    
+    #contents = repo.get_contents("escala1050.xlsx")
+    contents = repo.get_contents("metar_trat_teste2.csv")
+    #repo.delete_file(contents.path,sha=contents, branch="main")
+    #repo.delete_file(contents.path,"remove teste",contents.sha,branch="main")
 
+    repo.update_file(contents.path, "more tests", "more tests", contents.sha, branch="main")
 
-    
-    
-    with open('metar_trat_teste2.csv', 'wb') as f: 
-       
-        f.write(data.content)
-    dff = pd.read_csv('metar_trat_teste2.csv')
-    #print(dff)
-    return dff
 
 
 # Define a function to create the search page
 def create_search_page():
     # Create a search page with a title and a search bar
     st.title("Product Price Comparison")
-   # p=salva()
+    p=salva()
     search_term = st.text_input('Entre com o produto:')
     
 
