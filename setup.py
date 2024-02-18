@@ -8,7 +8,7 @@ import glob
 
 from sites import *
 
-# Create a dictionary of valid username and password
+
 VALID_USERNAME_PASSWORD_PAIRS = {
     "edu": "edu"
 }
