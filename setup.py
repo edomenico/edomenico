@@ -133,7 +133,7 @@ def main():
                 # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
                 # select_fr.select_by_index(3)
 
-                table = browser.find_element_by_id('msg_resultado')
+                table = browser.find_element(By.ID,'msg_resultado')
 
                 # df = pd.read_html(str(table))
                 # print(table)
