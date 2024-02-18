@@ -37,7 +37,7 @@ def salva():
 def create_search_page():
     # Create a search page with a title and a search bar
     st.title("Product Price Comparison")
-    p=salva()
+   # p=salva()
     search_term = st.text_input('Entre com o produto:')
     
 
