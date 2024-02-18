@@ -92,7 +92,7 @@ if st.sidebar.button("Login"):
         session_state["logged_in"] = True
         #st.sidebar.success("Logged in!")
        # p = salva()
-        st.sidebar.success(print(p))
+        #st.sidebar.success(print(p))
         
         
         
