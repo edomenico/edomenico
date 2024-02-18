@@ -332,11 +332,8 @@ def main():
 
 
         if area==1:
-            with open('/mount/src/edomenico/teste.csv, 'w') as csvfile:
-                writer = csv.writer(csvfile, delimiter=',')
-                writer.writerow(['João', '30' ])
-                writer.writerow(['José', '27'])
-                writer.writerow(['Pedro', '20'])
+            
+               
             os.chdir("/mount/src/edomenico/area1")
             #os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area1")
             # extension = 'csv'
@@ -349,6 +346,8 @@ def main():
         extension = 'csv'
         all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
         arqi1 = pd.concat([pd.read_csv(f) for f in all_filenames])
+        arqi1.to_csv('nome_do_arquivo.csv')
+        
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
        # nomeest="SBJR"
