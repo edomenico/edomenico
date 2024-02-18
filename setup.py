@@ -85,7 +85,7 @@ def main():
 
                 # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
                 browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                 # if (datahi.day + i)==31:
                 datacori = datahini + timedelta(days=i)
