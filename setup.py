@@ -12,6 +12,22 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 def main():
+    import time  # to simulate a real time data, time loop
+
+    import numpy as np  # np mean, np random
+    import pandas as pd  # read csv, df manipulation
+    import plotly.express as px  # interactive charts
+    import sys
+    #from streamlit.web import cli as stcli
+    
+    import streamlit
+    from streamlit import runtime
+    from streamlit_toggle import toggle
+    from streamlit.web import cli as stcli
+    import streamlit as st
+    from datetime import datetime, timedelta
+import os
+import glob
     def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
         # Create Chrome options
         chrome_options = Options()
