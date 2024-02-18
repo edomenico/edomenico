@@ -26,8 +26,8 @@ def main():
     from streamlit.web import cli as stcli
     import streamlit as st
     from datetime import datetime, timedelta
-import os
-import glob
+    import os
+    import glob
     def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
         # Create Chrome options
         chrome_options = Options()
