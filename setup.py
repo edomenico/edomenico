@@ -2,6 +2,9 @@ import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import pandas as pd
+from datetime import datetime, timedelta
+import datetime
+import time
 
 # Set up the Chrome driver
 from selenium.webdriver.chrome.options import Options
@@ -26,9 +29,7 @@ def main():
 
 
         
-        from datetime import datetime, timedelta
-        import datetime
-        import time
+        
         if escolha == 1:
             from urllib.request import Request, urlopen
             #import lxml
