@@ -113,15 +113,16 @@ def main():
 
                 # preenche a data inicial e final
 
-                element = browser.find_element_by_id("consulta_data_ini").clear()
-                element = browser.find_element_by_id("consulta_data_ini").click()
-                element = browser.find_element_by_id("consulta_data_ini").send_keys(datacoris)
-                element = browser.find_element_by_id("consulta_data_fim").clear()
-                element = browser.find_element_by_id("consulta_data_fim").click()
-                element = browser.find_element_by_id("consulta_data_fim").send_keys(datacorfs)
+                element = browser.find_element(By.ID, "consulta_data_ini").clear()
+                
+                element = browser.find_element(By.ID,"consulta_data_ini").click()
+                element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
+                element = browser.find_element(By.ID,"consulta_data_fim").clear()
+                element = browser.find_element(By.ID,"consulta_data_fim").click()
+                element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
 
                 # envia a consulta
-                botao = browser.find_element_by_id("consulta_localidade")
+                botao = browser.find_element(By.ID,"consulta_localidade")
                 time.sleep(20)
                 botao.click()
 
