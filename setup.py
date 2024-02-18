@@ -153,35 +153,35 @@ def main():
             # df = df.drop(columns=['Unnamed: 0'])
             df.to_csv("metar.csv", header=True)
             # df.to_csv('example.csv')
-start_date = datetime.today()
-end_date = datetime.today()
-
-area = ['Área 1', 'Área 2']
-area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
-            'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
-            'SBPJ']
-area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
-            'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
-            'SBBV',
-            'SSKW', 'SWEI', 'SWPI']
-st.set_page_config(
-        page_title="Dados Estatísticos",
-        page_icon="✅",
-        layout="wide",
-    )
-barra_lateral = st.sidebar.empty()
-area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
-if area_seleciona == 'Área 1':
-    areasel = area_1
-else:
-    areasel = area_2
-estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
-to_data = st.sidebar.date_input('Inicio:', start_date)
-from_data = st.sidebar.date_input('Fim:', end_date)
-if st.button('Carregar dados'):
-
-    redemet_baixa(1, areasel, to_data, from_data,estacao)
-       # st.button('Carregar dados')==False
+    start_date = datetime.today()
+    end_date = datetime.today()
+    
+    area = ['Área 1', 'Área 2']
+    area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+                'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
+                'SBPJ']
+    area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
+                'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
+                'SBBV',
+                'SSKW', 'SWEI', 'SWPI']
+    st.set_page_config(
+            page_title="Dados Estatísticos",
+            page_icon="✅",
+            layout="wide",
+        )
+    barra_lateral = st.sidebar.empty()
+    area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
+    if area_seleciona == 'Área 1':
+        areasel = area_1
+    else:
+        areasel = area_2
+    estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
+    to_data = st.sidebar.date_input('Inicio:', start_date)
+    from_data = st.sidebar.date_input('Fim:', end_date)
+    if st.button('Carregar dados'):
+    
+        redemet_baixa(1, areasel, to_data, from_data,estacao)
+           # st.button('Carregar dados')==False
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
     main()
