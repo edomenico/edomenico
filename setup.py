@@ -99,7 +99,7 @@ def main():
                 datacorfs =datacorfs[0:10] + ' 23:00'
 
                 # espera 5s
-                time.sleep(5)
+                time.sleep(15)
                 # tira a checkbox para mensagem recente
                 browser.find_element_by_id("consulta_recente").click()
 
