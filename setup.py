@@ -1,6 +1,6 @@
 import re
 from bs4 import BeautifulSoup
-from selenium import webdriver
+
 import pandas as pd
 from datetime import datetime, timedelta
 import datetime
@@ -57,7 +57,7 @@ def main():
     
         # Wait up to 10 seconds for the page to load
         # Wait for the page to finish loading all JavaScript
-        wait = WebDriverWait(browser, 10)
+        wait = WebDriverWait(browser, 20)
 
 
         
