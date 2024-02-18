@@ -101,7 +101,10 @@ def main():
                 # espera 5s
                 time.sleep(15)
                 # tira a checkbox para mensagem recente
-                browser.find_element_by_id("consulta_recente").click()
+                #driver.find_element(By.ID, url) 
+                el = browser.find_element(By.ID, "consulta_recente")
+                el.click()
+                #browser.find_element_by_id("consulta_recente").click()
 
                 # preenche o nome das estações para consulta
                 element = browser.find_element_by_id("msg_localidade")
