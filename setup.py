@@ -91,7 +91,7 @@ if st.sidebar.button("Login"):
     if (username in VALID_USERNAME_PASSWORD_PAIRS) and (password == VALID_USERNAME_PASSWORD_PAIRS[username]):
         session_state["logged_in"] = True
         #st.sidebar.success("Logged in!")
-        p = salva()
+       # p = salva()
         st.sidebar.success(print(p))
         
         
