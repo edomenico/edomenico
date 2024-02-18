@@ -31,16 +31,6 @@ def main():
         
         
         if escolha == 1:
-            from urllib.request import Request, urlopen
-            #import lxml
-            import pandas as pd
-            import pandas as pd
-            import time
-            from datetime import datetime, timedelta
-            from selenium import webdriver
-            from bs4 import BeautifulSoup
-            from selenium.webdriver.support.select import Select
-
             # datai = "01/06/2020 00:00"
             # dataf = "02/06/2020 23:00"
             datahi = datetime.strftime(datahini, '%d/%m/%Y %H:%M')
@@ -131,8 +121,8 @@ def main():
             # df = df.drop(columns=['Unnamed: 0'])
             df.to_csv("metar.csv", header=True)
             # df.to_csv('example.csv')
-start_date = datetime.today()
-end_date = datetime.today()
+#start_date = datetime.today()
+#end_date = datetime.today()
 
 area = ['Área 1', 'Área 2']
 area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
