@@ -107,7 +107,8 @@ def main():
                 #browser.find_element_by_id("consulta_recente").click()
 
                 # preenche o nome das estações para consulta
-                element = browser.find_element_by_id("msg_localidade")
+                
+                element = browser.find_element(By.ID, "msg_localidade")
                 element.send_keys(nome)
 
                 # preenche a data inicial e final
