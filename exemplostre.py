@@ -322,6 +322,7 @@ def main():
         # application of the filter on the wind_rose_data array
         return wind_rose_data[log_mask_speed & log_mask_direction]
     def rosa(nomeestacaorosa,hora,area,frequencia,estacaodoano,mesdoano,horaria):
+        import csv
         #area_value ='ÁREA 2'
         nomeest=nomeestacaorosa
         # if area_value == 'ÁREA 2':
@@ -331,6 +332,11 @@ def main():
 
 
         if area==1:
+            with open('/mount/src/edomenico/teste.csv, 'w') as csvfile:
+                writer = csv.writer(csvfile, delimiter=',')
+                writer.writerow(['João', '30' ])
+                writer.writerow(['José', '27'])
+                writer.writerow(['Pedro', '20'])
             os.chdir("/mount/src/edomenico/area1")
             #os.chdir("C:/Users/edome/OneDrive/Área de Trabalho/similaridade/area1")
             # extension = 'csv'
