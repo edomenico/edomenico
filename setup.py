@@ -153,8 +153,8 @@ def main():
             # df = df.drop(columns=['Unnamed: 0'])
             df.to_csv("metar.csv", header=True)
             # df.to_csv('example.csv')
-#start_date = datetime.today()
-#end_date = datetime.today()
+start_date = datetime.today()
+end_date = datetime.today()
 
 area = ['Área 1', 'Área 2']
 area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
