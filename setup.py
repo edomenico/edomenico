@@ -665,8 +665,10 @@ def main():
     barra_lateral = st.sidebar.empty()
     area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
     if area_seleciona == 'Área 1':
+        areaprev=1
         areasel = area_1
     else:
+        areaprev = 2
         areasel = area_2
     estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
     to_data = st.sidebar.date_input('Inicio:', start_date)
