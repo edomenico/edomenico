@@ -44,6 +44,492 @@ def main():
     from datetime import datetime, timedelta
     import os
     import glob
+
+        def trata_redemet(areasele):
+        import PySimpleGUI as sg
+        import matplotlib.pyplot as plt
+        import matplotlib.dates as md
+        import dateutil
+
+        import pandas as pd
+        import os, sys
+        import numpy as np
+        from random import randint
+        import re
+        from datetime import datetime
+
+        import string
+
+        def criadataframe():
+            global df,arqi
+            COLUNAS = [
+                'estacao',
+                'datahora',
+                'wspd',
+                'wdir',
+                'gust',
+                'dryt',
+                'dewp',
+                'pres',
+                'vis',
+                'tp',
+                'altn1',
+                'qn1',
+                'altn2',
+                'qn2',
+                'altn3',
+                'qn3',
+                'altn4',
+                'qn4',
+                'altncb',
+                'qncb',
+                'metar',
+                'speci'
+            ]
+
+            df = pd.DataFrame(columns=COLUNAS)
+
+        criadataframe()
+        estado=areasele
+        areatrab=areasele
+
+        arqi = pd.read_csv('metar.csv',
+                           sep=',',
+                           # index_col=0,
+                           parse_dates=True,
+                           dayfirst=True,
+                           decimal='.')
+        wspd = []
+        wdir = []
+        estacao = []
+        dryt = []
+        dewp = []
+        pres = []
+        vis = []
+        datahora = []
+        altn1 = []
+        altn2 = []
+        altn3 = []
+        altn4 = []
+        altncb = []
+        qn1 = []
+        qn2 = []
+        qn3 = []
+        qn4 = []
+        qncb = []
+        tp = []
+        gust = []
+        k = -1
+        metar=[]
+        speci=[]
+
+
+        for i in range(len(arqi)):
+
+            if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
+                c = 6
+
+            if arqi.Mensagem[i].find('COR') > -1:
+                novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
+
+
+                mensagem1 = novamens.split()
+                mens=novamens
+
+            else:
+
+                mensagem1 = arqi.Mensagem[i].split()
+                mens=arqi.Mensagem[i]
+
+            # print(len(mensagem1))
+
+            if mensagem1[0] == 'METAR' or mensagem1[0]== 'SPECI':
+                k = k + 1
+                aviso = False
+                entrou = False
+                camada1 = False
+                camada2 = False
+                camada3 = False
+                camada4 = False
+                tempopres = False
+                nuvemcb = False
+                tempentrou = False
+
+                for j in range(1, len(mensagem1), 1):
+
+                    # if estacao[j] == 'SBFZ':
+                    #     GGGGGGGGG = 1
+
+                    if mensagem1[j].find('AUTO') > -1:
+                        aviso = True
+                    if j==2:
+                        #data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
+                        data_hora = mensagem1[j][2:4] + ':00' #+ mensagem1[j][4:6]
+                        if estacao[k] == 'SBFN' and data_hora == "20:00":
+                            GGGGGGGGG = 1
+
+                    # campo 3 vento
+                    # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
+                    if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find('SWPI') > -1 or mensagem1[j].find('SWEI') > -1:
+                        estacao.append(mensagem1[j])
+                    # if estacao[k] == 'SBFZ':
+                    #      GGGGGGGGG = 1
+
+                    #if k==190:
+                        #print('k= ',k,estacao[k])
+                        #print('data',datahora[k-1])
+
+                    if mensagem1[j].find('KT') > -1:
+                        if len(wdir) == len(dryt):
+                            if (mensagem1[j][0:3]) == 'VRB' or (mensagem1[j][0:3]) == '///' :
+
+                                wdir.append('NaN')
+                            else:
+                                if mensagem1[j][0:3]=="OOO":
+                                    wdir.append(0)
+                                else:
+                                    try:
+                                        wdir.append(float(mensagem1[j][0:3]))
+                                    except ValueError:
+                                        wdir.append('NaN')
+
+                            if (mensagem1[j][3:5]) == '//' or mensagem1[j].find('P') > -1:
+                                wspd.append('NaN')
+                            else:
+                                if mensagem1[j][3:5]=='OO':
+                                    wspd.append(0)
+                                else:
+                                    try:
+                                        wspd.append(float(mensagem1[j][3:5]))
+                                    except ValueError:
+                                        wspd.append('NaN')
+
+                            if mensagem1[j].find('G') > -1:
+                                gust.append(mensagem1[j][6:8])
+                            else:
+                                gust.append('NaN')
+
+                    if mensagem1[j].find('CAVOK') > -1 and aviso==False and entrou == False:
+
+                        vis.append('9999')
+                        entrou = True
+                        altn1.append('NaN')
+                        altn2.append('NaN')
+                        altn3.append('NaN')
+                        altn4.append('NaN')
+                        qn1.append('NaN')
+                        qn2.append('NaN')
+                        qn3.append('NaN')
+                        qn4.append('NaN')
+                        camada1 = True
+                        camada2 = True
+                        camada3 = True
+                        camada4 = True
+                        print('cavok', mensagem1[j])
+
+                    # sbxx data vento visi
+                    if j == 4 and mensagem1[j].find('CAVOK') == -1 and aviso == False and mensagem1[j].find(
+                            'V') == -1 and mensagem1[j].find('F')==-1 and mensagem1[j].find('S')==-1 and mensagem1[j].find('B')==-1 and mensagem1[j].find('O')==-1 and entrou == False:
+                        vis.append(mensagem1[j])
+                        entrou = True
+                        print('j4 1', mensagem1[j])
+
+                    # vento variavel nao cavok
+                    if j == 5 and mensagem1[j - 1].find('V') > -1 and mensagem1[j].find('CAVOK') == -1 and mensagem1[
+                        j - 1].find('CAVOK') == -1 and mensagem1[j].find('R') == -1 and entrou == False:
+                        vis.append(mensagem1[j])
+                        entrou = True
+                        print('j5 1', mensagem1[j])
+
+                    # automatica
+                    if j == 5 and aviso == True and entrou == False and (mensagem1[j].find('V') == -1 or mensagem1[j].find('CAVOK') > -1):
+                        if mensagem1[j].find('CAVOK') > -1:
+                            vis.append('9999')
+                            altn1.append('NaN')
+                            altn2.append('NaN')
+                            altn3.append('NaN')
+                            altn4.append('NaN')
+                            qn1.append('NaN')
+                            qn2.append('NaN')
+                            qn3.append('NaN')
+                            qn4.append('NaN')
+                            camada1 = True
+                            camada2 = True
+                            camada3 = True
+                            camada4 = True
+                        else:
+                            vis.append(mensagem1[j])
+                            print('j5 2',mensagem1[j])
+                        entrou = True
+
+                    if (mensagem1[j]==('////') and entrou == False) :
+                        vis.append('NaN')
+                        entrou=True
+
+
+
+                    if j == 6 and aviso == True and entrou == False and mensagem1[j].find('/')==-1:
+                        if mensagem1[j].find('CAVOK') > -1:
+                            vis.append('9999')
+                            altn1.append('NaN')
+                            altn2.append('NaN')
+                            altn3.append('NaN')
+                            altn4.append('NaN')
+                            qn1.append('NaN')
+                            qn2.append('NaN')
+                            qn3.append('NaN')
+                            qn4.append('NaN')
+                            camada1 = True
+                            camada2 = True
+                            camada3 = True
+                            camada4 = True
+
+                        else:
+                            vis.append(mensagem1[j])
+                        entrou = True
+
+
+
+                    if mensagem1[j].find('Q') > -1 and mensagem1[j].find('S') !=0: #and bool(re.search(r'\d', mensagem1[j])):
+                        if (mensagem1[j][1:5])=='////':
+                            pres.append('NaN')
+                        else:
+
+                            try:
+                           # print(mensagem1[j])
+
+                                pres.append(float(mensagem1[j][1:5]))
+
+
+                            except ValueError:
+                                pres.append('NaN')
+                                if len(pres)!=len(dryt):
+                                    dryt.append('NaN')
+                                if len(pres)!=len(dewp):
+                                    dewp.append('NaN')
+
+
+                        break
+
+                    #if tempentrou== False:
+                  #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
+                  #              'Q') > -1:
+                   # print(mensagem1[j])
+                    if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
+
+
+                              # print(mensagem1[j][0:2])
+                               # print(mensagem1[j][3:5])
+                              #  print(mensagem1[j + 1])
+                        if (mensagem1[j][0:2])=='//':
+
+                            dryt.append('NaN')
+                        else:
+                            dryt.append(float(mensagem1[j][0:2]))
+                        if (mensagem1[j][3:5]) == '//':
+                            dewp.append('NaN')
+                        else:
+                            if mensagem1[j][3:5].find('M') > -1:
+                                dewp.append(float(mensagem1[j][4:6])*-1)
+                            else:
+
+                                dewp.append(float(mensagem1[j][3:5]))
+                                #tempentrou = True
+
+                    if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find('BKN') > -1 or \
+                            mensagem1[j].find('OVC') > -1:
+                        if mensagem1[j].find('CB') < 0 and mensagem1[j].find('TCU') < 0:
+                            if camada1 == False:
+                                if (mensagem1[j][3:6]).isnumeric():
+                                    try:
+                                        altn1.append(float(mensagem1[j][3:6]))
+                                    except ValueError:
+                                        altn1.append('NaN')
+                                else:
+                                    altn1.append((mensagem1[j][3:6]))
+                                qn1.append((mensagem1[j][0:3]))
+                                camada1 = True
+
+                            elif camada2 == False:
+                                if (mensagem1[j][3:6]).isnumeric():
+                                    try:
+                                        altn2.append(float(mensagem1[j][3:6]))
+                                    except ValueError:
+                                        altn2.append('NaN')
+
+                                else:
+                                    altn2.append((mensagem1[j][3:6]))
+                                qn2.append((mensagem1[j][0:3]))
+                                camada2 = True
+
+                            elif camada3 == False:
+                                if (mensagem1[j][3:5]).isnumeric():
+                                    try:
+                                        altn3.append(float(mensagem1[j][3:5]))
+                                    except ValueError:
+                                        altn3.append('NaN')
+                                else:
+                                    altn3.append((mensagem1[j][3:5]))
+                                qn3.append((mensagem1[j][0:3]))
+                                camada3 = True
+                            else:
+
+                                if (mensagem1[j][3:5]).isnumeric():
+                                    altn4.append(float(mensagem1[j][3:5]))
+                                else:
+                                    altn4.append((mensagem1[j][3:5]))
+                                qn4.append((mensagem1[j][0:3]))
+                                camada4 = True
+                    if mensagem1[j].find('CB') > -1 and len(mensagem1[j]) > 4 and nuvemcb==False:
+                        altncb.append(((mensagem1[j][3:6])))
+                        qncb.append((mensagem1[j][0:3]))
+                        nuvemcb = True
+                    if mensagem1[j].find('TCU') > -1 and len(mensagem1[j]) > 4 and nuvemcb==False:
+                        altncb.append(((mensagem1[j][3:7])))
+                        qncb.append((mensagem1[j][0:3]))
+                        nuvemcb = True
+
+
+                    if aviso == True and mensagem1[j].find('NCD') > -1:
+                        altn1.append('NaN')
+                        altn2.append('NaN')
+                        altn3.append('NaN')
+                        altn4.append('NaN')
+                        qn1.append('NaN')
+                        qn2.append('NaN')
+                        qn3.append('NaN')
+                        qn4.append('NaN')
+                        camada1 = True
+                        camada2 = True
+                        camada3 = True
+                        camada4 = True
+
+                    if mensagem1[j].find('NSC') > -1:
+                        altn1.append('NaN')
+                        altn2.append('NaN')
+                        altn3.append('NaN')
+                        altn4.append('NaN')
+                        qn1.append('NaN')
+                        qn2.append('NaN')
+                        qn3.append('NaN')
+                        qn4.append('NaN')
+                        camada1 = True
+                        camada2 = True
+                        camada3 = True
+                        camada4 = True
+
+                    if mensagem1[j].find('VV') > -1:
+                        altn1.append((mensagem1[j][2:5]))
+                        altn2.append('NaN')
+                        altn3.append('NaN')
+                        altn4.append('NaN')
+                        qn1.append('OVC')
+                        qn2.append('NaN')
+                        qn3.append('NaN')
+                        qn4.append('NaN')
+                        camada1 = True
+                        camada2 = True
+                        camada3 = True
+                        camada4 = True
+
+                    if (mensagem1[j].find('RA') > -1 or mensagem1[j].find('DZ') > -1 or mensagem1[j].find('BR') > -1 or
+                        mensagem1[j].find('HZ') > -1 or mensagem1[j].find('FG') > -1 or mensagem1[j].find('FU') > -1 or mensagem1[j].find('VC') > -1 or
+                        mensagem1[j].find('TS') > -1) and mensagem1[j].find('SB') == -1 and mensagem1[j].find(
+                            'OVC') == -1 and tempopres == False:
+                        tp.append((mensagem1[j][0:len(mensagem1[j])]))
+                        tempopres = True
+
+                datahora.append(arqi['Data'][i]+' '+data_hora)
+                try:
+                    xhor = datetime.strptime(datahora[k], '%d/%m/%Y %H:%M')
+                except ValueError:
+                    if k > 0:
+                        datahora[k] = datahora[k-1]
+                else:
+                    datahora[k]=xhor
+                if nuvemcb == False:
+                    altncb.append('NaN')
+                    qncb.append('NaN')
+                if camada1 == False:
+                    altn1.append('NaN')
+                    qn1.append('NaN')
+
+                if camada2 == False:
+                    altn2.append('NaN')
+                    qn2.append('NaN')
+                if camada3 == False:
+                    altn3.append('NaN')
+                    qn3.append('NaN')
+
+                if camada4 == False:
+                    altn4.append('NaN')
+                    qn4.append('NaN')
+
+                if (entrou == False):
+                    vis.append('-10000')
+                    entrou = True
+
+                if tempopres == False:
+                    tp.append('NaN')
+                if len(dryt) != len(qn1):
+                    print(estacao[k],datahora[k])
+                if mensagem1[0] =='SPECI':
+                    speci.append(mens)
+                    print('aqui',datahora[k])
+                    print(mens)
+                    metar.append('-')
+                else:
+                    metar.append(mens)
+                    speci.append('-')
+                if estacao[k]=='SWPI':
+                    yyyyyyyyy=1
+                if vis[k]=='////':
+                    vis[k]='-9999'
+                if len(wspd) != len(pres):
+                    pres.append('NaN')
+                    if len(pres)!=len(dryt):
+                        dryt.append('NaN')
+                        dewp.append('NaN')
+                df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
+                    altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [altn4[k]] + [qn4[k]] + [
+                            altncb[k]] + [qncb[k]] + [metar[k]] + [speci[k]]
+                #f.sort_values(by=['First Column', 'Second Column', ...], inplace=True)
+
+
+                df.sort_values(by=['estacao','datahora'], inplace=True)
+
+                df.to_csv('metar_trat_'+str(estado)+'.csv',encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
+
+
+        #-----------------------juntar arquivos
+        arqiago = pd.read_csv('metar_trat_'+str(estado)+'.csv',
+                              sep=',',
+                              decimal='.')
+        #x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
+        #arqiago['data_hora'] = x
+        if areatrab==1:
+            arqiant = pd.read_csv('metar_trat_teste1.csv',
+                                sep=',',
+                                decimal='.')
+        else:
+            arqiant = pd.read_csv('metar_trat_teste2.csv',
+                                  sep=',',
+                                  decimal='.')
+
+
+        df1 = pd.concat([arqiant, arqiago])
+        df1.sort_values(by=['datahora', 'estacao'], inplace=True)
+        df1 = df1.drop_duplicates(['estacao', 'datahora','speci'])
+
+        if areatrab==1:
+            df1.to_csv('metar_trat_teste1.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+        else:
+            df1.to_csv('metar_trat_teste2.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+
+        return df1
+
+
+    
     def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
         # Create Chrome options
         chrome_options = Options()
@@ -187,9 +673,10 @@ def main():
     from_data = st.sidebar.date_input('Fim:', end_date)
     if st.button('Carregar dados'):
     
-        pdf=redemet_baixa(1, areasel, to_data, from_data,estacao)
-        edited_df = st.data_editor(pdf)
-           # st.button('Carregar dados')==False
+        pdf= redemet_baixa(1, areasel, to_data, from_data,estacao)
+        #edited_df = st.data_editor(pdf)
+        pdff=trata_redemet(areaprev)
+        edited_df = st.data_editor(pdff)
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
     main()
