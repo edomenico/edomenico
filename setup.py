@@ -677,7 +677,7 @@ def main():
     from_data = st.sidebar.date_input('Fim:', end_date)
     if st.button('Carregar dados'):
     
-        pdf= redemet_baixa(1, areasel, to_data, from_data,estacao)
+        pdf= redemet_baixa(areaprev, areasel, to_data, from_data,estacao)
         #edited_df = st.data_editor(pdf)
         pdff=trata_redemet(areaprev)
         edited_df = st.data_editor(pdff)
