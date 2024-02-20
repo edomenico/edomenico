@@ -45,7 +45,7 @@ def main():
     import os
     import glob
 
-        def trata_redemet(areasele):
+    def trata_redemet(areasele):
         import PySimpleGUI as sg
         import matplotlib.pyplot as plt
         import matplotlib.dates as md
