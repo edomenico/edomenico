@@ -159,6 +159,7 @@ def main():
             os.chdir("/mount/src/edomenico/area1")
             df.to_csv("metar.csv", header=True)
             # df.to_csv('example.csv')
+            return df
     start_date = datetime.today()
     end_date = datetime.today()
     
@@ -186,7 +187,8 @@ def main():
     from_data = st.sidebar.date_input('Fim:', end_date)
     if st.button('Carregar dados'):
     
-        redemet_baixa(1, areasel, to_data, from_data,estacao)
+        pdf=redemet_baixa(1, areasel, to_data, from_data,estacao)
+        edited_df = st.data_editor(pdf)
            # st.button('Carregar dados')==False
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
