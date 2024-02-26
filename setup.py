@@ -643,7 +643,7 @@ def main():
 
                 # print(df.loc[(df["Localidade"] == 'SBSC')])
                 df.to_csv("metar.csv", header=True)
-                browser.quit()
+                #browser.quit()
             print(df)
             # df = df.drop(columns=['Unnamed: 0'])
             os.chdir("/mount/src/edomenico/area1")
