@@ -576,13 +576,15 @@ def main():
                 #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                 # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                 # if (datahi.day + i)==31:
-                datacori = datahini + timedelta(days=i)
+                if i != 0:
+                    datacori = datahini + timedelta(days=i)
                     # datacori=datahf
+                else:
+                    datacori = datahini + timedelta(days=i)
+
                 datacoris = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-
-
-                datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-                datacorf=  datahfim + timedelta(hours=23)
+                #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
+                datacorf=  datacori + timedelta(hours=23)
                 datacorfs = datetime.strftime(datacorf, '%d/%m/%Y %H:%M')
                 datacorfs =datacorfs[0:10] + ' 23:00'
 
