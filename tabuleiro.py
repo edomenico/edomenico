@@ -40,6 +40,9 @@ from bokeh.transform import dodge, factor_cmap
 #from metpy.units import units
 from PIL import Image
 global diaini, mesini
+from bokeh.resources import CDN
+from bokeh.embed import file_html
+
 
 def main():
     def _data_url_to_image(data_url: str) -> Image:
@@ -1418,9 +1421,7 @@ def main():
                #                         div=div)
 
                 #HtmlFile = open("SBMEtab.html", 'r', encoding='utf-8')
-                from bokeh.resources import CDN
-                from bokeh.embed import file_html
-
+                
                 handle = file_html(p, CDN, "my plot")
 
                 #source_code = HtmlFile.read()
