@@ -1436,8 +1436,8 @@ def main():
 
 
             except Exception as err:
-                continue
-                #print(f"Unexpected {err=}, {type(err)=}")
+                #continue
+                print(f"Unexpected {err=}, {type(err)=}")
             return source_code
 
     # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
