@@ -385,7 +385,7 @@ def main():
         estacao_area=est
         noestacao = estacao_area.split(',')
 
-        for i in range(1, 1, 1):
+        for i in range(0, 1, 1):
             try:
                 print('nome da estação: ', noestacao[i])
                 nome_estacao = noestacao[i]
