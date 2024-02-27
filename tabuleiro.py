@@ -405,7 +405,7 @@ def main():
                         mkdir(cwd + "/tabuleiro/area2/")
                         caminho = cwd + '/tabuleiro/area2/'
                 output_file((caminho + arqi['estacao'][0] + "tab.html"))
-                print('CHEGUEI AQUI 2')
+                
                 # print(arqi)
                 # result1= arqi.loc[(arqi['data_hora']>=datacomp)]
 
@@ -570,7 +570,7 @@ def main():
                 # print(arqi.period)
                 arqi["period"] = [periods[x] for x in arqi.period]
                 # print(len(arqi['period']))
-
+                print('CHEGUEI AQUI 2')
                 ###temp max e min diaria
                 #######arqi.groupby(by=arqi['data_hora'].dt.day).agg({'dryt': 'max'})
                 #######arqi.groupby(by=arqi['data_hora'].dt.day).agg({'dryt': 'min'})
