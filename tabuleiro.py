@@ -923,6 +923,7 @@ def main():
                 p = figure(title="Tabuleiro: " + arqi.estacao[0] + ' ' + datatit, width=1500, height=2300,
                            x_range=groups, y_range=list(reversed(periods)), x_axis_location="above",
                            toolbar_location=None, tooltips=Tooltips)
+                print('CHEGUEI AQUI')
 
                 # p.add_layout(
                 #     BoxAnnotation(left='starttime', right='enddtime', bottom='startvalue', source=arqi, fill_color='green',
