@@ -394,6 +394,7 @@ def main():
                 nome_estacao = noestacao[i]
                 arqi = arqi1.loc[(arqi1['estacao'] == nome_estacao)]
                 arqi = arqi.reset_index(drop=True)
+                print('arquivo: ', arqi)
                
                 #cwd = os.getcwd()
                 #if areatrab == 1:
@@ -1439,7 +1440,7 @@ def main():
 
 
 
-
+            
             except:# Exception as err:
                 continue
                 #print(f"Unexpected {err=}, {type(err)=}")
