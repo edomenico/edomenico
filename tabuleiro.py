@@ -368,7 +368,7 @@ def main():
         # pd.set_option('max_columns', None)
         #areatrab = 1  # dado entrada
         # datainicio='27/03/20'#dado entrada
-         print('CHEGUEI AQUI 2')
+        print('CHEGUEI AQUI 2')
         datainicio = datetime.utcnow() - timedelta(9)
         datainicio = datainicio.strftime('%d/%m/%y')
 
