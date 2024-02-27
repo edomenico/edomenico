@@ -383,7 +383,7 @@ def main():
             # estacao_area ='SBEG,'
             arqi1 = pd.read_csv('metar_trat_teste2.csv')
         estacao_area=est
-        noestacao = estacao_area.split(',')
+        noestacao = estacao_area
 
         for i in range(0, 1, 1):
             try:
@@ -570,7 +570,7 @@ def main():
                 # print(arqi.period)
                 arqi["period"] = [periods[x] for x in arqi.period]
                 # print(len(arqi['period']))
-                print('CHEGUEI AQUI 2')
+                
                 ###temp max e min diaria
                 #######arqi.groupby(by=arqi['data_hora'].dt.day).agg({'dryt': 'max'})
                 #######arqi.groupby(by=arqi['data_hora'].dt.day).agg({'dryt': 'min'})
