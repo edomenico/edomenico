@@ -615,7 +615,7 @@ def main():
                 arqi['tmin'] = tmin
                 arqi['vmax'] = vmax
                 arqi['vmin'] = vmin
-                print('CHEGUEI AQUI'
+                print('CHEGUEI AQUI 2')
 
                 arqi['dewpt'].fillna(0, inplace=True)
                 dewttt = []
@@ -1482,6 +1482,7 @@ def main():
                 "Área 2",
                 area_2)
             noarea = 2
+    print('CHEGUEI AQUI 1')
     p=tabuleiro(nomedaestacao,noarea)
 
     import streamlit.components.v1 as components
