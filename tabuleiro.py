@@ -368,7 +368,7 @@ def main():
         # pd.set_option('max_columns', None)
         #areatrab = 1  # dado entrada
         # datainicio='27/03/20'#dado entrada
-        
+
         datainicio = datetime.utcnow() - timedelta(9)
         datainicio = datainicio.strftime('%d/%m/%y')
 
@@ -383,7 +383,7 @@ def main():
             # estacao_area ='SBEG,'
             arqi1 = pd.read_csv('metar_trat_teste2.csv')
         estacao_area=est
-        noestacao = estacao_area
+        noestacao = estacao_area.split(',')
 
         for i in range(0, 1, 1):
             try:
@@ -405,7 +405,7 @@ def main():
                         mkdir(cwd + "/tabuleiro/area2/")
                         caminho = cwd + '/tabuleiro/area2/'
                 output_file((caminho + arqi['estacao'][0] + "tab.html"))
-                
+
                 # print(arqi)
                 # result1= arqi.loc[(arqi['data_hora']>=datacomp)]
 
@@ -570,7 +570,7 @@ def main():
                 # print(arqi.period)
                 arqi["period"] = [periods[x] for x in arqi.period]
                 # print(len(arqi['period']))
-                
+
                 ###temp max e min diaria
                 #######arqi.groupby(by=arqi['data_hora'].dt.day).agg({'dryt': 'max'})
                 #######arqi.groupby(by=arqi['data_hora'].dt.day).agg({'dryt': 'min'})
@@ -615,7 +615,6 @@ def main():
                 arqi['tmin'] = tmin
                 arqi['vmax'] = vmax
                 arqi['vmin'] = vmin
-               
 
                 arqi['dewpt'].fillna(0, inplace=True)
                 dewttt = []
@@ -644,8 +643,6 @@ def main():
                         # ur.append(uuu)
                         uuu = round(100 - 5 * (at - atb))
                         ur.append(uuu)
-                        
-                
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
                 #     else:
@@ -1439,7 +1436,6 @@ def main():
 
 
             except Exception as err:
-               # continue
                 
                 print(f"Unexpected {err=}, {type(err)=}")
             return source_code
@@ -1481,7 +1477,6 @@ def main():
                 "Área 2",
                 area_2)
             noarea = 2
-    print('CHEGUEI AQUI 1')
     p=tabuleiro(nomedaestacao,noarea)
 
     import streamlit.components.v1 as components
