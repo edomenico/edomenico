@@ -624,6 +624,7 @@ def main():
 
                     if str(arqi.dewpt[iur])[0:1] == 'M':
                         atb = np.ceil(float(arqi.dewpt[iur][1:2]))
+
                     else:
                         atb = np.ceil(float(arqi.dewpt[iur]))
                     at = float((arqi.drytt[iur]))
@@ -637,10 +638,10 @@ def main():
                     if (arqi['dewp'][iur]) != (arqi['dewp'][iur]):
                         ur.append('-')
                     else:
-                       # uuu = (
-                       # round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
-                       # ur.append(uuu)
-                        uuu=round(100 -5*(at-atb))
+                        # uuu = (
+                        # round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
+                        # ur.append(uuu)
+                        uuu = round(100 - 5 * (at - atb))
                         ur.append(uuu)
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
@@ -1435,22 +1436,18 @@ def main():
 
 
             except Exception as err:
-            #except:
-                return source_code
-                print(f"Unexpected {err=}, {type(err)=}")
-                print('erro')
-                
-                
+                continue
+                #print(f"Unexpected {err=}, {type(err)=}")
             return source_code
 
     # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
     #                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
     #                 ,tab25, tab26, tab27, tab28 = st.tabs(
-    #     ['SBES', 'SBJR', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+    #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
     area = ['Área 1', 'Área 2']
-    area_1 = ['SBES', 'SBJR', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+    area_1 = ['SBJR', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
               'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
               'SBPJ']
     area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
