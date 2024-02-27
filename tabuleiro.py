@@ -391,7 +391,7 @@ def main():
                 nome_estacao = noestacao[i]
                 arqi = arqi1.loc[(arqi1['estacao'] == nome_estacao)]
                 arqi = arqi.reset_index(drop=True)
-                print (arqi)
+               
                 #cwd = os.getcwd()
                 #if areatrab == 1:
 
@@ -472,6 +472,7 @@ def main():
                 arqi['valor'] = valores
                 arqi['aviso'] = stop
                 arqi['nspc'] = noespec
+                
                 print(valores)
                 # arqi['especial'] = arqi['especial'].str[:50]
                 # arqi = arqi.reset_index(drop=True)
@@ -595,8 +596,8 @@ def main():
                 ur = []
                 tmax = []
                 tmin = []
-                vmax = []
-                vmin = []
+                #vmax = []
+               # vmin = []
                 arqi['drytt'] = arqi['dryt']
                 arqi['drytt'].fillna(0, inplace=True)
                 arqi['dewpt'] = arqi['dewp']
@@ -610,13 +611,13 @@ def main():
                         if ccmax['datahora2'].dt.day[bbb] == arqi['datahora2'].dt.day[bb]:
                             tmax.append(ccmax.drytt[bbb])
                             tmin.append(ccmin.drytt[bbb])
-                            vmax.append(ccmax.wspd[bbb])
-                            vmin.append(ccmin.wspd[bbb])
+                           # vmax.append(ccmax.wspd[bbb])
+                           # vmin.append(ccmin.wspd[bbb])
 
                 arqi['tmax'] = tmax
                 arqi['tmin'] = tmin
-                arqi['vmax'] = vmax
-                arqi['vmin'] = vmin
+               # arqi['vmax'] = vmax
+               # arqi['vmin'] = vmin
 
                 arqi['dewpt'].fillna(0, inplace=True)
                 dewttt = []
@@ -887,7 +888,7 @@ def main():
                <div>
                 <font color = "red"
                 <i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
-                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp Vmax: @vmax kt&nbsp&nbsp Vmin: @vmin kt</b>
+                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
                 </font>
                 <div>
     
