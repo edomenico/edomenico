@@ -23,7 +23,7 @@ from datetime import datetime, timedelta, date
 from os import makedirs as mkdir
 
 import emoji
-import metpy.calc as mpcalc
+#import metpy.calc as mpcalc
 # import numpy as np
 import numpy as np
 import pandas as pd
@@ -37,7 +37,7 @@ from bokeh.plotting import save
 from bokeh.sampledata.periodic_table import elements
 # from bokeh.transform import dodge, factor_cmap
 from bokeh.transform import dodge, factor_cmap
-from metpy.units import units
+#from metpy.units import units
 from PIL import Image
 global diaini, mesini
 
@@ -637,9 +637,10 @@ def main():
                     if (arqi['dewp'][iur]) != (arqi['dewp'][iur]):
                         ur.append('-')
                     else:
-                        uuu = (
-                        round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
-                        ur.append(uuu)
+                       # uuu = (
+                       # round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
+                       # ur.append(uuu)
+                        uuu=round(100 -5*(at-atb))
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
                 #     else:
