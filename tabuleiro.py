@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 import os
 import glob
 from bokeh.plotting import figure
-from PyInstaller.utils.hooks import collect_data_files
+#from PyInstaller.utils.hooks import collect_data_files
 import math
 import os.path
 # from datetime import date
