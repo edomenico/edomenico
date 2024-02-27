@@ -1440,9 +1440,9 @@ def main():
 
 
 
-            except Exception as err:
-                
-                print(f"Unexpected {err=}, {type(err)=}")
+            except:# Exception as err:
+                continue
+                #print(f"Unexpected {err=}, {type(err)=}")
             return source_code
 
     # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
@@ -1457,8 +1457,7 @@ def main():
               'SBPJ','SBJR']
     area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
-              'SBBV',
-              'SSKW', 'SWEI', 'SWPI']
+              'SBBV','SSKW', 'SWEI', 'SWPI']
     start_date = datetime.today() - timedelta(days=365)
     end_date = datetime.today()
     with st.sidebar:
