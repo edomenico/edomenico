@@ -1,3 +1,4 @@
+math
 metpy
 webdriver-manager
 plotly==5.3.1
@@ -54,4 +55,4 @@ pmdarima~=2.0.3
 lxml~=4.6.3
 webdriver-manager
 pygithub
-math
+
