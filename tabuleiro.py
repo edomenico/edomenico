@@ -391,21 +391,21 @@ def main():
                 nome_estacao = noestacao[i]
                 arqi = arqi1.loc[(arqi1['estacao'] == nome_estacao)]
                 arqi = arqi.reset_index(drop=True)
-                cwd = os.getcwd()
-                if areatrab == 1:
+                #cwd = os.getcwd()
+                #if areatrab == 1:
 
-                    if os.path.isdir(cwd + '/tabuleiro/area1/'):
-                        caminho = cwd + '/tabuleiro/area1/'
-                    else:
-                        mkdir(cwd + '/tabuleiro/area1/')
-                        caminho = cwd + '/tabuleiro/area1/'
-                else:
-                    if os.path.isdir(cwd + '/tabuleiro/area2/'):
-                        caminho = cwd + '/tabuleiro/area2/'
-                    else:
-                        mkdir(cwd + "/tabuleiro/area2/")
-                        caminho = cwd + '/tabuleiro/area2/'
-                output_file((caminho + arqi['estacao'][0] + "tab.html"))
+                #    if os.path.isdir(cwd + '/tabuleiro/area1/'):
+                #        caminho = cwd + '/tabuleiro/area1/'
+                #    else:
+                #        mkdir(cwd + '/tabuleiro/area1/')
+                #        caminho = cwd + '/tabuleiro/area1/'
+               # else:
+                 #   if os.path.isdir(cwd + '/tabuleiro/area2/'):
+                  #      caminho = cwd + '/tabuleiro/area2/'
+                   # else:
+                    #    mkdir(cwd + "/tabuleiro/area2/")
+                   #     caminho = cwd + '/tabuleiro/area2/'
+               # output_file((caminho + arqi['estacao'][0] + "tab.html"))
 
                 # print(arqi)
                 # result1= arqi.loc[(arqi['data_hora']>=datacomp)]
