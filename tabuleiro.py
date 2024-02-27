@@ -368,7 +368,7 @@ def main():
         # pd.set_option('max_columns', None)
         #areatrab = 1  # dado entrada
         # datainicio='27/03/20'#dado entrada
-
+         print('CHEGUEI AQUI 2')
         datainicio = datetime.utcnow() - timedelta(9)
         datainicio = datainicio.strftime('%d/%m/%y')
 
@@ -615,7 +615,7 @@ def main():
                 arqi['tmin'] = tmin
                 arqi['vmax'] = vmax
                 arqi['vmin'] = vmin
-                print('CHEGUEI AQUI 2')
+               
 
                 arqi['dewpt'].fillna(0, inplace=True)
                 dewttt = []
