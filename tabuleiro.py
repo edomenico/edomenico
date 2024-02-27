@@ -615,6 +615,7 @@ def main():
                 arqi['tmin'] = tmin
                 arqi['vmax'] = vmax
                 arqi['vmin'] = vmin
+                print('CHEGUEI AQUI'
 
                 arqi['dewpt'].fillna(0, inplace=True)
                 dewttt = []
@@ -643,6 +644,8 @@ def main():
                         # ur.append(uuu)
                         uuu = round(100 - 5 * (at - atb))
                         ur.append(uuu)
+                        
+                
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
                 #     else:
