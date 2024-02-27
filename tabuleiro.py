@@ -1439,9 +1439,8 @@ def main():
 
 
             except Exception as err:
-                #continue
-                handle = file_html(p, CDN, "my plot")
-                source_code =handle
+                continue
+                
                 print(f"Unexpected {err=}, {type(err)=}")
             return source_code
 
