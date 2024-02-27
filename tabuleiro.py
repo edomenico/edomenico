@@ -519,7 +519,7 @@ def main():
                 arqi = arqi.loc[(arqi['data_hora'] < date_fim)]
                 arqi.sort_values(by=['estacao', 'data_hora'], inplace=True)
                 arqi = arqi.reset_index(drop=True)
-                # print('arq: ', arqi)
+                print('CHEGUEI AQUI')
                 dia = []
                 hora = []
                 diai = arqi['data_hora']
