@@ -1,4 +1,4 @@
-math==3.7.17
+math==none
 metpy
 webdriver-manager
 plotly==5.3.1
