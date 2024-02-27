@@ -387,6 +387,7 @@ def main():
 
         for i in range(0, 1, 1):
             try:
+                print('nome da estação: ', noestacao[i])
                 nome_estacao = noestacao[i]
                 arqi = arqi1.loc[(arqi1['estacao'] == nome_estacao)]
                 arqi = arqi.reset_index(drop=True)
