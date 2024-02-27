@@ -923,7 +923,7 @@ def main():
                 p = figure(title="Tabuleiro: " + arqi.estacao[0] + ' ' + datatit, width=1500, height=2300,
                            x_range=groups, y_range=list(reversed(periods)), x_axis_location="above",
                            toolbar_location=None, tooltips=Tooltips)
-                print('CHEGUEI AQUI')
+                
 
                 # p.add_layout(
                 #     BoxAnnotation(left='starttime', right='enddtime', bottom='startvalue', source=arqi, fill_color='green',
@@ -1452,9 +1452,9 @@ def main():
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
     area = ['Área 1', 'Área 2']
-    area_1 = ['SBJR', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+    area_1 = ['SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
               'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
-              'SBPJ']
+              'SBPJ','SBJR']
     area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
               'SBBV',
