@@ -1436,7 +1436,7 @@ def main():
 
             except Exception as err:
             #except:
-                #continue
+                continue
                 print(f"Unexpected {err=}, {type(err)=}")
                 print('erro')
             return source_code
