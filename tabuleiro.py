@@ -16,12 +16,10 @@ import os
 import glob
 from bokeh.plotting import figure
 #from PyInstaller.utils.hooks import collect_data_files
-import math
 import os.path
 # from datetime import date
 # from datetime import datetime
 from datetime import datetime, timedelta, date
-from math import floor
 from os import makedirs as mkdir
 
 import emoji
@@ -625,15 +623,15 @@ def main():
                 for iur in range(0, len(arqi['dryt']), 1):
 
                     if str(arqi.dewpt[iur])[0:1] == 'M':
-                        atb = math.ceil(float(arqi.dewpt[iur][1:2]))
+                        atb = np.ceil(float(arqi.dewpt[iur][1:2]))
                     else:
-                        atb = math.ceil(float(arqi.dewpt[iur]))
+                        atb = np.ceil(float(arqi.dewpt[iur]))
                     at = float((arqi.drytt[iur]))
                     if arqi.dewpt[iur] == 0:
                         attt.append('xx')
 
                     else:
-                        attt.append(math.ceil(float(arqi.dewpt[iur])))
+                        attt.append(np.ceil(float(arqi.dewpt[iur])))
                     dewttt.append(atb)
 
                     if (arqi['dewp'][iur]) != (arqi['dewp'][iur]):
