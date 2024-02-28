@@ -463,6 +463,8 @@ def main():
                                 stop[jj - iii] = 'A'
                                 # valores[jj-iii]=especi[jj-iii].split('=')
                                 iii = iii + 1
+                                if (jj-iii) < 0:
+                                    break
                             # noespec[jj-iii] = str(iii+2)
                         #
                         #
