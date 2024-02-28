@@ -2184,7 +2184,7 @@ def main():
             noarea = 2
     p=tabuleiro(nomedaestacao,noarea)
     if st.button('Atualizar dados'):
-        pt = redemet.rest(noarea)
+        pt = rest(noarea)
     import streamlit.components.v1 as components
 
 
