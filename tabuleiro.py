@@ -2236,7 +2236,7 @@ def main():
     with st.sidebar:
         #st.markdown("## Atualizar Dados")
 
-        atualizar_horario = st.toggle('Atualizar horário')
+        
         selarea = st.radio("Escolha a área",["Área 1", "Área 2"])
 
         #col1, col2 = st.columns(2)
@@ -2272,7 +2272,7 @@ def main():
         # st.write(event_result)
     #st.bokeh_chart(html_content,use_container_width=True)
         #st.write(p)
-
+    atualizar_horario = st.toggle('Atualizar horário')
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
 #if __name__ == '__main__':
