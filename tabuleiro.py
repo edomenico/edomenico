@@ -748,7 +748,8 @@ def main():
             _, _data_url = data_url.split(";base64,")
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
-    def tabuleiro(est,areatrab):
+    def tabuleiro(est,areatrab,dados1,dados2,pt1,pt2):
+        
         def formata():
             from bokeh.models import FuncTickFormatter, FixedTicker
             p.xaxis.ticker = FixedTicker(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -1148,13 +1149,15 @@ def main():
         if areatrab == 1:
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
+            #arqi1 = pd.read_csv('metar_trat_teste1.csv')
             arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
 
             #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
-            arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            #arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            arqi1 = pt2
         estacao_area=est
         noestacao = estacao_area.split(',')
 
@@ -2224,6 +2227,14 @@ def main():
     #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
+    pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                    sep=',',
+                                    decimal='.')
+    pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                    sep=',',
+                                    decimal='.')
+    atudados_area1=0
+    atudados_area2=0
     area = ['Área 1', 'Área 2']
     area_1 = ['SBJR','SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
               'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
@@ -2254,7 +2265,7 @@ def main():
                 "Área 2",
                 area_2)
             noarea = 2
-    p=tabuleiro(nomedaestacao,noarea)
+    p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
     
     import streamlit.components.v1 as components
 
@@ -2272,7 +2283,13 @@ def main():
     #st.bokeh_chart(html_content,use_container_width=True)
         #st.write(p)
     if st.button('Atualizar dados'):
-        pt = rest(noarea)
+        if noarea==1:
+            pt1 = rest(noarea)
+            atudados_area1=1
+        else:
+            pt2 = rest(noarea)
+            atudados_area2=1
+            
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
 #if __name__ == '__main__':
