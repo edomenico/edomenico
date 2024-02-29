@@ -1728,7 +1728,7 @@ def main():
                 p.xaxis.axis_label_text_font_size = "20pt"
                 p.yaxis.axis_label_text_font_size = "20pt"
                 p.xaxis.axis_label = 'D I A'
-                p.yaxis.axis_label = 'H O R A'
+                p.yaxis.axis_label = 'H O R A  (UTC)'
                 p.x_range.range_padding = -0.07
                 # p.xaxis.major_label_orientation = 1.3
 
