@@ -2271,7 +2271,7 @@ def main():
         # st.write(event_result)
     #st.bokeh_chart(html_content,use_container_width=True)
         #st.write(p)
-   if st.button('Atualizar dados'):
+    if st.button('Atualizar dados'):
         pt = rest(noarea)
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
