@@ -854,11 +854,18 @@ def main():
                             return mapping[tick];
                        """)
             if diaini == 20:
+
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 1};
-                                        return mapping[tick];
-                                   """)
+                    if (date.today().year % 4) !=0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 1};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 29};
+                                                                    return mapping[tick];
+                                                               """)
 
                 else:
 
@@ -868,10 +875,16 @@ def main():
                            """)
             if diaini == 21:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 1, 10: 2};
-                                        return mapping[tick];
-                                   """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 1, 10: 2};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 1};
+                                                                    return mapping[tick];
+                                                               """)
 
                 else:
                     p.xaxis.formatter = FuncTickFormatter(code="""
@@ -879,11 +892,19 @@ def main():
                                 return mapping[tick];
                            """)
             if diaini == 22:
+
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
-                                        return mapping[tick];
-                                   """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 1, 10: 2};
+                                                                    return mapping[tick];
+                                                               """)
+
                 elif mesini == 1 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 31};
@@ -897,10 +918,16 @@ def main():
                            """)
             if diaini == 23:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 1, 8: 2, 9: 3, 10: 4};
-                                        return mapping[tick];
-                                   """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 1, 8: 2, 9: 3, 10: 4};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 1, 9: 2, 10: 3};
+                                                                    return mapping[tick];
+                                                               """)
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                            var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 30, 9: 31, 10: 1};
@@ -914,10 +941,17 @@ def main():
 
             if diaini == 24:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
-                                           return mapping[tick];
-                                      """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 1, 2: 3, 3: 4, 10: 4};
+                                                                   return mapping[tick];
+                                                              """)
+
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                    var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 30, 8: 31, 9:1, 10:2};
@@ -931,10 +965,16 @@ def main():
 
             if diaini == 25:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
-                                           return mapping[tick];
-                                      """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
+                                                                   return mapping[tick];
+                                                              """)
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                    var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 30, 7: 31, 8: 1, 9: 2, 10: 3};
@@ -948,10 +988,17 @@ def main():
 
             if diaini == 26:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                               var mapping = {1: 26, 2: 27, 3: 28, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
-                                               return mapping[tick];
-                                          """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                   var mapping = {1: 26, 2: 27, 3: 28, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
+                                                   return mapping[tick];
+                                              """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                           var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
+                                                                           return mapping[tick];
+                                                                      """)
+
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
 
                     p.xaxis.formatter = FuncTickFormatter(code="""
@@ -966,10 +1013,16 @@ def main():
 
             if diaini == 27:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 27, 2: 28, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
-                                           return mapping[tick];
-                                      """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 27, 2: 28, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 27, 2: 28, 3: 29, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
+                                                                   return mapping[tick];
+                                                              """)
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
 
                     p.xaxis.formatter = FuncTickFormatter(code="""
@@ -983,10 +1036,16 @@ def main():
                                           """)
             if diaini == 28:
                 if mesini == 2:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 28, 2: 29, 1: 30, 2: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
-                                           return mapping[tick];
-                                      """)
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 28, 2: 1, 1: 2, 2: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 28, 2: 29, 1: 1, 2: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                                                   return mapping[tick];
+                                                              """)
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                    var mapping = {1: 28, 2: 29, 3: 30, 4: 31, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
@@ -999,7 +1058,20 @@ def main():
                                           """)
 
             if diaini == 29:
-                if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 28, 2: 1, 1: 2, 2: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 28, 2: 29, 1: 1, 2: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                                                   return mapping[tick];
+                                                              """)
+
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                    var mapping = {1: 29, 2: 30, 3: 31, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
                                    return mapping[tick];
