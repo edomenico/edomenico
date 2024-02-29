@@ -2296,7 +2296,7 @@ def main():
             atudados_area1=1
         else:
             pt2 = rest(noarea)
-            atudados_area2=1
+            atudados_area2=2
             
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
