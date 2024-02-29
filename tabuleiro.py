@@ -1283,9 +1283,17 @@ def main():
                         mes_fim = '12'
                         ano_fim = str(date_fim.year - 1)
                 elif date_fim.day == 1:
-                    dia_fim = '30'
-                    mes_fim = str(date_fim.month - 1)
-                    ano_fim = str(date_fim.year)
+                    if date_fim.month==3:
+                        if date_fim.year%4==0:
+                            dia_fim = '29'
+                            mes_fim = str(date_fim.month - 1)
+                            ano_fim = str(date_fim.year)
+                        else:
+                            dia_fim = '28'
+                            mes_fim = str(date_fim.month - 1)
+                            ano_fim = str(date_fim.year)
+
+                
                 else:
                     dia_fim = str(date_fim.day - 1)
                     ano_fim = str(date_fim.year)
@@ -1295,7 +1303,7 @@ def main():
                 arqi = arqi.loc[(arqi['data_hora'] < date_fim)]
                 arqi.sort_values(by=['estacao', 'data_hora'], inplace=True)
                 arqi = arqi.reset_index(drop=True)
-                print('CHEGUEI AQUI')
+               # print('CHEGUEI AQUI')
                 dia = []
                 hora = []
                 diai = arqi['data_hora']
