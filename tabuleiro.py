@@ -2255,8 +2255,7 @@ def main():
                 area_2)
             noarea = 2
     p=tabuleiro(nomedaestacao,noarea)
-    if st.button('Atualizar dados'):
-        pt = rest(noarea)
+    
     import streamlit.components.v1 as components
 
 
@@ -2272,7 +2271,8 @@ def main():
         # st.write(event_result)
     #st.bokeh_chart(html_content,use_container_width=True)
         #st.write(p)
-    atualizar_horario = st.toggle('Atualizar horário')
+   if st.button('Atualizar dados'):
+        pt = rest(noarea)
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
 #if __name__ == '__main__':
