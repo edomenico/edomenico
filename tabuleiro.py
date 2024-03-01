@@ -42,7 +42,8 @@ from PIL import Image
 global diaini, mesini
 from bokeh.resources import CDN
 from bokeh.embed import file_html
-
+global atudados_area1
+global atudados_area2
 
 def main():
     def rest(areas):
@@ -2315,5 +2316,8 @@ def main():
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
+
 st.session_state
+atudados_area1=0
+atudados_area2=0
 main()
