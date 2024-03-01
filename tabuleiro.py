@@ -1146,12 +1146,12 @@ def main():
         datainicio = datetime.utcnow() - timedelta(9)
         datainicio = datainicio.strftime('%d/%m/%y')
 
-       # if areatrab == 1:
+        if areatrab == 1:
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
             #arqi1 = pd.read_csv('metar_trat_teste1.csv')
             arqi1 = pd.read_csv('metar_trat_teste1.csv')
-       # else:
+        else:
 
             #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
@@ -1319,7 +1319,7 @@ def main():
 
                         if mesini == 2 and (diai[i].day == 1) and (diai[i - j].day != 28):
 
-                            dia.append(29 - deltatempo+1)
+                            dia.append(29 - deltatempo)
                             hora.append(diai[i].hour)
 
                             ult = dia[i] - 1
@@ -2291,10 +2291,9 @@ def main():
     #st.bokeh_chart(html_content,use_container_width=True)
         #st.write(p)
     if st.button('Atualizar dados'):
-        atualizar=1
         if noarea==1:
             pt1 = rest(noarea)
-            atudados_area2=1
+            atudados_area1=1
         else:
             pt2 = rest(noarea)
             atudados_area2=2
