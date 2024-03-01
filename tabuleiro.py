@@ -2237,6 +2237,7 @@ def main():
     #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
+    atualizou=False
     pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
@@ -2275,7 +2276,10 @@ def main():
                 "Área 2",
                 area_2)
             noarea = 2
-    p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
+    if atualizou:
+        p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt3,pt4)
+    else:
+        p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
     
     import streamlit.components.v1 as components
 
@@ -2294,11 +2298,13 @@ def main():
         #st.write(p)
     if st.button('Atualizar dados'):
         if noarea==1:
-            pt1 = rest(noarea)
+            pt3 = rest(noarea)
             atudados_area1=1
+            atualizou=True
         else:
-            pt2 = rest(noarea)
+            pt4 = rest(noarea)
             atudados_area2=2
+            atualizou=True
             
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
