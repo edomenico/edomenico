@@ -1154,11 +1154,14 @@ def main():
             # estacao_area = 'SBFZ,'
             #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
                 #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
+                
                 arqi1 = pd.read_csv('metar_trat_teste1.csv')
             else:
                 #arqi1=pt1
-               arqi1= rest(noarea)
-               arqi1 = pd.read_csv('metar_trat_teste1.csv')
+               arqi1= rest(1)
+               dados1=0
+               
+               #arqi1 = pd.read_csv('metar_trat_teste1.csv')
             
         else:
             if dados2==0:
@@ -1166,10 +1169,12 @@ def main():
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
                 #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv')
-                arqi1 = pd.read_csv('metar_trat_teste2.csv')
-            else:
                 arqi1= rest(noarea)
                 arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            else:
+                arqi1= rest(2)
+                dados2=0
+                #arqi1 = pd.read_csv('metar_trat_teste2.csv')
             
                 
         estacao_area=est
