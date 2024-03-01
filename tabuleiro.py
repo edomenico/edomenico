@@ -1152,7 +1152,7 @@ def main():
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
             #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
-                arqi1 = pd.read_csv('metar_trat_teste1.csv')
+                arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
             else:
                 arqi1=pt1
             
