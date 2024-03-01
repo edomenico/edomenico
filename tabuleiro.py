@@ -2303,7 +2303,7 @@ def main():
         if noarea==1:
             pt1 = rest(noarea)
             atudados_area1=1
-        #else:
+        else:
             pt2 = rest(noarea)
             atudados_area2=2
             
