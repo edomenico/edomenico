@@ -1158,6 +1158,7 @@ def main():
             else:
                 #arqi1=pt1
                arqi1= rest(noarea)
+               arqi1 = pd.read_csv('metar_trat_teste1.csv')
             
         else:
             if dados2==0:
@@ -1168,6 +1169,7 @@ def main():
                 arqi1 = pd.read_csv('metar_trat_teste2.csv')
             else:
                 arqi1= rest(noarea)
+                arqi1 = pd.read_csv('metar_trat_teste2.csv')
             
                 
         estacao_area=est
