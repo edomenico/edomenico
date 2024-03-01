@@ -1150,16 +1150,14 @@ def main():
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
             #arqi1 = pd.read_csv('metar_trat_teste1.csv')
-            #arqi1 = pd.read_csv('metar_trat_teste1.csv')
-            arqi1 = pt1
+            arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
 
             #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
             #arqi1 = pd.read_csv('metar_trat_teste2.csv')
-            #arqi1 = pd.read_csv('metar_trat_teste2.csv')
-            arqi1 = pt2
+            arqi1 = pd.read_csv('metar_trat_teste2.csv')
         estacao_area=est
         noestacao = estacao_area.split(',')
 
@@ -1321,7 +1319,7 @@ def main():
 
                         if mesini == 2 and (diai[i].day == 1) and (diai[i - j].day != 28):
 
-                            dia.append(29 - deltatempo+1)
+                            dia.append(29 - deltatempo + 1)
                             hora.append(diai[i].hour)
 
                             ult = dia[i] - 1
@@ -2237,7 +2235,6 @@ def main():
     #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
-    atualizou=False
     pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
@@ -2276,10 +2273,7 @@ def main():
                 "Área 2",
                 area_2)
             noarea = 2
-    if atualizou:
-        p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt3,pt4)
-    else:
-        p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
+    p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
     
     import streamlit.components.v1 as components
 
@@ -2298,13 +2292,11 @@ def main():
         #st.write(p)
     if st.button('Atualizar dados'):
         if noarea==1:
-            pt3 = rest(noarea)
-            atudados_area1=1
-            atualizou=True
+            pt1 = rest(noarea)
+            atudados_area2=1
         else:
-            pt4 = rest(noarea)
+            pt2 = rest(noarea)
             atudados_area2=2
-            atualizou=True
             
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
