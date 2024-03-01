@@ -1319,7 +1319,7 @@ def main():
 
                         if mesini == 2 and (diai[i].day == 1) and (diai[i - j].day != 28):
 
-                            dia.append(29 - deltatempo)
+                            dia.append(29 - deltatempo+1)
                             hora.append(diai[i].hour)
 
                             ult = dia[i] - 1
