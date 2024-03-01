@@ -2294,7 +2294,7 @@ def main():
         atualizar=1
         if noarea==1:
             pt1 = rest(noarea)
-            atudados_area1=1
+            atudados_area2=1
         else:
             pt2 = rest(noarea)
             atudados_area2=2
