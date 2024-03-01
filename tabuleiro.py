@@ -42,8 +42,7 @@ from PIL import Image
 global diaini, mesini
 from bokeh.resources import CDN
 from bokeh.embed import file_html
-global atudados_area1
-global atudados_area2
+
 
 def main():
     def rest(areas):
@@ -748,7 +747,7 @@ def main():
             """Convert DataURL string to the image."""
             _, _data_url = data_url.split(";base64,")
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
-        return pdff
+
     def tabuleiro(est,areatrab,dados1,dados2,pt1,pt2):
         
         def formata():
@@ -1148,35 +1147,17 @@ def main():
         datainicio = datainicio.strftime('%d/%m/%y')
 
         if areatrab == 1:
-            if dados1==0:
-            
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
-            #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
-                #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
-                
-                arqi1 = pd.read_csv('metar_trat_teste1.csv')
-            else:
-                #arqi1=pt1
-               arqi1= rest(1)
-               dados1=0
-               
-               #arqi1 = pd.read_csv('metar_trat_teste1.csv')
-            
+            #arqi1 = pd.read_csv('metar_trat_teste1.csv')
+            arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
-            if dados2==0:
+
             #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
-                #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv')
-                arqi1= rest(noarea)
-                arqi1 = pd.read_csv('metar_trat_teste2.csv')
-            else:
-                arqi1= rest(2)
-                dados2=0
-                #arqi1 = pd.read_csv('metar_trat_teste2.csv')
-            
-                
+            #arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            arqi1 = pd.read_csv('metar_trat_teste2.csv')
         estacao_area=est
         noestacao = estacao_area.split(',')
 
@@ -1338,7 +1319,7 @@ def main():
 
                         if mesini == 2 and (diai[i].day == 1) and (diai[i - j].day != 28):
 
-                            dia.append(29 - deltatempo + 1)
+                            dia.append(29 - deltatempo)
                             hora.append(diai[i].hour)
 
                             ult = dia[i] - 1
@@ -2311,10 +2292,10 @@ def main():
         #st.write(p)
     if st.button('Atualizar dados'):
         if noarea==1:
-            #pt1 = rest(noarea)
+            pt1 = rest(noarea)
             atudados_area1=1
         else:
-           # pt2 = rest(noarea)
+            pt2 = rest(noarea)
             atudados_area2=2
             
     #barra_lateral = st.sid,ebar.empty()
@@ -2326,8 +2307,5 @@ def main():
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
-
 st.session_state
-atudados_area1=0
-atudados_area2=0
 main()
