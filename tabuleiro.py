@@ -1148,7 +1148,7 @@ def main():
         datainicio = datainicio.strftime('%d/%m/%y')
 
         if areatrab == 1:
-            if dados1!=0:
+            if dados1==0:
             
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
@@ -1156,17 +1156,18 @@ def main():
                 #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv')
                 arqi1 = pd.read_csv('metar_trat_teste1.csv')
             else:
-                arqi1=pt1
+                #arqi1=pt1
+               arqi1= rest(noarea)
             
         else:
-            if dados2!=0:
+            if dados2==0:
             #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
                 #arqi1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv')
                 arqi1 = pd.read_csv('metar_trat_teste2.csv')
             else:
-                arqi1 = pt2
+                arqi1= rest(noarea)
             
                 
         estacao_area=est
@@ -2303,10 +2304,10 @@ def main():
         #st.write(p)
     if st.button('Atualizar dados'):
         if noarea==1:
-            pt1 = rest(noarea)
+            #pt1 = rest(noarea)
             atudados_area1=1
         else:
-            pt2 = rest(noarea)
+           # pt2 = rest(noarea)
             atudados_area2=2
             
     #barra_lateral = st.sid,ebar.empty()
