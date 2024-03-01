@@ -1157,7 +1157,7 @@ def main():
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
             #arqi1 = pd.read_csv('metar_trat_teste2.csv')
-            arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            arqi1 = pt2
         estacao_area=est
         noestacao = estacao_area.split(',')
 
