@@ -1153,14 +1153,13 @@ def main():
             #arqi1 = pd.read_csv('metar_trat_teste1.csv')
             arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
-            if dados2==0:
+            
             #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
-            #arqi1 = pd.read_csv('metar_trat_teste2.csv')
-                arqi1 = pt2
-            else:
-                arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            arqi1 = pd.read_csv('metar_trat_teste2.csv')
+            #arqi1 = pt2
+            
                 
         estacao_area=est
         noestacao = estacao_area.split(',')
