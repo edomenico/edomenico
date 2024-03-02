@@ -742,7 +742,7 @@ def main():
         pdf= redemet_baixa(1, areasel, to_data, from_data,estacao)
     
         pdff=trata_redemet(areaprev)
-        edited_df = st.data_editor(pdff)
+        #edited_df = st.data_editor(pdff)
         def _data_url_to_image(data_url: str) -> Image:
             """Convert DataURL string to the image."""
             _, _data_url = data_url.split(";base64,")
