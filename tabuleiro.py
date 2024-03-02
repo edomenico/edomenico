@@ -2266,7 +2266,7 @@ def main():
             my_bar.progress(100, text="Terminou")
 
         
-        selarea = st.radio("Escolha a área",["Área 1", "Área 2"])
+        selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
 
         #col1, col2 = st.columns(2)
         if selarea=="Área 1":
