@@ -2254,6 +2254,16 @@ def main():
     end_date = datetime.today()
     with st.sidebar:
         #st.markdown("## Atualizar Dados")
+        if st.button('Atualizar dados'):
+            progress_text = "Processando... Aguarde."
+            my_bar = st.progress(10, text=progress_text)
+            pt1 = rest(1)
+            my_bar.progress(50, text="Em andamento...")
+            # for percent_complete in range(100):
+            #     time.sleep(0.01)
+            pt2 = rest(2)
+
+            my_bar.progress(100, text="Terminou")
 
         
         selarea = st.radio("Escolha a área",["Área 1", "Área 2"])
@@ -2290,13 +2300,13 @@ def main():
         # st.write(event_result)
     #st.bokeh_chart(html_content,use_container_width=True)
         #st.write(p)
-    if st.button('Atualizar dados'):
-        if noarea==1:
-            pt1 = rest(noarea)
-            atudados_area1=1
+    #if st.button('Atualizar dados'):
+    #    if noarea==1:
+     #       pt1 = rest(noarea)
+     #       atudados_area1=1
         
-            pt2 = rest(2)
-            atudados_area2=2
+      #      pt2 = rest(2)
+       #     atudados_area2=2
             
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
