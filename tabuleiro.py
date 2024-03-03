@@ -605,10 +605,10 @@ def main():
                 #datahf = datetime.strftime(datahfim, '%d/%m/%Y')
                # tempo = datahfim - datahini
     
-                #if datahi == datahf:
-                intervalo = 0
-                #else:
-                #    intervalo = int((str(tempo)[0:2]))
+                if datahini == datahfim:
+                    intervalo = 0
+                else:
+                    intervalo = (datahfim - datahini).days
                 #mes = datahini.month
                 # nome = "SBSC,SBAR,SBBH,SBBR,SBBV,SBCB,SBCG,SBCP,SBCT,SBCY,SBEN,SBES,SBFL,SBFN,SBFS,SBFZ,SBGL,SBGO,SBGR,SBIL,SBJF,SBJP,SBLB,SBME,SBMM,SBMO,SBMQ,SBNF,SBNT,SBPA,SBPJ,SBPV,SBRB,SBRF,SBRJ,SBSL,SBSP,SBST,SBSV,SBTE,SBMN,SBBE,SBVT,SBSG"
                 nome = estacao1
@@ -625,18 +625,20 @@ def main():
                     # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                     # if (datahi.day + i)==31:
                     if i != 0:
-                        datacori = datahini + timedelta(days=i)
+                        datacoris =  datetime.strptime(datahini,"%d/%m/%Y") + timedelta(days=i)
+                        datacoris = datacoris + timedelta(minutes=0)
+                        datacorfs = datacoris + timedelta(hours=23)
                         # datacori=datahf
                     else:
                         # datacori = datahini + timedelta(days=i)
-                        datacoris = datahini + ' 00:00'
-                        datacorfs = datahini + ' 23:00'
-    
-                    # datacoris = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
+                        datacoris = datetime.strptime(datahini,"%d/%m/%Y") + timedelta(minutes=0)
+                        datacorfs = datetime.strptime(datahini,"%d/%m/%Y") + timedelta(minutes=23)
+
+                    datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
                     # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
                     # datacorf=  datacori + timedelta(hours=23)
-                    # datacorfs = datetime.strftime(datacorf, '%d/%m/%Y %H:%M')
-                    # datacorfs =datacorfs[0:10] + ' 23:00'
+                    datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
+                    datacorfs = datacorfs[0:10] + ' 23:00'
     
                     # espera 5s
                     time.sleep(15)
@@ -2250,18 +2252,18 @@ def main():
     area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
               'SBBV','SSKW', 'SWEI', 'SWPI']
-    start_date = datetime.today() - timedelta(days=365)
-    end_date = datetime.today()
+    to_data = format(datetime.utcnow(), "%d/%m/%Y")
+    from_data = to_data
     with st.sidebar:
         #st.markdown("## Atualizar Dados")
         if st.button('Atualizar dados'):
             progress_text = "Processando... Aguarde."
             my_bar = st.progress(10, text=progress_text)
-            pt1 = rest(1)
+            pt1 = rest(1,to_data,from_data)
             my_bar.progress(50, text="Em andamento...")
             # for percent_complete in range(100):
             #     time.sleep(0.01)
-            pt2 = rest(2)
+            pt2 = rest(2,to_data,from_data)
 
             my_bar.progress(100, text="Terminou")
 
