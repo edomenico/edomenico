@@ -2290,7 +2290,7 @@ def main():
             """
             ---
             
-            e-mail → edomenico813@gmail.com
+            e-mail:edomenico813@gmail.com
 
            
             """
