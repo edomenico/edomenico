@@ -2266,6 +2266,7 @@ def main():
             pt2 = rest(2,to_data,from_data)
 
             my_bar.progress(100, text="Terminou")
+        st.divider()
 
         
         selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
@@ -2285,6 +2286,15 @@ def main():
                 "Área 2",
                 area_2)
             noarea = 2
+        st.markdown(
+            """
+            ---
+            
+            e-mail → edomenico813@gmail.com
+
+           
+            """
+        )
     p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
     
     import streamlit.components.v1 as components
