@@ -45,7 +45,7 @@ from bokeh.embed import file_html
 
 
 def main():
-    def rest(areas):
+    def rest(areas,to_data,from_data):
         import re
         from bs4 import BeautifulSoup
         from selenium import webdriver
