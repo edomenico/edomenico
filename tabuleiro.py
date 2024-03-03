@@ -750,7 +750,7 @@ def main():
             _, _data_url = data_url.split(";base64,")
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
-    def tabuleiro(est,areatrab,dados1,dados2,pt1,pt2):
+    def tabuleiro(est,areatrab,dados1,dados2,pt1,pt2,datainicio):
         
         def formata():
             from bokeh.models import FuncTickFormatter, FixedTicker
@@ -1145,7 +1145,7 @@ def main():
         #areatrab = 1  # dado entrada
         # datainicio='27/03/20'#dado entrada
 
-        datainicio = datetime.utcnow() - timedelta(9)
+        #datainicio = datetime.utcnow() - timedelta(9)
         datainicio = datainicio.strftime('%d/%m/%y')
 
         if areatrab == 1:
@@ -2267,6 +2267,15 @@ def main():
 
             my_bar.progress(100, text="Terminou")
         st.divider()
+        selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial'],horizontal=True)
+        if selecionaperiodo=='Últimos 10 dias':
+            datainicial = datetime.utcnow() - timedelta(9)
+        else:
+            to_data = st.sidebar.date_input('Inicio:', start_date)
+            datainicial=to_data
+           # datainicial= datainicial-timedelta(9)
+
+        st.divider()
 
         
         selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
@@ -2295,7 +2304,7 @@ def main():
            
             """
         )
-    p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2)
+    p=tabuleiro(nomedaestacao,noarea,atudados_area1,atudados_area2,pt1,pt2,datainicial)
     
     import streamlit.components.v1 as components
 
