@@ -625,14 +625,14 @@ def main():
                     # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                     # if (datahi.day + i)==31:
                     if i != 0:
-                        datacoris =  datetime.strptime(datahini,"%d/%m/%Y") + timedelta(days=i)
+                        datacoris = datahini + timedelta(days=i)
                         datacoris = datacoris + timedelta(minutes=0)
                         datacorfs = datacoris + timedelta(hours=23)
                         # datacori=datahf
                     else:
                         # datacori = datahini + timedelta(days=i)
-                        datacoris = datetime.strptime(datahini,"%d/%m/%Y") + timedelta(minutes=0)
-                        datacorfs = datetime.strptime(datahini,"%d/%m/%Y") + timedelta(minutes=23)
+                        datacoris = datahini + timedelta(minutes=0)
+                        datacorfs = datahini + timedelta(hours=23)
 
                     datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
                     # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
@@ -2252,19 +2252,42 @@ def main():
     area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
               'SBBV','SSKW', 'SWEI', 'SWPI']
-    to_data = format(datetime.utcnow(), "%d/%m/%Y")
-    from_data = to_data
     start_date = datetime.today()
+    end_date = datetime.today()
+    start_datee = datetime.today()
     with st.sidebar:
-        #st.markdown("## Atualizar Dados")
-        if st.button('Atualizar dados'):
+        st.write('Atualização dos Dados')
+        #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
+
+        # if st.button('Último dia'):
+        # #if atualizardados=='Último dia':
+        #
+        #     progress_text = "Processando... Aguarde."
+        #     my_bar = st.progress(0, text=progress_text)
+        #     pt = rest(1,to_data,from_data)
+        #     my_bar.progress(50, text="Em andamento...")
+        #     # for percent_complete in range(100):
+        #     #     time.sleep(0.01)
+        #     pt = rest(2,to_data,from_data)
+        #
+        #     my_bar.progress(100, text="Terminou")
+        too_data = format(datetime.utcnow(), "%d/%m/%Y")
+        to_data = st.date_input('Inicio:', start_date)
+        from_data = st.date_input('Fim:', end_date)
+
+
+        if st.button('Selecionar vários dias/Estação'):
+        #if atualizardados=='Último dia':
+
+
+        #if st.button('Consultar'):
             progress_text = "Processando... Aguarde."
-            my_bar = st.progress(10, text=progress_text)
-            pt1 = rest(1,to_data,from_data)
+            my_bar = st.progress(0, text=progress_text)
+            pt = rest(1,to_data,from_data)
             my_bar.progress(50, text="Em andamento...")
-            # for percent_complete in range(100):
-            #     time.sleep(0.01)
-            pt2 = rest(2,to_data,from_data)
+                # for percent_complete in range(100):
+                #     time.sleep(0.01)
+            #pt = rest(2,to_data,from_data)
 
             my_bar.progress(100, text="Terminou")
         st.divider()
@@ -2272,8 +2295,8 @@ def main():
         if selecionaperiodo=='Últimos 10 dias':
             datainicial = datetime.utcnow() - timedelta(9)
         else:
-            to_data = st.sidebar.date_input('Inicio:', start_date)
-            datainicial=to_data
+            too_data = st.date_input('Dia Inicial:', start_datee)
+            datainicial=too_data
            # datainicial= datainicial-timedelta(9)
 
         st.divider()
