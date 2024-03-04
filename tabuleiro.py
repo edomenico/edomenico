@@ -2277,7 +2277,7 @@ def main():
            # datainicial= datainicial-timedelta(9)
 
         st.divider()
-
+        st.write('Visualização dos dados')
         
         selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
 
