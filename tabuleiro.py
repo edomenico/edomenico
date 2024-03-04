@@ -2306,12 +2306,13 @@ def main():
         #st.divider()
 
         with st.container(border=True):
-            st.divider()
+           # st.divider()
             st.write('Visualização dos dados')
-            st.divider()
+            
             
             
             selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
+            st.divider()
     
             #col1, col2 = st.columns(2)
             if selarea=="Área 1":
