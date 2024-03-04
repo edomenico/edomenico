@@ -2268,7 +2268,7 @@ def main():
 
             my_bar.progress(100, text="Terminou")
         st.divider()
-        selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial'],horizontal=True)
+        selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/01/2024'],horizontal=True)
         if selecionaperiodo=='Últimos 10 dias':
             datainicial = datetime.utcnow() - timedelta(9)
         else:
