@@ -2306,7 +2306,9 @@ def main():
         #st.divider()
 
         with st.container(border=True):
+            st.divider()
             st.write('Visualização dos dados')
+            st.divider()
             
             
             selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
