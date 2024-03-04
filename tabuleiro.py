@@ -2256,8 +2256,8 @@ def main():
     end_date = datetime.today()
     start_datee = datetime.today()
     with st.sidebar:
-    on = st.toggle('Gerenciar dados')
-    if on:    
+        on = st.toggle('Gerenciar dados')
+        if on:    
             st.write('Atualização dos Dados')
             #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
     
