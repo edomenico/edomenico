@@ -729,9 +729,9 @@ def main():
         #    estacao = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
         #to_data = st.sidebar.date_input('Inicio:', start_date)
         #from_data = st.sidebar.date_input('Fim:', end_date)
-        datainicio = datetime.utcnow()
-        to_data = datainicio.strftime("%d/%m/%Y")
-        from_data = to_data
+        #datainicio = datetime.utcnow()
+       # to_data = datainicio.strftime("%d/%m/%Y")
+       # from_data = to_data
     
         if areas==1:
             areasel=area_1
@@ -2276,7 +2276,7 @@ def main():
         from_data = st.date_input('Fim:', end_date)
 
 
-        if st.button('Selecionar vários dias/Estação'):
+        if st.button('Selecionar'):
         #if atualizardados=='Último dia':
 
 
@@ -2287,7 +2287,7 @@ def main():
             my_bar.progress(50, text="Em andamento...")
                 # for percent_complete in range(100):
                 #     time.sleep(0.01)
-            #pt = rest(2,to_data,from_data)
+            pt = rest(2,to_data,from_data)
 
             my_bar.progress(100, text="Terminou")
         st.divider()
