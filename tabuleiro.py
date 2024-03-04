@@ -2254,6 +2254,7 @@ def main():
               'SBBV','SSKW', 'SWEI', 'SWPI']
     to_data = format(datetime.utcnow(), "%d/%m/%Y")
     from_data = to_data
+    start_date = datetime.today()
     with st.sidebar:
         #st.markdown("## Atualizar Dados")
         if st.button('Atualizar dados'):
