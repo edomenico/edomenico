@@ -2256,49 +2256,51 @@ def main():
     end_date = datetime.today()
     start_datee = datetime.today()
     with st.sidebar:
-        st.write('Atualização dos Dados')
-        #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
-
-        # if st.button('Último dia'):
-        # #if atualizardados=='Último dia':
-        #
-        #     progress_text = "Processando... Aguarde."
-        #     my_bar = st.progress(0, text=progress_text)
-        #     pt = rest(1,to_data,from_data)
-        #     my_bar.progress(50, text="Em andamento...")
-        #     # for percent_complete in range(100):
-        #     #     time.sleep(0.01)
-        #     pt = rest(2,to_data,from_data)
-        #
-        #     my_bar.progress(100, text="Terminou")
-        too_data = format(datetime.utcnow(), "%d/%m/%Y")
-        to_data = st.date_input('Inicio:', start_date)
-        from_data = st.date_input('Fim:', end_date)
-
-
-        if st.button('Selecionar'):
-        #if atualizardados=='Último dia':
-
-
-        #if st.button('Consultar'):
-            progress_text = "Processando... Aguarde."
-            my_bar = st.progress(0, text=progress_text)
-            pt = rest(1,to_data,from_data)
-            my_bar.progress(50, text="Em andamento...")
-                # for percent_complete in range(100):
-                #     time.sleep(0.01)
-            pt = rest(2,to_data,from_data)
-
-            my_bar.progress(100, text="Terminou")
-        st.divider()
-        selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/01/24)'],horizontal=True)
-        if selecionaperiodo=='Últimos 10 dias':
-            datainicial = datetime.utcnow() - timedelta(9)
+        on = st.toggle('Gerenciar dados')
+            st.write('Atualização dos Dados')
+            #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
+    
+            # if st.button('Último dia'):
+            # #if atualizardados=='Último dia':
+            #
+            #     progress_text = "Processando... Aguarde."
+            #     my_bar = st.progress(0, text=progress_text)
+            #     pt = rest(1,to_data,from_data)
+            #     my_bar.progress(50, text="Em andamento...")
+            #     # for percent_complete in range(100):
+            #     #     time.sleep(0.01)
+            #     pt = rest(2,to_data,from_data)
+            #
+            #     my_bar.progress(100, text="Terminou")
+            too_data = format(datetime.utcnow(), "%d/%m/%Y")
+            to_data = st.date_input('Inicio:', start_date)
+            from_data = st.date_input('Fim:', end_date)
+    
+    
+            if st.button('Selecionar'):
+            #if atualizardados=='Último dia':
+    
+    
+            #if st.button('Consultar'):
+                progress_text = "Processando... Aguarde."
+                my_bar = st.progress(0, text=progress_text)
+                pt = rest(1,to_data,from_data)
+                my_bar.progress(50, text="Em andamento...")
+                    # for percent_complete in range(100):
+                    #     time.sleep(0.01)
+                pt = rest(2,to_data,from_data)
+    
+                my_bar.progress(100, text="Terminou")
+            st.divider()
+            selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/01/24)'],horizontal=True)
+            if selecionaperiodo=='Últimos 10 dias':
+                datainicial = datetime.utcnow() - timedelta(9)
+            else:
+                too_data = st.date_input('Dia Inicial:', start_datee)
+                datainicial=too_data
+               # datainicial= datainicial-timedelta(9)
         else:
-            too_data = st.date_input('Dia Inicial:', start_datee)
-            datainicial=too_data
-           # datainicial= datainicial-timedelta(9)
-
+            datainicial = datetime.utcnow() - timedelta(9)
         st.divider()
         st.write('Visualização dos dados')
         
