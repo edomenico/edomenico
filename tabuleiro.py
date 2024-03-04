@@ -951,7 +951,7 @@ def main():
                                           """)
                     else:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                   var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 1, 2: 3, 3: 4, 10: 4};
+                                                                   var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 1, 8: 2, 9: 3, 10: 4};
                                                                    return mapping[tick];
                                                               """)
 
@@ -2278,6 +2278,7 @@ def main():
 
         st.divider()
         st.write('Visualização dos dados')
+        
         
         selarea = st.radio("Escolha a área",["Área 1", "Área 2"],horizontal=True)
 
