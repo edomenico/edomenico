@@ -2257,9 +2257,9 @@ def main():
     start_datee = datetime.today()
     with st.sidebar:
         with st.container(border=True):
-            on = st.toggle('Gerenciar dados')
+            on = st.toggle('Atualizar dados')
             if on:    
-                st.write('Atualização dos Dados')
+               # st.write('Atualização dos Dados')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
         
                 # if st.button('Último dia'):
@@ -2293,7 +2293,7 @@ def main():
                     pt = rest(2,to_data,from_data)
         
                     my_bar.progress(100, text="Terminou")
-                st.divider()
+            on2 = st.toggle('Consultar outro período')
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/01/24)'],horizontal=True)
                 if selecionaperiodo=='Últimos 10 dias':
                     datainicial = datetime.utcnow() - timedelta(9)
