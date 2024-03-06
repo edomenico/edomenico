@@ -31,7 +31,7 @@ from math import floor
 from os import makedirs as mkdir
 
 import emoji
-import metpy.calc as mpcalc
+
 # import numpy as np
 import numpy as np
 import pandas as pd
