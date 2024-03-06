@@ -2405,6 +2405,9 @@ def main2():
             import streamlit.components.v1 as components
 
             st.components.v1.html(p, height=2300, width=1700, scrolling=True)
+
+            st.session_state
+            main()
             # from streamlit_bokeh_events import streamlit_bokeh_events
             # event_result = streamlit_bokeh_events(
             #     events="TestSelectEvent",
@@ -2429,6 +2432,7 @@ def main2():
         # my_bar.empty()
 
         # escolha.index='None'
+        
 
         # if __name__ == '__main__':
         #     if runtime.exists():
