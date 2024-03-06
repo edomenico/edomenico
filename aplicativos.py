@@ -539,7 +539,7 @@ def main2():
                                       sep=',',
                                       decimal='.')
             else:
-                arqiant = pd.read_csv('metar_trat_teste2.csv',
+                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
                                       sep=',',
                                       decimal='.')
 
