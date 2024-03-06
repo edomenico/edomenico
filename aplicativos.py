@@ -21,7 +21,11 @@ from datetime import datetime, timedelta
 import os
 import glob
 # from bokeh.plotting import figure
-
+# Set up the Chrome driver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import math
 import os.path
 # from datetime import date
