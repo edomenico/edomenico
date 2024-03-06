@@ -2456,10 +2456,10 @@ def main2():
         start_date = datetime.today()
         end_date = datetime.today()
         to_date = datetime.today()
-        title='SBGL'
+        title=''
         entrou=0
         with st.sidebar:
-            title = st.text_input('Escolha a estação', 'SBGL')
+            title = st.text_input('Escolha a estação', 'SBBE')
 
             st.write('Escolha o período para plotagem')
             to_data = st.date_input('Inicio:', start_date)
