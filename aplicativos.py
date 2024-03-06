@@ -2446,6 +2446,7 @@ def main2():
         end_date = datetime.today()
         to_date = datetime.today()
         title=''
+        entrou=0
         with st.sidebar:
             title = st.text_input('Escolha a estação', 'SBGL')
 
@@ -2457,8 +2458,9 @@ def main2():
                 my_bar = st.progress(0, text=progress_text)
                 pt = rest(1, to_data, from_data, title)
                 my_bar.progress(100, text="Terminou...")
-
-        p = tabuleiro(title, 2, to_data)
+                entrou=1
+        if entrou==1:
+            p = tabuleiro(title, 2, to_data)
 
         import streamlit.components.v1 as components
 
