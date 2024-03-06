@@ -535,7 +535,7 @@ def main2():
             # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
             # arqiago['data_hora'] = x
             if areatrab == 1:
-                arqiant = pd.read_csv('metar_trat_teste1.csv',
+                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                       sep=',',
                                       decimal='.')
             else:
