@@ -11,7 +11,7 @@ import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
 # from streamlit.web import cli as stcli
-import Redemet_Streamilit_def
+#import Redemet_Streamilit_def
 import streamlit
 from streamlit import runtime
 from streamlit_toggle import toggle
