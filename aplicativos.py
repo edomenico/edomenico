@@ -1,17 +1,11 @@
-# Contents of ~/my_app/streamlit_app.py
-import streamlit as st
-from streamlit import runtime
-import sys
-from streamlit.web import cli as stcli
-
 import time  # to simulate a real time data, time loop
-
+#import redemet
 import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
-# from streamlit.web import cli as stcli
-#import Redemet_Streamilit_def
+#from streamlit.web import cli as stcli
+
 import streamlit
 from streamlit import runtime
 from streamlit_toggle import toggle
@@ -20,22 +14,16 @@ import streamlit as st
 from datetime import datetime, timedelta
 import os
 import glob
-# from bokeh.plotting import figure
-# Set up the Chrome driver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import math
+from bokeh.plotting import figure
+#from PyInstaller.utils.hooks import collect_data_files
 import os.path
 # from datetime import date
 # from datetime import datetime
 from datetime import datetime, timedelta, date
-from math import floor
 from os import makedirs as mkdir
 
 import emoji
-
+#import metpy.calc as mpcalc
 # import numpy as np
 import numpy as np
 import pandas as pd
@@ -49,9 +37,11 @@ from bokeh.plotting import save
 from bokeh.sampledata.periodic_table import elements
 # from bokeh.transform import dodge, factor_cmap
 from bokeh.transform import dodge, factor_cmap
-
+#from metpy.units import units
 from PIL import Image
-global diaini, mesini, pt
+global diaini, mesini
+from bokeh.resources import CDN
+from bokeh.embed import file_html
 def main2():
     def rest(areas, to_data, from_data,nome_estacao):
         import time  # to simulate a real time data, time loop
