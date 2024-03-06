@@ -5,7 +5,12 @@ import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
 #from streamlit.web import cli as stcli
-
+# Set up the Chrome driver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time  # to simulate a real time data, time loop
 import streamlit
 from streamlit import runtime
 from streamlit_toggle import toggle
