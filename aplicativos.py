@@ -2462,9 +2462,9 @@ def main2():
         if entrou==1:
             p = tabuleiro(title, 2, to_data)
 
-        import streamlit.components.v1 as components
+            import streamlit.components.v1 as components
 
-        st.components.v1.html(p, height=2300, width=1700, scrolling=True)
+            st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 
         st.markdown("# Page 2 ❄️")
 
