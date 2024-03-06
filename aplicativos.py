@@ -745,7 +745,7 @@ def main2():
 
 
 
-    def tabuleiro(est, areatrab, datainicio):
+    def tabuleiro(est, areatrab, datainicio,pt1,pt2):
         def formata():
             from bokeh.models import FuncTickFormatter, FixedTicker
             p.xaxis.ticker = FixedTicker(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -2405,7 +2405,7 @@ def main2():
                     """
                 )
 
-            p = tabuleiro(nomedaestacao, noarea, datainicial)
+            p = tabuleiro(nomedaestacao, noarea, datainicial,pt1,pt2)
 
             import streamlit.components.v1 as components
 
@@ -2471,7 +2471,7 @@ def main2():
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
         if entrou==1:
-            p = tabuleiro(title, 2, to_data)
+            p = tabuleiro(title, 2, to_data,pt1,pt2)
 
             import streamlit.components.v1 as components
 
