@@ -2456,7 +2456,7 @@ def main2():
         start_date = datetime.today()
         end_date = datetime.today()
         to_date = datetime.today()
-        title=''
+        title='SBGL'
         entrou=0
         with st.sidebar:
             title = st.text_input('Escolha a estação', 'SBGL')
