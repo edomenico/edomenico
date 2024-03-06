@@ -2441,6 +2441,12 @@ def main2():
         #         sys.argv = ["streamlit", "run", sys.argv[0]]
         #         sys.exit(stcli.main())
     def page2():
+        pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                    sep=',',
+                                    decimal='.')
+        pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                    sep=',',
+                                    decimal='.')
         st.markdown("# Page 2 ❄️")
         start_date = datetime.today()
         end_date = datetime.today()
