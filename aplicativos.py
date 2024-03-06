@@ -2294,7 +2294,12 @@ def main2():
         def main():
 
 
-
+            pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                    sep=',',
+                                    decimal='.')
+            pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                    sep=',',
+                                    decimal='.')
 
             # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
             #                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
