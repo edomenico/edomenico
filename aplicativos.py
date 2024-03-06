@@ -6,6 +6,7 @@ import plotly.express as px  # interactive charts
 import sys
 #from streamlit.web import cli as stcli
 # Set up the Chrome driver
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
