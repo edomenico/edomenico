@@ -45,7 +45,7 @@ from bokeh.plotting import save
 from bokeh.sampledata.periodic_table import elements
 # from bokeh.transform import dodge, factor_cmap
 from bokeh.transform import dodge, factor_cmap
-from metpy.units import units
+
 from PIL import Image
 global diaini, mesini, pt
 def main2():
