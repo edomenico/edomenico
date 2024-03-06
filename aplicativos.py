@@ -48,26 +48,43 @@ from bokeh.transform import dodge, factor_cmap
 from metpy.units import units
 from PIL import Image
 global diaini, mesini, pt
-
 def main2():
     def rest(areas, to_data, from_data,nome_estacao):
+        import time  # to simulate a real time data, time loop
+
+        import numpy as np  # np mean, np random
+        import pandas as pd  # read csv, df manipulation
+        import plotly.express as px  # interactive charts
+        import sys
+        # from streamlit.web import cli as stcli
+
+        import streamlit
+        from streamlit import runtime
+        from streamlit_toggle import toggle
+        from streamlit.web import cli as stcli
+        import streamlit as st
+        from datetime import datetime, timedelta
+        import os
+        import glob
+        global pt
+
         def trata_redemet(areasele):
-            
+            import PySimpleGUI as sg
             import matplotlib.pyplot as plt
             import matplotlib.dates as md
             import dateutil
-    
+
             import pandas as pd
             import os, sys
             import numpy as np
             from random import randint
             import re
             from datetime import datetime
-    
+
             import string
-    
+
             def criadataframe():
-                global df,arqi
+                global df, arqi
                 COLUNAS = [
                     'estacao',
                     'datahora',
@@ -92,13 +109,13 @@ def main2():
                     'metar',
                     'speci'
                 ]
-    
+
                 df = pd.DataFrame(columns=COLUNAS)
-    
+
             criadataframe()
-            estado=areasele
-            areatrab=areasele
-    
+            estado = areasele
+            areatrab = areasele
+
             arqi = pd.read_csv('metar.csv',
                                sep=',',
                                # index_col=0,
@@ -126,30 +143,30 @@ def main2():
             tp = []
             gust = []
             k = -1
-            metar=[]
-            speci=[]
-    
-    
+            metar = []
+            speci = []
+
             for i in range(len(arqi)):
-    
-                if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
+
+                if arqi.Mensagem[
+                    i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
                     c = 6
-    
+
                 if arqi.Mensagem[i].find('COR') > -1:
-                    novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
-    
-    
+                    novamens = 'METAR ' + arqi.Mensagem[i][
+                                          arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
+
                     mensagem1 = novamens.split()
-                    mens=novamens
-    
+                    mens = novamens
+
                 else:
-    
+
                     mensagem1 = arqi.Mensagem[i].split()
-                    mens=arqi.Mensagem[i]
-    
+                    mens = arqi.Mensagem[i]
+
                 # print(len(mensagem1))
-    
-                if mensagem1[0] == 'METAR' or mensagem1[0]== 'SPECI':
+
+                if mensagem1[0] == 'METAR' or mensagem1[0] == 'SPECI':
                     k = k + 1
                     aviso = False
                     entrou = False
@@ -160,63 +177,63 @@ def main2():
                     tempopres = False
                     nuvemcb = False
                     tempentrou = False
-    
+
                     for j in range(1, len(mensagem1), 1):
-    
+
                         # if estacao[j] == 'SBFZ':
                         #     GGGGGGGGG = 1
-    
+
                         if mensagem1[j].find('AUTO') > -1:
                             aviso = True
-                        if j==2:
-                            #data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
-                            data_hora = mensagem1[j][2:4] + ':00' #+ mensagem1[j][4:6]
+                        if j == 2:
+                            # data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
+                            data_hora = mensagem1[j][2:4] + ':00'  # + mensagem1[j][4:6]
                             if estacao[k] == 'SBFN' and data_hora == "20:00":
                                 GGGGGGGGG = 1
-    
+
                         # campo 3 vento
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
-                        if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find('SWPI') > -1 or mensagem1[j].find('SWEI') > -1:
+                        if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
+                                'SWPI') > -1 or mensagem1[j].find('SWEI') > -1:
                             estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
                         #      GGGGGGGGG = 1
-    
-                        #if k==190:
-                            #print('k= ',k,estacao[k])
-                            #print('data',datahora[k-1])
-    
+
+                        # if k==190:
+                        # print('k= ',k,estacao[k])
+                        # print('data',datahora[k-1])
+
                         if mensagem1[j].find('KT') > -1:
                             if len(wdir) == len(dryt):
-                                if (mensagem1[j][0:3]) == 'VRB' or (mensagem1[j][0:3]) == '///' :
-    
+                                if (mensagem1[j][0:3]) == 'VRB' or (mensagem1[j][0:3]) == '///':
+
                                     wdir.append('NaN')
                                 else:
-                                    if mensagem1[j][0:3]=="OOO":
+                                    if mensagem1[j][0:3] == "OOO":
                                         wdir.append(0)
                                     else:
                                         try:
                                             wdir.append(float(mensagem1[j][0:3]))
                                         except ValueError:
                                             wdir.append('NaN')
-    
+
                                 if (mensagem1[j][3:5]) == '//' or mensagem1[j].find('P') > -1:
                                     wspd.append('NaN')
                                 else:
-                                    if mensagem1[j][3:5]=='OO':
+                                    if mensagem1[j][3:5] == 'OO':
                                         wspd.append(0)
                                     else:
                                         try:
                                             wspd.append(float(mensagem1[j][3:5]))
                                         except ValueError:
                                             wspd.append('NaN')
-    
+
                                 if mensagem1[j].find('G') > -1:
                                     gust.append(mensagem1[j][6:8])
                                 else:
                                     gust.append('NaN')
-    
-                        if mensagem1[j].find('CAVOK') > -1 and aviso==False and entrou == False:
-    
+
+                        if mensagem1[j].find('CAVOK') > -1 and aviso == False and entrou == False:
                             vis.append('9999')
                             entrou = True
                             altn1.append('NaN')
@@ -232,23 +249,28 @@ def main2():
                             camada3 = True
                             camada4 = True
                             print('cavok', mensagem1[j])
-    
+
                         # sbxx data vento visi
                         if j == 4 and mensagem1[j].find('CAVOK') == -1 and aviso == False and mensagem1[j].find(
-                                'V') == -1 and mensagem1[j].find('F')==-1 and mensagem1[j].find('S')==-1 and mensagem1[j].find('B')==-1 and mensagem1[j].find('O')==-1 and entrou == False:
+                                'V') == -1 and mensagem1[j].find('F') == -1 and mensagem1[j].find('S') == -1 and \
+                                mensagem1[j].find('B') == -1 and mensagem1[j].find(
+                            'O') == -1 and entrou == False:
                             vis.append(mensagem1[j])
                             entrou = True
                             print('j4 1', mensagem1[j])
-    
+
                         # vento variavel nao cavok
-                        if j == 5 and mensagem1[j - 1].find('V') > -1 and mensagem1[j].find('CAVOK') == -1 and mensagem1[
-                            j - 1].find('CAVOK') == -1 and mensagem1[j].find('R') == -1 and entrou == False:
+                        if j == 5 and mensagem1[j - 1].find('V') > -1 and mensagem1[j].find('CAVOK') == -1 and \
+                                mensagem1[
+                                    j - 1].find('CAVOK') == -1 and mensagem1[j].find(
+                            'R') == -1 and entrou == False:
                             vis.append(mensagem1[j])
                             entrou = True
                             print('j5 1', mensagem1[j])
-    
+
                         # automatica
-                        if j == 5 and aviso == True and entrou == False and (mensagem1[j].find('V') == -1 or mensagem1[j].find('CAVOK') > -1):
+                        if j == 5 and aviso == True and entrou == False and (
+                                mensagem1[j].find('V') == -1 or mensagem1[j].find('CAVOK') > -1):
                             if mensagem1[j].find('CAVOK') > -1:
                                 vis.append('9999')
                                 altn1.append('NaN')
@@ -265,16 +287,14 @@ def main2():
                                 camada4 = True
                             else:
                                 vis.append(mensagem1[j])
-                                print('j5 2',mensagem1[j])
+                                print('j5 2', mensagem1[j])
                             entrou = True
-    
-                        if (mensagem1[j]==('////') and entrou == False) :
+
+                        if (mensagem1[j] == ('////') and entrou == False):
                             vis.append('NaN')
-                            entrou=True
-    
-    
-    
-                        if j == 6 and aviso == True and entrou == False and mensagem1[j].find('/')==-1:
+                            entrou = True
+
+                        if j == 6 and aviso == True and entrou == False and mensagem1[j].find('/') == -1:
                             if mensagem1[j].find('CAVOK') > -1:
                                 vis.append('9999')
                                 altn1.append('NaN')
@@ -289,46 +309,43 @@ def main2():
                                 camada2 = True
                                 camada3 = True
                                 camada4 = True
-    
+
                             else:
                                 vis.append(mensagem1[j])
                             entrou = True
-    
-    
-    
-                        if mensagem1[j].find('Q') > -1 and mensagem1[j].find('S') !=0: #and bool(re.search(r'\d', mensagem1[j])):
-                            if (mensagem1[j][1:5])=='////':
+
+                        if mensagem1[j].find('Q') > -1 and mensagem1[j].find(
+                                'S') != 0:  # and bool(re.search(r'\d', mensagem1[j])):
+                            if (mensagem1[j][1:5]) == '////':
                                 pres.append('NaN')
                             else:
-    
+
                                 try:
-                               # print(mensagem1[j])
-    
+                                    # print(mensagem1[j])
+
                                     pres.append(float(mensagem1[j][1:5]))
-    
-    
+
+
                                 except ValueError:
                                     pres.append('NaN')
-                                    if len(pres)!=len(dryt):
+                                    if len(pres) != len(dryt):
                                         dryt.append('NaN')
-                                    if len(pres)!=len(dewp):
+                                    if len(pres) != len(dewp):
                                         dewp.append('NaN')
-    
-    
+
                             break
-    
-                        #if tempentrou== False:
-                      #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
-                      #              'Q') > -1:
-                       # print(mensagem1[j])
+
+                        # if tempentrou== False:
+                        #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
+                        #              'Q') > -1:
+                        # print(mensagem1[j])
                         if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
-    
-    
-                                  # print(mensagem1[j][0:2])
-                                   # print(mensagem1[j][3:5])
-                                  #  print(mensagem1[j + 1])
-                            if (mensagem1[j][0:2])=='//':
-    
+
+                            # print(mensagem1[j][0:2])
+                            # print(mensagem1[j][3:5])
+                            #  print(mensagem1[j + 1])
+                            if (mensagem1[j][0:2]) == '//':
+
                                 dryt.append('NaN')
                             else:
                                 dryt.append(float(mensagem1[j][0:2]))
@@ -336,13 +353,14 @@ def main2():
                                 dewp.append('NaN')
                             else:
                                 if mensagem1[j][3:5].find('M') > -1:
-                                    dewp.append(float(mensagem1[j][4:6])*-1)
+                                    dewp.append(float(mensagem1[j][4:6]) * -1)
                                 else:
-    
+
                                     dewp.append(float(mensagem1[j][3:5]))
-                                    #tempentrou = True
-    
-                        if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find('BKN') > -1 or \
+                                    # tempentrou = True
+
+                        if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find(
+                                'BKN') > -1 or \
                                 mensagem1[j].find('OVC') > -1:
                             if mensagem1[j].find('CB') < 0 and mensagem1[j].find('TCU') < 0:
                                 if camada1 == False:
@@ -355,19 +373,19 @@ def main2():
                                         altn1.append((mensagem1[j][3:6]))
                                     qn1.append((mensagem1[j][0:3]))
                                     camada1 = True
-    
+
                                 elif camada2 == False:
                                     if (mensagem1[j][3:6]).isnumeric():
                                         try:
                                             altn2.append(float(mensagem1[j][3:6]))
                                         except ValueError:
                                             altn2.append('NaN')
-    
+
                                     else:
                                         altn2.append((mensagem1[j][3:6]))
                                     qn2.append((mensagem1[j][0:3]))
                                     camada2 = True
-    
+
                                 elif camada3 == False:
                                     if (mensagem1[j][3:5]).isnumeric():
                                         try:
@@ -379,23 +397,22 @@ def main2():
                                     qn3.append((mensagem1[j][0:3]))
                                     camada3 = True
                                 else:
-    
+
                                     if (mensagem1[j][3:5]).isnumeric():
                                         altn4.append(float(mensagem1[j][3:5]))
                                     else:
                                         altn4.append((mensagem1[j][3:5]))
                                     qn4.append((mensagem1[j][0:3]))
                                     camada4 = True
-                        if mensagem1[j].find('CB') > -1 and len(mensagem1[j]) > 4 and nuvemcb==False:
+                        if mensagem1[j].find('CB') > -1 and len(mensagem1[j]) > 4 and nuvemcb == False:
                             altncb.append(((mensagem1[j][3:6])))
                             qncb.append((mensagem1[j][0:3]))
                             nuvemcb = True
-                        if mensagem1[j].find('TCU') > -1 and len(mensagem1[j]) > 4 and nuvemcb==False:
+                        if mensagem1[j].find('TCU') > -1 and len(mensagem1[j]) > 4 and nuvemcb == False:
                             altncb.append(((mensagem1[j][3:7])))
                             qncb.append((mensagem1[j][0:3]))
                             nuvemcb = True
-    
-    
+
                         if aviso == True and mensagem1[j].find('NCD') > -1:
                             altn1.append('NaN')
                             altn2.append('NaN')
@@ -409,7 +426,7 @@ def main2():
                             camada2 = True
                             camada3 = True
                             camada4 = True
-    
+
                         if mensagem1[j].find('NSC') > -1:
                             altn1.append('NaN')
                             altn2.append('NaN')
@@ -423,7 +440,7 @@ def main2():
                             camada2 = True
                             camada3 = True
                             camada4 = True
-    
+
                         if mensagem1[j].find('VV') > -1:
                             altn1.append((mensagem1[j][2:5]))
                             altn2.append('NaN')
@@ -437,106 +454,108 @@ def main2():
                             camada2 = True
                             camada3 = True
                             camada4 = True
-    
-                        if (mensagem1[j].find('RA') > -1 or mensagem1[j].find('DZ') > -1 or mensagem1[j].find('BR') > -1 or
-                            mensagem1[j].find('HZ') > -1 or mensagem1[j].find('FG') > -1 or mensagem1[j].find('FU') > -1 or mensagem1[j].find('VC') > -1 or
-                            mensagem1[j].find('TS') > -1) and mensagem1[j].find('SB') == -1 and mensagem1[j].find(
-                                'OVC') == -1 and tempopres == False:
+
+                        if (mensagem1[j].find('RA') > -1 or mensagem1[j].find('DZ') > -1 or mensagem1[j].find(
+                                'BR') > -1 or
+                            mensagem1[j].find('HZ') > -1 or mensagem1[j].find('FG') > -1 or mensagem1[j].find(
+                                    'FU') > -1 or mensagem1[j].find('VC') > -1 or
+                            mensagem1[j].find('TS') > -1) and mensagem1[j].find('SB') == -1 and mensagem1[
+                            j].find(
+                            'OVC') == -1 and tempopres == False:
                             tp.append((mensagem1[j][0:len(mensagem1[j])]))
                             tempopres = True
-    
-                    datahora.append(arqi['Data'][i]+' '+data_hora)
+
+                    datahora.append(arqi['Data'][i] + ' ' + data_hora)
                     try:
                         xhor = datetime.strptime(datahora[k], '%d/%m/%Y %H:%M')
                     except ValueError:
                         if k > 0:
-                            datahora[k] = datahora[k-1]
+                            datahora[k] = datahora[k - 1]
                     else:
-                        datahora[k]=xhor
+                        datahora[k] = xhor
                     if nuvemcb == False:
                         altncb.append('NaN')
                         qncb.append('NaN')
                     if camada1 == False:
                         altn1.append('NaN')
                         qn1.append('NaN')
-    
+
                     if camada2 == False:
                         altn2.append('NaN')
                         qn2.append('NaN')
                     if camada3 == False:
                         altn3.append('NaN')
                         qn3.append('NaN')
-    
+
                     if camada4 == False:
                         altn4.append('NaN')
                         qn4.append('NaN')
-    
+
                     if (entrou == False):
                         vis.append('-10000')
                         entrou = True
-    
+
                     if tempopres == False:
                         tp.append('NaN')
                     if len(dryt) != len(qn1):
-                        print(estacao[k],datahora[k])
-                    if mensagem1[0] =='SPECI':
+                        print(estacao[k], datahora[k])
+                    if mensagem1[0] == 'SPECI':
                         speci.append(mens)
-                        print('aqui',datahora[k])
+                        print('aqui', datahora[k])
                         print(mens)
                         metar.append('-')
                     else:
                         metar.append(mens)
                         speci.append('-')
-                    if estacao[k]=='SWPI':
-                        yyyyyyyyy=1
-                    if vis[k]=='////':
-                        vis[k]='-9999'
+                    if estacao[k] == 'SWPI':
+                        yyyyyyyyy = 1
+                    if vis[k] == '////':
+                        vis[k] = '-9999'
                     if len(wspd) != len(pres):
                         pres.append('NaN')
-                        if len(pres)!=len(dryt):
+                        if len(pres) != len(dryt):
                             dryt.append('NaN')
                             dewp.append('NaN')
-                    df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
-                        altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [altn4[k]] + [qn4[k]] + [
-                                altncb[k]] + [qncb[k]] + [metar[k]] + [speci[k]]
-                    #f.sort_values(by=['First Column', 'Second Column', ...], inplace=True)
-    
-    
-                    df.sort_values(by=['estacao','datahora'], inplace=True)
-    
-                    df.to_csv('metar_trat_'+str(estado)+'.csv',encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
-    
-    
-            #-----------------------juntar arquivos
-            arqiago = pd.read_csv('metar_trat_'+str(estado)+'.csv',
+                    df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [
+                        dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
+                                    altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [
+                                    altn4[k]] + [qn4[k]] + [
+                                    altncb[k]] + [qncb[k]] + [metar[k]] + [speci[k]]
+                    # f.sort_values(by=['First Column', 'Second Column', ...], inplace=True)
+
+                    df.sort_values(by=['estacao', 'datahora'], inplace=True)
+
+                    df.to_csv('metar_trat_' + str(estado) + '.csv', encoding='utf-8', index=False,
+                              date_format='%d/%m/%Y %H:%M')
+
+            # -----------------------juntar arquivos
+            arqiago = pd.read_csv('metar_trat_' + str(estado) + '.csv',
                                   sep=',',
                                   decimal='.')
-            #x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
-            #arqiago['data_hora'] = x
-            if areatrab==1:
-                
-                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
-                                    sep=',',
-                                    decimal='.')
-            else:
-                
-                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+            # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
+            # arqiago['data_hora'] = x
+            if areatrab == 1:
+                arqiant = pd.read_csv('metar_trat_teste1.csv',
                                       sep=',',
                                       decimal='.')
-    
-    
+            else:
+                arqiant = pd.read_csv('metar_trat_teste2.csv',
+                                      sep=',',
+                                      decimal='.')
+
             df1 = pd.concat([arqiant, arqiago])
             df1.sort_values(by=['datahora', 'estacao'], inplace=True)
-            df1 = df1.drop_duplicates(['estacao', 'datahora','speci'])
-    
-            if areatrab==1:
+            df1 = df1.drop_duplicates(['estacao', 'datahora', 'speci'])
+
+            if areatrab == 1:
                 df1.to_csv('metar_trat_teste1.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
             else:
                 df1.to_csv('metar_trat_teste2.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
-    
+
             return df1
 
-        #------------------------------------------------------
+        # --------------------------------------------------------
+
         start_date = datetime.today()
 
         end_date = datetime.today()
@@ -557,6 +576,22 @@ def main2():
                   'SBEG',
                   'SBBV',
                   'SSKW', 'SWEI', 'SWPI']
+        # st.set_page_config(
+        #         page_title="Dados Estatísticos",
+        #         page_icon="✅",
+        #         layout="wide",
+        #     )
+        # barra_lateral = st.sidebar.empty()
+        # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
+        # if area_seleciona == 'Área 1':
+        #     areaprev=1
+        #     areasel = area_1
+        #     estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
+        # else:
+        ##    areasel = area_2
+        #    estacao = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
+        # to_data = st.sidebar.date_input('Inicio:', start_date)
+        # from_data = st.sidebar.date_input('Fim:', end_date)
         datainicio = datetime.utcnow()
         if nome_estacao =='N':
             if areas == 1:
@@ -576,44 +611,45 @@ def main2():
         pdff = trata_redemet(areaprev)
         edited_df = st.data_editor(pdff)
         return pdff
+
     def _data_url_to_image(data_url: str) -> Image:
         """Convert DataURL string to the image."""
         _, _data_url = data_url.split(";base64,")
         return Image.open(io.BytesIO(base64.b64decode(_data_url)))
-    def redemet_baixa(escolha, ar, datahini, datahfim, estacao1):
-        # Create Chrome options
-        
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
+
+    def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
+            # Create Chrome options
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
         
             # Create the driver with the options
-        browser = webdriver.Chrome(options=chrome_options)
+            browser = webdriver.Chrome(options=chrome_options)
         
             # Load the page with Selenium
             #browser.get(url)
         
             # Wait up to 10 seconds for the page to load
             # Wait for the page to finish loading all JavaScript
-        wait = WebDriverWait(browser, 20)
+            wait = WebDriverWait(browser, 20)
     
     
             
             
-        if escolha == 1:
+            if escolha == 1:
                 # datai = "01/06/2020 00:00"
                 # dataf = "02/06/2020 23:00"
                 #datahi = datetime.strftime(datahini, '%d/%m/%Y')
                 #datahf = datetime.strftime(datahfim, '%d/%m/%Y')
                # tempo = datahfim - datahini
     
-            if datahini == datahfim:
-                intervalo = 0
-            else:
-                intervalo = (datahfim - datahini).days
+                if datahini == datahfim:
+                    intervalo = 0
+                else:
+                    intervalo = (datahfim - datahini).days
                 #mes = datahini.month
                 # nome = "SBSC,SBAR,SBBH,SBBR,SBBV,SBCB,SBCG,SBCP,SBCT,SBCY,SBEN,SBES,SBFL,SBFN,SBFS,SBFZ,SBGL,SBGO,SBGR,SBIL,SBJF,SBJP,SBLB,SBME,SBMM,SBMO,SBMQ,SBNF,SBNT,SBPA,SBPJ,SBPV,SBRB,SBRF,SBRJ,SBSL,SBSP,SBST,SBSV,SBTE,SBMN,SBBE,SBVT,SBSG"
-            nome = estacao1
-            for i in range(intervalo + 1):
+                nome = estacao1
+                for i in range(intervalo + 1):
                     # abre o Firefox
                     #browser = webdriver.Firefox(executable_path='geckodriver.exe')
                     # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
@@ -621,90 +657,96 @@ def main2():
                     # chama a página da redemet para consulta
     
                     # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                    browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                     #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
                     # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
                     # if (datahi.day + i)==31:
-                if i != 0:
-                    datacoris = datahini + timedelta(days=i)
-                    datacoris = datacoris + timedelta(minutes=0)
-                    datacorfs = datacoris + timedelta(hours=23)
+                    if i != 0:
+                        datacoris = datahini + timedelta(days=i)
+                        datacoris = datacoris + timedelta(minutes=0)
+                        datacorfs = datacoris + timedelta(hours=23)
                         # datacori=datahf
-                else:
+                    else:
                         # datacori = datahini + timedelta(days=i)
-                    datacoris = datahini + timedelta(minutes=0)
-                    datacorfs = datahini + timedelta(hours=23)
+                        datacoris = datahini + timedelta(minutes=0)
+                        datacorfs = datahini + timedelta(hours=23)
 
-                datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
+                    datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
                     # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
                     # datacorf=  datacori + timedelta(hours=23)
-                datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
-                datacorfs = datacorfs[0:10] + ' 23:00'
+                    datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
+                    datacorfs = datacorfs[0:10] + ' 23:00'
     
                     # espera 5s
-                time.sleep(15)
+                    time.sleep(15)
                     # tira a checkbox para mensagem recente
                     #driver.find_element(By.ID, url) 
-                el = browser.find_element(By.ID, "consulta_recente")
-                el.click()
+                    el = browser.find_element(By.ID, "consulta_recente")
+                    el.click()
                     #browser.find_element_by_id("consulta_recente").click()
     
                     # preenche o nome das estações para consulta
                     
-                element = browser.find_element(By.ID, "msg_localidade")
-                element.send_keys(nome)
+                    element = browser.find_element(By.ID, "msg_localidade")
+                    element.send_keys(nome)
     
                     # preenche a data inicial e final
     
-                element = browser.find_element(By.ID, "consulta_data_ini").clear()
+                    element = browser.find_element(By.ID, "consulta_data_ini").clear()
                     
-                element = browser.find_element(By.ID,"consulta_data_ini").click()
-                element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
-                element = browser.find_element(By.ID,"consulta_data_fim").clear()
-                element = browser.find_element(By.ID,"consulta_data_fim").click()
-                element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
+                    element = browser.find_element(By.ID,"consulta_data_ini").click()
+                    element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
+                    element = browser.find_element(By.ID,"consulta_data_fim").clear()
+                    element = browser.find_element(By.ID,"consulta_data_fim").click()
+                    element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
     
                     # envia a consulta
-                botao = browser.find_element(By.ID,"consulta_localidade")
-                time.sleep(20)
-                botao.click()
+                    botao = browser.find_element(By.ID,"consulta_localidade")
+                    time.sleep(20)
+                    botao.click()
     
                     # espera 10s
-                time.sleep(20)
+                    time.sleep(20)
     
                     ## coloca todo o resultado numa página
                     # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
                     # select_fr.select_by_index(3)
     
-                table = browser.find_element(By.ID,'msg_resultado')
+                    table = browser.find_element(By.ID,'msg_resultado')
     
                     # df = pd.read_html(str(table))
                     # print(table)
-                table_html = table.get_attribute('outerHTML')
+                    table_html = table.get_attribute('outerHTML')
                     # print(df[0])
     
                     # print(table)
-                if i == 0:
-                    df = pd.read_html(str(table_html))
-                    df = df[0]
-                else:
-                    df2 = pd.read_html(str(table_html))
-                    df2 = df2[0]
+                    if i == 0:
+                        df = pd.read_html(str(table_html))
+                        df = df[0]
+                    else:
+                        df2 = pd.read_html(str(table_html))
+                        df2 = df2[0]
     
-                    df = df.append(df2, ignore_index=True)
-                        #print(df)
+                        df = df.append(df2, ignore_index=True)
+                        print(df)
     
                     # print(df.loc[(df["Localidade"] == 'SBSC')])
-                df.to_csv("metar.csv", header=True)
+                    df.to_csv("metar.csv", header=True)
                     #browser.quit()
-                #print(df)
+                print(df)
                 # df = df.drop(columns=['Unnamed: 0'])
-            os.chdir("/mount/src/edomenico/area1")
-            df.to_csv("metar.csv", header=True)
+                os.chdir("/mount/src/edomenico/area1")
+                df.to_csv("metar.csv", header=True)
                 # df.to_csv('example.csv')
-            return df
-	def tabuleiro(est, areatrab, datainicio):
-		def formata():
+                return df
+
+
+
+
+
+
+    def tabuleiro(est, areatrab, datainicio):
+        def formata():
             from bokeh.models import FuncTickFormatter, FixedTicker
             p.xaxis.ticker = FixedTicker(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
@@ -811,7 +853,7 @@ def main2():
             if diaini == 20:
 
                 if mesini == 2:
-                    if (date.today().year % 4) !=0:
+                    if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
                                             var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 1};
                                             return mapping[tick];
@@ -1094,50 +1136,45 @@ def main2():
         n = (emoji.emojize("\U0001f4dd"))  # pancadas de chuva
 
         # pd.set_option('max_columns', None)
-        #areatrab = 1  # dado entrada
+        # areatrab = 1  # dado entrada
         # datainicio='27/03/20'#dado entrada
 
-        #datainicio = datetime.utcnow() - timedelta(9)
+        # datainicio = datetime.utcnow() - timedelta(9)
         datainicio = datainicio.strftime('%d/%m/%y')
 
         if areatrab == 1:
-          #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
+            #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
             # estacao_area = 'SBFZ,'
-            #arqi1 = pd.read_csv('metar_trat_teste1.csv')
             arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
 
-            #estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
+            # estacao_area = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SWPI,SBTF,SBUA,SBEG,SBBV'  # sem SBMY SBCY
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
-            #arqi1 = pd.read_csv('metar_trat_teste2.csv')
             arqi1 = pd.read_csv('metar_trat_teste2.csv')
-        estacao_area=est
+        estacao_area = est
         noestacao = estacao_area.split(',')
 
         for i in range(0, 1, 1):
             try:
-                print('nome da estação: ', noestacao[i])
                 nome_estacao = noestacao[i]
                 arqi = arqi1.loc[(arqi1['estacao'] == nome_estacao)]
                 arqi = arqi.reset_index(drop=True)
-                print('arquivo: ', arqi)
-               
-                #cwd = os.getcwd()
-                #if areatrab == 1:
-
-                #    if os.path.isdir(cwd + '/tabuleiro/area1/'):
-                #        caminho = cwd + '/tabuleiro/area1/'
-                #    else:
-                #        mkdir(cwd + '/tabuleiro/area1/')
-                #        caminho = cwd + '/tabuleiro/area1/'
-               # else:
-                 #   if os.path.isdir(cwd + '/tabuleiro/area2/'):
-                  #      caminho = cwd + '/tabuleiro/area2/'
-                   # else:
-                    #    mkdir(cwd + "/tabuleiro/area2/")
-                   #     caminho = cwd + '/tabuleiro/area2/'
-               # output_file((caminho + arqi['estacao'][0] + "tab.html"))
+                # cwd = os.getcwd()
+                # if areatrab == 1:
+                #
+                #     if os.path.isdir(cwd + '/tabuleiro/area1/'):
+                #         caminho = cwd + '/tabuleiro/area1/'
+                #     else:
+                #         mkdir(cwd + '/tabuleiro/area1/')
+                #         caminho = cwd + '/tabuleiro/area1/'
+                # else:
+                #     if os.path.isdir(cwd + '/tabuleiro/area2/'):
+                #         caminho = cwd + '/tabuleiro/area2/'
+                #     else:
+                #         mkdir(cwd + "/tabuleiro/area2/")
+                #         caminho = cwd + '/tabuleiro/area2/'
+                # output_file((caminho + arqi['estacao'][0] + "tab.html"))
 
                 # print(arqi)
                 # result1= arqi.loc[(arqi['data_hora']>=datacomp)]
@@ -1178,6 +1215,7 @@ def main2():
 
                         if diai[jj] == diai[jj - iii]:
                             stop[jj] = 'A'
+
                             while (diai[jj] == diai[jj - iii]):
                                 arqi.metar[jj - iii] = str(arqi.metar[jj - iii]) + '\n' + str(arqi.speci[jj])
                                 # valores[jj] = str(len(arqi.metar[jj-iii]))
@@ -1190,7 +1228,7 @@ def main2():
                                 stop[jj - iii] = 'A'
                                 # valores[jj-iii]=especi[jj-iii].split('=')
                                 iii = iii + 1
-                                if (jj-iii) < 0:
+                                if (jj - iii) < 0:
                                     break
                             # noespec[jj-iii] = str(iii+2)
                         #
@@ -1205,7 +1243,6 @@ def main2():
                 arqi['valor'] = valores
                 arqi['aviso'] = stop
                 arqi['nspc'] = noespec
-                
                 print(valores)
                 # arqi['especial'] = arqi['especial'].str[:50]
                 # arqi = arqi.reset_index(drop=True)
@@ -1237,8 +1274,8 @@ def main2():
                         mes_fim = '12'
                         ano_fim = str(date_fim.year - 1)
                 elif date_fim.day == 1:
-                    if date_fim.month==3:
-                        if date_fim.year%4==0:
+                    if date_fim.month == 3:
+                        if date_fim.year % 4 == 0:
                             dia_fim = '29'
                             mes_fim = str(date_fim.month - 1)
                             ano_fim = str(date_fim.year)
@@ -1246,8 +1283,6 @@ def main2():
                             dia_fim = '28'
                             mes_fim = str(date_fim.month - 1)
                             ano_fim = str(date_fim.year)
-
-                
                 else:
                     dia_fim = str(date_fim.day - 1)
                     ano_fim = str(date_fim.year)
@@ -1257,7 +1292,7 @@ def main2():
                 arqi = arqi.loc[(arqi['data_hora'] < date_fim)]
                 arqi.sort_values(by=['estacao', 'data_hora'], inplace=True)
                 arqi = arqi.reset_index(drop=True)
-               # print('CHEGUEI AQUI')
+                # print('arq: ', arqi)
                 dia = []
                 hora = []
                 diai = arqi['data_hora']
@@ -1273,7 +1308,7 @@ def main2():
 
                         if mesini == 2 and (diai[i].day == 1) and (diai[i - j].day != 28):
 
-                            dia.append(29 - deltatempo+1)
+                            dia.append(29 - deltatempo + 1)
                             hora.append(diai[i].hour)
 
                             ult = dia[i] - 1
@@ -1306,7 +1341,8 @@ def main2():
                 arqi['period'] = (hora)
                 ddi = (arqi.data_hora[0]).day
                 ddf = (arqi.data_hora[len(arqi.datahora) - 1]).day
-                periods = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+                periods = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                           "16", "17",
                            "18", "19", "20", "21", "22", "23"]
                 periodos = arqi.period[1:23]
                 groups = [str(x) for x in range(1, 12)]
@@ -1337,8 +1373,8 @@ def main2():
                 ur = []
                 tmax = []
                 tmin = []
-                #vmax = []
-               # vmin = []
+                vmax = []
+                vmin = []
                 arqi['drytt'] = arqi['dryt']
                 arqi['drytt'].fillna(0, inplace=True)
                 arqi['dewpt'] = arqi['dewp']
@@ -1352,13 +1388,13 @@ def main2():
                         if ccmax['datahora2'].dt.day[bbb] == arqi['datahora2'].dt.day[bb]:
                             tmax.append(ccmax.drytt[bbb])
                             tmin.append(ccmin.drytt[bbb])
-                           # vmax.append(ccmax.wspd[bbb])
-                           # vmin.append(ccmin.wspd[bbb])
+                            vmax.append(ccmax.wspd[bbb])
+                            vmin.append(ccmin.wspd[bbb])
 
                 arqi['tmax'] = tmax
                 arqi['tmin'] = tmin
-               # arqi['vmax'] = vmax
-               # arqi['vmin'] = vmin
+                arqi['vmax'] = vmax
+                arqi['vmin'] = vmin
 
                 arqi['dewpt'].fillna(0, inplace=True)
                 dewttt = []
@@ -1432,8 +1468,8 @@ def main2():
                 arqi['tp'] = arqi['tp'].replace(['-DZ'], "-" + d)
                 arqi['tp'] = arqi['tp'].replace(['+DZ'], "+" + d)
                 arqi['tp'] = arqi['tp'].replace(['FU'], g)
-                arqi['tp'] = arqi['tp'].replace(['FG'], e)
                 arqi['tp'] = arqi['tp'].replace(['VCFG'], e)
+                arqi['tp'] = arqi['tp'].replace(['FG'], e)
                 arqi['tp'] = arqi['tp'].replace(['BCFG'], e)
                 arqi['tp'] = arqi['tp'].replace(['FZFG'], e)
                 arqi['tp'] = arqi['tp'].replace(['BR'], h)
@@ -1598,8 +1634,9 @@ def main2():
                     else:
                         auxvis.append(str(arqi['vis'][inuv]))
                     auxvis[inuv] = auxvis[inuv][0:2]
-                    if int(arqi['vis'][inuv]) == 99 and arqi['qn1'][inuv] == "" and arqi['tp'][inuv] == "" and arqi['qncb'][
-                        inuv] == "":
+                    if int(arqi['vis'][inuv]) == 99 and arqi['qn1'][inuv] == "" and arqi['tp'][inuv] == "" and \
+                            arqi['qncb'][
+                                inuv] == "":
                         auxvis[inuv] = 'CVK'
                     if int(arqi['vis'][inuv]) != 99 and arqi['qn1'][inuv] == "":
                         auxqn1[inuv] = 'NSC'
@@ -1630,15 +1667,15 @@ def main2():
                <div>
                 <font color = "red"
                 <i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
-                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
+                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp Vmax: @vmax kt&nbsp&nbsp Vmin: @vmin kt</b>
                 </font>
                 <div>
-    
-    
+
+
                 <textarea cols=@valor rows=@nspc wrap="hard">@metar</textarea>
-    
-    
-    
+
+
+
                 """
 
                 # TOOLTIPS = """
@@ -1662,7 +1699,6 @@ def main2():
                 p = figure(title="Tabuleiro: " + arqi.estacao[0] + ' ' + datatit, width=1500, height=2300,
                            x_range=groups, y_range=list(reversed(periods)), x_axis_location="above",
                            toolbar_location=None, tooltips=Tooltips)
-                
 
                 # p.add_layout(
                 #     BoxAnnotation(left='starttime', right='enddtime', bottom='startvalue', source=arqi, fill_color='green',
@@ -1683,7 +1719,7 @@ def main2():
                 p.xaxis.axis_label_text_font_size = "20pt"
                 p.yaxis.axis_label_text_font_size = "20pt"
                 p.xaxis.axis_label = 'D I A'
-                p.yaxis.axis_label = 'H O R A  (UTC)'
+                p.yaxis.axis_label = 'H O R A'
                 p.x_range.range_padding = -0.07
                 # p.xaxis.major_label_orientation = 1.3
 
@@ -1708,7 +1744,8 @@ def main2():
                 # x_text_font_size = "40px"
 
                 # print(arqi.group)
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6)  # , legend_field="dryt")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi,
+                           fill_alpha=0.6)  # , legend_field="dryt")
                 # #              color=factor_cmap('metal', palette=list(cmap.values()), factors=list(cmap.keys())))
                 # #
 
@@ -1729,11 +1766,13 @@ def main2():
                 # p.ellipse(arqi["group"], arqi["period"], width=0.1, height=0.0,
                 #           angle=0.8, color="red")
 
-                # p.circle([1, 2, 3, 4, 5,6, 7, 8, 9, 10], [1, 2, 3, 4, 5,6, 7, 8, 9, 10], size=10, color="navy", alpha=0.5)
+                # p.circle([1,
+                # 2, 3, 4, 5,6, 7, 8, 9, 10], [1, 2, 3, 4, 5,6, 7, 8, 9, 10], size=10, color="navy", alpha=0.5)
                 p.text(x=x, y=dodge("period", 0.3, range=p.y_range), text="dryt", text_font_style="bold",
                        text_font_size="11px", **text_props)
 
-                p.text(x=dodge("group", -0.07, range=p.x_range), y=dodge("period", 0.3, range=p.y_range), text="aviso",
+                p.text(x=dodge("group", -0.07, range=p.x_range), y=dodge("period", 0.3, range=p.y_range),
+                       text="aviso",
                        text_font_style="bold",
                        text_font_size="11px", **text_props)
 
@@ -1743,44 +1782,55 @@ def main2():
                        text_font_size="11px", **text_props)
                 p.text(x=x, y=dodge("period", -0.05, range=p.y_range), text="vis", text_font_style="bold",
                        text_font_size="11px", **text_props)
-                p.text(x=dodge("group", -0.3, range=p.x_range), y=dodge("period", 0.05, range=p.y_range), text="tp",
+                p.text(x=dodge("group", -0.3, range=p.x_range), y=dodge("period", 0.05, range=p.y_range),
+                       text="tp",
                        text_font_style="bold",
                        text_font_size="18px", text_color='red', **text_props)
-                p.text(x=dodge("group", 0.3, range=p.x_range), y=dodge("period", 0.3, range=p.y_range), text="pres",
+                p.text(x=dodge("group", 0.3, range=p.x_range), y=dodge("period", 0.3, range=p.y_range),
+                       text="pres",
                        text_font_style="bold",
                        text_font_size="11px", **text_props)
 
-                p.text(x=dodge("group", -0.07, range=p.x_range), y=dodge("period", -0.4, range=p.y_range), text="qn1",
+                p.text(x=dodge("group", -0.07, range=p.x_range), y=dodge("period", -0.4, range=p.y_range),
+                       text="qn1",
                        text_font_style="bold",
                        text_font_size="9px", **text_props)
-                p.text(x=dodge("group", 0.065, range=p.x_range), y=dodge("period", -0.4, range=p.y_range), text="altn1",
-                       text_font_style="bold",
-                       text_font_size="9px", **text_props)
-
-                p.text(x=dodge("group", -0.07, range=p.x_range), y=dodge("period", -0.2, range=p.y_range), text="qn2",
-                       text_font_style="bold",
-                       text_font_size="9px", **text_props)
-                p.text(x=dodge("group", 0.065, range=p.x_range), y=dodge("period", -0.2, range=p.y_range), text="altn2",
+                p.text(x=dodge("group", 0.065, range=p.x_range), y=dodge("period", -0.4, range=p.y_range),
+                       text="altn1",
                        text_font_style="bold",
                        text_font_size="9px", **text_props)
 
-                p.text(x=dodge("group", 0.07, range=p.x_range), y=dodge("period", -0.3, range=p.y_range), text="qncb",
+                p.text(x=dodge("group", -0.07, range=p.x_range), y=dodge("period", -0.2, range=p.y_range),
+                       text="qn2",
+                       text_font_style="bold",
+                       text_font_size="9px", **text_props)
+                p.text(x=dodge("group", 0.065, range=p.x_range), y=dodge("period", -0.2, range=p.y_range),
+                       text="altn2",
+                       text_font_style="bold",
+                       text_font_size="9px", **text_props)
+
+                p.text(x=dodge("group", 0.07, range=p.x_range), y=dodge("period", -0.3, range=p.y_range),
+                       text="qncb",
                        text_font_style="bold", text_color='red',
                        text_font_size="9px", **text_props)
-                p.text(x=dodge("group", 0.20, range=p.x_range), y=dodge("period", -0.3, range=p.y_range), text="altncb",
+                p.text(x=dodge("group", 0.20, range=p.x_range), y=dodge("period", -0.3, range=p.y_range),
+                       text="altncb",
                        text_font_style="bold", text_color='red',
                        text_font_size="9px", **text_props)
 
-                p.text(x=dodge("group", 0.06, range=p.x_range), y=dodge("period", -0.05, range=p.y_range), text="gust",
+                p.text(x=dodge("group", 0.06, range=p.x_range), y=dodge("period", -0.05, range=p.y_range),
+                       text="gust",
                        text_font_style="bold", text_color='red',
                        text_font_size="9px", **text_props)
 
                 # -----dia 19
-                p.text(x=dodge("group", 0.06, range=p.x_range), y=dodge("period", 0.1, range=p.y_range), text="wdirstr",
+                p.text(x=dodge("group", 0.06, range=p.x_range), y=dodge("period", 0.1, range=p.y_range),
+                       text="wdirstr",
                        text_font_style="bold", text_color='black',
                        text_font_size="9px", **text_props)
                 #### Intensidade do vento
-                p.text(x=dodge("group", 0.4, range=p.x_range), y=dodge("period", -0.35, range=p.y_range), text="wspd",
+                p.text(x=dodge("group", 0.4, range=p.x_range), y=dodge("period", -0.35, range=p.y_range),
+                       text="wspd",
                        text_font_style="bold", text_color='red',
                        text_font_size="11px", **text_props)
                 #### Intensidade do vento - fim
@@ -1794,12 +1844,15 @@ def main2():
                 # print(arqi.group)
                 # print(arqi.periodd)
 
-                yyy = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5,
+                yyy = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5,
+                       16.5, 17.5,
                        18.5, 19.5, 20.5, 21.5, 22.5, 23.5]
-                yyyyyy = [0.8, 1.8, 2.8, 3.8, 4.8, 5.8, 6.8, 7.8, 8.8, 9.8, 10.8, 11.8, 12.8, 13.8, 14.8, 15.8, 16.8, 17.8,
+                yyyyyy = [0.8, 1.8, 2.8, 3.8, 4.8, 5.8, 6.8, 7.8, 8.8, 9.8, 10.8, 11.8, 12.8, 13.8, 14.8, 15.8,
+                          16.8, 17.8,
                           18.8, 19.8, 20.8, 21.8, 22.8, 23.8]
                 xxx = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                xxxxxx = [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1,
+                xxxxxx = [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1,
+                          1.1, 1.1,
                           1.1, 1.1, 1.1, 1.1, 1.1]
                 # yyy=[11.5,12.5,13.5,14.5,15.5,16.5,17.5,18.5,19.5,20.5,21.5,22.5,23.5]
                 # yyyyyy=[11.8,12.8,13.8,14.8,15.8,16.8,17.8,18.8,19.8,20.8,21.8,22.8,23.8]
@@ -1896,8 +1949,10 @@ def main2():
                                         x7.append(xxxx[gg] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
 
-                                        xxxxxx.append((xxxxx[aux] + 0 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        yyyyyy.append((yyyyy[aux] + 0 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
                                         x8.append((xxxx[gg]))
                                         y8.append((yyyy[ggg]))
                                         x9.append((xxxx[gg]))
@@ -1920,8 +1975,10 @@ def main2():
                                         x7.append(xxxx[gg] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
 
-                                        xxxxxx.append((xxxxx[aux] + 0.10 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.10 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.10 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.10 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
                                         x8.append((xxxx[gg]))
                                         y8.append((yyyy[ggg]))
                                         x9.append((xxxx[gg]))
@@ -1941,8 +1998,10 @@ def main2():
 
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
                                         x8.append((xxxx[gg]))
                                         y8.append((yyyy[ggg]))
                                         x9.append((xxxx[gg]))
@@ -1960,13 +2019,17 @@ def main2():
 
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
 
                                         x8.append(xxxx[aux] + 0.25 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y8.append(yyyy[aux] + 0.25 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        x9.append((xxxxx[aux] + 0.1 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
-                                        y9.append((yyyyy[aux] + 0.1 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        x9.append(
+                                            (xxxxx[aux] + 0.1 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        y9.append(
+                                            (yyyyy[aux] + 0.1 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
                                         x10.append((xxxx[gg]))
                                         y10.append((yyyy[ggg]))
                                         x11.append((xxxx[gg]))
@@ -1979,13 +2042,17 @@ def main2():
 
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
 
                                         x8.append(xxxx[aux] + 0.25 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y8.append(yyyy[aux] + 0.25 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        x9.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
-                                        y9.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        x9.append((xxxxx[aux] + 0.20 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        y9.append((yyyyy[aux] + 0.20 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 105))))
                                         x10.append((xxxx[gg]))
                                         y10.append((yyyy[ggg]))
                                         x11.append((xxxx[gg]))
@@ -1997,18 +2064,26 @@ def main2():
                                     elif arqi.wspd[iwdir] > 22 and arqi.wspd[iwdir] <= 27:
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
 
                                         x8.append(xxxx[aux] + 0.25 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y8.append(yyyy[aux] + 0.25 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        x9.append((xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
-                                        y9.append((yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        x9.append(
+                                            (xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        y9.append(
+                                            (yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
 
-                                        x10.append((xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        y10.append((yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        x11.append((xxxxx[aux] + 0.15 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 135))))
-                                        y11.append((yyyyy[aux] + 0.15 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 135))))
+                                        x10.append(
+                                            (xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        y10.append(
+                                            (yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        x11.append((xxxxx[aux] + 0.15 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 135))))
+                                        y11.append((yyyyy[aux] + 0.15 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 135))))
                                         x12.append((xxxx[gg]))
                                         y12.append((yyyy[ggg]))
                                         x13.append((xxxx[gg]))
@@ -2016,18 +2091,26 @@ def main2():
                                     elif arqi.wspd[iwdir] > 27 and arqi.wspd[iwdir] <= 32:
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
 
                                         x8.append(xxxx[aux] + 0.25 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y8.append(yyyy[aux] + 0.25 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        x9.append((xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
-                                        y9.append((yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        x9.append(
+                                            (xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        y9.append(
+                                            (yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
 
-                                        x10.append((xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        y10.append((yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        x11.append((xxxxx[aux] + 0.21 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
-                                        y11.append((yyyyy[aux] + 0.21 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        x10.append(
+                                            (xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        y10.append(
+                                            (yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        x11.append((xxxxx[aux] + 0.21 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        y11.append((yyyyy[aux] + 0.21 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 120))))
 
                                         x12.append((xxxx[gg]))
                                         y12.append((yyyy[ggg]))
@@ -2036,43 +2119,67 @@ def main2():
                                     elif arqi.wspd[iwdir] > 32 and arqi.wspd[iwdir] <= 37:
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
 
                                         x8.append(xxxx[aux] + 0.25 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y8.append(yyyy[aux] + 0.25 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        x9.append((xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
-                                        y9.append((yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        x9.append(
+                                            (xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        y9.append(
+                                            (yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
 
-                                        x10.append((xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        y10.append((yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        x11.append((xxxxx[aux] + 0.21 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
-                                        y11.append((yyyyy[aux] + 0.21 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        x10.append(
+                                            (xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        y10.append(
+                                            (yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        x11.append((xxxxx[aux] + 0.21 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        y11.append((yyyyy[aux] + 0.21 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 120))))
 
-                                        x12.append((xxxx[aux] + 0.15 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        y12.append((yyyy[aux] + 0.15 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        x13.append((xxxxx[aux] + 0.19 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 145))))
-                                        y13.append((yyyyy[aux] + 0.19 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 145))))
+                                        x12.append(
+                                            (xxxx[aux] + 0.15 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        y12.append(
+                                            (yyyy[aux] + 0.15 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        x13.append((xxxxx[aux] + 0.19 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 145))))
+                                        y13.append((yyyyy[aux] + 0.19 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 145))))
                                     elif arqi.wspd[iwdir] > 37 and arqi.wspd[iwdir] <= 42:
                                         x7.append(xxxx[gg] + 0.30 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y7.append(yyyy[ggg] + 0.30 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        xxxxxx.append((xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
-                                        yyyyyy.append((yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        xxxxxx.append(
+                                            (xxxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
+                                        yyyyyy.append(
+                                            (yyyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 90))))
 
                                         x8.append(xxxx[aux] + 0.25 * np.sin(np.pi / 180 * (arqi.wdir[iwdir])))
                                         y8.append(yyyy[aux] + 0.25 * np.cos(np.pi / 180 * (arqi.wdir[iwdir])))
-                                        x9.append((xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
-                                        y9.append((yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        x9.append(
+                                            (xxxxx[aux] + 0.2 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
+                                        y9.append(
+                                            (yyyyy[aux] + 0.2 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 105))))
 
-                                        x10.append((xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        y10.append((yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        x11.append((xxxxx[aux] + 0.21 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
-                                        y11.append((yyyyy[aux] + 0.21 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        x10.append(
+                                            (xxxx[aux] + 0.20 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        y10.append(
+                                            (yyyy[aux] + 0.20 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        x11.append((xxxxx[aux] + 0.21 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 120))))
+                                        y11.append((yyyyy[aux] + 0.21 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 120))))
 
-                                        x12.append((xxxx[aux] + 0.15 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        y12.append((yyyy[aux] + 0.15 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
-                                        x13.append((xxxxx[aux] + 0.24 * np.sin(np.pi / 180 * (arqi.wdir[iwdir] - 130))))
-                                        y13.append((yyyyy[aux] + 0.24 * np.cos(np.pi / 180 * (arqi.wdir[iwdir] - 130))))
+                                        x12.append(
+                                            (xxxx[aux] + 0.15 * np.sin(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        y12.append(
+                                            (yyyy[aux] + 0.15 * np.cos(np.pi / 180 * (arqi.wdir[iwdir]))))
+                                        x13.append((xxxxx[aux] + 0.24 * np.sin(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 130))))
+                                        y13.append((yyyyy[aux] + 0.24 * np.cos(
+                                            np.pi / 180 * (arqi.wdir[iwdir] - 130))))
 
 
                                 else:
@@ -2148,44 +2255,44 @@ def main2():
                 # p.hover.callback = CustomJS(code=code_hover)
 
                 # output_file('filename.html')
-                #show(p)
+                # show(p)
                 from bokeh.embed import components
 
-                #st.components.v1.iframe(p, height=600, width=1700, scrolling=True)
-                #html = file_html(p, CDN, "my plot")
-                #st.bokeh_chart(html, use_container_width=True)
-                
-               # script, div = components(p)
-               #  html = template.render(resources=resources,
-               #                         script=script,
-               #                         div=div)
+                # st.components.v1.iframe(p, height=600, width=1700, scrolling=True)
+                # html = file_html(p, CDN, "my plot")
+                # st.bokeh_chart(html, use_container_width=True)
 
-                #HtmlFile = open("SBMEtab.html", 'r', encoding='utf-8')
-                
+                # script, div = components(p)
+                #  html = template.render(resources=resources,
+                #                         script=script,
+                #                         div=div)
+
+                # HtmlFile = open("SBMEtab.html", 'r', encoding='utf-8')
+                from bokeh.resources import CDN
+                from bokeh.embed import file_html
+
                 handle = file_html(p, CDN, "my plot")
 
-                #source_code = HtmlFile.read()
-                source_code =handle
+                # source_code = HtmlFile.read()
+                source_code = handle
 
-               # print(source_code)
-               # ppp=components.html(source_code)
-                #ppp = open("SBMEtab.html")
-                #components.html(ppp.read())
-               # PP=_data_url_to_image(p)
+            # print(source_code)
+            # ppp=components.html(source_code)
+            # ppp = open("SBMEtab.html")
+            # components.html(ppp.read())
+            # PP=_data_url_to_image(p)
 
-                # save(p)
+            # save(p)
 
+            except Exception as err:
 
-
-
-            
-            except:# Exception as err:
-                continue
-                #print(f"Unexpected {err=}, {type(err)=}")
+                print(f"Unexpected {err=}, {type(err)=}")
             return source_code
-	def main_page():
-		def main():
-			
+    def main_page():
+
+
+        def main():
+
 
 
 
@@ -2195,141 +2302,169 @@ def main2():
             #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
             #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
             #      'SBPJ'])
-	            	area = ['Área 1', 'Área 2']
-	            	area_1 = ['SBJR', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
-	                     	 'SBAC', 'SBJE',
-	                     	 'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
-	                      	'SBPL',
-	                      	'SBPJ']
-	            	area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
-	                    	  'SBHT',
-	                    	  'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
-	                    	  'SBEG',
-	                     	 'SBBV', 'SSKW', 'SWEI', 'SWPI']
-	            	start_date = datetime.today()
-	            	end_date = datetime.today()
-	            	start_datee = datetime.today()
-	            	nome_estacao='N'
-	            	with st.sidebar:
-	                	with st.container(border=True):
-	                    		on = st.toggle('Atualizar dados')
-	                    		if on:
-	                        # st.write('Atualização dos Dados')
-	                        # atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
-	
-	                        # if st.button('Último dia'):
-	                        # #if atualizardados=='Último dia':
-	                        #
-	                        #     progress_text = "Processando... Aguarde."
-	                        #     my_bar = st.progress(0, text=progress_text)
-	                        #     pt = rest(1,to_data,from_data)
-	                        #     my_bar.progress(50, text="Em andamento...")
-	                        #     # for percent_complete in range(100):
-	                        #     #     time.sleep(0.01)
-	                        #     pt = rest(2,to_data,from_data)
-	                        #
-	                        #     my_bar.progress(100, text="Terminou")
-		                        too_data = format(datetime.utcnow(), "%d/%m/%Y")
-		                        to_data = st.date_input('Inicio:', start_date)
-		                        from_data = st.date_input('Fim:', end_date)
-		
-		                        if st.button('Selecionar vários dias/Estação'):
-		                            # if atualizardados=='Último dia':
-	
-		                            # if st.button('Consultar'):
-		                            progress_text = "Processando... Aguarde."
-		                            my_bar = st.progress(0, text=progress_text)
-		                            pt = rest(1, to_data, from_data,nome_estacao)
-		                            my_bar.progress(50, text="Em andamento...")
-		                            # for percent_complete in range(100):
-		                            #     time.sleep(0.01)
-		                            pt = rest(2, to_data, from_data,nome_estacao)
-		
-		                            my_bar.progress(100, text="Terminou")
-		
-	                    # else:
-	
-		                    on2 = st.toggle('Consultar outra data')
-		                    if on2:
-		                        # st.divider()
-		                        # st.write('Visualização dos dados')
-		                        selecionaperiodo = st.radio('Escolha o período', ['Últimos 10 dias', 'Selecionar dia inicial'],
-		                                                    horizontal=True)
-		                        if selecionaperiodo == 'Últimos 10 dias':
-		                            datainicial = datetime.utcnow() - timedelta(9)
-		                        else:
-		                            too_data = st.date_input('Dia Inicial:', start_datee)
-		                            datainicial = too_data
-		                        # datainicial= datainicial-timedelta(9)
-		                    else:
-		                        datainicial = datetime.utcnow() - timedelta(9)
-		                # st.divider()
-		
-		                # st.markdown("## Atualizar Dados")
-		
-		                # atualizar_horario = st.toggle('Atualizar horário')
-		                with st.container(border=True):
-		                    selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
-		
-		                    # col1, col2 = st.columns(2)
-		                    if selarea == "Área 1":
-		                        # with col1:
-		                        # st.header('Área 1')
-		                        nomedaestacao = st.radio("Área 1", area_1)
-		                        noarea = 1
-		
-		                    else:
-		                        # st.header('Área 2')
-		                        nomedaestacao = st.radio("Área 2", area_2)
-		                        noarea = 2
-		
-		                st.markdown(
-		                    """
-		
-		
-		                    e-mail → edomenico813@gmail.com
-		
-		
-		                    """
-		                )
-		
-		            p = tabuleiro(nomedaestacao, noarea, datainicial)
-		
-		            import streamlit.components.v1 as components
-		
-		            st.components.v1.html(p, height=2300, width=1700, scrolling=True)
-	
+            area = ['Área 1', 'Área 2']
+            area_1 = ['SBJR', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
+                      'SBAC', 'SBJE',
+                      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
+                      'SBPL',
+                      'SBPJ']
+            area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
+                      'SBHT',
+                      'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
+                      'SBEG',
+                      'SBBV', 'SSKW', 'SWEI', 'SWPI']
+            start_date = datetime.today()
+            end_date = datetime.today()
+            start_datee = datetime.today()
+            nome_estacao='N'
+            with st.sidebar:
+                with st.container(border=True):
+                    on = st.toggle('Atualizar dados')
+                    if on:
+                        # st.write('Atualização dos Dados')
+                        # atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
 
-		
-	def page2():
-	        st.markdown("# Page 2 ❄️")
-	        start_date = datetime.today()
-	        end_date = datetime.today()
-	        to_date = datetime.today()
-	        title=''
-	        with st.sidebar:
-	            title = st.text_input('Escolha a estação', '')
-	
-	            st.write('Escolha o período para plotagem')
-	            to_data = st.date_input('Inicio:', start_date)
-	            from_data = st.date_input('Fim:', end_date)
-	            if st.button('Iniciar'):
-	                progress_text = "Processando... Aguarde."
-	                my_bar = st.progress(0, text=progress_text)
-	                pt = rest(1, to_data, from_data, title)
-	                my_bar.progress(100, text="Terminou...")
-	
-	        p = tabuleiro(title, 2, to_data)
-	
-	        import streamlit.components.v1 as components
-	
-	        st.components.v1.html(p, height=2300, width=1700, scrolling=True)
-	
-	        st.markdown("# Page 2 ❄️")
+                        # if st.button('Último dia'):
+                        # #if atualizardados=='Último dia':
+                        #
+                        #     progress_text = "Processando... Aguarde."
+                        #     my_bar = st.progress(0, text=progress_text)
+                        #     pt = rest(1,to_data,from_data)
+                        #     my_bar.progress(50, text="Em andamento...")
+                        #     # for percent_complete in range(100):
+                        #     #     time.sleep(0.01)
+                        #     pt = rest(2,to_data,from_data)
+                        #
+                        #     my_bar.progress(100, text="Terminou")
+                        too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                        to_data = st.date_input('Inicio:', start_date)
+                        from_data = st.date_input('Fim:', end_date)
 
-    	def page3():
-	        st.markdown("# Page 3 🎉")
-	        st.sidebar.markdown("# Page 3 🎉")
+                        if st.button('Selecionar vários dias/Estação'):
+                            # if atualizardados=='Último dia':
+
+                            # if st.button('Consultar'):
+                            progress_text = "Processando... Aguarde."
+                            my_bar = st.progress(0, text=progress_text)
+                            pt = rest(1, to_data, from_data,nome_estacao)
+                            my_bar.progress(50, text="Em andamento...")
+                            # for percent_complete in range(100):
+                            #     time.sleep(0.01)
+                            pt = rest(2, to_data, from_data,nome_estacao)
+
+                            my_bar.progress(100, text="Terminou")
+
+                    # else:
+
+                    on2 = st.toggle('Consultar outra data')
+                    if on2:
+                        # st.divider()
+                        # st.write('Visualização dos dados')
+                        selecionaperiodo = st.radio('Escolha o período', ['Últimos 10 dias', 'Selecionar dia inicial'],
+                                                    horizontal=True)
+                        if selecionaperiodo == 'Últimos 10 dias':
+                            datainicial = datetime.utcnow() - timedelta(9)
+                        else:
+                            too_data = st.date_input('Dia Inicial:', start_datee)
+                            datainicial = too_data
+                        # datainicial= datainicial-timedelta(9)
+                    else:
+                        datainicial = datetime.utcnow() - timedelta(9)
+                # st.divider()
+
+                # st.markdown("## Atualizar Dados")
+
+                # atualizar_horario = st.toggle('Atualizar horário')
+                with st.container(border=True):
+                    selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
+
+                    # col1, col2 = st.columns(2)
+                    if selarea == "Área 1":
+                        # with col1:
+                        # st.header('Área 1')
+                        nomedaestacao = st.radio("Área 1", area_1)
+                        noarea = 1
+
+                    else:
+                        # st.header('Área 2')
+                        nomedaestacao = st.radio("Área 2", area_2)
+                        noarea = 2
+
+                st.markdown(
+                    """
+
+
+                    e-mail → edomenico813@gmail.com
+
+
+                    """
+                )
+
+            p = tabuleiro(nomedaestacao, noarea, datainicial)
+
+            import streamlit.components.v1 as components
+
+            st.components.v1.html(p, height=2300, width=1700, scrolling=True)
+            # from streamlit_bokeh_events import streamlit_bokeh_events
+            # event_result = streamlit_bokeh_events(
+            #     events="TestSelectEvent",
+            #     bokeh_plot=p,
+            #     key="foo",
+            #     debounce_time=1000,
+            # )
+            # st.subheader("Raw Event Data")
+            # st.write(event_result)
+            # st.bokeh_chart(html_content,use_container_width=True)
+            # st.write(p)
+
+            # barra_lateral = st.sid,ebar.empty()
+        # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
+        #  if st.button('Atualizar dados'):
+        #      pt = rest(noarea)
+        #      ll=1
+        # st.write('Atualizar os dados')
+        # escolha= st.radio('Atualizar os dados',["Sim","Não"],index=1,horizontal=True)
+
+        # time.sleep(1)
+        # my_bar.empty()
+
+        # escolha.index='None'
+
+        # if __name__ == '__main__':
+        #     if runtime.exists():
+        #         main()
+        #     else:
+        #         sys.argv = ["streamlit", "run", sys.argv[0]]
+        #         sys.exit(stcli.main())
+    def page2():
+        st.markdown("# Page 2 ❄️")
+        start_date = datetime.today()
+        end_date = datetime.today()
+        to_date = datetime.today()
+        title=''
+        with st.sidebar:
+            title = st.text_input('Escolha a estação', '')
+
+            st.write('Escolha o período para plotagem')
+            to_data = st.date_input('Inicio:', start_date)
+            from_data = st.date_input('Fim:', end_date)
+            if st.button('Iniciar'):
+                progress_text = "Processando... Aguarde."
+                my_bar = st.progress(0, text=progress_text)
+                pt = rest(1, to_data, from_data, title)
+                my_bar.progress(100, text="Terminou...")
+
+        p = tabuleiro(title, 2, to_data)
+
+        import streamlit.components.v1 as components
+
+        st.components.v1.html(p, height=2300, width=1700, scrolling=True)
+
+        st.markdown("# Page 2 ❄️")
+
+    def page3():
+        st.markdown("# Page 3 🎉")
+        st.sidebar.markdown("# Page 3 🎉")
 
     page_names_to_funcs = {
         "Main Page": main_page,
@@ -2339,5 +2474,6 @@ def main2():
 
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
     page_names_to_funcs[selected_page]()
+
 st.session_state
-main()
+main2()
