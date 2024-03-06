@@ -2183,39 +2183,37 @@ def main2():
                 continue
                 #print(f"Unexpected {err=}, {type(err)=}")
             return source_code
-	    def main_page():
+	def main_page():
+		def main():
+			
 
 
-	        def main():
-	
-	
-	
-	
-	            # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
-	            #                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
-	            #                 ,tab25, tab26, tab27, tab28 = st.tabs(
-	            #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
-	            #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
-	            #      'SBPJ'])
-	            area = ['Área 1', 'Área 2']
-	            area_1 = ['SBJR', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
-	                      'SBAC', 'SBJE',
-	                      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
-	                      'SBPL',
-	                      'SBPJ']
-	            area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
-	                      'SBHT',
-	                      'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
-	                      'SBEG',
-	                      'SBBV', 'SSKW', 'SWEI', 'SWPI']
-	            start_date = datetime.today()
-	            end_date = datetime.today()
-	            start_datee = datetime.today()
-	            nome_estacao='N'
-	            with st.sidebar:
-	                with st.container(border=True):
-	                    on = st.toggle('Atualizar dados')
-	                    if on:
+
+            # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
+            #                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
+            #                 ,tab25, tab26, tab27, tab28 = st.tabs(
+            #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+            #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
+            #      'SBPJ'])
+	            	area = ['Área 1', 'Área 2']
+	            	area_1 = ['SBJR', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
+	                     	 'SBAC', 'SBJE',
+	                     	 'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN',
+	                      	'SBPL',
+	                      	'SBPJ']
+	            	area_2 = ['SBRD', 'SBVH', 'SBJI', 'SBRB', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ',
+	                    	  'SBHT',
+	                    	  'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SBMY', 'SBTF', 'SBUA',
+	                    	  'SBEG',
+	                     	 'SBBV', 'SSKW', 'SWEI', 'SWPI']
+	            	start_date = datetime.today()
+	            	end_date = datetime.today()
+	            	start_datee = datetime.today()
+	            	nome_estacao='N'
+	            	with st.sidebar:
+	                	with st.container(border=True):
+	                    		on = st.toggle('Atualizar dados')
+	                    		if on:
 	                        # st.write('Atualização dos Dados')
 	                        # atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
 	
@@ -2231,76 +2229,115 @@ def main2():
 	                        #     pt = rest(2,to_data,from_data)
 	                        #
 	                        #     my_bar.progress(100, text="Terminou")
-	                        too_data = format(datetime.utcnow(), "%d/%m/%Y")
-	                        to_data = st.date_input('Inicio:', start_date)
-	                        from_data = st.date_input('Fim:', end_date)
+		                        too_data = format(datetime.utcnow(), "%d/%m/%Y")
+		                        to_data = st.date_input('Inicio:', start_date)
+		                        from_data = st.date_input('Fim:', end_date)
+		
+		                        if st.button('Selecionar vários dias/Estação'):
+		                            # if atualizardados=='Último dia':
 	
-	                        if st.button('Selecionar vários dias/Estação'):
-	                            # if atualizardados=='Último dia':
-	
-	                            # if st.button('Consultar'):
-	                            progress_text = "Processando... Aguarde."
-	                            my_bar = st.progress(0, text=progress_text)
-	                            pt = rest(1, to_data, from_data,nome_estacao)
-	                            my_bar.progress(50, text="Em andamento...")
-	                            # for percent_complete in range(100):
-	                            #     time.sleep(0.01)
-	                            pt = rest(2, to_data, from_data,nome_estacao)
-	
-	                            my_bar.progress(100, text="Terminou")
-	
+		                            # if st.button('Consultar'):
+		                            progress_text = "Processando... Aguarde."
+		                            my_bar = st.progress(0, text=progress_text)
+		                            pt = rest(1, to_data, from_data,nome_estacao)
+		                            my_bar.progress(50, text="Em andamento...")
+		                            # for percent_complete in range(100):
+		                            #     time.sleep(0.01)
+		                            pt = rest(2, to_data, from_data,nome_estacao)
+		
+		                            my_bar.progress(100, text="Terminou")
+		
 	                    # else:
 	
-	                    on2 = st.toggle('Consultar outra data')
-	                    if on2:
-	                        # st.divider()
-	                        # st.write('Visualização dos dados')
-	                        selecionaperiodo = st.radio('Escolha o período', ['Últimos 10 dias', 'Selecionar dia inicial'],
-	                                                    horizontal=True)
-	                        if selecionaperiodo == 'Últimos 10 dias':
-	                            datainicial = datetime.utcnow() - timedelta(9)
-	                        else:
-	                            too_data = st.date_input('Dia Inicial:', start_datee)
-	                            datainicial = too_data
-	                        # datainicial= datainicial-timedelta(9)
-	                    else:
-	                        datainicial = datetime.utcnow() - timedelta(9)
-	                # st.divider()
+		                    on2 = st.toggle('Consultar outra data')
+		                    if on2:
+		                        # st.divider()
+		                        # st.write('Visualização dos dados')
+		                        selecionaperiodo = st.radio('Escolha o período', ['Últimos 10 dias', 'Selecionar dia inicial'],
+		                                                    horizontal=True)
+		                        if selecionaperiodo == 'Últimos 10 dias':
+		                            datainicial = datetime.utcnow() - timedelta(9)
+		                        else:
+		                            too_data = st.date_input('Dia Inicial:', start_datee)
+		                            datainicial = too_data
+		                        # datainicial= datainicial-timedelta(9)
+		                    else:
+		                        datainicial = datetime.utcnow() - timedelta(9)
+		                # st.divider()
+		
+		                # st.markdown("## Atualizar Dados")
+		
+		                # atualizar_horario = st.toggle('Atualizar horário')
+		                with st.container(border=True):
+		                    selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
+		
+		                    # col1, col2 = st.columns(2)
+		                    if selarea == "Área 1":
+		                        # with col1:
+		                        # st.header('Área 1')
+		                        nomedaestacao = st.radio("Área 1", area_1)
+		                        noarea = 1
+		
+		                    else:
+		                        # st.header('Área 2')
+		                        nomedaestacao = st.radio("Área 2", area_2)
+		                        noarea = 2
+		
+		                st.markdown(
+		                    """
+		
+		
+		                    e-mail → edomenico813@gmail.com
+		
+		
+		                    """
+		                )
+		
+		            p = tabuleiro(nomedaestacao, noarea, datainicial)
+		
+		            import streamlit.components.v1 as components
+		
+		            st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 	
-	                # st.markdown("## Atualizar Dados")
-	
-	                # atualizar_horario = st.toggle('Atualizar horário')
-	                with st.container(border=True):
-	                    selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
-	
-	                    # col1, col2 = st.columns(2)
-	                    if selarea == "Área 1":
-	                        # with col1:
-	                        # st.header('Área 1')
-	                        nomedaestacao = st.radio("Área 1", area_1)
-	                        noarea = 1
-	
-	                    else:
-	                        # st.header('Área 2')
-	                        nomedaestacao = st.radio("Área 2", area_2)
-	                        noarea = 2
-	
-	                st.markdown(
-	                    """
-	
-	
-	                    e-mail → edomenico813@gmail.com
-	
-	
-	                    """
-	                )
-	
-	            p = tabuleiro(nomedaestacao, noarea, datainicial)
-	
-	            import streamlit.components.v1 as components
-	
-	            st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 
+		
+	def page2():
+	        st.markdown("# Page 2 ❄️")
+	        start_date = datetime.today()
+	        end_date = datetime.today()
+	        to_date = datetime.today()
+	        title=''
+	        with st.sidebar:
+	            title = st.text_input('Escolha a estação', '')
+	
+	            st.write('Escolha o período para plotagem')
+	            to_data = st.date_input('Inicio:', start_date)
+	            from_data = st.date_input('Fim:', end_date)
+	            if st.button('Iniciar'):
+	                progress_text = "Processando... Aguarde."
+	                my_bar = st.progress(0, text=progress_text)
+	                pt = rest(1, to_data, from_data, title)
+	                my_bar.progress(100, text="Terminou...")
+	
+	        p = tabuleiro(title, 2, to_data)
+	
+	        import streamlit.components.v1 as components
+	
+	        st.components.v1.html(p, height=2300, width=1700, scrolling=True)
+	
+	        st.markdown("# Page 2 ❄️")
 
+    	def page3():
+	        st.markdown("# Page 3 🎉")
+	        st.sidebar.markdown("# Page 3 🎉")
+
+    page_names_to_funcs = {
+        "Main Page": main_page,
+        "Page 2": page2,
+        "Page 3": page3,
+    }
+
+    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
+    page_names_to_funcs[selected_page]()
 st.session_state
 main()
