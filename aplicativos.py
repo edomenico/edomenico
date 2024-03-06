@@ -2340,7 +2340,7 @@ def main2():
                         to_data = st.date_input('Inicio:', start_date)
                         from_data = st.date_input('Fim:', end_date)
 
-                        if st.button('Selecionar vários dias/Estação'):
+                        if st.button('Selecionar'):
                             # if atualizardados=='Último dia':
 
                             # if st.button('Consultar'):
@@ -2355,7 +2355,7 @@ def main2():
                             my_bar.progress(100, text="Terminou")
 
                     # else:
-
+                    st.divider()
                     on2 = st.toggle('Consultar outra data')
                     if on2:
                         # st.divider()
