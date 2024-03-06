@@ -2471,11 +2471,11 @@ def main2():
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
         if entrou==1:
-            p = tabuleiro(title, 2, to_data,pt1,pt2)
+        p = tabuleiro(title, 2, to_data,pt1,pt2)
 
-            import streamlit.components.v1 as components
+        import streamlit.components.v1 as components
 
-            st.components.v1.html(p, height=2300, width=1700, scrolling=True)
+        st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 
         st.markdown("# Page 2 ❄️")
         
