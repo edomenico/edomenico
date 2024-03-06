@@ -2245,12 +2245,7 @@ def main():
                                     sep=',',
                                     decimal='.')
     
-    st.set_page_config(
-        page_title="Tabuleiro-Visualização de Metar CMA-GL",
-        page_icon="✅",
-        layout="wide",
-    )
-
+    
     atudados_area1=0
     atudados_area2=0
     area = ['Área 1', 'Área 2']
