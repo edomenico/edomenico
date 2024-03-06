@@ -69,7 +69,7 @@ def main2():
         global pt
 
         def trata_redemet(areasele):
-            import PySimpleGUI as sg
+            
             import matplotlib.pyplot as plt
             import matplotlib.dates as md
             import dateutil
