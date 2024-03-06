@@ -2478,8 +2478,7 @@ def main2():
             st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 
         st.markdown("# Page 2 ❄️")
-        st.session_state
-        main()
+        
 
     def page3():
         st.markdown("# Page 3 🎉")
