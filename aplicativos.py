@@ -2463,6 +2463,7 @@ def main2():
 
             st.write('Escolha o período para visualizar')
             to_data = st.date_input('Inicio:', start_date)
+            datai=to_data
             from_data = st.date_input('Fim:', end_date)
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
@@ -2471,7 +2472,7 @@ def main2():
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
         #if entrou==1:
-        p = tabuleiro(title, 2, to_data,pt1,pt2)
+        p = tabuleiro(title, 2, datai,pt1,pt2)
 
         import streamlit.components.v1 as components
 
