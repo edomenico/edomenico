@@ -1046,7 +1046,7 @@ def main():
                                           """)
                     else:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                   var mapping = {1: 28, 2: 29, 1: 1, 2: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                                                   var mapping = {1: 28, 2: 29, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
                                                                    return mapping[tick];
                                                               """)
                 elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
