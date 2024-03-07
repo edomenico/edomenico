@@ -2459,9 +2459,9 @@ def main2():
         title=''
         entrou=0
         with st.sidebar:
-            title = st.text_input('Escolha a estação', 'SBBE')
+            title = st.text_input('Escolha a estação', 'SBMQ')
 
-            st.write('Escolha o período para plotagem')
+            st.write('Escolha o período para visualizar')
             to_data = st.date_input('Inicio:', start_date)
             from_data = st.date_input('Fim:', end_date)
             if st.button('Iniciar'):
