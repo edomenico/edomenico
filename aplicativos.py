@@ -1035,7 +1035,7 @@ def main2():
                 if mesini == 2:
                     if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                               var mapping = {1: 28, 2: 1, 1: 2, 2: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                               var mapping = {1: 28, 2: 1, 2: 2, 3: 3, 4:4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9};
                                                return mapping[tick];
                                           """)
                     else:
@@ -2455,7 +2455,7 @@ def main2():
         st.markdown("# Page 2 ❄️")
         start_date = datetime.today()
         end_date = datetime.today()
-        to_date = datetime.today()
+        #to_date = datetime.today()
         title=''
         entrou=0
         with st.sidebar:
