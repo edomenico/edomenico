@@ -2287,6 +2287,7 @@ def main2():
             except Exception as err:
 
                 print(f"Unexpected {err=}, {type(err)=}")
+                source_code = ("ERRO - DADOS INCONSISTENTES - MODIFIQUE AS OPÇÕES E TENTE DE NOVO")
             return source_code
     def main_page():
 
