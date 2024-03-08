@@ -1,4 +1,5 @@
 import time  # to simulate a real time data, time loop
+import rosadosventos
 #import redemet
 import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
@@ -2484,6 +2485,7 @@ def main2():
 
     def page3():
         st.markdown("# Page 3 🎉")
+        rosadosventos.rosa
         st.sidebar.markdown("# Page 3 🎉")
 
     page_names_to_funcs = {
