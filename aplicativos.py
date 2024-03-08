@@ -3495,7 +3495,7 @@ def main2():
                               st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
                           else:
                               st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
-                st.markdown("# Page 3 🎉")
+            st.markdown("# Page 3 🎉")
             rosa()
         #st.sidebar.markdown("# Page 3 🎉")
 
