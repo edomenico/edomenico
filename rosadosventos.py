@@ -1010,10 +1010,10 @@ def rest():
                       st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
                   else:
                       st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
-    
-  if __name__ == '__main__':
+  st.session_state
+  #if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
-    main()
+  main()
     #else:
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
