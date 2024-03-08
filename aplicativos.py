@@ -2484,7 +2484,7 @@ def main2():
 
     def page3():
         st.markdown("# Page 3 🎉")
-        rosadosventos.rosa()
+        rosadosventos.rest()
         #st.sidebar.markdown("# Page 3 🎉")
 
     page_names_to_funcs = {
