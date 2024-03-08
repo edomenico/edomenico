@@ -1010,8 +1010,9 @@ def rosa():
                       st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
                   else:
                       st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
-  
- # if __name__ == '__main__':
+  st.session_state
+  main()
+#  if __name__ == '__main__':
  #     #if streamlit._is_running_with_streamlit:
  #     main()
       #else:
