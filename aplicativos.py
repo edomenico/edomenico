@@ -1,5 +1,5 @@
 import time  # to simulate a real time data, time loop
-import rosadosventos
+import rosadosventos.py
 #import redemet
 import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
