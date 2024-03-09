@@ -2290,7 +2290,8 @@ def main2():
                 print(f"Unexpected {err=}, {type(err)=}")
                 source_code = ("ERRO - DADOS INCONSISTENTES - MODIFIQUE AS OPÇÕES E TENTE DE NOVO")
             return source_code
-def page1():
+    def page2():
+    
         pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
@@ -2326,7 +2327,7 @@ def page1():
         st.markdown("# Page 2 ❄️")
         
 
-    def page2():
+    def page3():
        
         st.markdown("# Page 3 🎉")
         
