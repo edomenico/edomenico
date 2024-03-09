@@ -2308,9 +2308,9 @@ def main2():
         with st.sidebar:
             title = st.text_input('Escolha a estação','SBMQ')
             st.write('Escolha o período para visualizar')
-            to_data = st.date_input('Inicio:', start_date)
+            to_data = st.date_input('Inicio:', start_date,format="DD/MM/YYYY")
             datai=to_data
-            from_data = st.date_input('Fim:', end_date)
+            from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
                 my_bar = st.progress(0, text=progress_text)
@@ -2324,7 +2324,7 @@ def main2():
 
         st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 
-        st.markdown("# Page 2 ❄️")
+       # st.markdown("# Page 2 ❄️")
         
 
     def page3():
