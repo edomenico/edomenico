@@ -2258,6 +2258,11 @@ def main():
     start_date = datetime.today()
     end_date = datetime.today()
     start_datee = datetime.today()
+    st.set_page_config(
+        page_title="Tabuleiro - CMA-GL",
+        page_icon="✅",
+        layout="wide",
+    )
     with st.sidebar:
         pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
