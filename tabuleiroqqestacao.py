@@ -2330,9 +2330,9 @@ def main2():
 
     def page3():
        
-        st.markdown("# Page 3 🎉")
+        st.markdown("#Rosa dos Ventos - Em construção 🎉")
         
-        st.sidebar.markdown("# Page 3 🎉")
+        #st.sidebar.markdown("# Page 3 🎉")
     page_names_to_funcs = {
         "Page 1": page2,
         "Page 2": page3,
@@ -2340,6 +2340,10 @@ def main2():
 
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
     page_names_to_funcs[selected_page]()
-
+st.set_page_config(
+        page_title="Tabuleiro",
+        page_icon="✅",
+        layout="wide",
+    )
 st.session_state
 main2()
