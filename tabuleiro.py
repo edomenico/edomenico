@@ -723,6 +723,7 @@ def main():
         #         page_icon="✅",
         #         layout="wide",
         #     )
+        
        # barra_lateral = st.sidebar.empty()
         #area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
        # if area_seleciona == 'Área 1':
