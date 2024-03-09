@@ -194,7 +194,8 @@ def main2():
                         # campo 3 vento
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
                         if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
-                                'SWPI') > -1 or mensagem1[j].find('SWEI') > -1:
+                                'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
+                                or mensagem1[j].find('SNBR') > -1 or mensagem1[j].find('SNGI') > -1:
                             estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
                         #      GGGGGGGGG = 1
@@ -2334,11 +2335,11 @@ def main2():
         
         #st.sidebar.markdown("# Page 3 🎉")
     page_names_to_funcs = {
-        "Page 1": page2,
-        "Page 2": page3,
+        "Tabuleiro - Outros": page2,
+        "Rosa dos Ventos": page3,
     }
 
-    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
+    selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
     page_names_to_funcs[selected_page]()
 st.set_page_config(
         page_title="Tabuleiro - Outros",
