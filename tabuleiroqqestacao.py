@@ -2291,7 +2291,8 @@ def main2():
                 source_code = ("ERRO - DADOS INCONSISTENTES - MODIFIQUE AS OPÇÕES E TENTE DE NOVO")
             return source_code
     def page2():
-    
+        
+        
         pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
