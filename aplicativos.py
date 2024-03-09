@@ -2454,6 +2454,7 @@ def main2():
         #         sys.argv = ["streamlit", "run", sys.argv[0]]
         #         sys.exit(stcli.main())
     def page2():
+        
         pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
@@ -2495,12 +2496,7 @@ def main2():
         
         st.sidebar.markdown("# Page 3 🎉")
 
-    page_names_to_funcs = {
-        "Main Page": main_page,
-        "Page 2": page2,
-        "Page 3": page3,
-    }
-
+    
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
     page_names_to_funcs[selected_page]()
 
