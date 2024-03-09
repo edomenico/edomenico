@@ -2332,7 +2332,7 @@ def main2():
         st.markdown("# Page 3 🎉")
         
         st.sidebar.markdown("# Page 3 🎉")
-     page_names_to_funcs = {
+    page_names_to_funcs = {
         "Page 1": page2,
         "Page 2": page3,
     }
