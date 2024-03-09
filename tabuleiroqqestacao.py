@@ -2299,15 +2299,14 @@ def main2():
         pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
                                     sep=',',
                                     decimal='.')
-        st.markdown("# Page 2 ❄️")
+        #st.markdown("# Page 2 ❄️")
         start_date = datetime.today()
         end_date = datetime.today()
         #to_date = datetime.today()
         title=''
         entrou=0
         with st.sidebar:
-            title = st.text_input('Escolha a estação', 'SBMQ')
-
+            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
             st.write('Escolha o período para visualizar')
             to_data = st.date_input('Inicio:', start_date)
             datai=to_data
@@ -2331,6 +2330,7 @@ def main2():
     def page3():
        
         st.markdown("#Rosa dos Ventos - Em construção 🎉")
+        st.
         
         #st.sidebar.markdown("# Page 3 🎉")
     page_names_to_funcs = {
@@ -2341,7 +2341,7 @@ def main2():
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
     page_names_to_funcs[selected_page]()
 st.set_page_config(
-        page_title="Tabuleiro",
+        page_title="Tabuleiro - Outros",
         page_icon="✅",
         layout="wide",
     )
