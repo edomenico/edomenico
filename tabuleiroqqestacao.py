@@ -2330,7 +2330,7 @@ def main2():
     def page3():
        
         st.markdown("#Rosa dos Ventos - Em construção 🎉")
-        st.
+        
         
         #st.sidebar.markdown("# Page 3 🎉")
     page_names_to_funcs = {
