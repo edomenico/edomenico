@@ -2306,7 +2306,7 @@ def main2():
         title=''
         entrou=0
         with st.sidebar:
-            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
+            title = st.text_input('Escolha a estação','SBMQ')
             st.write('Escolha o período para visualizar')
             to_data = st.date_input('Inicio:', start_date)
             datai=to_data
