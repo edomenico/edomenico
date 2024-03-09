@@ -2259,6 +2259,12 @@ def main():
     end_date = datetime.today()
     start_datee = datetime.today()
     with st.sidebar:
+        pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                    sep=',',
+                                    decimal='.')
+        pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                    sep=',',
+                                    decimal='.')
         with st.container(border=True):
             on = st.toggle('Atualizar dados')
             if on:    
