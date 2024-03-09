@@ -188,8 +188,8 @@ def main2():
                         if j == 2:
                             # data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
                             data_hora = mensagem1[j][2:4] + ':00'  # + mensagem1[j][4:6]
-                            if estacao[k] == 'SBFN' and data_hora == "20:00":
-                                GGGGGGGGG = 1
+                            #if estacao[k] == 'SBFN' and data_hora == "20:00":
+                            #    GGGGGGGGG = 1
 
                         # campo 3 vento
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
