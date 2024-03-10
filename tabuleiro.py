@@ -2288,8 +2288,8 @@ def main():
                 #
                 #     my_bar.progress(100, text="Terminou")
                 too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                to_data = st.date_input('Inicio:', start_date,format="DD/MM/YYYY")
-                from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
+                to_data = st.date_input('Inicio:', start_date)
+                from_data = st.date_input('Fim:', end_date)
         
         
                 if st.button('Atualizar agora'):
@@ -2313,7 +2313,7 @@ def main():
                 if selecionaperiodo=='Últimos 10 dias':
                     datainicial = datetime.utcnow() - timedelta(9)
                 else:
-                    too_data = st.date_input('Dia Inicial:', start_datee,format="DD/MM/YYYY")
+                    too_data = st.date_input('Dia Inicial:', start_datee)
                     datainicial=too_data
                    # datainicial= datainicial-timedelta(9)
             else:
