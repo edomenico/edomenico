@@ -2269,7 +2269,7 @@ def main():
                                     sep=',',
                                     decimal='.')
         with st.container(border=True):
-            on = st.toggle('Atualizar dados')
+            on = st.toggle('Atualizar dados das duas áreas')
             if on:    
                # st.write('Atualização dos Dados(das 2 áreas)')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
