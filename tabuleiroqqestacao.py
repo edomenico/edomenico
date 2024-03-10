@@ -2307,14 +2307,14 @@ def main2():
         title=''
         entrou=0
         with st.sidebar:
-            title = st.text_input('Escolha a estação','SBMQ')
+            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
             st.write('Escolha o período para visualizar')
             to_data = st.date_input('Inicio:', start_date,format="DD/MM/YYYY")
             datai=to_data
             from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
-                my_bar = st.progress(0, text=progress_text)
+                my_bar = st.progress(50, text=progress_text)
                 pt = rest(1, to_data, from_data, title)
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
