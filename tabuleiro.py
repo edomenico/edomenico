@@ -2269,7 +2269,7 @@ def main():
                                     sep=',',
                                     decimal='.')
         with st.container(border=True):
-            st.write('Visualização dos dados')
+            st.write('Gerenciamento dos dados')
             on = st.toggle('Atualizar dados das duas áreas')
             if on:    
                # st.write('Atualização dos Dados(das 2 áreas)')
@@ -2323,7 +2323,7 @@ def main():
                    # datainicial= datainicial-timedelta(9)
             else:
                 datainicial = datetime.utcnow() - timedelta(9)
-            st.divider()
+            #st.divider()
             
             st.write('Visualização dos dados')
             
