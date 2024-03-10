@@ -2271,7 +2271,7 @@ def main():
         with st.container(border=True):
             on = st.toggle('Atualizar dados')
             if on:    
-               # st.write('Atualização dos Dados')
+               # st.write('Atualização dos Dados(das 2 áreas)')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
         
                 # if st.button('Último dia'):
@@ -2291,7 +2291,7 @@ def main():
                 from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
         
         
-                if st.button('Selecionar'):
+                if st.button('Atualizar agora'):
                 #if atualizardados=='Último dia':
         
         
