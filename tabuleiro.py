@@ -2306,7 +2306,7 @@ def main():
                     pt = rest(2,to_data,from_data)
         
                     my_bar.progress(100, text="Terminou")
-            st.divider()
+            #st.divider()
             on2 = st.toggle('Consultar outro período')
             if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/10/23)'],horizontal=True)
