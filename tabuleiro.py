@@ -45,7 +45,6 @@ from bokeh.embed import file_html
 
 
 def main():
-    
     def rest(areas,to_data,from_data):
         import re
         from bs4 import BeautifulSoup
@@ -719,7 +718,6 @@ def main():
         #         page_icon="✅",
         #         layout="wide",
         #     )
-        
        # barra_lateral = st.sidebar.empty()
         #area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
        # if area_seleciona == 'Área 1':
@@ -2260,19 +2258,11 @@ def main():
     start_date = datetime.today()
     end_date = datetime.today()
     start_datee = datetime.today()
-    
     with st.sidebar:
-        pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
-                                    sep=',',
-                                    decimal='.')
-        pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
-                                    sep=',',
-                                    decimal='.')
         with st.container(border=True):
-            st.write('Gerenciar dados')
-            on = st.toggle('Atualizar dados das duas áreas')
+            on = st.toggle('Atualizar dados')
             if on:    
-               # st.write('Atualização dos Dados(das 2 áreas)')
+               # st.write('Atualização dos Dados')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
         
                 # if st.button('Último dia'):
@@ -2292,7 +2282,7 @@ def main():
                 from_data = st.date_input('Fim:', end_date)
         
         
-                if st.button('Atualizar agora'):
+                if st.button('Selecionar'):
                 #if atualizardados=='Último dia':
         
         
@@ -2306,7 +2296,7 @@ def main():
                     pt = rest(2,to_data,from_data)
         
                     my_bar.progress(100, text="Terminou")
-            #st.divider()
+            st.divider()
             on2 = st.toggle('Consultar outro período')
             if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/10/23)'],horizontal=True)
@@ -2381,17 +2371,10 @@ def main():
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
 #if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
- #   main()
+    #main()
     #else:
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
-
-st.set_page_config(
-        page_title="Tabuleiro - CMA-GL",
-        page_icon="✅",
-        layout="wide",
-    )
 st.session_state
-
 main()
