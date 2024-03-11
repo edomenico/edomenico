@@ -1145,8 +1145,8 @@ def main():
         #areatrab = 1  # dado entrada
         # datainicio='27/03/20'#dado entrada
 
-        #datainicio = datetime.utcnow() - timedelta(9)
-        datainicio = datainicio.strftime('%d/%m/%y')
+        datainicio = datetime.utcnow() - timedelta(9)
+        #datainicio = datainicio.strftime('%d/%m/%y')
 
         if areatrab == 1:
           #  estacao_area = 'SBJR,SBES,SBME,SBCP,SBFS,SBRJ,SBCB,SBVT,SBPS,SBGL,SBNT,SBMS,SBAC,SBJE,SBPB,SBAR,SBMO,SBRF,SBJP,SBSG,SBFZ,SBSL,SBTE,SBJU,SBKG,SBFN,SBPL,SBPJ'
