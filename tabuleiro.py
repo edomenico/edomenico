@@ -2369,12 +2369,12 @@ def main():
             
     #barra_lateral = st.sid,ebar.empty()
    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
-#if __name__ == '__main__':
+if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
-    #main()
+    main()
     #else:
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
-st.session_state
-main()
+#st.session_state
+#main()
