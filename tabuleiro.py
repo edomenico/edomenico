@@ -2269,7 +2269,7 @@ def main():
                                     sep=',',
                                     decimal='.')
         with st.container(border=True):
-            st.write('Visualização dos dados')
+            st.write('Gerenciar dados')
             on = st.toggle('Atualizar dados das duas áreas')
             if on:    
                # st.write('Atualização dos Dados(das 2 áreas)')
