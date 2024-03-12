@@ -2259,10 +2259,11 @@ def main():
     end_date = datetime.today()
     start_datee = datetime.today()
     with st.sidebar:
+        st.write('Gerenciamento dos dados')
         with st.container(border=True):
-            on = st.toggle('Atualizar dados')
+            on = st.toggle('Atualizar dados (Área 1 e Área 2)')
             if on:    
-               # st.write('Atualização dos Dados')
+               # st.write('Atualização dos Dados (Área 1 e Área 2)')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
         
                 # if st.button('Último dia'):
@@ -2282,7 +2283,7 @@ def main():
                 from_data = st.date_input('Fim:', end_date)
         
         
-                if st.button('Selecionar'):
+                if st.button('Atualizar'):
                 #if atualizardados=='Último dia':
         
         
@@ -2309,10 +2310,10 @@ def main():
             else:
                 datainicial = datetime.utcnow() - timedelta(9)
         #st.divider()
-
+        st.write('Visualização dos dados')
         with st.container(border=True):
            # st.divider()
-            st.write('Visualização dos dados')
+            
             
             
             
