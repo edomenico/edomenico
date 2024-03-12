@@ -2261,7 +2261,7 @@ def main():
     with st.sidebar:
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
-            on = st.toggle('Atualizar dados (Área 1 e Área 2)')
+            on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
             if on:    
                # st.write('Atualização dos Dados (Área 1 e Área 2)')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
