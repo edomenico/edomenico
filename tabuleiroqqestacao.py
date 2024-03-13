@@ -611,7 +611,7 @@ def main2():
         pdf = redemet_baixa(1, areasel, to_data, from_data, estacao)
 
         pdff = trata_redemet(areaprev)
-        edited_df = st.data_editor(pdff)
+       # edited_df = st.data_editor(pdff)
         return pdff
 
     def _data_url_to_image(data_url: str) -> Image:
