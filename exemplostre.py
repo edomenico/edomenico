@@ -1008,7 +1008,15 @@ def main():
                 if inicio == 'Estação fechada neste horário':
                     st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
                 else:
-                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.markdown(
+                    """
+            
+                        e-mail: edomenico813@gmail.com
+
+           
+                    """
+                )
 
 if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
