@@ -1022,108 +1022,11 @@ def main():
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
 st.set_page_config(
-        page_title="Rosa dos Ventos - CMA-GL",
-        page_icon="✅",
-        layout="wide",
-    )
+    page_title="Rosa dos Ventos - CMA-GL",
+    page_icon="✅",
+    layout="wide",
+)
 
 st.session_state
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
