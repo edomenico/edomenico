@@ -2319,6 +2319,14 @@ def main2():
                 pt = rest(1, to_data, from_data, title)
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
+            st.markdown(
+            """
+            
+            e-mail: edomenico813@gmail.com
+
+           
+            """
+            )
         #if entrou==1:
         p = tabuleiro(title, 3, datai,pt1,pt2)
 
