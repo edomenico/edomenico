@@ -650,11 +650,7 @@ def main():
     import streamlit as st  #
     from datetime import datetime, timedelta
     from plotly.subplots import make_subplots
-    st.set_page_config(
-        page_title="Rosa dos Ventos - CMA-GL",
-        page_icon="✅",
-        layout="wide",
-    )
+    
 
     # read csv from a github repo
     #dataset_url = "https://raw.githubusercontent.com/Lexie88rus/bank-marketing-analysis/master/bank.csv"
@@ -1018,15 +1014,21 @@ def main():
                     """
                 )
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
-    main()
+   # main()
     #else:
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
+st.set_page_config(
+        page_title="Rosa dos Ventos - CMA-GL",
+        page_icon="✅",
+        layout="wide",
+    )
 
-
+st.session_state
+main()
 
 
 
