@@ -1014,9 +1014,10 @@ def main():
                     """
                 )
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
+    
     #if streamlit._is_running_with_streamlit:
-   # main()
+    main()
     #else:
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
@@ -1027,6 +1028,6 @@ def main():
  #   layout="wide",
 #)
 
-st.session_state
-main()
+#st.session_state
+#main()
 
