@@ -3,7 +3,6 @@ import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
 import sys
-import streamlit as st
 #from streamlit.web import cli as stcli
 
 import streamlit
@@ -651,7 +650,11 @@ def main():
     import streamlit as st  #
     from datetime import datetime, timedelta
     from plotly.subplots import make_subplots
-    
+    st.set_page_config(
+        page_title="Rosa dos Ventos - CMA-GL",
+        page_icon="✅",
+        layout="wide",
+    )
 
     # read csv from a github repo
     #dataset_url = "https://raw.githubusercontent.com/Lexie88rus/bank-marketing-analysis/master/bank.csv"
@@ -1005,7 +1008,7 @@ def main():
                 if inicio == 'Estação fechada neste horário':
                     st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :disappointed:')
                 else:
-                    st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
+                st.subheader('Fonte: METAR ---- Início: ' + str(inicio) + ' - Fim: ' + str(fim) + ' :sunglasses:')
                 st.markdown(
                     """
             
@@ -1015,20 +1018,11 @@ def main():
                     """
                 )
 
-#if __name__ == '__main__':
-    
+if __name__ == '__main__':
     #if streamlit._is_running_with_streamlit:
-    #main()
+    main()
     #else:
     #    sys.argv = ["streamlit", "run", sys.argv[0]]
     #    #app.run_server(debug=True, port=8881)
       #  sys.exit(stcli.main())
-st.set_page_config(
-    page_title="Rosa dos Ventos - CMA-GL",
-    page_icon="✅",
-    layout="wide",
-)
-
-st.session_state
-#main()
 
