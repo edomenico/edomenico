@@ -680,7 +680,7 @@ def main2():
                     datacorfs = datacorfs[0:10] + ' 23:00'
     
                     # espera 5s
-                    time.sleep(15)
+                    time.sleep(30)
                     # tira a checkbox para mensagem recente
                     #driver.find_element(By.ID, url) 
                     el = browser.find_element(By.ID, "consulta_recente")
