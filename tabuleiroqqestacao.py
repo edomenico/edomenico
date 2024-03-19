@@ -652,89 +652,92 @@ def main2():
                 # nome = "SBSC,SBAR,SBBH,SBBR,SBBV,SBCB,SBCG,SBCP,SBCT,SBCY,SBEN,SBES,SBFL,SBFN,SBFS,SBFZ,SBGL,SBGO,SBGR,SBIL,SBJF,SBJP,SBLB,SBME,SBMM,SBMO,SBMQ,SBNF,SBNT,SBPA,SBPJ,SBPV,SBRB,SBRF,SBRJ,SBSL,SBSP,SBST,SBSV,SBTE,SBMN,SBBE,SBVT,SBSG"
                 nome = estacao1
                 for i in range(intervalo + 1):
-                    # abre o Firefox
-                    #browser = webdriver.Firefox(executable_path='geckodriver.exe')
-                    # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
-                    # browser = webdriver.Chrome(executable_path='chrome.EXE')
-                    # chama a página da redemet para consulta
+                    try:
+                        # abre o Firefox
+                        #browser = webdriver.Firefox(executable_path='geckodriver.exe')
+                        # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
+                        # browser = webdriver.Chrome(executable_path='chrome.EXE')
+                        # chama a página da redemet para consulta
+        
+                        # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
+                        browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                        #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                        # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
+                        # if (datahi.day + i)==31:
+                        if i != 0:
+                            datacoris = datahini + timedelta(days=i)
+                            datacoris = datacoris + timedelta(minutes=0)
+                            datacorfs = datacoris + timedelta(hours=23)
+                            # datacori=datahf
+                        else:
+                            # datacori = datahini + timedelta(days=i)
+                            datacoris = datahini + timedelta(minutes=0)
+                            datacorfs = datahini + timedelta(hours=23)
     
-                    # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                    browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                    #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                    # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
-                    # if (datahi.day + i)==31:
-                    if i != 0:
-                        datacoris = datahini + timedelta(days=i)
-                        datacoris = datacoris + timedelta(minutes=0)
-                        datacorfs = datacoris + timedelta(hours=23)
-                        # datacori=datahf
-                    else:
-                        # datacori = datahini + timedelta(days=i)
-                        datacoris = datahini + timedelta(minutes=0)
-                        datacorfs = datahini + timedelta(hours=23)
-
-                    datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
-                    # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-                    # datacorf=  datacori + timedelta(hours=23)
-                    datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
-                    datacorfs = datacorfs[0:10] + ' 23:00'
-    
-                    # espera 5s
-                    time.sleep(30)
-                    # tira a checkbox para mensagem recente
-                    #driver.find_element(By.ID, url) 
-                    el = browser.find_element(By.ID, "consulta_recente")
-                    el.click()
-                    #browser.find_element_by_id("consulta_recente").click()
-    
-                    # preenche o nome das estações para consulta
-                    
-                    element = browser.find_element(By.ID, "msg_localidade")
-                    element.send_keys(nome)
-    
-                    # preenche a data inicial e final
-    
-                    element = browser.find_element(By.ID, "consulta_data_ini").clear()
-                    
-                    element = browser.find_element(By.ID,"consulta_data_ini").click()
-                    element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
-                    element = browser.find_element(By.ID,"consulta_data_fim").clear()
-                    element = browser.find_element(By.ID,"consulta_data_fim").click()
-                    element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
-    
-                    # envia a consulta
-                    botao = browser.find_element(By.ID,"consulta_localidade")
-                    time.sleep(20)
-                    botao.click()
-    
-                    # espera 10s
-                    time.sleep(20)
-    
-                    ## coloca todo o resultado numa página
-                    # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
-                    # select_fr.select_by_index(3)
-    
-                    table = browser.find_element(By.ID,'msg_resultado')
-    
-                    # df = pd.read_html(str(table))
-                    # print(table)
-                    table_html = table.get_attribute('outerHTML')
-                    # print(df[0])
-    
-                    # print(table)
-                    if i == 0:
-                        df = pd.read_html(str(table_html))
-                        df = df[0]
-                    else:
-                        df2 = pd.read_html(str(table_html))
-                        df2 = df2[0]
-    
-                        df = df.append(df2, ignore_index=True)
-                        print(df)
-    
-                    # print(df.loc[(df["Localidade"] == 'SBSC')])
-                    df.to_csv("metar.csv", header=True)
-                    #browser.quit()
+                        datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
+                        # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
+                        # datacorf=  datacori + timedelta(hours=23)
+                        datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
+                        datacorfs = datacorfs[0:10] + ' 23:00'
+        
+                        # espera 5s
+                        time.sleep(30)
+                        # tira a checkbox para mensagem recente
+                        #driver.find_element(By.ID, url) 
+                        el = browser.find_element(By.ID, "consulta_recente")
+                        el.click()
+                        #browser.find_element_by_id("consulta_recente").click()
+        
+                        # preenche o nome das estações para consulta
+                        
+                        element = browser.find_element(By.ID, "msg_localidade")
+                        element.send_keys(nome)
+        
+                        # preenche a data inicial e final
+        
+                        element = browser.find_element(By.ID, "consulta_data_ini").clear()
+                        
+                        element = browser.find_element(By.ID,"consulta_data_ini").click()
+                        element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
+                        element = browser.find_element(By.ID,"consulta_data_fim").clear()
+                        element = browser.find_element(By.ID,"consulta_data_fim").click()
+                        element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
+        
+                        # envia a consulta
+                        botao = browser.find_element(By.ID,"consulta_localidade")
+                        time.sleep(20)
+                        botao.click()
+        
+                        # espera 10s
+                        time.sleep(20)
+        
+                        ## coloca todo o resultado numa página
+                        # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
+                        # select_fr.select_by_index(3)
+        
+                        table = browser.find_element(By.ID,'msg_resultado')
+        
+                        # df = pd.read_html(str(table))
+                        # print(table)
+                        table_html = table.get_attribute('outerHTML')
+                        # print(df[0])
+        
+                        # print(table)
+                        if i == 0:
+                            df = pd.read_html(str(table_html))
+                            df = df[0]
+                        else:
+                            df2 = pd.read_html(str(table_html))
+                            df2 = df2[0]
+        
+                            df = df.append(df2, ignore_index=True)
+                            print(df)
+        
+                        # print(df.loc[(df["Localidade"] == 'SBSC')])
+                        df.to_csv("metar.csv", header=True)
+                        #browser.quit()
+                except:
+                    continue
                 print(df)
                 # df = df.drop(columns=['Unnamed: 0'])
                 os.chdir("/mount/src/edomenico/area1")
