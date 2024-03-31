@@ -908,7 +908,7 @@ def main():
                                                                     return mapping[tick];
                                                                """)
 
-                elif mesini == 1 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 31};
                                            return mapping[tick];
