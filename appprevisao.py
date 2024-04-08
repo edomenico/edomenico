@@ -93,7 +93,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
 
-    st.set_page_config(page_title='Previsão', page_icon='	:satellite:', layout='wide',
+    st.set_page_config(page_title='Previsão', page_icon=':satellite:', layout='wide',
                        initial_sidebar_state='expanded')
 
     # Page header
