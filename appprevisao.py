@@ -93,8 +93,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
 
-    st.set_page_config(page_title='Previsão', page_icon=':satellite:', layout='wide',
-                       initial_sidebar_state='expanded')
+    
 
     # Page header
     st.title("App Previsão Tempo:satellite:")
@@ -199,5 +198,12 @@ def main():
 #    else:
  #       sys.argv = ["streamlit", "run", sys.argv[0]]
  #       sys.exit(stcli.main())
+#st.set_page_config(
+#        page_title="Previsão - CMA-GL",
+ #       page_icon="✅",
+  #      layout="wide",
+  #  )
+st.set_page_config(page_title='Previsão', page_icon=':satellite:', layout='wide',
+                       initial_sidebar_state='expanded')
 st.session_state
 main()
