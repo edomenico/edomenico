@@ -49,7 +49,7 @@ def sort_data(weather_data):
 def authenticate(lat, lon):
     """Function to request information from OpenWeatherMap API giving the necessary details"""
     try:
-        API_KEY = '6735133fcb33d07e90beaff802fde5a0'
+        API_KEY = st.secrets['API_KEY']
         response = requests.get(f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=metric&lang=pt_br&appid={API_KEY}")
         if not response.status_code == 200:
             st.error("Failed to get data. Reason: ", response.json()['message'])
