@@ -129,8 +129,8 @@ def main():
 
 
         show_map = st.sidebar.checkbox('Mostrar mapa')
-        st.divider()
-        st.markdown(
+        st.sidebar.divider()
+        st.sidebar.markdown(
         """
             
         e-mail: edomenico813@gmail.com
