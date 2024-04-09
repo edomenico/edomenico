@@ -129,6 +129,15 @@ def main():
 
 
         show_map = st.sidebar.checkbox('Mostrar mapa')
+        st.divider()
+        st.markdown(
+        """
+            
+        e-mail: edomenico813@gmail.com
+
+           
+        """
+    )
 
     if button or city:
         if not city:
@@ -193,15 +202,7 @@ def main():
 
             with st.expander(label="Mostrar dados:"):
                 st.table(df)
-            st.divider()
-            st.markdown(
-            """
-            
-            e-mail: edomenico813@gmail.com
-
            
-            """
-        )
 #if __name__ == '__main__':
 #    if runtime.exists():
 #        main()
