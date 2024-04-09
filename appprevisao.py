@@ -193,6 +193,15 @@ def main():
 
             with st.expander(label="Mostrar dados:"):
                 st.table(df)
+            st.divider()
+            st.markdown(
+            """
+            
+            e-mail: edomenico813@gmail.com
+
+           
+            """
+        )
 #if __name__ == '__main__':
 #    if runtime.exists():
 #        main()
