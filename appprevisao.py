@@ -169,7 +169,7 @@ def main():
         with st.container():
 
             st.header(f"{city.capitalize().upper()}, {df['país'].iloc[0]} {emoji(df['tempo'].iloc[0])}")
-            st.subheader(str(df['timestamp'].iloc[0])+'UTC')
+            st.subheader(str(df['timestamp'].iloc[0])[0:16]+'UTC')
             col1, col2, col3 = st.columns(3)
             with col1:
                 col1.metric("Temperatura(°C)", f"{round(df['temp'].iloc[0], 1)}")
