@@ -7,6 +7,7 @@ import baixaamodeloNovometeograma
 
 def lookup_coord(city_name,usu):
     """Function to lookup the names of city"""
+    print('chegou aqui')
     if usu==1:
         df = pd.read_csv("cities_transformed3.csv")
     else:
