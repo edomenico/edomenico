@@ -311,11 +311,7 @@ def main():
 
                 with st.expander(label="Mostrar dados:"):
                     st.table(df)
-if __name__ == '__main__':
-    if runtime.exists():
-        main()
-    else:
-
-
-        sys.argv = ["streamlit", "run", sys.argv[0]]
-        sys.exit(stcli.main())
+st.set_page_config(page_title='Previsão', page_icon=':satellite:', layout='wide',
+                       initial_sidebar_state='expanded')
+st.session_state
+main()
