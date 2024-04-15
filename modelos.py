@@ -217,6 +217,7 @@ def main():
         if button or city:
             if not city:
                 pass
+            print('cidade',city)
             result, lat, lon = novo_projeto2.search2(city, usu)
             # st.write(result)
             df = pd.DataFrame(result)
