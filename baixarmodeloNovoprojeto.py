@@ -99,6 +99,7 @@ def Scraper(estacao):
         chrome_options.add_argument("--headless")
         print('chegou aqui 666')
         driver = webdriver.Chrome(options=chrome_options)
+        wait = WebDriverWait(driver, 20)
         print('chegou aqui 7')
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
