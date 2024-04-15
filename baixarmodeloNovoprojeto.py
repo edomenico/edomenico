@@ -94,10 +94,11 @@ def Scraper(estacao):
 
         print('chegou aqui 4444')
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
-
-        driver = webdriver.Chrome(options=chrome_options)
         print('chegou aqui 5')
+        chrome_options.add_argument("--headless")
+         print('chegou aqui 5')
+        driver = webdriver.Chrome(options=chrome_options)
+        
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
             try:
