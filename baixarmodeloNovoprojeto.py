@@ -7,6 +7,19 @@ from time import sleep
 from datetime import datetime,timedelta
 from datetime import date
 from pytz import timezone
+import re
+from bs4 import BeautifulSoup
+from selenium import webdriver
+import pandas as pd
+from datetime import datetime, timedelta
+import datetime
+import time
+        
+# Set up the Chrome driver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 def inicio():
 
 
@@ -72,19 +85,7 @@ def qnuvem(s):
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
 def Scraper(estacao):
 
-        import re
-        from bs4 import BeautifulSoup
-        from selenium import webdriver
-        import pandas as pd
-        from datetime import datetime, timedelta
-        import datetime
-        import time
         
-        # Set up the Chrome driver
-        from selenium.webdriver.chrome.options import Options
-        from selenium.webdriver.common.by import By
-        from selenium.webdriver.support.wait import WebDriverWait
-        from selenium.webdriver.support import expected_conditions as EC
         
 
 
