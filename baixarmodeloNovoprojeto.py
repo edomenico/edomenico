@@ -93,7 +93,7 @@ def Scraper(estacao):
        # driver = webdriver.Firefox()
         # self.driver.set_window_size(1120, 550)
 
-        print('chegou aqui 44')
+        print('chegou aqui 444')
         chrome_options = Options()
         chrome_options.add_argument("--headless")
 
