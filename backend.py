@@ -39,7 +39,7 @@ def sort_data(weather_data):
             visibilidade=weather_data['list'][i]['visibility']
         else:
             visibilidade = np.nan
-        visibilidade=weather_data['list'][i]['visibility']
+        #visibilidade=weather_data['list'][i]['visibility']
         #chuva=weather_data['list'][i]['rain']['3h']
         weather_status = weather_data['list'][i]['weather'][0]['main']
         extracted_data.append(
