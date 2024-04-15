@@ -16,7 +16,12 @@ from pytz import timezone
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
 def Scraper(estacao,link,horazulu):
-        driver = webdriver.Firefox()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        
+            # Create the driver with the options
+        driver = webdriver.Chrome(options=chrome_options)
+        
 
 
         for jj in range(0,1,1):
