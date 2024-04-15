@@ -78,7 +78,7 @@ def authenticate(city):
     """Function to request information from OpenWeatherMap API giving the necessary details"""
     #try:
 
-
+    print('chegou aqui 2')
 
 
     link,data,horazulu=baixarmodeloNovoprojeto.Scraper(city)
