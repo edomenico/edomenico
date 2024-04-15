@@ -79,9 +79,10 @@ def Scraper(estacao):
         # self.driver.set_window_size(1120, 550)
 
 
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
 
-
-        driver = webdriver.Firefox()
+        driver = webdriver.Chrome(options=chrome_options)
 
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
