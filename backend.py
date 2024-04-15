@@ -36,10 +36,10 @@ def sort_data(weather_data):
         wdir=weather_data['list'][i]['wind']['deg']
         gust=weather_data['list'][i]['wind']['gust']*2
         if 'visibility' in weather_data['list'][i]:
-            visibilidade=weather_data['list'][i]['visibility']
+            visibilidade=str(weather_data['list'][i]['visibility'])
         else:
-            visibilidade = np.nan
-        #visibilidade=weather_data['list'][i]['visibility']
+            visibilidade= 'Nan'
+            #visibilidade=weather_data['list'][i]['visibility']
         #chuva=weather_data['list'][i]['rain']['3h']
         weather_status = weather_data['list'][i]['weather'][0]['main']
         extracted_data.append(
