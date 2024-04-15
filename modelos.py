@@ -311,6 +311,5 @@ def main():
 
                 with st.expander(label="Mostrar dados:"):
                     st.table(df)
-st.set_page_config(page_title='Previsão', page_icon=':satellite:', layout='wide',initial_sidebar_state='expanded')
-st.session_state
+
 main()
