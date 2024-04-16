@@ -166,7 +166,7 @@ def Scraper(estacao):
                     print ('chegou aqui 12 ')
                     
                         
-                    s = BeautifulSoup(str(browser.page_source), "html.parser")
+                    s = BeautifulSoup(browser.page_source, "html.parser")
                     print('chegou aqui 13')
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
