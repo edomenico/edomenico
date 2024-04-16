@@ -49,7 +49,7 @@ def Scraper(estacao,link,horazulu):
                     print('Loading...')
                     print('chegou aqui b22')
                     driver.get(link1)
-                    wait = WebDriverWait(driver, 10)
+                    wait = WebDriverWait(driver, 20)
                     print('chegou aqui b33')
                     html = driver.page_source
                     forecast = {}
