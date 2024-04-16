@@ -102,8 +102,8 @@ def Scraper(estacao):
         chrome_options.add_argument("--headless")
          
         print('chegou aqui 666')
+       # browser = webdriver.Chrome(options=chrome_options)
         browser = webdriver.Chrome(options=chrome_options)
-        browser = get_driver()
         wait = WebDriverWait(browser, 20)
         print('chegou aqui 7')
         #for no in range(0, len(arqi), 1):
@@ -339,7 +339,7 @@ def Scraper(estacao):
                 df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
             except:
                 continue
-        driver.quit()
+        browser.quit()
         return link,df1,horazulu
 
 
