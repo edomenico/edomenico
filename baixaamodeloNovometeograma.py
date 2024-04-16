@@ -47,7 +47,7 @@ def Scraper(estacao,link,horazulu):
                     #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                     #horazulu=3
                     print('Loading...')
-                    print('chegou aqui b22')
+                    print('chegou aqui b222')
                     driver.get(link1)
                     wait = WebDriverWait(driver, 20)
                     print('chegou aqui b33')
