@@ -1,4 +1,5 @@
 import requests
+from requests.api import options
 import pandas as pd
 import streamlit as st
 import urllib.parse
@@ -124,20 +125,7 @@ def Scraper(estacao):
 
 
 
-       # driver = webdriver.Firefox()
-        # self.driver.set_window_size(1120, 550)
-
-        print('chegou aqui 4444')
-        chrome_options = Options()
-        print('chegou aqui 5')
-        chrome_options.add_argument("--headless")
-         
-        print('chegou aqui 666')
-       # browser = webdriver.Chrome(options=chrome_options)
-        browser = webdriver.Chrome(options=chrome_options)
-        wait = WebDriverWait(browser, 20)
-        print('chegou aqui 7')
-        #for no in range(0, len(arqi), 1):
+       
         for jj in range(0,1,1):
             try:
                 print('chegou aqui 8')
@@ -157,7 +145,9 @@ def Scraper(estacao):
                     print('Loading...')
                     print('chegou aqui 11')
                     print('chegou aqui 11 ',link)
-                    browser.get(link)
+                    html = requests.get(url=str(link))
+                    dhtmt=html.text
+                    #browser.get(link)
                     
 
                     forecast = {}
@@ -168,7 +158,7 @@ def Scraper(estacao):
                     print ('chegou aqui 121 ')
                     
                         
-                    s = BeautifulSoup(browser.page_source, 'html.parser')
+                    s = BeautifulSoup(dhtml, 'html.parser')
                     print('chegou aqui 13')
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
@@ -380,7 +370,7 @@ def Scraper(estacao):
                 df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
             except:
                 continue
-        browser.quit()
+        #browser.quit()
         return link,df1,horazulu
 
 
