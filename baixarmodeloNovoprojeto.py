@@ -97,10 +97,10 @@ def Scraper(estacao):
                     arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                 arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
                 arqi = arqi.reset_index(drop=True)
-
+                print('chegou aqui b22')
                 for no in range(0, 1, 1):
 
-                    link = arqi['endereco'][no]
+                    link = str(arqi['endereco'][no])
                     horazulu=arqi['horzulu'][no]
                     print('Loading...')
                     driver.get(link)
