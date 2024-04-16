@@ -149,7 +149,7 @@ def Scraper(estacao):
                     #html = requests.get(link).content
                     
                     html = requests.get(link)
-                    s = BeautifulSoup(html.text, 'html.parser')
+                    s = BeautifulSoup(html.content, 'html.parser')
                     #if html.status_code in [200]:
                             
                      #       print('link ok')
