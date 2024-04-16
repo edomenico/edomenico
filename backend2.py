@@ -5,8 +5,7 @@ import baixarmodeloNovoprojeto
 import baixaamodeloNovometeograma
 
 
-import re
-import urllib.parse
+
 import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup
