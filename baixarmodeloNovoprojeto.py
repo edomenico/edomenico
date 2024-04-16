@@ -146,6 +146,9 @@ def Scraper(estacao):
                     print('chegou aqui 11')
                     print('chegou aqui 11 ',link)
                     html = requests.get(url=(link))
+                    if html.status_code in [200]:
+                            
+                            print('link ok')
                     dhtmt=html
                     #browser.get(link)
                     
