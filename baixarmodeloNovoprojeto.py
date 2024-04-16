@@ -164,7 +164,7 @@ def Scraper(estacao):
 
                     sleep(12)
                     print ('chegou aqui 12 ')
-                    print (browser.page_source)
+                    
                         
                     s = BeautifulSoup(str(browser.page_source), "html.parser")
                     print('chegou aqui 13')
