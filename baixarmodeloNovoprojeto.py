@@ -8,7 +8,7 @@ from datetime import datetime,timedelta
 from datetime import date
 from pytz import timezone
 import re
-from bs4 import BeautifulSoup
+
 
 import pandas as pd
 from datetime import datetime, timedelta
