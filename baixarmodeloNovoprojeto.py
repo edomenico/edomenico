@@ -111,7 +111,7 @@ def Scraper(estacao, proxy: str=None):
         #chrome_options = Options()
         print('chegou aqui 5')
         #chrome_options.add_argument("--headless")
-        webdriver.Chrome(options=get_webdriver_options(proxy=proxy)) as driver:
+        driver=webdriver.Chrome(options=get_webdriver_options(proxy=proxy)) 
         print('chegou aqui 666')
         driver = webdriver.Chrome(options=chrome_options)
         wait = WebDriverWait(driver, 20)
