@@ -145,7 +145,7 @@ def Scraper(estacao):
                     print('Loading...')
                     print('chegou aqui 11')
                     print('chegou aqui 11 ',link)
-                    html = requests.get(link)
+                    html = requests.get(link).content
                     if html.status_code in [200]:
                             
                             print('link ok')
