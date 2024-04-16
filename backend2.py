@@ -448,9 +448,10 @@ def authenticate(city):
 
 
     link,data,horazulu=baixarmodeloNovoprojeto(city)
+    print('chegou aqui 3')
     data1=baixaamodeloNovometeograma.Scraper(city,link,horazulu)
 
-    print('chegou aqui 3')
+   
 
     #except Exception as e:
     #    st.error(f"Could not get the data because {e}. Exiting...")
