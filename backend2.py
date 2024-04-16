@@ -137,6 +137,7 @@ def baixarmodeloNovoprojeto(estacao):
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
             try:
+                print('chegou aqui 8')
 
                 if jj==0:
                     arqi = pd.read_csv('estacaomodeloecmwf.csv', encoding='iso-8859-1', delimiter=';')
@@ -235,7 +236,7 @@ def baixarmodeloNovoprojeto(estacao):
                                         wdir.append(apenasDigitos)
                         except:
                             continue
-                    print('chegou aqui 8')
+                    
 
                     print(data)
                     print(hora)
