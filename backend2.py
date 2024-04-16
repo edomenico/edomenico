@@ -4,7 +4,8 @@ import streamlit as st
 import baixarmodeloNovoprojeto
 import baixaamodeloNovometeograma
 
-
+import sys
+import os
 
 import pandas as pd
 from selenium import webdriver
