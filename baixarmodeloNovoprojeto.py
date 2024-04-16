@@ -154,6 +154,7 @@ def Scraper(estacao):
                     horazulu=arqi['horzulu'][no]
                     print('Loading...')
                     print('chegou aqui 11')
+                    print('chegou aqui 11 ',link)
                     browser.get(link)
                     
 
