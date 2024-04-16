@@ -49,7 +49,7 @@ def Scraper(estacao,link,horazulu):
                     print('Loading...')
                     print('chegou aqui bm222')
                     print(link1)
-                    link1=str(link1)
+                    
                     driver.get(link1)
                     wait = WebDriverWait(driver, 20)
                     wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
