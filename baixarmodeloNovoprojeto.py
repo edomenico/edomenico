@@ -148,12 +148,12 @@ def Scraper(estacao):
                     #print('chegou aqui 11 ',link)
                     #html = requests.get(link).content
                     html = urlopen(link).read()
-                    if html.status_code in [200]:
+                    #if html.status_code in [200]:
                             
-                            print('link ok')
-                            dhtml=html.text
-                    else:
-                            print('sem link')
+                     #       print('link ok')
+                     #       dhtml=html.text
+                   # else:
+                    #        print('sem link')
                             
                     
                     #browser.get(link)
