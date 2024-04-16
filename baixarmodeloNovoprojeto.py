@@ -123,8 +123,9 @@ def Scraper(estacao):
                     link = arqi['endereco'][no]
                     horazulu=arqi['horzulu'][no]
                     print('Loading...')
-                    browser.get(link)
                     print('chegou aqui 11')
+                    browser.get(link)
+                    
 
                     forecast = {}
 
