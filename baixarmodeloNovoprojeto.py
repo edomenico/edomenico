@@ -87,18 +87,7 @@ def qnuvem(s):
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
 def Scraper(estacao):
-        def get_driver():
-                return webdriver.Chrome(
-                    service=Service(
-                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-                    ),
-                    options=options,
-                )
-
-        options = Options()
-        options.add_argument("--disable-gpu")
-        options.add_argument("--headless")
-
+        
         
         
 
@@ -108,12 +97,12 @@ def Scraper(estacao):
         # self.driver.set_window_size(1120, 550)
 
         print('chegou aqui 4444')
-        ###chrome_options = Options()
+        chrome_options = Options()
         print('chegou aqui 5')
-        ###chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")
          
         print('chegou aqui 666')
-        ###driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options)
         driver = get_driver()
         wait = WebDriverWait(driver, 20)
         print('chegou aqui 7')
