@@ -101,7 +101,9 @@ def Scraper(estacao):
                 for no in range(0, 1, 1):
 
                     link = str(arqi['endereco'][no])
+                    print(link)
                     horazulu=arqi['horzulu'][no]
+                    print(horazulu)
                     print('Loading...')
                     driver.get(link)
                     wait = WebDriverWait(driver, 20)
