@@ -49,15 +49,16 @@ def Scraper(estacao,link,horazulu):
                     print('Loading...')
                     print('chegou aqui b2')
                     driver.get(link1)
+                    wait = WebDriverWait(driver, 10)
                     print('chegou aqui b3')
-
+                    html = driver.page_source
                     forecast = {}
 
                 # while True:
 
                     sleep(12)
                     print('chegou aqui b4')
-                    s = BeautifulSoup(driver.page_source, "html.parser")
+                    s = BeautifulSoup(html, "html.parser")
                     print('chegou aqui b5')
                    # horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
