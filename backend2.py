@@ -29,7 +29,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
-def import re
+
 import urllib.parse
 import pandas as pd
 from selenium import webdriver
