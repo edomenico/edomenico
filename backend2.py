@@ -128,7 +128,7 @@ def baixarmodeloNovoprojeto(estacao):
         print('chegou aqui 5')
         chrome_options.add_argument("--headless")
          
-        print('chegou aqui 666')
+        print('chegou aqui 6666')
         browser = webdriver.Chrome(options=chrome_options)
         browser = get_driver()
         wait = WebDriverWait(browser, 20)
