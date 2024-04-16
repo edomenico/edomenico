@@ -50,6 +50,7 @@ def Scraper(estacao,link,horazulu):
                     print('chegou aqui b222')
                     driver.get(link1)
                     wait = WebDriverWait(driver, 20)
+                    wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                     print('chegou aqui b33')
                     html = driver.page_source
                     forecast = {}
