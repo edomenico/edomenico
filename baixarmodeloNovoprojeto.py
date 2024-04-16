@@ -114,7 +114,7 @@ def Scraper(estacao):
 
                 # while True:
 
-                    sleep(12)
+                   
                     s = BeautifulSoup(driver.page_source, "html.parser")
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
