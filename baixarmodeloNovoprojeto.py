@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import streamlit as st
 import urllib.parse
+from urllib import urlopen
 import sys
 import os
 
@@ -166,7 +167,7 @@ def Scraper(estacao):
                     print ('chegou aqui 12 ')
                     
                         
-                    s = BeautifulSoup(browser.page_source, "html.parser")
+                    s = BeautifulSoup(browser.page_source, 'html.parser')
                     print('chegou aqui 13')
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
