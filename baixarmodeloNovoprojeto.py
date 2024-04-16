@@ -133,15 +133,16 @@ def Scraper(estacao):
                     sleep(12)
                     print('chegou aqui 12')
                     s = BeautifulSoup(browser.page_source, "html.parser")
+                    print('chegou aqui 13')
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
                     # text_file.write(s.find_all('script'))
                     # text_file.close()
 
-
+                   
 
                    # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                    print('chegou aqui 13')
+                    print('chegou aqui 14')
                     rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
                     s.find()
                     # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
