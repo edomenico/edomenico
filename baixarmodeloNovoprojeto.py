@@ -134,9 +134,9 @@ def Scraper(estacao):
         chrome_options.add_argument("--headless")
          
         print('chegou aqui 666')
-        driver = webdriver.Chrome(options=chrome_options)
-        driver = get_driver()
-        wait = WebDriverWait(driver, 20)
+        browser = webdriver.Chrome(options=chrome_options)
+        browser = get_driver()
+        wait = WebDriverWait(browser, 20)
         print('chegou aqui 7')
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
@@ -154,14 +154,14 @@ def Scraper(estacao):
                     link = arqi['endereco'][no]
                     horazulu=arqi['horzulu'][no]
                     print('Loading...')
-                    driver.get(link)
+                    browser.get(link)
 
                     forecast = {}
 
                 # while True:
 
                     sleep(12)
-                    s = BeautifulSoup(driver.page_source, "html.parser")
+                    s = BeautifulSoup(browser.page_source, "html.parser")
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
                     # text_file.write(s.find_all('script'))
