@@ -1,37 +1,4 @@
-import requests
-from requests.api import options
-import pandas as pd
-import streamlit as st
-import urllib.parse
-from urllib.request import urlopen
-
-import sys
-import os
-
-import pandas as pd
-from selenium import webdriver
-
-from time import sleep
-from datetime import datetime,timedelta
-from datetime import date
-from pytz import timezone
 import re
-from bs4 import BeautifulSoup
-
-import pandas as pd
-from datetime import datetime, timedelta
-import datetime
-import time
-        
-# Set up the Chrome driver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
-
 import urllib.parse
 import pandas as pd
 from selenium import webdriver
@@ -40,22 +7,6 @@ from time import sleep
 from datetime import datetime,timedelta
 from datetime import date
 from pytz import timezone
-import re
-from bs4 import BeautifulSoup
-
-import pandas as pd
-from datetime import datetime, timedelta
-import datetime
-import time
-        
-# Set up the Chrome driver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
 def inicio():
 
 
@@ -120,74 +71,52 @@ def qnuvem(s):
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
 def Scraper(estacao):
-        
-        
-        
 
 
 
-       
+
+       # driver = webdriver.Firefox()
+        # self.driver.set_window_size(1120, 550)
+
+
+
+
+        driver = webdriver.Firefox()
+
+        #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
             try:
-                print('chegou aqui 8')
+
                 if jj==0:
                     arqi = pd.read_csv('estacaomodeloecmwf.csv', encoding='iso-8859-1', delimiter=';')
                 else:
                     arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                 arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
                 arqi = arqi.reset_index(drop=True)
-                print('chegou aqui 9')
 
                 for no in range(0, 1, 1):
-                    print('chegou aqui 10')
-                    #link = str(arqi['endereco'][no])
-                    link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
-                    horazulu=str(arqi['horzulu'][no])
+
+                    link = arqi['endereco'][no]
+                    horazulu=arqi['horzulu'][no]
                     print('Loading...')
-                    print('chegou aqui 11')
-                    #print('chegou aqui 11 ',link)
-                    #html = requests.get(link).content
-                    
-                    html = requests.get(link)
-                    s = BeautifulSoup(html.content, 'html.parser')
-                    #if html.status_code in [200]:
-                            
-                     #       print('link ok')
-                     #       dhtml=html.text
-                   # else:
-                    #        print('sem link')
-                            
-                    
-                    #browser.get(link)
-                    
+                    driver.get(link)
 
                     forecast = {}
 
                 # while True:
 
                     sleep(12)
-                    print ('chegou aqui 122 ')
-                    
-                   # try:
-                   #         s = BeautifulSoup(html, 'html.parser')
-                   # except Exception as e:
-                            
-                   #         print(e)
-                    
-                    print('chegou aqui 13')
+                    s = BeautifulSoup(driver.page_source, "html.parser")
                     horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
                     # text_file.write(s.find_all('script'))
                     # text_file.close()
 
-                   
 
-                    #rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                    print('chegou aqui 14')
+
+                   # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                     rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
-                    print('chegou aqui 15')
                     s.find()
-                    print('chegou aqui 16')
                     # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                     data=[]
                     dataaux=[]
@@ -203,7 +132,7 @@ def Scraper(estacao):
                     tp=[]
 
                     cldcb=[]
-                    print('chegou aqui 17')
+
                     for i in range(0,8,1): #variável
                         try:
                             #if i==7:
@@ -255,7 +184,7 @@ def Scraper(estacao):
                                         wdir.append(apenasDigitos)
                         except:
                             continue
-                   
+
                     print(data)
                     print(hora)
                     print(neb)
@@ -387,13 +316,5 @@ def Scraper(estacao):
                 df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
             except:
                 continue
-        #browser.quit()
+        driver.quit()
         return link,df1,horazulu
-
-
-
-# def inicio():
-#     if __name__ == '__main__':
-#
-#         scraper = Scraper()
-#         scraper.scrape()
