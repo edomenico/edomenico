@@ -21,7 +21,7 @@ import sys
 
 import streamlit
 from streamlit import runtime
-from streamlit_toggle import toggle
+
 from streamlit.web import cli as stcli
 import streamlit as st
 from datetime import datetime, timedelta
