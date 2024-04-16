@@ -152,7 +152,7 @@ def Scraper(estacao):
                     else:
                             print('sem link')
                             
-                    dhtmt=html
+                    dhtmt=html.text
                     #browser.get(link)
                     
 
