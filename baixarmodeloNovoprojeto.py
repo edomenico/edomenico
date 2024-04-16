@@ -1,4 +1,36 @@
+import requests
+import pandas as pd
+import streamlit as st
+import baixarmodeloNovoprojeto
+import baixaamodeloNovometeograma
+
+import sys
+import os
+
+import pandas as pd
+from selenium import webdriver
+from bs4 import BeautifulSoup
+from time import sleep
+from datetime import datetime,timedelta
+from datetime import date
+from pytz import timezone
 import re
+from bs4 import BeautifulSoup
+
+import pandas as pd
+from datetime import datetime, timedelta
+import datetime
+import time
+        
+# Set up the Chrome driver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
+
 import urllib.parse
 import pandas as pd
 from selenium import webdriver
@@ -8,7 +40,7 @@ from datetime import datetime,timedelta
 from datetime import date
 from pytz import timezone
 import re
-
+from bs4 import BeautifulSoup
 
 import pandas as pd
 from datetime import datetime, timedelta
