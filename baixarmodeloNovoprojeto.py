@@ -147,7 +147,9 @@ def Scraper(estacao):
                     print('chegou aqui 11')
                     #print('chegou aqui 11 ',link)
                     #html = requests.get(link).content
+                    
                     html = urlopen(link).read()
+                    #s = BeautifulSoup(html, 'html.parser')
                     #if html.status_code in [200]:
                             
                      #       print('link ok')
@@ -167,7 +169,7 @@ def Scraper(estacao):
                     print ('chegou aqui 121 ')
                     
                     try:
-                            s = BeautifulSoup(dhtml, 'html.parser')
+                            s = BeautifulSoup(html, 'html.parser')
                     except Exception as e:
                             
                             print(e)
