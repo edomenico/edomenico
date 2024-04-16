@@ -182,9 +182,9 @@ def Scraper(estacao):
 
                    
 
-                   # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
+                    rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                     print('chegou aqui 14')
-                    rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                    #rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
                     print('chegou aqui 15')
                     s.find()
                     print('chegou aqui 16')
