@@ -7,107 +7,60 @@ from time import sleep
 from datetime import datetime,timedelta
 from datetime import date
 from pytz import timezone
-def inicio():
-
-
-        scraper = Scraper()
-        scraper.scrape()
-
-def qnuvem(s):
-    nuvcb='n'
-    nuv=''
-    tp=''
-    vis=''
-    if s=='1':
-        nuv='CAVOK'
-        vis='9999'
-        tp=''
-    elif s=='2':
-        nuv='FEW'
-        vis = '9999'
-        tp=''
-    elif s=='3' or s=='4':#PARC NUBLADO
-        nuv='SCT'
-        vis = '9999'
-        tp=''
-
-    elif s == '5' or s=='18' : #'CHUVA FRACA'
-        nuv = 'SCT'
-        tp=''
-        vis = '7000'
-    elif s == '6' or s == '7' : #'CHUVA MODERADA'
-        nuv = 'BKN'
-        tp='RA'
-        vis = '3500'
-
-
-    elif s=='17': #NÉVOA
-        nuv = 'BKN'
-        tp = 'BR'
-        vis = '3500'
-    elif s == '14' or s == '21': #|TROVOADA COM CHUVA
-        nuv = 'BKN'
-        nuvcb='s'
-        tp = 'TS'
-        vis = '7000'
-    elif s == '22': # #NÉVOA
-        nuv = 'SCT'
-        tp = 'BR'
-        vis = '4000'
-    elif s == '20' or s == '19':# #CHUVA FRACA
-        nuv = 'BKN'
-        tp = 'BR'
-        vis = '4000'
-    elif s == '18':  # chuvisco
-        nuv = 'BKN'
-        tp = 'DZ'
-        vis = '5000'
-    return nuv,tp,vis,nuvcb
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 #arqi=pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter =';')
 
 
 
 
+
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
-def Scraper(estacao):
+def Scraper(estacao,link,horazulu):
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        
+            # Create the driver with the options
+        driver = webdriver.Chrome(options=chrome_options)
+        
+        print('chegou aqui b1')
 
-
-
-
-       # driver = webdriver.Firefox()
-        # self.driver.set_window_size(1120, 550)
-
-
-
-
-        driver = webdriver.Firefox()
-
-        #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
             try:
 
-                if jj==0:
-                    arqi = pd.read_csv('estacaomodeloecmwf.csv', encoding='iso-8859-1', delimiter=';')
-                else:
-                    arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
-                arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
-                arqi = arqi.reset_index(drop=True)
+                # if jj==0:
+                #     arqi = pd.read_csv('estacaomodeloecmwf.csv', encoding='iso-8859-1', delimiter=';')
+                # else:
+                #     #arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
+                #arqi = arqi.loc[(arqi['area'] == area)]
+                #arqi = arqi.reset_index(drop=True)
 
                 for no in range(0, 1, 1):
 
-                    link = arqi['endereco'][no]
-                    horazulu=arqi['horzulu'][no]
+                    #link = arqi['endereco'][no]
+                    posicaoi=str.find(link,"?")
+                    posicaof=str.find(link,"pressure")+8
+                    link1=link[0:posicaoi] + '/meteogram' + link[posicaoi:posicaof]
+                    #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
+                    #horazulu=3
                     print('Loading...')
-                    driver.get(link)
-
+                    print('chegou aqui b22')
+                    driver.get(link1)
+                    wait = WebDriverWait(driver, 10)
+                    print('chegou aqui b33')
+                    html = driver.page_source
                     forecast = {}
 
                 # while True:
 
                     sleep(12)
-                    s = BeautifulSoup(driver.page_source, "html.parser")
-                    horagmt=arqi['horzulu'][no]
+                    print('chegou aqui b4')
+                    s = BeautifulSoup(html, "html.parser")
+                    print('chegou aqui b5')
+                   # horagmt=arqi['horzulu'][no]
                     # text_file = open("forecast.txt", "w")
                     # text_file.write(s.find_all('script'))
                     # text_file.close()
@@ -116,22 +69,20 @@ def Scraper(estacao):
 
                    # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                     rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                    print('chegou aqui b6')
                     s.find()
                     # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                     data=[]
                     dataaux=[]
                     hora=[]
-                    neb=[]
-                    tar=[]
-                    prp=[]
-                    wspd=[]
-                    gust=[]
-                    wdir=[]
-                    cld=[]
-                    vis=[]
-                    tp=[]
 
-                    cldcb=[]
+                    tar=[]
+                    tdr=[]
+                    nbaixa=[]
+
+                    pressao=[]
+
+
 
                     for i in range(0,8,1): #variável
                         try:
@@ -150,50 +101,28 @@ def Scraper(estacao):
 
                                     if i==1:
                                         hora.append(rows[i].contents[j].string)
-                                    elif i==2:
-                                        numv=''
-                                        for nuv in str(rows[i].contents[j].contents[0])[29:35]:
-                                            if nuv.isdigit():
-                                                numv = numv + nuv
-                                        neb.append(numv)
-                                        nuv,tep,visi,nucb=qnuvem(numv)
-                                        cld.append(nuv)
-                                        cldcb.append(nucb)
-                                        tp.append(tep)
-                                        vis.append(visi)
+
                                     elif i==3:
-                                        apenasDigitos = ''
 
-                                        for taraux in rows[i].contents[j].string:
-                                            if taraux.isdigit():
-                                                apenasDigitos = apenasDigitos + taraux
-                                        tar.append(apenasDigitos)
+
+
+                                        apenasDigitos1 = rows[i].contents[j].text[0:2]
+                                        apenasDigitos2 = rows[i].contents[j].text[3:5]
+                                        tar.append(apenasDigitos1)
+                                        tdr.append(apenasDigitos2)
                                         #tar.append(rows[i].contents[j].string)
-                                    elif i==4:
-                                        prp.append(rows[i].contents[j].string)
-                                    elif i==5:
-                                        wspd.append(int(rows[i].contents[j].string))
-                                    elif i==6:
-                                        gust.append(rows[i].contents[j].string)
-                                    else:
-                                        apenasDigitos =''
 
-                                        for wdiraux in str(rows[i].contents[j].contents[0])[30:33]:
-                                            if wdiraux.isdigit():
-                                                apenasDigitos=apenasDigitos+wdiraux
-                                        wdir.append(apenasDigitos)
+                                    elif i==5:
+                                        pressao.append(rows[i].contents[j].string)
+                                    elif i==7:
+                                        nbaixa.append(rows[i].contents[j].string)
+
                         except:
                             continue
 
-                    print(data)
-                    print(hora)
-                    print(neb)
-                    print(tar)
-                    print(prp)
-                    print(wspd)
-                    print(gust)
-                    print(wdir)
-                    estacao=[arqi['estacao'][no]]*len(wdir)
+
+                    #estacao='SBGL'*len(tar)
+                    estacao=[estacao.upper() for x in range(len(tar))]
                     j=0
                     dd=[]
                     datazulu=[]
@@ -286,11 +215,11 @@ def Scraper(estacao):
                             #     i = i + 1
                         except:
                             continue
-                    lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
+                    lista_de_tuplas = list(zip(estacao,dd,tar,tdr,pressao,nbaixa,datazulu))
 
                     df= pd.DataFrame(
                         lista_de_tuplas,
-                        columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
+                        columns=['estacao','datahora', 'tar', 'tdr', 'pressao','nbaixa','datazulu']
                     )
                     print(forecast)
                     if no!=0:
@@ -309,12 +238,12 @@ def Scraper(estacao):
                 else:
                     mesf = str(datetime.now().month)
 
-                if jj==0:
-                    nomearq = 'dadosecmwf_area' + str(area) + '_' + diaf + mesf + '.csv'
-                else:
-                    nomearq = 'dadosicon_area' + str(area) + '_' + diaf + mesf + '.csv'
-                df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+                # if jj==0:
+                #     nomearq = 'dadosecmwf_area_o' +  '_' + diaf + mesf + '.csv'
+                # else:
+                #     nomearq = 'dadosicon_area' + '_' + diaf + mesf + '.csv'
+                # df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
             except:
                 continue
         driver.quit()
-        return link,df1,horazulu
+        return df1
