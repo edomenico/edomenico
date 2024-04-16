@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import streamlit as st
 import urllib.parse
-from urllib import urlopen
+
 import sys
 import os
 
