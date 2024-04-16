@@ -79,25 +79,12 @@ def qnuvem(s):
     return nuv,tp,vis,nuvcb
 
 #arqi=pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter =';')
-def get_webdriver_options(proxy: str = None) -> Options:
-    options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-features=NetworkService")
-    options.add_argument("--window-size=1920x1080")
-    options.add_argument("--disable-features=VizDisplayCompositor")
-    options.add_argument('--ignore-certificate-errors')
-    if proxy is not None:
-        options.add_argument(f"--proxy-server=socks5://{proxy}")
-    options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
-    return options
+
 
 
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
-def Scraper(estacao, proxy: str=None):
+def Scraper(estacao):
 
         
         
@@ -110,8 +97,8 @@ def Scraper(estacao, proxy: str=None):
         print('chegou aqui 4444')
         #chrome_options = Options()
         print('chegou aqui 5')
-        #chrome_options.add_argument("--headless")
-        driver=webdriver.Chrome(options=get_webdriver_options(proxy=proxy)) 
+        chrome_options.add_argument("--headless")
+         
         print('chegou aqui 666')
         driver = webdriver.Chrome(options=chrome_options)
         wait = WebDriverWait(driver, 20)
