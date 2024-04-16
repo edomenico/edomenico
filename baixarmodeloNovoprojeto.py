@@ -95,7 +95,7 @@ def Scraper(estacao):
         # self.driver.set_window_size(1120, 550)
 
         print('chegou aqui 4444')
-        #chrome_options = Options()
+        chrome_options = Options()
         print('chegou aqui 5')
         chrome_options.add_argument("--headless")
          
