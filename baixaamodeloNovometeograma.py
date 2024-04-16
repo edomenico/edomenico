@@ -56,7 +56,7 @@ def Scraper(estacao,link,horazulu):
 
                 # while True:
 
-                    sleep(12)
+                    
                     print('chegou aqui b4')
                     s = BeautifulSoup(html, "html.parser")
                     print('chegou aqui b5')
