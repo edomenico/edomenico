@@ -150,7 +150,7 @@ def Scraper(estacao):
 
                 for no in range(0, 1, 1):
                     print('chegou aqui 10')
-                    link = arqi['endereco'][no]
+                    link = str(arqi['endereco'][no])
                     horazulu=arqi['horzulu'][no]
                     print('Loading...')
                     print('chegou aqui 11')
