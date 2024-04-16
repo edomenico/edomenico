@@ -26,7 +26,7 @@ def Scraper(estacao,link,horazulu):
             # Create the driver with the options
         driver = webdriver.Chrome(options=chrome_options)
         
-
+        print('chegou aqui b1')
 
         for jj in range(0,1,1):
             try:
@@ -47,6 +47,7 @@ def Scraper(estacao,link,horazulu):
                     #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                     #horazulu=3
                     print('Loading...')
+                    print('chegou aqui b2')
                     driver.get(link1)
 
                     forecast = {}
