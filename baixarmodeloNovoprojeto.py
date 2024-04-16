@@ -95,9 +95,9 @@ def Scraper(estacao):
                     options=options,
                 )
 
-            options = Options()
-            options.add_argument("--disable-gpu")
-            options.add_argument("--headless")
+        options = Options()
+        options.add_argument("--disable-gpu")
+        options.add_argument("--headless")
 
         
         
