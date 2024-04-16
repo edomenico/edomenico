@@ -234,6 +234,7 @@ def baixarmodeloNovoprojeto(estacao):
                                             if wdiraux.isdigit():
                                                 apenasDigitos=apenasDigitos+wdiraux
                                         wdir.append(apenasDigitos)
+                                        print('chegou aqui 9')
                         except:
                             continue
                     
