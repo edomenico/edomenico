@@ -100,7 +100,7 @@ def Scraper(estacao):
                 print('chegou aqui b22')
                 for no in range(0, 1, 1):
 
-                    link = str(arqi['endereco'][no])
+                    link = (arqi['endereco'][no])
                     print(link)
                     horazulu=arqi['horzulu'][no]
                     print(horazulu)
