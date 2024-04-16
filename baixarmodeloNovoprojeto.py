@@ -7,11 +7,7 @@ from time import sleep
 from datetime import datetime,timedelta
 from datetime import date
 from pytz import timezone
-def inicio():
 
-
-        scraper = Scraper()
-        scraper.scrape()
 
 def qnuvem(s):
     nuvcb='n'
@@ -81,7 +77,11 @@ def Scraper(estacao):
 
 
 
-        driver = webdriver.Firefox()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        
+            # Create the driver with the options
+        driver = webdriver.Chrome(options=chrome_options)
 
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
