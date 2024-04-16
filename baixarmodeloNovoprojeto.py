@@ -149,6 +149,9 @@ def Scraper(estacao):
                     if html.status_code in [200]:
                             
                             print('link ok')
+                    else:
+                            print('sem link')
+                            
                     dhtmt=html
                     #browser.get(link)
                     
