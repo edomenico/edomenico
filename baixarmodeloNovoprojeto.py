@@ -151,7 +151,8 @@ def Scraper(estacao):
 
                 for no in range(0, 1, 1):
                     print('chegou aqui 10')
-                    link = str(arqi['endereco'][no])
+                    #link = str(arqi['endereco'][no])
+                    link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
                     horazulu=str(arqi['horzulu'][no])
                     print('Loading...')
                     print('chegou aqui 11')
