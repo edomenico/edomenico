@@ -450,7 +450,7 @@ def authenticate(city):
     print('chegou aqui 2')
 
 
-    link,data,horazulu=baixarmodeloNovoprojeto(city)
+    link,data,horazulu=baixarmodeloNovoprojeto.Scraper(city)
     print('chegou aqui 3')
     data1=baixaamodeloNovometeograma.Scraper(city,link,horazulu)
 
