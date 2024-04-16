@@ -235,6 +235,7 @@ def baixarmodeloNovoprojeto(estacao):
                                         wdir.append(apenasDigitos)
                         except:
                             continue
+                    print('chegou aqui 8')
 
                     print(data)
                     print(hora)
