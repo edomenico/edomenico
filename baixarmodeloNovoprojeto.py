@@ -104,6 +104,9 @@ def Scraper(estacao):
                     horazulu=arqi['horzulu'][no]
                     print('Loading...')
                     driver.get(link)
+                    wait = WebDriverWait(driver, 20)
+                    wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+                    print('chegou aqui b33')
 
                     forecast = {}
 
