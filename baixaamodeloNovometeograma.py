@@ -69,6 +69,7 @@ def Scraper(estacao,link,horazulu):
 
                    # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                     rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                    print('chegou aqui b6')
                     s.find()
                     # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                     data=[]
