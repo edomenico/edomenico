@@ -3,6 +3,7 @@ from requests.api import options
 import pandas as pd
 import streamlit as st
 import urllib.parse
+from urllib.request import urlopen
 
 import sys
 import os
@@ -144,8 +145,9 @@ def Scraper(estacao):
                     horazulu=str(arqi['horzulu'][no])
                     print('Loading...')
                     print('chegou aqui 11')
-                    print('chegou aqui 11 ',link)
+                    #print('chegou aqui 11 ',link)
                     html = requests.get(link).content
+                    html = urlopen(link).read()
                     if html.status_code in [200]:
                             
                             print('link ok')
