@@ -181,7 +181,9 @@ def Scraper(estacao):
                    # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                     print('chegou aqui 14')
                     rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                    print('chegou aqui 15')
                     s.find()
+                    print('chegou aqui 16')
                     # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                     data=[]
                     dataaux=[]
@@ -197,7 +199,7 @@ def Scraper(estacao):
                     tp=[]
 
                     cldcb=[]
-
+                    print('chegou aqui 17')
                     for i in range(0,8,1): #variável
                         try:
                             #if i==7:
@@ -249,7 +251,7 @@ def Scraper(estacao):
                                         wdir.append(apenasDigitos)
                         except:
                             continue
-
+                   
                     print(data)
                     print(hora)
                     print(neb)
