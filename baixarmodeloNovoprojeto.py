@@ -165,7 +165,7 @@ def Scraper(estacao):
                     print ('chegou aqui 121 ')
                     
                     try:
-                            s = BeautifulSoup(dhtml, 'parser')
+                            s = BeautifulSoup(dhtml, 'html.parser')
                     except Exception as e:
                             
                             print(e)
