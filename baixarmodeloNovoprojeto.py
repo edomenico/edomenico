@@ -1,15 +1,13 @@
 import requests
 import pandas as pd
 import streamlit as st
-import baixarmodeloNovoprojeto
-import baixaamodeloNovometeograma
 
 import sys
 import os
 
 import pandas as pd
 from selenium import webdriver
-from bs4 import BeautifulSoup
+
 from time import sleep
 from datetime import datetime,timedelta
 from datetime import date
