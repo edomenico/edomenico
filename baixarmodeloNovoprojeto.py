@@ -145,7 +145,7 @@ def Scraper(estacao):
                     print('Loading...')
                     print('chegou aqui 11')
                     print('chegou aqui 11 ',link)
-                    html = requests.get(url=str(link))
+                    html = requests.get(url=(link))
                     dhtmt=html
                     #browser.get(link)
                     
