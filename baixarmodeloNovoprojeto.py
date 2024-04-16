@@ -104,7 +104,7 @@ def Scraper(estacao):
                     print(link)
                     horazulu=arqi['horzulu'][no]
                     print(horazulu)
-                    
+                    link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                     driver.get(link)
                     wait = WebDriverWait(driver, 20)
                     wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
