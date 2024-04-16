@@ -149,7 +149,7 @@ def Scraper(estacao):
                     #html = requests.get(link).content
                     
                     html = urlopen(link).read()
-                    #s = BeautifulSoup(html, 'html.parser')
+                    s = BeautifulSoup(html, 'html.parser')
                     #if html.status_code in [200]:
                             
                      #       print('link ok')
@@ -168,11 +168,11 @@ def Scraper(estacao):
                     sleep(12)
                     print ('chegou aqui 122 ')
                     
-                    try:
-                            s = BeautifulSoup(html, 'html.parser')
-                    except Exception as e:
+                   # try:
+                   #         s = BeautifulSoup(html, 'html.parser')
+                   # except Exception as e:
                             
-                            print(e)
+                   #         print(e)
                     
                     print('chegou aqui 13')
                     horagmt=arqi['horzulu'][no]
@@ -182,9 +182,9 @@ def Scraper(estacao):
 
                    
 
-                    rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
+                    #rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                     print('chegou aqui 14')
-                    #rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                    rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
                     print('chegou aqui 15')
                     s.find()
                     print('chegou aqui 16')
