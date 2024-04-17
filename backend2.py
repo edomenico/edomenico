@@ -23,6 +23,9 @@ def lookup_coord(city_name,usu):
 
 def sort_data(weather_data):
     """"Function to extract data from json"""
+    print('extracted')
+    print(weather_data)
+    
 
     extracted_data = []
     for i in range(len(weather_data)):
