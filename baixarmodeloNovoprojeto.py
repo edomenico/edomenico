@@ -12,6 +12,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+def get_driver():
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 
 def qnuvem(s):
     nuvcb='n'
@@ -79,10 +84,13 @@ def Scraper(estacao):
         # self.driver.set_window_size(1120, 550)
 
 
+        options = Options()
+        options.add_argument('--disable-gpu')
+        options.add_argument('--headless')
 
 
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        #chrome_options = Options()
+        #chrome_options.add_argument("--headless")
         
             # Create the driver with the options
         driver = webdriver.Chrome(options=chrome_options)
@@ -105,6 +113,7 @@ def Scraper(estacao):
                     horazulu=arqi['horzulu'][no]
                     print(horazulu)
                     link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
+                    driver = get_driver()
                     driver.get(link)
                     wait = WebDriverWait(driver, 20)
                     wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
