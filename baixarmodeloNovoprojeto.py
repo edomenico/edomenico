@@ -99,8 +99,8 @@ def Scraper(estacao):
     
 
 
-        #chrome_options = Options()
-        #chrome_options.add_argument("--headless")
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
         
             # Create the driver with the options
         driver = webdriver.Chrome(options=chrome_options)
