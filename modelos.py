@@ -295,6 +295,7 @@ def main():
                                 #
     
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
+                                
                                 dd.append(datetime.strptime(d, dateFormatter))
                                 datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
                                 # fuso_horario = timezone('Greenwich')
@@ -332,6 +333,8 @@ def main():
                             columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                         )
                         print(forecast)
+                        print('chegou aqui baixarmodeloNovoprojeto')
+                        print (df)
                         if no!=0:
                             df1=pd.concat([df,df1])
                         else:
@@ -356,8 +359,7 @@ def main():
                 except:
                     continue
             driver.quit()
-            print('chegou aqui baixarmodeloNovoprojeto')
-            print (df1)
+            
             return link,df1,horazulu
     
     def baixaamodeloNovometeograma(estacao,link,horazulu):
