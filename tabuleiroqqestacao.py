@@ -50,14 +50,27 @@ from bokeh.resources import CDN
 from bokeh.embed import file_html
 def main2():
     def rest(areas, to_data, from_data,nome_estacao):
+        import re
+        from bs4 import BeautifulSoup
+        from selenium import webdriver
+        import pandas as pd
+        from datetime import datetime, timedelta
+        import datetime
+        import time
+        
+        # Set up the Chrome driver
+        from selenium.webdriver.chrome.options import Options
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.wait import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
         import time  # to simulate a real time data, time loop
-
+        
         import numpy as np  # np mean, np random
         import pandas as pd  # read csv, df manipulation
         import plotly.express as px  # interactive charts
         import sys
-        # from streamlit.web import cli as stcli
-
+        #from streamlit.web import cli as stcli
+        
         import streamlit
         from streamlit import runtime
         from streamlit_toggle import toggle
@@ -66,6 +79,24 @@ def main2():
         from datetime import datetime, timedelta
         import os
         import glob
+    
+        import time  # to simulate a real time data, time loop
+    
+        import numpy as np  # np mean, np random
+        import pandas as pd  # read csv, df manipulation
+        import plotly.express as px  # interactive charts
+        import sys
+        #from streamlit.web import cli as stcli
+        
+        import streamlit
+        from streamlit import runtime
+        from streamlit_toggle import toggle
+        from streamlit.web import cli as stcli
+        import streamlit as st
+        from datetime import datetime, timedelta
+        import os
+        import glob
+
         global pt
 
         def trata_redemet(areasele):
