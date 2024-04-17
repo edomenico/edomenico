@@ -33,6 +33,7 @@ def sort_data(weather_data):
         #date, time = weather_data.datazulu[i].split(' ')
 
         temp = weather_data['tar'][i]
+        print(temp)
         #feel_temp = weather_data['list'][i]['main']['feels_like']
         #min_temp = weather_data['list'][i]['main']['temp_min']
         #max_temp = weather_data['list'][i]['main']['temp_max']
