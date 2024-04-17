@@ -350,5 +350,5 @@ def Scraper(estacao):
                 df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
             except:
                 continue
-        #driver.quit()
+        driver.quit()
         return link,df1,horazulu
