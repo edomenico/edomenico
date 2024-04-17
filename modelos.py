@@ -223,6 +223,8 @@ def main():
             print('modelos p1')
             # st.write(result)
             df = pd.DataFrame(result)
+            print(df)
+            print('modelos p2')
             df.rename(
                 columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'ur', 5: 'pressao', 6: 'tp',
                          7: 'ceu',8: 'ncb',9: 'int vento',
@@ -230,7 +232,7 @@ def main():
 
 
 
-
+            print('modelos p3')
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
