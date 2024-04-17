@@ -327,10 +327,10 @@ def Scraper(estacao):
                         columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                     )
                     print(forecast)
-                    #if no!=0:
-                    #    df1=pd.concat([df,df1])
-                    #else:
-                    #    df1=df
+                    if no!=0:
+                        df1=pd.concat([df,df1])
+                    else:
+                        df1=df
                 df1 = df1.reset_index(drop=True)
 
                 if datetime.now().day<10:
