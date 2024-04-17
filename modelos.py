@@ -223,6 +223,7 @@ def main():
             print('modelos p1')
             # st.write(result)
             df = pd.DataFrame(result)
+            df1 = pd.DataFrame(result)
             print(df)
             print('modelos p2')
             df.rename(
@@ -233,7 +234,8 @@ def main():
 
 
             print('modelos p3')
-            df['timestamp'] = (df['data'] + ' ' + df['hora'])
+            df['timestamp'] = (df1['1'] + ' ' + df1['2'])
+            print('modelos p4')
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
             #     df['sens.term'] = df['sens.term'] - 273.15
