@@ -620,6 +620,31 @@ def main2():
         return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
     def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
+
+            import re
+            import urllib.parse
+            import pandas as pd
+            from selenium import webdriver
+            from bs4 import BeautifulSoup
+            from time import sleep
+            from datetime import datetime,timedelta
+            from datetime import date
+            from pytz import timezone
+            from selenium.webdriver.chrome.options import Options
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.support.wait import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            
+            from selenium.webdriver.chrome.service import Service
+            from webdriver_manager.chrome import ChromeDriverManager
+            
+            from selenium.common.exceptions import TimeoutException
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.firefox.options import Options
+            from selenium.webdriver.firefox.service import Service
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.support.ui import WebDriverWait
+            from webdriver_manager.firefox import GeckoDriverManager
             # Create Chrome options
             chrome_options = Options()
             chrome_options.add_argument("--headless")
