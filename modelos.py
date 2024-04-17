@@ -219,7 +219,7 @@ def main():
                 pass
             
             result, lat, lon = novo_projeto2.search2(city, usu)
-            print(result)
+            print(result['estacao'][0])
             print('modelos p1')
             # st.write(result)
             df = pd.DataFrame(result)
