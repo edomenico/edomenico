@@ -697,13 +697,13 @@ def authenticate(city):
     print('chegou aqui 2')
 
 
-    link,data1,horazulu=baixarmodeloNovoprojeto.Scraper(city)
+    link,data1,horazulu=baixarmodeloNovoprojeto(city)
    # city='SBJR'
    # link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
    # horazulu=3
     print('chegou aqui 333333333')
     print (data1)
-    data2=baixaamodeloNovometeograma.Scraper(city,link,horazulu)
+    data2=baixaamodeloNovometeograma(city,link,horazulu)
     print('chegou aqui 2222222222222')
    
 
