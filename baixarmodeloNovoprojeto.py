@@ -93,9 +93,9 @@ def Scraper(estacao):
         # self.driver.set_window_size(1120, 550)
 
 
-       options = Options()
-       options.add_argument('--disable-gpu')
-       options.add_argument('--headless')
+        options = Options()
+        options.add_argument('--disable-gpu')
+        options.add_argument('--headless')
     
 
 
