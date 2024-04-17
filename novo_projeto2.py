@@ -1,7 +1,7 @@
 import numpy as np
 
 import backend2
-import baixarmodeloNovoprojeto
+#import baixarmodeloNovoprojeto
 from streamlit import runtime
 import sys
 from streamlit.web import cli as stcli
