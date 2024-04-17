@@ -66,7 +66,7 @@ def qnuvem(s):
 
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
-def baixarmodeloNovoprojeto.py(estacao):
+def baixarmodeloNovoprojeto(estacao):
         import re
         import urllib.parse
         import pandas as pd
