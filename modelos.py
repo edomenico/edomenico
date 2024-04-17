@@ -9,55 +9,55 @@ import plotly.express as px
 import novo_projeto2
 def main():
     def qnuvem(s):
-    nuvcb='n'
-    nuv=''
-    tp=''
-    vis=''
-    if s=='1':
-        nuv='CAVOK'
-        vis='9999'
+        nuvcb='n'
+        nuv=''
         tp=''
-    elif s=='2':
-        nuv='FEW'
-        vis = '9999'
-        tp=''
-    elif s=='3' or s=='4':#PARC NUBLADO
-        nuv='SCT'
-        vis = '9999'
-        tp=''
-
-    elif s == '5' or s=='18' : #'CHUVA FRACA'
-        nuv = 'SCT'
-        tp=''
-        vis = '7000'
-    elif s == '6' or s == '7' : #'CHUVA MODERADA'
-        nuv = 'BKN'
-        tp='RA'
-        vis = '3500'
-
-
-    elif s=='17': #NÉVOA
-        nuv = 'BKN'
-        tp = 'BR'
-        vis = '3500'
-    elif s == '14' or s == '21': #|TROVOADA COM CHUVA
-        nuv = 'BKN'
-        nuvcb='s'
-        tp = 'TS'
-        vis = '7000'
-    elif s == '22': # #NÉVOA
-        nuv = 'SCT'
-        tp = 'BR'
-        vis = '4000'
-    elif s == '20' or s == '19':# #CHUVA FRACA
-        nuv = 'BKN'
-        tp = 'BR'
-        vis = '4000'
-    elif s == '18':  # chuvisco
-        nuv = 'BKN'
-        tp = 'DZ'
-        vis = '5000'
-    return nuv,tp,vis,nuvcb
+        vis=''
+        if s=='1':
+            nuv='CAVOK'
+            vis='9999'
+            tp=''
+        elif s=='2':
+            nuv='FEW'
+            vis = '9999'
+            tp=''
+        elif s=='3' or s=='4':#PARC NUBLADO
+            nuv='SCT'
+            vis = '9999'
+            tp=''
+    
+        elif s == '5' or s=='18' : #'CHUVA FRACA'
+            nuv = 'SCT'
+            tp=''
+            vis = '7000'
+        elif s == '6' or s == '7' : #'CHUVA MODERADA'
+            nuv = 'BKN'
+            tp='RA'
+            vis = '3500'
+    
+    
+        elif s=='17': #NÉVOA
+            nuv = 'BKN'
+            tp = 'BR'
+            vis = '3500'
+        elif s == '14' or s == '21': #|TROVOADA COM CHUVA
+            nuv = 'BKN'
+            nuvcb='s'
+            tp = 'TS'
+            vis = '7000'
+        elif s == '22': # #NÉVOA
+            nuv = 'SCT'
+            tp = 'BR'
+            vis = '4000'
+        elif s == '20' or s == '19':# #CHUVA FRACA
+            nuv = 'BKN'
+            tp = 'BR'
+            vis = '4000'
+        elif s == '18':  # chuvisco
+            nuv = 'BKN'
+            tp = 'DZ'
+            vis = '5000'
+        return nuv,tp,vis,nuvcb
 
 #arqi=pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter =';')
 
