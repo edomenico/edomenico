@@ -18,6 +18,7 @@ def search2(city,usu):
         data = backend2.authenticate(city)
             # st.write(data)
         print('novo_projeto 2')
+        print(data)
         extracted_data = backend2.sort_data(data)
             # st.write(extracted_data)
         return extracted_data, lat, lon
