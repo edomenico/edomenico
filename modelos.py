@@ -214,6 +214,8 @@ def main():
                                             wspd.append(int(rows[i].contents[j].string))
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
+                                             print('chegou aqui baixarmodeloNovoprojeto')
+                                             print (rows[i].contents[j].string)
                                         else:
                                             apenasDigitos =''
     
@@ -327,8 +329,7 @@ def main():
                             except:
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
-                        print('chegou aqui baixarmodeloNovoprojeto')
-                        print (lista_de_tuplas)
+                       
     
                         df= pd.DataFrame(
                             lista_de_tuplas,
@@ -473,16 +474,20 @@ def main():
     
                                         if i==1:
                                             hora.append(rows[i].contents[j].string)
+                                            print('baixa1')
+                                            print(rows[i].contents[j].string)
     
                                         elif i==3:
     
     
-    
+                                            
                                             apenasDigitos1 = rows[i].contents[j].text[0:2]
                                             apenasDigitos2 = rows[i].contents[j].text[3:5]
                                             tar.append(apenasDigitos1)
                                             tdr.append(apenasDigitos2)
                                             #tar.append(rows[i].contents[j].string)
+                                            print('baixa2')
+                                            print(tar.append(apenasDigitos1))
     
                                         elif i==5:
                                             pressao.append(rows[i].contents[j].string)
