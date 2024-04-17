@@ -47,7 +47,7 @@ def Scraper(estacao,link,horazulu):
                     #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                     #horazulu=3
                     print('Loading...')
-                    print('chegou aqui bm222')
+                    print('chegou aqui bm2223')
                     print(link1)
                     link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                     
