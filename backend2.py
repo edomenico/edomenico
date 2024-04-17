@@ -80,12 +80,12 @@ def authenticate(city):
     print('chegou aqui 2')
 
 
-    link,data,horazulu=baixarmodeloNovoprojeto.Scraper(city)
+    link,data1,horazulu=baixarmodeloNovoprojeto.Scraper(city)
    # city='SBJR'
    # link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
    # horazulu=3
     print('chegou aqui 333333333')
-    data1=baixaamodeloNovometeograma.Scraper(city,link,horazulu)
+    data2=baixaamodeloNovometeograma.Scraper(city,link,horazulu)
     print('chegou aqui 2222222222222')
    
 
@@ -93,16 +93,16 @@ def authenticate(city):
     #    st.error(f"Could not get the data because {e}. Exiting...")
     #    st.stop()
     #data = pd.read_csv("dadosecmwf_area2_1104.csv")
-    data=pd.merge(data, data1, how='inner', on='datahora')
+    data3=pd.merge(data1, data2, how='inner', on='datahora')
     print(data)
     print('chegou aqui 44444444444444')
     #data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
     print('chegou aqui 5555555555555')
     
-    data1=data.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'}, inplace=True)
+    data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'}, inplace=True)
     print('chegou aqui 66666666666666')
-    print(data1)
+    print(data4)
 
 
-    return data
+    return data4
 
