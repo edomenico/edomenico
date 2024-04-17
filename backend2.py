@@ -99,9 +99,9 @@ def authenticate(city):
     #data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
     print('chegou aqui 5555555555555')
     
-    data=data.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'}, inplace=True)
+    data1=data.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'}, inplace=True)
     print('chegou aqui 66666666666666')
-    print(data)
+    print(data1)
 
 
     return data
