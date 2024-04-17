@@ -133,7 +133,7 @@ def main():
                         print(link)
                         horazulu=arqi['horzulu'][no]
                         print(horazulu)
-                        link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
+                        #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
                         wait = WebDriverWait(driver, 20)
@@ -418,7 +418,7 @@ def main():
                         print('Loading...')
                         print('chegou aqui bm2223')
                         print(link1)
-                        link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
+                       # link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 20)
