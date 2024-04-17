@@ -234,7 +234,7 @@ def main():
 
 
             print('modelos p3')
-            df['timestamp'] = (df1['1'] + ' ' + df1['2'])
+            df['timestamp'] = (df1[1] + ' ' + df1[2])
             print('modelos p4')
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
