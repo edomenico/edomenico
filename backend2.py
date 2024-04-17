@@ -95,7 +95,7 @@ def authenticate(city):
     #data = pd.read_csv("dadosecmwf_area2_1104.csv")
     data=pd.merge(data, data1, how='inner', on='datahora')
     print('chegou aqui 44444444444444')
-    data=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], 1)
+    data=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1,inplace=True)
     print('chegou aqui 5555555555555')
     data=data.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
     print('chegou aqui 66666666666666')
