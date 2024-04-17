@@ -14,6 +14,15 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.firefox import GeckoDriverManager
+
 def get_driver():
     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
@@ -84,9 +93,10 @@ def Scraper(estacao):
         # self.driver.set_window_size(1120, 550)
 
 
-        options = Options()
-        options.add_argument('--disable-gpu')
-        options.add_argument('--headless')
+       # options = Options()
+       # options.add_argument('--disable-gpu')
+       # options.add_argument('--headless')
+    
 
 
         #chrome_options = Options()
@@ -94,7 +104,13 @@ def Scraper(estacao):
         
             # Create the driver with the options
         #driver = webdriver.Chrome(options=chrome_options)
-
+        firefoxOptions = Options()
+        firefoxOptions.add_argument("--headless")
+        service = Service(GeckoDriverManager().install())
+        driver = webdriver.Firefox(
+        options=firefoxOptions,
+        service=service,
+        )
         #for no in range(0, len(arqi), 1):
         for jj in range(0,1,1):
             try:
@@ -113,7 +129,7 @@ def Scraper(estacao):
                     horazulu=arqi['horzulu'][no]
                     print(horazulu)
                     link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
-                    driver = get_driver()
+                    #driver = get_driver()
                     driver.get(link)
                     wait = WebDriverWait(driver, 20)
                     wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
