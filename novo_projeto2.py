@@ -617,7 +617,7 @@ def baixaamodeloNovometeograma(estacao,link,horazulu):
         return df1
 
 
-def lookup_coord(city_name,usu):
+def lookup_coord2(city_name,usu):
     """Function to lookup the names of city"""
     print('chegou aqui')
     if usu==1:
@@ -634,7 +634,7 @@ def lookup_coord(city_name,usu):
         return None
 
 
-def sort_data(weather_data):
+def sort_data2(weather_data):
     """"Function to extract data from json"""
     print('extracted')
     print(weather_data)
@@ -689,7 +689,7 @@ def sort_data(weather_data):
     return extracted_data
 
 
-def authenticate(city):
+def authenticate2(city):
 
     """Function to request information from OpenWeatherMap API giving the necessary details"""
     #try:
@@ -726,14 +726,14 @@ def authenticate(city):
 
 def search2(city,usu):
     try:
-        lat, lon = lookup_coord(city,usu)
+        lat, lon = lookup_coord2(city,usu)
             # st.write(lat)
         print('novo_projeto 1')
-        data = authenticate(city)
+        data = authenticate2(city)
             # st.write(data)
         print('novo_projeto 2')
         print(data)
-        extracted_data = sort_data(data)
+        extracted_data = sort_data2(data)
             # st.write(extracted_data)
         return extracted_data, lat, lon
     except Exception as e:
@@ -761,7 +761,7 @@ def temp_time_series2(df):
     st.plotly_chart(fig, use_container_width=True)
 
 
-def weather_pie(df):
+def weather_pie2(df):
     """Container for pie chart of weather conditions"""
     labels = list(set(df['tp']))
     values = [sum([i == j for i in df['tp']]) for j in labels]
