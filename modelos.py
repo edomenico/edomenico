@@ -214,8 +214,8 @@ def main():
                                             wspd.append(int(rows[i].contents[j].string))
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
-                                             print('chegou aqui baixarmodeloNovoprojeto')
-                                             print (rows[i].contents[j].string)
+                                            print('chegou aqui baixarmodeloNovoprojeto')
+                                            print (rows[i].contents[j].string)
                                         else:
                                             apenasDigitos =''
     
