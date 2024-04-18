@@ -507,11 +507,11 @@ def main():
                                                  b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
                                                 #if taraux.isdigit():
                                                     #apenasDigitos = apenasDigitos + taraux
-                                            bb= (int(b) - 32) * 5/9
-                                            print('chegou aqui 3')
-                                            print(b)
-                                            print(bb)
-                                            tar.append(str(int(bb)))
+                                             bb= (int(b) - 32) * 5/9
+                                             print('chegou aqui 3')
+                                             print(b)
+                                             print(bb)
+                                             tar.append(str(int(bb)))
                                             
     
                                         elif i==5:
