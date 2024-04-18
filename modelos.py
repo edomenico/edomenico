@@ -219,9 +219,10 @@ def main():
                                                 b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
                                                 #if taraux.isdigit():
                                                     #apenasDigitos = apenasDigitos + taraux
-                                            tar.append(b)
+                                            tar.append(str(b))
+                                            
+                                            print(str(b))
                                             print('chegou aqui 8')
-                                            print(b)
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append(str(rows[i].contents[j]))
