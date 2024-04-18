@@ -215,7 +215,7 @@ def main():
                                         elif i==3:
                                             apenasDigitos = ''
     
-                                            for taraux in string(rows[i].contents[j]):
+                                            for taraux in str(rows[i].contents[j]):
                                                 if taraux.isdigit():
                                                     apenasDigitos = apenasDigitos + taraux
                                             tar.append(apenasDigitos)
