@@ -198,7 +198,7 @@ def main():
                                         
                                         print(hhh)
                                         print(hhhh)
-                                        if hhhh=='PM":
+                                        if hhhh=='PM':
                                             hhh=str(int(hhh)+12))
                                         
     
