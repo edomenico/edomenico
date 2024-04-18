@@ -720,7 +720,7 @@ def main():
        # horazulu=3
         
         ####data2=baixaamodeloNovometeograma(city,link,horazulu)
-        print(data2)
+        #print(data2)
         
        
     
