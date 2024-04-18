@@ -276,10 +276,10 @@ def main():
                         mes=datahora1[5:7]
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
-                        d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                        dd = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
                         print(d)
                         print('chegou aqui 8')
-                        d=datetime.strptime(d, dateFormatter)
+                        d=datetime.strptime(dd, dateFormatter)
                         print(d)
                         j=0
                         dd=[]
@@ -290,9 +290,10 @@ def main():
                         for i in range(0,len(estacao),3):
                             try:
                                 print(d)
-                                d=d+timedelta(hours=3)
+                                timestring = datetime.strptime(dd + timedelta(hours=3)), dateFormatter)
+                                #d=d+timedelta(hours=3)
                                 print('chegou aqui 9')
-                                print(d)
+                                print(timestring)
                                 dd.append(datetime.strptime(d, dateFormatter))
                                 datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
