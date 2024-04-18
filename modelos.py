@@ -470,104 +470,105 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-    
+                                        print('chegou aqui 1')
+                                        ddd=str(rows[0].contents[0])[55:65]
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
+                                        print (datetime.now() + timedelta(days=j))
+                                        print(ddd)
+                                        print((str(rows[1].contents[0])))
+                                        hhh=(str(rows[1].contents[0])[28:29])
+                                        hhhh=(str(rows[1].contents[0])[36:38])
+                                        
+                                        print(hhh)
+                                        print(hhhh)
+                                        if hhhh=='PM':
+                                            hhh=str(int(hhh)+12)
     
     
                                 else:
                                     for j in range(0,len(rows[3].contents),1):
     
                                         if i==1:
-                                            hora.append(rows[i].contents[j].string)
+                                            
+                                           # print('chegou aqui 6')
+                                            print('chegou aqui 2')
+                                            print((str(rows[i].contents[j])))
+                                            hhh=(str(rows[1].contents[0])[28:30])
                                             
     
                                         elif i==3:
     
     
                                             
-                                            apenasDigitos1 = rows[i].contents[j].text[0:2]
-                                            apenasDigitos2 = rows[i].contents[j].text[3:5]
-                                            tar.append(apenasDigitos1)
-                                            tdr.append(apenasDigitos2)
-                                            #tar.append(rows[i].contents[j].string)
+                                             apenasDigitos = ''
+    
+                                            for taraux in str(rows[i].contents[j]):
+                                                b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
+                                                #if taraux.isdigit():
+                                                    #apenasDigitos = apenasDigitos + taraux
+                                            bb= (int(b) - 32) * 5/9
+                                            print('chegou aqui 3')
+                                            print(b)
+                                            print(bb)
+                                            tar.append(str(int(bb)))
                                             
     
                                         elif i==5:
-                                            pressao.append(rows[i].contents[j].string)
+                                            pressao.append(str(rows[i].contents[j]))
+                                            print('chegou aqui 4')
+                                            print(str(rows[i].contents[j]))
                                         elif i==7:
-                                            nbaixa.append(rows[i].contents[j].string)
+                                            nbaixa.append(str(rows[i].contents[j]))
+                                            print('chegou aqui 5')
+                                            print(str(rows[i].contents[j]))
     
                             except:
                                 continue
     
     
                         #estacao='SBGL'*len(tar)
-                        estacao=[estacao.upper() for x in range(len(tar))]
+                        estacao=[arqi['estacao'][no]]*len(wdir)
+
+                        if hhh=='0':
+                            hhh='0'+hhh
+                        datahora1=ddd +" "+hhh+":00"
+                        print('chegou aqui 7')
+                        print(datahora1)
+                        
+                            
+                        
+                        print(estacao)
+                        print(len(estacao))
+                        dia=datahora1[8:10]
+                        mes=datahora1[5:7]
+                        ano=datahora1[0:4]
+                        hor=datahora1[11:16]
+                        d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                        print(d)
+                        print('chegou aqui 8')
+                        dateFormatter = "%d/%m/%Y %H:%M"
+                        d=datetime.strptime(d, dateFormatter)
+                        d=d+timedelta(hours=int(horazulu))
+                        print(d)
                         j=0
                         dd=[]
                         datazulu=[]
-                        dateFormatter = "%d/%m/%Y %H:%M"
+                        
+                        
                         #datetime.strptime(dateString, dateFormatter)
-                        for i in range(0,len(hora),1):
+                        for i in range(0,len(estacao),1):
                             try:
-                                dia=dataaux[j].day
-                                mes=dataaux[j].month
-                                ano=dataaux[j].year
-                                hor=hora[i]
-                                d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
-    
-    
-                                # timedelta(hours=3)
-                                # if horagmt !=3:
-                                #     if horagmt <3:
-                                #         hor=str(int(hor)-(3-horagmt))
-                                #     elif horagmt==4:
-                                #         hor =str(int(hor)+(1))
-                                #     elif horagmt==5:
-                                #         hor =str(int(hor)+(2))
-                                #
-                                #     else:
-                                #         hor = str(int(hor) + (horagmt - 3))
-                                #
-                                #
-                                # if horagmt != 3:
-                                #     if horagmt < 3:
-                                #         if '0' == str(int(hora[i]) - 3 +horagmt) and hor != '3':
-                                #             j=j+1
-                                #     elif horagmt==4:
-                                #         if '0' == str(int(hora[i]) +2 -horagmt)  and hor !='3':
-                                #             j=j+1
-                                #             if hor=='24':
-                                #                 hor='0'
-                                #     elif horagmt == 5:
-                                #         if '0' == str(int(hora[i]) +4 -horagmt)  and hor !='3':
-                                #             j=j+1
-                                #             if hor=='24':
-                                #                 hor='0'
-                                # else:
-                                if horazulu == 5:
-                                    if hora[i] == '19':
-                                        j = j + 1
-                                    if hora[i] == '22':
-                                        dia=dia-1
-                                elif horazulu == 4:
-                                    if hora[i] == '20':
-                                        j = j + 1
-                                    if hora[i] == '23':
-                                        dia=dia-1
-    
-                                elif horazulu == 3:
-                                    if hora[i] == '21':
-                                        j = j + 1
-                                elif horazulu == 2:
-                                    if hora[i] == '22':
-                                        j = j + 1
-                                #
-    
-                                d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
-                                dd.append(datetime.strptime(d, dateFormatter))
-                                datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
+                                print(d)
+                                dd.append(d)
+                                datazulu.append(d)
+                                #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
+                                d=d+timedelta(hours=int(horazulu))
+                                print('chegou aqui 9')
+                                #print(timestring)
+                               # dd.append(datetime.strptime(d, dateFormatter))
+                               # datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
+                                
                                 # fuso_horario = timezone('Greenwich')
                                 # data_e_hora_sao_paulo = datetime.strptime(d, dateFormatter).astimezone(fuso_horario)
                                 # datazulu.append(data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M'))
@@ -712,12 +713,13 @@ def main():
        
     
     
-        link,data1,horazulu=baixarmodeloNovoprojeto(city)
+        ###################link,data1,horazulu=baixarmodeloNovoprojeto(city)
        # city='SBJR'
        # link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
        # horazulu=3
         
-        #################data2=baixaamodeloNovometeograma(city,link,horazulu)
+        data2=baixaamodeloNovometeograma(city,link,horazulu)
+        print(data2)
         
        
     
