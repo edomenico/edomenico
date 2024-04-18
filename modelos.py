@@ -478,7 +478,7 @@ def main():
                                              #bb= (apenasDigitos2 - 32) * 5/9
                                              #print(bb)
 
-                                             tdr.append(bb)
+                                             #tdr.append(bb)
 
                                             
                                             
