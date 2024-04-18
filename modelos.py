@@ -279,12 +279,13 @@ def main():
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
                         print(d)
                         print('chegou aqui 8')
+                        dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
                         print(d)
                         j=0
                         dd=[]
                         datazulu=[]
-                        dateFormatter = "%d/%m/%Y %H:%M"
+                        
                         dd.append(d)
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),3):
