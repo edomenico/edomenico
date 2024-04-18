@@ -130,15 +130,15 @@ def main():
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
-                        print(link)
+                        
                         horazulu=arqi['horzulu'][no]
-                        print(horazulu)
+                        
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
                         wait = WebDriverWait(driver, 20)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-                        print('chegou aqui 2')
+                       
     
                         forecast = {}
     
@@ -147,8 +147,7 @@ def main():
                        
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
-                        print('chegou aqui 3')
-                        print(horagmt)
+                        
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
                         # text_file.close()
@@ -157,8 +156,7 @@ def main():
     
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                         rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
-                        print('chegou aqui 4')
-                        print(rows)
+                        
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
@@ -183,21 +181,17 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                        print('chegou aqui 5')
+                                        
                                         ddd=str(rows[0].contents[0])[55:65]
-                                        #print(datetime.now() + timedelta(days=j))
-                                        #dateFormatter = "%d/%m/%Y %H:%M"
+                                        
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                        print (datetime.now() + timedelta(days=j))
-                                        print(ddd)
-                                        print((str(rows[1].contents[0])))
+                                        
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
                                         
-                                        print(hhh)
-                                        print(hhhh)
+                                        
                                         if hhhh=='PM':
                                             hhh=str(int(hhh)+12)
                                         
@@ -208,13 +202,11 @@ def main():
     
                                         if i==1:
                                             
-                                           # print('chegou aqui 6')
-                                            print('chegou aqui 1')
-                                            print((str(rows[i].contents[j])))
+                                           
                                             hhh=(str(rows[1].contents[0])[28:30])
                                             
                                             
-                                            #print(hhh)
+                                            
                                         elif i==2:
                                             numv=''
                                             for nuv in str(rows[i].contents[j].contents[0])[29:35]:
@@ -267,24 +259,21 @@ def main():
                         if hhh=='0':
                             hhh='0'+hhh
                         datahora1=ddd +" "+hhh+":00"
-                        print('chegou aqui 7')
-                        print(datahora1)
+                        
                         
                             
                         
-                        print(estacao)
-                        print(len(estacao))
+                       
                         dia=datahora1[8:10]
                         mes=datahora1[5:7]
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
-                        print(d)
-                        print('chegou aqui 8')
+                       
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
                         d=d+timedelta(hours=int(horazulu))
-                        print(d)
+                        
                         j=0
                         dd=[]
                         datazulu=[]
@@ -293,13 +282,12 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                print(d)
+                                
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
                                 d=d+timedelta(hours=int(horazulu))
-                                print('chegou aqui 9')
-                                #print(timestring)
+                              
                                # dd.append(datetime.strptime(d, dateFormatter))
                                # datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
@@ -308,39 +296,21 @@ def main():
                                 # datazulu.append(data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M'))
                                 #
                                 # dd.append(datetime.strptime(d, dateFormatter))
-                            # for k in range(0,len(neb),1):
-                            #     cc = ''
-                            #     #print(cc,' ',neb[k])
-                            #     cc = cc + 3
-                            #     if cc > 24:
-                            #         cc=3
+                            
     
     
     
-                                # cc=rows[i].contents[i].string
-                                # print(type(cc))
-                                # #forecast[id] = []
-                                # #i = 0
-                                # for cell in cells:
-                                #     if ('DIRPW' in id): # or ('DIRPW' in id):
-                                #         print(id + " " + str(i))
-                                #         value = cell.find('span').find('svg').find('g')["transform"]
-                                #     else:
-                                #         value = cell.get_text()
-                                #     forecast[id].append(value)
-                                #     i = i + 1
+                               
                             except:
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
                        
-                        print('chegou aqui 20')
-                        print(lista_de_tuplas)
+                        
                         df= pd.DataFrame(
                             lista_de_tuplas,
                             columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                         )
-                        print('chegou aqui 21')
-                        print(df)
+                        
                         
                         if no!=0:
                             df1=pd.concat([df,df1])
