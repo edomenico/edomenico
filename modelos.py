@@ -677,7 +677,7 @@ def main():
         #link,data1,horazulu=baixarmodeloNovoprojeto(city)
         city='SBJR'
         #####horazulu='3'
-        ####link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
+        link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
         horazulu='3'
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
