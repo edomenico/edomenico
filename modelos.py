@@ -705,16 +705,16 @@ def main():
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
         print('authenticate2')
-        data3=pd.merge(data1, data2, how='inner', on='datahora')
+        data=pd.merge(data1, data2, how='inner', on='datahora')
         
         data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
         
         
-        data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
+        data4=data1.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
         
     
     
-        return data1
+        return data4
     
     def search2(city,usu):
         try:
