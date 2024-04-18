@@ -760,7 +760,7 @@ def main():
         temp_time_df = pd.DataFrame(
             {'temp': df['temp'], ,'timestamp': df['timestamp']})
         fig = px.line(temp_time_df, x='timestamp', y=['temp'],
-                      title='Temperatura(°C) )
+                      title='Temperatura(°C)' )
         fig.update_yaxes(title="Valor")
             #fig.update_xaxes(title="dia")
         new = {'temp': 'Temperatura Atual(°C)'}
