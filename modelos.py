@@ -758,7 +758,7 @@ def main():
     def temp_time_series2(df):
         """Container for temperature time series"""
         temp_time_df = pd.DataFrame(
-            {'temp': df['temp'], ,'timestamp': df['timestamp']})
+            {'temp': df['temp'], 'timestamp': df['timestamp']})
         fig = px.line(temp_time_df, x='timestamp', y=['temp'],
                       title='Temperatura(°C)' )
         fig.update_yaxes(title="Valor")
