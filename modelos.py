@@ -517,11 +517,11 @@ def main():
                                         elif i==5:
                                             pressao.append(str(rows[i].contents[j]))
                                             print('chegou aqui 4')
-                                            print(str(rows[i].contents[j]))
+                                            print(rows[i].contents[j].string)
                                         elif i==7:
                                             nbaixa.append(str(rows[i].contents[j]))
                                             print('chegou aqui 5')
-                                            print(str(rows[i].contents[j]))
+                                            print(rows[i].contents[j].string)
     
                             except:
                                 continue
