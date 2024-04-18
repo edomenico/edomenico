@@ -242,10 +242,11 @@ def main():
     
                                             for wdiraux in str(rows[i].contents[j].contents[0])[30:33]:
                                                 if wdiraux.isdigit():
-                                                    apenasDigitos=apenasDigitos+wdiraux
+                                                    b = re.sub('[^0-9]', '', str(rows[i].contents[j].contents[0])[30:33])
+                                                    #apenasDigitos=apenasDigitos+wdiraux
                                                     print('chegou aqui 12')
-                                                    print(apenasDigitos)
-                                            wdir.append(apenasDigitos)
+                                                    print(int(b)
+                                            wdir.append(int(b))
                             except:
                                 continue
     
