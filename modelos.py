@@ -466,14 +466,20 @@ def main():
                                             
                                              apenasDigitos1 = rows[i].contents[j].text[0:2]
                                              apenasDigitos2 = rows[i].contents[j].text[3:5]
-                                             tar.append(apenasDigitos1)
-                                             tdr.append(apenasDigitos2)
-                                             bb= (int(b) - 32) * 5/9
+                                             #tar.append(apenasDigitos1)
+                                             #tdr.append(apenasDigitos2)
+                                             bb= (apenasDigitos1 - 32) * 5/9
                                              print('chegou aqui 4')
                                              print(str(rows[i].contents[j]))
-                                             print(b)
+                                            
                                              print(bb)
-                                             tar.append(str(int(bb)))
+                                             tar.append(bb)
+                                             bb= (apenasDigitos2 - 32) * 5/9
+                                             print(bb)
+
+                                             tdr.append(bb)
+
+                                            
                                             
     
                                         elif i==5:
