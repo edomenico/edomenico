@@ -184,7 +184,7 @@ def main():
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
                                         print('chegou aqui 5')
-                                        ddd=str(rows[i].contents[j])[52:62]
+                                        ddd=str(rows[i].contents[j])[54:65]
                                         #print(datetime.now() + timedelta(days=j))
                                         #dateFormatter = "%d/%m/%Y %H:%M"
                                         
