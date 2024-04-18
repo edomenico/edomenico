@@ -200,7 +200,7 @@ def main():
                                         if i==1:
                                             print('chegou aqui 6')
                                             hora.append(str(rows[i].contents[j]))
-                                            hhh=(str(rows[i].contents[j])[26:27])
+                                            hhh=(str(rows[i].contents[j])[20:30])
                                             
                                             print(hhh)
                                         elif i==2:
