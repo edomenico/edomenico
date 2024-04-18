@@ -234,8 +234,8 @@ def main():
                                                 b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
                                                 #if taraux.isdigit():
                                                     #apenasDigitos = apenasDigitos + taraux
-                                                bb= (int(b) - 32) * 5/9
-                                                tar.append(str(int(bb)))
+                                            bb= (int(b) - 32) * 5/9
+                                            tar.append(str(int(bb)))
                                             
                                                 
                                             #tar.append(rows[i].contents[j].string)
