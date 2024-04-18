@@ -192,7 +192,7 @@ def main():
                                         data.append(rows[i].contents[j].string)
                                         print (datetime.now() + timedelta(days=j))
                                         print(ddd)
-                                        print(str(rows[i].contents[j]))
+                                        print((str(rows[3].contents[0])))
     
     
                                 else:
@@ -201,10 +201,10 @@ def main():
                                         if i==1:
                                             print('chegou aqui 6')
                                             hora.append(str(rows[i].contents[j]))
-                                            hhh=(str(rows[i].contents[j])[28:30])
+                                           # hhh=(str(rows[i].contents[j])[28:30])
                                             
                                             
-                                            print(hhh)
+                                            #print(hhh)
                                         elif i==2:
                                             numv=''
                                             for nuv in str(rows[i].contents[j].contents[0])[29:35]:
@@ -317,9 +317,9 @@ def main():
                                 #
     
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
-                                print('chegou aqui 14')
-                                print(d)
-                                print(d[0:10])
+                               # print('chegou aqui 14')
+                               # print(d)
+                               # print(d[0:10])
                                 
                                 dd.append(datetime.strptime(d, dateFormatter))
                                 datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
