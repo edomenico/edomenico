@@ -184,11 +184,11 @@ def main():
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
                                         print('chegou aqui 5')
-                                        print(datetime.now() + timedelta(days=j))
+                                        #print(datetime.now() + timedelta(days=j))
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                        print(rows[i].contents[j].string)
+                                        print(rows[i].contents[j])
     
     
                                 else:
