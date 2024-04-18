@@ -198,6 +198,9 @@ def main():
                                         
                                         print(hhh)
                                         print(hhhh)
+                                        if hhhh=='PM":
+                                            hhh=str(int(hhh)+12))
+                                        
     
     
                                 else:
@@ -257,6 +260,15 @@ def main():
     
                         
                         estacao=[arqi['estacao'][no]]*len(wdir)
+
+                        #for i in range(0,len(estacao),1):
+                        if hhh='0':
+                            hhh='0'+hhh
+                        datahora1=ddd +" "+hhh+':00"
+                        print('chegou aqui 7')
+                        print(datahora1)
+                        
+                            
                         
                         print(estacao)
                         j=0
