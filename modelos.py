@@ -290,7 +290,7 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),3):
                             try:
-                                print(d)
+                                print(dd[0])
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
                                 #d=d+timedelta(hours=3)
                                 print('chegou aqui 9')
