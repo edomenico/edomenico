@@ -291,10 +291,10 @@ def main():
                         for i in range(0,len(estacao),3):
                             try:
                                 print(d)
-                                #timestring = datetime.strptime(sd + timedelta(hours=3), dateFormatter)
+                                timestring = datetime.strptime(d + timedelta(hours=3), dateFormatter)
                                 #d=d+timedelta(hours=3)
                                 print('chegou aqui 9')
-                               #print(timestring)
+                                print(timestring)
                                # dd.append(datetime.strptime(d, dateFormatter))
                                # datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
