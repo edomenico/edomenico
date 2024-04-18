@@ -1,4 +1,4 @@
-chimport backend
+import backend
 
 from streamlit import runtime
 import sys
