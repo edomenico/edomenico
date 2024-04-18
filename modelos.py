@@ -347,13 +347,14 @@ def main():
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
                        
-    
+                        print('chegou aqui 13')
+                        print(lista_de_tuplas)
                         df= pd.DataFrame(
                             lista_de_tuplas,
                             columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                         )
-                        print('chegou aqui 13')
-                        print(forecast)
+                        print('chegou aqui 14')
+                        print(df)
                         
                         if no!=0:
                             df1=pd.concat([df,df1])
