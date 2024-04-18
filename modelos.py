@@ -470,10 +470,10 @@ def main():
                                              #tdr.append(apenasDigitos2)
                                              #bb= (apenasDigitos1 - 32) * 5/9
                                              print('chegou aqui 4')
-                                             bb= str((int(apenasDigitos1) - 32) * 5/9)
+                                             bb= str(int((int(apenasDigitos1) - 32) * 5/9))
                                              print(bb)
                                              tar.append(bb)
-                                             bb= str((int(apenasDigitos1) - 32) * 5/9)
+                                             bb= str(int((int(apenasDigitos2) - 32) * 5/9))
                                              tdr.append(bb)
                                              print( bb)
                                              
