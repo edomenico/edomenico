@@ -286,7 +286,7 @@ def main():
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
                                 print(d)
                                 print('chegou aqui 8')
-                                d=strptime(datetime.strptime(d, dateFormatter))
+                                d=datetime.strptime(d, dateFormatter)
                                 print(d)
                                 
                                 
