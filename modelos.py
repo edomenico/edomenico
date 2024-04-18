@@ -271,6 +271,7 @@ def main():
                             
                         
                         print(estacao)
+                        print(len(estacao))
                         j=0
                         dd=[]
                         datazulu=[]
