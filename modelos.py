@@ -215,12 +215,12 @@ def main():
                                         elif i==3:
                                             apenasDigitos = ''
     
-                                            for taraux in rows[i].contents[j].string:
+                                            for taraux in string(rows[i].contents[j]):
                                                 if taraux.isdigit():
                                                     apenasDigitos = apenasDigitos + taraux
                                             tar.append(apenasDigitos)
                                             print('chegou aqui 8')
-                                            print(apenasDigitos)
+                                            printstring(rows[i].contents[j]))
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append(rows[i].contents[j].string)
