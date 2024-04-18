@@ -184,12 +184,14 @@ def main():
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
                                         print('chegou aqui 5')
+                                        ddd=str(rows[i].contents[j])[52:62]
                                         #print(datetime.now() + timedelta(days=j))
+                                        #dateFormatter = "%d/%m/%Y %H:%M"
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
                                         print (datetime.now() + timedelta(days=j))
-                                        print(str(rows[i].contents[j]))
+                                        print(ddd)
     
     
                                 else:
