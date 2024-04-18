@@ -571,6 +571,7 @@ def main():
                             except:
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd,tar,tdr,pressao,nbaixa,datazulu))
+                        print('chegou aqui 10')
     
                         df= pd.DataFrame(
                             lista_de_tuplas,
@@ -601,6 +602,7 @@ def main():
                 except:
                     continue
             driver.quit()
+            print(df1)
             return df1
     
     
