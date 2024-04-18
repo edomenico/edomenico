@@ -276,11 +276,11 @@ def main():
                         mes=datahora1[5:7]
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
-                        sd = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                        d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
                         print(d)
                         print('chegou aqui 8')
                         dateFormatter = "%d/%m/%Y %H:%M"
-                        d=datetime.strptime(sd, dateFormatter)
+                        d=datetime.strptime(d, dateFormatter)
                         print(d)
                         j=0
                         dd=[]
