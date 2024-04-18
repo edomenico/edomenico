@@ -243,7 +243,7 @@ def main():
                                             for wdiraux in str(rows[i].contents[j].contents[0])[30:33]:
                                                 if wdiraux.isdigit():
                                                     apenasDigitos=apenasDigitos+wdiraux
-                                                    print('chegou aqui 11')
+                                                    print('chegou aqui 12')
                                                     print(apenasDigitos)
                                             wdir.append(apenasDigitos)
                             except:
@@ -351,7 +351,7 @@ def main():
                             lista_de_tuplas,
                             columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                         )
-                        print('chegou aqui 12')
+                        print('chegou aqui 13')
                         print(forecast)
                         
                         if no!=0:
