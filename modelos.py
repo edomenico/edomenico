@@ -283,7 +283,7 @@ def main():
                         print('chegou aqui 8')
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
-                        d=d+timedelta(hours=horazulu)
+                        d=d+timedelta(hours=int(horazulu))
                         print(d)
                         j=0
                         dd=[]
@@ -297,7 +297,7 @@ def main():
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
-                                d=d+timedelta(hours=horazulu)
+                                d=d+timedelta(hours=int(horazulu))
                                 print('chegou aqui 9')
                                 #print(timestring)
                                # dd.append(datetime.strptime(d, dateFormatter))
