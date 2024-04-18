@@ -464,14 +464,19 @@ def main():
     
     
                                             
-                                             #apenasDigitos1 = rows[i].contents[j].text[0:2]
-                                             #apenasDigitos2 = rows[i].contents[j].text[3:5]
+                                             apenasDigitos1 = rows[i].contents[j].text[0:2]
+                                             apenasDigitos2 = rows[i].contents[j].text[3:5]
                                              #tar.append(apenasDigitos1)
                                              #tdr.append(apenasDigitos2)
                                              #bb= (apenasDigitos1 - 32) * 5/9
                                              print('chegou aqui 4')
-                                             print((rows[i].contents[j]))
-                                             print(rows[i].contents[j].text[3:5])
+                                             bb= str((int(apenasDigitos1) - 32) * 5/9)
+                                             print(bb)
+                                             tar.append(bb)
+                                             bb= str((int(apenasDigitos1) - 32) * 5/9)
+                                             tdr.append(bb)
+                                             print( bb)
+                                             
                                             
                                             # print(bb)
                                              #tar.append(bb)
