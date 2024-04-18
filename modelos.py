@@ -184,7 +184,7 @@ def main():
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
                                         print('chegou aqui 5')
-                                        ddd=str(rows[i].contents[j])[54:65]
+                                        ddd=str(rows[i].contents[j])[54:66]
                                         #print(datetime.now() + timedelta(days=j))
                                         #dateFormatter = "%d/%m/%Y %H:%M"
                                         
@@ -200,8 +200,9 @@ def main():
                                         if i==1:
                                             print('chegou aqui 6')
                                             hora.append(str(rows[i].contents[j]))
+                                            hhh=(str(rows[i].contents[j])[26:27]
                                             
-                                            print(str(rows[i].contents[j]))
+                                            print(hhh)
                                         elif i==2:
                                             numv=''
                                             for nuv in str(rows[i].contents[j].contents[0])[29:35]:
@@ -213,8 +214,7 @@ def main():
                                             cldcb.append(nucb)
                                             tp.append(tep)
                                             vis.append(visi)
-                                            print('chegou aqui 7')
-                                            print(str(rows[i].contents[j].contents[0])[29:35])
+                                            
                                         elif i==3:
                                             apenasDigitos = ''
     
@@ -225,21 +225,17 @@ def main():
                                                 bb= (int(b) - 32) * 5/9
                                                 tar.append(str(int(bb)))
                                             
-                                                print(str(int(bb)))
-                                                print('chegou aqui 8')
+                                                
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append(str(rows[i].contents[j]))
-                                            print('chegou aqui 9')
-                                            print(str(rows[i].contents[j]))
+                                           
                                         elif i==5:
                                             wspd.append(int(rows[i].contents[j].string))
-                                            print('chegou aqui 10')
-                                            print(int(rows[i].contents[j].string))
+                                           
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
-                                            print('chegou aqui 11')
-                                            print (rows[i].contents[j].string)
+                                           
                                         else:
                                             apenasDigitos =''
     
@@ -247,15 +243,14 @@ def main():
                                                 if wdiraux.isdigit():
                                                     b = re.sub('[^0-9]', '', str(rows[i].contents[j].contents[0])[3:35])
                                                     #apenasDigitos=apenasDigitos+wdiraux
-                                                    print('chegou aqui 12')
-                                                    print(int(b))
+                                                    
                                             wdir.append(int(b))
                             except:
                                 continue
     
                         
                         estacao=[arqi['estacao'][no]]*len(wdir)
-                        print('chegou aqui 13')
+                        
                         print(estacao)
                         j=0
                         dd=[]
