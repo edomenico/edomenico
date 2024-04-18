@@ -240,9 +240,9 @@ def main():
                                         else:
                                             apenasDigitos =''
     
-                                            for wdiraux in str(rows[i].contents[j].contents[0])[30:33]:
+                                            for wdiraux in str(rows[i].contents[j].contents[0])[3:35]:
                                                 if wdiraux.isdigit():
-                                                    b = re.sub('[^0-9]', '', str(rows[i].contents[j].contents[0])[30:33])
+                                                    b = re.sub('[^0-9]', '', str(rows[i].contents[j].contents[0])[3:35])
                                                     #apenasDigitos=apenasDigitos+wdiraux
                                                     print('chegou aqui 12')
                                                     print(int(b)
