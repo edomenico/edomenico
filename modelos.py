@@ -193,9 +193,10 @@ def main():
                                     for j in range(0,len(rows[3].contents),1):
     
                                         if i==1:
-                                            hora.append(rows[i].contents[j].string)
                                             print('chegou aqui 6')
-                                            printrows[i].contents[j].string
+                                            hora.append(rows[i].contents[j].string)
+                                            
+                                            print(rows[i].contents[j].string)
                                         elif i==2:
                                             numv=''
                                             for nuv in str(rows[i].contents[j].contents[0])[29:35]:
