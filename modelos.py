@@ -321,7 +321,9 @@ def main():
     
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
                                 print('chegou aqui 14')
+                                print(d)
                                 print(d[0:10])
+                                
                                 dd.append(datetime.strptime(d, dateFormatter))
                                 datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
