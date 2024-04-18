@@ -689,6 +689,7 @@ def main():
     
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
+         print('authenticate2------1')
         ###city='SBJR'
         #####horazulu='3'
         ###link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
@@ -696,7 +697,7 @@ def main():
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
         #print(data2)
-        
+        print('authenticate2------2')
        
     
         #except Exception as e:
