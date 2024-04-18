@@ -195,7 +195,7 @@ def main():
                                         print((str(rows[1].contents[0])))
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
-                                        print('chegou aqui 1')
+                                        
                                         print(hhh)
                                         print(hhhh)
                                         if hhhh=='PM':
@@ -208,7 +208,8 @@ def main():
     
                                         if i==1:
                                            # print('chegou aqui 6')
-                                            hora.append(str(rows[i].contents[j]))
+                                            print('chegou aqui 1')
+                                            print(hora.append(str(rows[i].contents[j])))
                                            # hhh=(str(rows[i].contents[j])[28:30])
                                             
                                             
