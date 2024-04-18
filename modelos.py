@@ -199,7 +199,7 @@ def main():
                                         print(hhh)
                                         print(hhhh)
                                         if hhhh=='PM':
-                                            hhh=str(int(hhh)+12))
+                                            hhh=str(int(hhh)+12)
                                         
     
     
