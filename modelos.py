@@ -688,11 +688,11 @@ def main():
        
     
     
-        #link,data1,horazulu=baixarmodeloNovoprojeto(city)
-        city='SBJR'
+        link,data1,horazulu=baixarmodeloNovoprojeto(city)
+        ###city='SBJR'
         #####horazulu='3'
-        link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
-        horazulu='3'
+        ###link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
+        ##horazulu='3'
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
         #print(data2)
@@ -703,12 +703,13 @@ def main():
         #    st.error(f"Could not get the data because {e}. Exiting...")
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
-        #################data3=pd.merge(data1, data2, how='inner', on='datahora')
+        print('authenticate2')
+        data3=pd.merge(data1, data2, how='inner', on='datahora')
         
-        #data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
+        data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
         
         
-        #################data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
+        data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
         
     
     
