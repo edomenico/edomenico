@@ -285,7 +285,7 @@ def main():
                                 hor=datahora1[11:12]
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
                                 print('chegou aqui 8')
-                                d=strptime(date_string, dateFormatter)
+                                d=strptime(d, dateFormatter)
                                 print(d)
                                 
                                 
