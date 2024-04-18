@@ -503,8 +503,8 @@ def main():
                                             
                                              apenasDigitos = ''
     
-                                            for taraux in str(rows[i].contents[j]):
-                                                b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
+                                             for taraux in str(rows[i].contents[j]):
+                                                 b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
                                                 #if taraux.isdigit():
                                                     #apenasDigitos = apenasDigitos + taraux
                                             bb= (int(b) - 32) * 5/9
