@@ -192,6 +192,7 @@ def main():
                                         data.append(rows[i].contents[j].string)
                                         print (datetime.now() + timedelta(days=j))
                                         print(ddd)
+                                        print(str(rows[i].contents[j]))
     
     
                                 else:
@@ -200,7 +201,8 @@ def main():
                                         if i==1:
                                             print('chegou aqui 6')
                                             hora.append(str(rows[i].contents[j]))
-                                            hhh=(str(rows[i].contents[j])[27:30])
+                                            hhh=(str(rows[i].contents[j])[28:30])
+                                            
                                             
                                             print(hhh)
                                         elif i==2:
