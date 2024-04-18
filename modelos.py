@@ -188,7 +188,7 @@ def main():
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                        print(rows[i].contents[j])
+                                        print(str(rows[i].contents[j]))
     
     
                                 else:
