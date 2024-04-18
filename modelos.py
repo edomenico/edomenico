@@ -126,7 +126,7 @@ def main():
                         arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                     arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
                     arqi = arqi.reset_index(drop=True)
-                    print('chegou aqui 1')
+                    
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
@@ -195,7 +195,7 @@ def main():
                                         print((str(rows[1].contents[0])))
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
-                                        
+                                        print('chegou aqui 1')
                                         print(hhh)
                                         print(hhhh)
                                         if hhhh=='PM':
