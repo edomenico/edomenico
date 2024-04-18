@@ -276,13 +276,16 @@ def main():
                         datazulu=[]
                         dateFormatter = "%d/%m/%Y %H:%M"
                         #datetime.strptime(dateString, dateFormatter)
-                        for i in range(0,len(hora),1):
+                        for i in range(0,len(estacao),1):
                             try:
-                                dia=dataaux[j].day
-                                mes=dataaux[j].month
-                                ano=dataaux[j].year
-                                hor=hora[i]
+                                dia=datahora1[9:10]
+                                mes=datahora1[6:7]
+                                ano=datahora1[0:3]
+                                hor=atahora1[11:12]
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
+                                print('chegou aqui 8')
+                                print(d)
+                                
                                 
     
     
