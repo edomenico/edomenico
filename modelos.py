@@ -220,9 +220,9 @@ def main():
                                                 #if taraux.isdigit():
                                                     #apenasDigitos = apenasDigitos + taraux
                                                 bb= (int(b) - 32) * 5/9
-                                                tar.append(str(bb))
+                                                tar.append(str(int(bb)))
                                             
-                                                print(str(bb))
+                                                print(str(int(bb)))
                                                 print('chegou aqui 8')
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
@@ -230,9 +230,9 @@ def main():
                                             print('chegou aqui 9')
                                             print(str(rows[i].contents[j]))
                                         elif i==5:
-                                            wspd.append(int(str(rows[i].contents[j])))
+                                            wspd.append(int(rows[i].contents[j].string))
                                             print('chegou aqui 10')
-                                            print(int(str(rows[i].contents[j])))
+                                            print(int(rows[i].contents[j].string))
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
                                             print('chegou aqui 11')
