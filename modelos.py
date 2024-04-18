@@ -216,11 +216,12 @@ def main():
                                             apenasDigitos = ''
     
                                             for taraux in str(rows[i].contents[j]):
-                                                if taraux.isdigit():
-                                                    apenasDigitos = apenasDigitos + taraux
-                                            tar.append(apenasDigitos)
+                                                b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
+                                                #if taraux.isdigit():
+                                                    #apenasDigitos = apenasDigitos + taraux
+                                            tar.append(b)
                                             print('chegou aqui 8')
-                                            print(str(rows[i].contents[j]))
+                                            print(b)
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append(str(rows[i].contents[j]))
