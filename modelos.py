@@ -674,28 +674,31 @@ def main():
                 visibilidade='10000'
     
             chuva=weather_data['prp'][i]
-            td=(weather_data['tdr'][i])
-            ur= str(round(100 - 5 * (int(temp) - int(td))))
-            nbaixas=str(weather_data['nbaixa'][i])
-            if nbaixas[-1]=='k':
-                nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*3281)
-            elif nbaixas=='--':
-                nbaixas = 'Nil'
-            else:
-                nbaixas=str(int(int((nbaixas))*3.281))
-            if len(nbaixas)>5:
-                nbaixas=nbaixas[0:5]
+            ######td=(weather_data['tdr'][i])
+            ######ur= str(round(100 - 5 * (int(temp) - int(td))))
+            ######nbaixas=str(weather_data['nbaixa'][i])
+            ######if nbaixas[-1]=='k':
+            #######    nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*3281)
+            #######elif nbaixas=='--':
+            #######    nbaixas = 'Nil'
+            #######else:
+            #######    nbaixas=str(int(int((nbaixas))*3.281))
+            #######if len(nbaixas)>5:
+            #######    nbaixas=nbaixas[0:5]
     
             tp=weather_data['tp'][i]
             if tp=='':
                 tp='Nil'
             cld=weather_data['cld'][i]
             cldcb=weather_data['cldcb'][i]
-            pressao=(weather_data['pressao'][i])
+            #######pressao=(weather_data['pressao'][i])
             #weather_status = weather_data['list'][i]['weather'][0]['main']
+            #######extracted_data.append(
+            #######    (weather_data['estacao'][i], date, time, temp,ur,pressao,
+            #######     tp, cld, cldcb,wspd,wdir,gust,visibilidade,nbaixas))
             extracted_data.append(
-                (weather_data['estacao'][i], date, time, temp,ur,pressao,
-                 tp, cld, cldcb,wspd,wdir,gust,visibilidade,nbaixas))
+                (weather_data['estacao'][i], date, time, temp,
+                 tp, cld, cldcb,wspd,wdir,gust,visibilidade))
     
         # push_data(extracted_data)
         return extracted_data
@@ -714,7 +717,7 @@ def main():
        # link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
        # horazulu=3
         
-        data2=baixaamodeloNovometeograma(city,link,horazulu)
+        #################data2=baixaamodeloNovometeograma(city,link,horazulu)
         
        
     
@@ -722,16 +725,16 @@ def main():
         #    st.error(f"Could not get the data because {e}. Exiting...")
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
-        data3=pd.merge(data1, data2, how='inner', on='datahora')
+        #################data3=pd.merge(data1, data2, how='inner', on='datahora')
         
         #data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
         
         
-        data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
+        #################data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
         
     
     
-        return data4
+        return data1
     
     def search2(city,usu):
         try:
@@ -740,6 +743,8 @@ def main():
             
             data = authenticate2(city)
                 # st.write(data)
+            print('cheguei aqui search2')
+            print(data)
             
             extracted_data = sort_data2(data)
                 # st.write(extracted_data)
@@ -753,12 +758,12 @@ def main():
     def temp_time_series2(df):
         """Container for temperature time series"""
         temp_time_df = pd.DataFrame(
-            {'temp': df['temp'], 'ur': df['ur'],'timestamp': df['timestamp']})
-        fig = px.line(temp_time_df, x='timestamp', y=['temp', 'ur'],
-                      title='Temperatura(°C) e Umidade Relativa(%)')
+            {'temp': df['temp'], ,'timestamp': df['timestamp']})
+        fig = px.line(temp_time_df, x='timestamp', y=['temp'],
+                      title='Temperatura(°C) )
         fig.update_yaxes(title="Valor")
             #fig.update_xaxes(title="dia")
-        new = {'temp': 'Temperatura Atual(°C)', 'ur': 'Umidade (%)'}
+        new = {'temp': 'Temperatura Atual(°C)'}
         fig.for_each_trace(lambda t: t.update(name=new[t.name]))
             # fig.update_legends(selector={'actual_temp': 'Air Temperature'})
             # fig = px.scatter(title='Temp')
@@ -1018,10 +1023,14 @@ def main():
             df = pd.DataFrame(result)
             df1 = pd.DataFrame(result)
            
+            ##########df.rename(
+            ##########    columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'ur', 5: 'pressao', 6: 'tp',
+            ##########             7: 'ceu',8: 'ncb',9: 'int vento',
+            ##########             10: 'dir vento', 11: 'raj vento', 12: 'visibilidade', 13: 'nbaixas'}, inplace=True)
             df.rename(
-                columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'ur', 5: 'pressao', 6: 'tp',
-                         7: 'ceu',8: 'ncb',9: 'int vento',
-                         10: 'dir vento', 11: 'raj vento', 12: 'visibilidade', 13: 'nbaixas'}, inplace=True)
+                columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'tp',
+                         5: 'ceu',6: 'ncb',7: 'int vento',
+                         8: 'dir vento', 9: 'raj vento', 10: 'visibilidade'}, inplace=True)
 
 
 
@@ -1064,7 +1073,7 @@ def main():
 
                     # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
                     col1.metric("Céu", sceu)
-                    col1.metric("Umidade", f"{df['ur'].iloc[0]}")
+                    ########col1.metric("Umidade", f"{df['ur'].iloc[0]}")
 
                 with col2:
                     if df['tp'].iloc[0] == 'BR':
@@ -1080,12 +1089,12 @@ def main():
                     # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
                     col2.metric("Tempo presente", stp)
                     col2.metric("Visibilidade(m)", f"{df['visibilidade'].iloc[0]}")
-                    col2.metric("Pressão(hPa)", f"{df['pressao'].iloc[0]}")
+                    ####col2.metric("Pressão(hPa)", f"{df['pressao'].iloc[0]}")
                 with col3:
                     # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                     col3.metric("Rajada(kt)", f"{(df['raj vento'].iloc[0])}")
                     col3.metric("Vento(graus/kt)", f"{(df['dir vento'].iloc[0])} / {int(df['int vento'].iloc[0])}")
-                    col3.metric("Altura nuvens baixas(ft)", f"{df['nbaixas'].iloc[0]}")
+                   ##### col3.metric("Altura nuvens baixas(ft)", f"{df['nbaixas'].iloc[0]}")
 
                 st.divider()
                 with st.container():
