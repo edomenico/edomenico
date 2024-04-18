@@ -279,10 +279,10 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                dia=datahora1[9:10]
-                                mes=datahora1[6:7]
+                                dia=datahora1[8:10]
+                                mes=datahora1[5:7]
                                 ano=datahora1[0:5]
-                                hor=datahora1[11:12]
+                                hor=datahora1[10:12]
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
                                 print(d)
                                 print('chegou aqui 8')
