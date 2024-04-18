@@ -126,7 +126,7 @@ def main():
                         arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                     arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
                     arqi = arqi.reset_index(drop=True)
-                    print('chegou aqui b222')
+                    print('chegou aqui 1')
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
@@ -138,7 +138,7 @@ def main():
                         driver.get(link)
                         wait = WebDriverWait(driver, 20)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-                        print('chegou aqui b33')
+                        print('chegou aqui 2')
     
                         forecast = {}
     
@@ -147,6 +147,8 @@ def main():
                        
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
+                        print('chegou aqui 3')
+                        print(horagmt)
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
                         # text_file.close()
@@ -155,6 +157,8 @@ def main():
     
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                         rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                        print('chegou aqui 4')
+                        print(rows)
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
@@ -179,7 +183,8 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-    
+                                        print('chegou aqui 5')
+                                        print(datetime.now() + timedelta(days=j))
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
     
@@ -189,6 +194,8 @@ def main():
     
                                         if i==1:
                                             hora.append(rows[i].contents[j].string)
+                                            print('chegou aqui 6')
+                                            printrows[i].contents[j].string
                                         elif i==2:
                                             numv=''
                                             for nuv in str(rows[i].contents[j].contents[0])[29:35]:
@@ -200,6 +207,8 @@ def main():
                                             cldcb.append(nucb)
                                             tp.append(tep)
                                             vis.append(visi)
+                                            print('chegou aqui 7')
+                                            print(str(rows[i].contents[j].contents[0])[29:35])
                                         elif i==3:
                                             apenasDigitos = ''
     
@@ -207,14 +216,20 @@ def main():
                                                 if taraux.isdigit():
                                                     apenasDigitos = apenasDigitos + taraux
                                             tar.append(apenasDigitos)
+                                            print('chegou aqui 8')
+                                            print(apenasDigitos)
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append(rows[i].contents[j].string)
+                                            print('chegou aqui 9')
+                                            print(rows[i].contents[j].string)
                                         elif i==5:
                                             wspd.append(int(rows[i].contents[j].string))
+                                            print('chegou aqui 10')
+                                            print(int(rows[i].contents[j].string))
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
-                                            print('chegou aqui baixarmodeloNovoprojeto')
+                                            print('chegou aqui 11')
                                             print (rows[i].contents[j].string)
                                         else:
                                             apenasDigitos =''
@@ -222,18 +237,13 @@ def main():
                                             for wdiraux in str(rows[i].contents[j].contents[0])[30:33]:
                                                 if wdiraux.isdigit():
                                                     apenasDigitos=apenasDigitos+wdiraux
+                                                    print('chegou aqui 11')
+                                                    print(apenasDigitos)
                                             wdir.append(apenasDigitos)
                             except:
                                 continue
     
-                        print(data)
-                        print(hora)
-                        print(neb)
-                        print(tar)
-                        print(prp)
-                        print(wspd)
-                        print(gust)
-                        print(wdir)
+                        
                         estacao=[arqi['estacao'][no]]*len(wdir)
                         j=0
                         dd=[]
@@ -335,6 +345,7 @@ def main():
                             lista_de_tuplas,
                             columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                         )
+                        print('chegou aqui 12')
                         print(forecast)
                         
                         if no!=0:
@@ -357,7 +368,7 @@ def main():
                         nomearq = 'dadosecmwf_area' + str(area) + '_' + diaf + mesf + '.csv'
                     else:
                         nomearq = 'dadosicon_area' + str(area) + '_' + diaf + mesf + '.csv'
-                    df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+                    #df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
                 except:
                     continue
             driver.quit()
@@ -395,7 +406,9 @@ def main():
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
             
-            print('chegou aqui b1')
+
+
+        
     
             for jj in range(0,1,1):
                 try:
@@ -416,23 +429,22 @@ def main():
                         #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                         #horazulu=3
                         print('Loading...')
-                        print('chegou aqui bm2223')
-                        print(link1)
+                        
                        # link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 20)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-                        print('chegou aqui b33')
+                        
                         html = driver.page_source
                         forecast = {}
     
                     # while True:
     
                         
-                        print('chegou aqui b4')
+                        
                         s = BeautifulSoup(html, "html.parser")
-                        print('chegou aqui b5')
+                        
                        # horagmt=arqi['horzulu'][no]
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
@@ -442,7 +454,7 @@ def main():
     
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                         rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
-                        print('chegou aqui b6')
+                        
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
@@ -474,8 +486,7 @@ def main():
     
                                         if i==1:
                                             hora.append(rows[i].contents[j].string)
-                                            print('baixa1')
-                                            print(rows[i].contents[j].string)
+                                            
     
                                         elif i==3:
     
@@ -486,8 +497,7 @@ def main():
                                             tar.append(apenasDigitos1)
                                             tdr.append(apenasDigitos2)
                                             #tar.append(rows[i].contents[j].string)
-                                            print('baixa2')
-                                            print(tar.append(apenasDigitos1))
+                                            
     
                                         elif i==5:
                                             pressao.append(rows[i].contents[j].string)
@@ -598,7 +608,7 @@ def main():
                             lista_de_tuplas,
                             columns=['estacao','datahora', 'tar', 'tdr', 'pressao','nbaixa','datazulu']
                         )
-                        print(forecast)
+                        
                         if no!=0:
                             df1=pd.concat([df,df1])
                         else:
@@ -628,7 +638,7 @@ def main():
     
     def lookup_coord2(city_name,usu):
         """Function to lookup the names of city"""
-        print('chegou aqui')
+        
         if usu==1:
             df = pd.read_csv("cities_transformed3.csv")
         else:
@@ -645,8 +655,7 @@ def main():
     
     def sort_data2(weather_data):
         """"Function to extract data from json"""
-        print('extracted')
-        print(weather_data)
+       
         
     
         extracted_data = []
@@ -655,7 +664,7 @@ def main():
             #date, time = weather_data.datazulu[i].split(' ')
     
             temp = weather_data['tar'][i]
-            print(temp)
+            
             #feel_temp = weather_data['list'][i]['main']['feels_like']
             #min_temp = weather_data['list'][i]['main']['temp_min']
             #max_temp = weather_data['list'][i]['main']['temp_max']
@@ -703,17 +712,16 @@ def main():
         """Function to request information from OpenWeatherMap API giving the necessary details"""
         #try:
     
-        print('chegou aqui 2')
+       
     
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
        # city='SBJR'
        # link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
        # horazulu=3
-        print('chegou aqui 333333333')
-        print (data1)
+        
         data2=baixaamodeloNovometeograma(city,link,horazulu)
-        print('chegou aqui 2222222222222')
+        
        
     
         #except Exception as e:
@@ -721,14 +729,12 @@ def main():
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
         data3=pd.merge(data1, data2, how='inner', on='datahora')
-        print(data3)
-        print('chegou aqui 44444444444444')
+        
         #data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
-        print('chegou aqui 5555555555555')
+        
         
         data4=data3.rename(columns={'estacao_x': 'estacao', 'tar_x': 'tar', 'datazulu_x': 'datazulu'})
-        print('chegou aqui 66666666666666')
-        print(data4)
+        
     
     
         return data4
@@ -737,11 +743,10 @@ def main():
         try:
             lat, lon = lookup_coord2(city,usu)
                 # st.write(lat)
-            print('novo_projeto 1')
+            
             data = authenticate2(city)
                 # st.write(data)
-            print('novo_projeto 2')
-            print(data)
+            
             extracted_data = sort_data2(data)
                 # st.write(extracted_data)
             return extracted_data, lat, lon
@@ -1014,13 +1019,11 @@ def main():
                 pass
             
             result, lat, lon = search2(city, usu)
-            print(result)
-            print('modelos p1')
+            
             # st.write(result)
             df = pd.DataFrame(result)
             df1 = pd.DataFrame(result)
-            print(df)
-            print('modelos p2')
+           
             df.rename(
                 columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'ur', 5: 'pressao', 6: 'tp',
                          7: 'ceu',8: 'ncb',9: 'int vento',
@@ -1028,9 +1031,9 @@ def main():
 
 
 
-            print('modelos p3')
+            
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
-            print('modelos p4')
+           
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
             #     df['sens.term'] = df['sens.term'] - 273.15
