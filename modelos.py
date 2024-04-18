@@ -209,7 +209,7 @@ def main():
                                         if i==1:
                                             
                                            # print('chegou aqui 6')
-                                            #print('chegou aqui 1')
+                                            print('chegou aqui 1')
                                             print((str(rows[i].contents[j])))
                                             hhh=(str(rows[1].contents[0])[28:30])
                                             
