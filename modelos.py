@@ -281,7 +281,7 @@ def main():
                             try:
                                 dia=datahora1[9:10]
                                 mes=datahora1[6:7]
-                                ano=datahora1[0:3]
+                                ano=datahora1[0:4]
                                 hor=datahora1[11:12]
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
                                 print(d)
