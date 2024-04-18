@@ -222,7 +222,7 @@ def main():
                                                 bb= (int(b) - 32) * 5/9
                                                 tar.append(str(bb))
                                             
-                                                print(str(b))
+                                                print(str(bb))
                                                 print('chegou aqui 8')
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
