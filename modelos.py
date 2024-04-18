@@ -252,6 +252,8 @@ def main():
     
                         
                         estacao=[arqi['estacao'][no]]*len(wdir)
+                        print('chegou aqui 13')
+                        print(estacao)
                         j=0
                         dd=[]
                         datazulu=[]
@@ -264,6 +266,8 @@ def main():
                                 ano=dataaux[j].year
                                 hor=hora[i]
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
+                                print('chegou aqui 14')
+                                print(d)
     
     
                                 # timedelta(hours=3)
@@ -347,13 +351,13 @@ def main():
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
                        
-                        print('chegou aqui 13')
+                        print('chegou aqui 20')
                         print(lista_de_tuplas)
                         df= pd.DataFrame(
                             lista_de_tuplas,
                             columns=['estacao','datahora', 'wspd', 'wdir', 'gust', 'tar', 'prp', 'neb','cld','cldcb','vis','tp','datazulu']
                         )
-                        print('chegou aqui 14')
+                        print('chegou aqui 21')
                         print(df)
                         
                         if no!=0:
