@@ -266,8 +266,7 @@ def main():
                                 ano=dataaux[j].year
                                 hor=hora[i]
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
-                                print('chegou aqui 14')
-                                print(d)
+                                
     
     
                                 # timedelta(hours=3)
@@ -318,9 +317,11 @@ def main():
                                 #
     
                                 d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
-                                
+                                print('chegou aqui 14')
+                                print(d)
                                 dd.append(datetime.strptime(d, dateFormatter))
                                 datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
+                                
                                 # fuso_horario = timezone('Greenwich')
                                 # data_e_hora_sao_paulo = datetime.strptime(d, dateFormatter).astimezone(fuso_horario)
                                 # datazulu.append(data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M'))
