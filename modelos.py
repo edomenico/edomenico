@@ -281,9 +281,9 @@ def main():
                             try:
                                 dia=datahora1[8:10]
                                 mes=datahora1[5:7]
-                                ano=datahora1[0:5]
-                                hor=datahora1[10:12]
-                                d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
+                                ano=datahora1[0:4]
+                                hor=datahora1[11:16]
+                                d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
                                 print(d)
                                 print('chegou aqui 8')
                                 d=strptime(datetime.strptime(d, dateFormatter))
