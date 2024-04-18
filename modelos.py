@@ -470,7 +470,7 @@ def main():
                                              tdr.append(apenasDigitos2)
                                              bb= (int(b) - 32) * 5/9
                                              print('chegou aqui 4')
-                                             print(str(rows[i].contents[j])
+                                             print(str(rows[i].contents[j]))
                                              print(b)
                                              print(bb)
                                              tar.append(str(int(bb)))
