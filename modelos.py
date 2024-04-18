@@ -276,10 +276,10 @@ def main():
                         mes=datahora1[5:7]
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
-                        dd = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                        dddd = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
                         print(d)
                         print('chegou aqui 8')
-                        d=datetime.strptime(dd, dateFormatter)
+                        d=datetime.strptime(dddd, dateFormatter)
                         print(d)
                         j=0
                         dd=[]
@@ -295,7 +295,7 @@ def main():
                                 print('chegou aqui 9')
                                 print(timestring)
                                 dd.append(datetime.strptime(d, dateFormatter))
-                                datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
+                                datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
                                 # fuso_horario = timezone('Greenwich')
                                 # data_e_hora_sao_paulo = datetime.strptime(d, dateFormatter).astimezone(fuso_horario)
