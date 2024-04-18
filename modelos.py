@@ -377,16 +377,11 @@ def main():
             for jj in range(0,1,1):
                 try:
     
-                    # if jj==0:
-                    #     arqi = pd.read_csv('estacaomodeloecmwf.csv', encoding='iso-8859-1', delimiter=';')
-                    # else:
-                    #     #arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
-                    #arqi = arqi.loc[(arqi['area'] == area)]
-                    #arqi = arqi.reset_index(drop=True)
+                    
     
                     for no in range(0, 1, 1):
     
-                        #link = arqi['endereco'][no]
+                        
                         posicaoi=str.find(link,"?")
                         posicaof=str.find(link,"pressure")+8
                         link1=link[0:posicaoi] + '/meteogram' + link[posicaoi:posicaof]
@@ -394,7 +389,7 @@ def main():
                         #horazulu=3
                         print('Loading...')
                         
-                       # link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
+                        link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 20)
@@ -435,9 +430,7 @@ def main():
     
                         for i in range(0,8,1): #variável
                             try:
-                                #if i==7:
-                                 #   cc=str(rows[i].contents[i].contents[0])[30:33]
-                                #for j in range(0,len)
+                               
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
                                         print('chegou aqui 1')
@@ -449,7 +442,7 @@ def main():
                                         print((str(rows[1].contents[0])))
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
-                                        
+                                        print('chegou aqui 2')
                                         print(hhh)
                                         print(hhhh)
                                         if hhhh=='PM':
@@ -461,8 +454,8 @@ def main():
     
                                         if i==1:
                                             
-                                           # print('chegou aqui 6')
-                                            print('chegou aqui 2')
+                                           
+                                            print('chegou aqui 3')
                                             print((str(rows[i].contents[j])))
                                             hhh=(str(rows[1].contents[0])[28:30])
                                             
@@ -471,25 +464,24 @@ def main():
     
     
                                             
-                                             apenasDigitos = ''
-    
-                                             for taraux in str(rows[i].contents[j]):
-                                                 b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
-                                                #if taraux.isdigit():
-                                                    #apenasDigitos = apenasDigitos + taraux
+                                             apenasDigitos1 = rows[i].contents[j].text[0:2]
+                                             apenasDigitos2 = rows[i].contents[j].text[3:5]
+                                             tar.append(apenasDigitos1)
+                                             tdr.append(apenasDigitos2)
                                              bb= (int(b) - 32) * 5/9
-                                             print('chegou aqui 3')
+                                             print('chegou aqui 4')
+                                             print(str(rows[i].contents[j])
                                              print(b)
                                              print(bb)
                                              tar.append(str(int(bb)))
                                             
     
                                         elif i==5:
-                                            pressao.append(str(rows[i].contents[j]))
-                                            print('chegou aqui 4')
+                                            pressao.append(rows[i].contents[j].string)
+                                            print('chegou aqui 5')
                                             print(rows[i].contents[j].string)
                                         elif i==7:
-                                            nbaixa.append(str(rows[i].contents[j]))
+                                            nbaixa.append(rows[i].contents[j].string)
                                             print('chegou aqui 5')
                                             print(rows[i].contents[j].string)
     
@@ -498,8 +490,7 @@ def main():
     
     
                         #estacao='SBGL'*len(tar)
-                        estacao=[arqi['estacao'][no]]*len(wdir)
-
+                        estacao=[estacao.upper() for x in range(len(tar))]
                         if hhh=='0':
                             hhh='0'+hhh
                         datahora1=ddd +" "+hhh+":00"
@@ -683,13 +674,13 @@ def main():
        
     
     
-        link,data1,horazulu=baixarmodeloNovoprojeto(city)
-       # city='SBJR'
+        #link,data1,horazulu=baixarmodeloNovoprojeto(city)
+        city='SBJR'
         #####horazulu='3'
         ####link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
-       # horazulu=3
+        horazulu='3'
         
-        ####data2=baixaamodeloNovometeograma(city,link,horazulu)
+        data2=baixaamodeloNovometeograma(city,link,horazulu)
         #print(data2)
         
        
