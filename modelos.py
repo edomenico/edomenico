@@ -220,16 +220,16 @@ def main():
                                                     apenasDigitos = apenasDigitos + taraux
                                             tar.append(apenasDigitos)
                                             print('chegou aqui 8')
-                                            print(string(rows[i].contents[j]))
+                                            print(str(rows[i].contents[j]))
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
-                                            prp.append(rows[i].contents[j].string)
+                                            prp.append(str(rows[i].contents[j]))
                                             print('chegou aqui 9')
-                                            print(rows[i].contents[j].string)
+                                            print(str(rows[i].contents[j]))
                                         elif i==5:
-                                            wspd.append(int(rows[i].contents[j].string))
+                                            wspd.append(int(str(rows[i].contents[j])))
                                             print('chegou aqui 10')
-                                            print(int(rows[i].contents[j].string))
+                                            print(int(str(rows[i].contents[j])))
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
                                             print('chegou aqui 11')
