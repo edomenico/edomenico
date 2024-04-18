@@ -272,78 +272,26 @@ def main():
                         
                         print(estacao)
                         print(len(estacao))
+                        dia=datahora1[8:10]
+                        mes=datahora1[5:7]
+                        ano=datahora1[0:4]
+                        hor=datahora1[11:16]
+                        d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                        print(d)
+                        print('chegou aqui 8')
+                        d=datetime.strptime(d, dateFormatter)
+                        print(d)
                         j=0
                         dd=[]
                         datazulu=[]
                         dateFormatter = "%d/%m/%Y %H:%M"
+                        dd.append(d)
                         #datetime.strptime(dateString, dateFormatter)
-                        for i in range(0,len(estacao),1):
+                        for i in range(0,len(estacao),3):
                             try:
-                                dia=datahora1[8:10]
-                                mes=datahora1[5:7]
-                                ano=datahora1[0:4]
-                                hor=datahora1[11:16]
-                                d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                                d=d+timedelta(hours=3)
+                                print('chegou aqui 9')
                                 print(d)
-                                print('chegou aqui 8')
-                                d=datetime.strptime(d, dateFormatter)
-                                print(d)
-                                
-                                
-    
-    
-                                # timedelta(hours=3)
-                                # if horagmt !=3:
-                                #     if horagmt <3:
-                                #         hor=str(int(hor)-(3-horagmt))
-                                #     elif horagmt==4:
-                                #         hor =str(int(hor)+(1))
-                                #     elif horagmt==5:
-                                #         hor =str(int(hor)+(2))
-                                #
-                                #     else:
-                                #         hor = str(int(hor) + (horagmt - 3))
-                                #
-                                #
-                                # if horagmt != 3:
-                                #     if horagmt < 3:
-                                #         if '0' == str(int(hora[i]) - 3 +horagmt) and hor != '3':
-                                #             j=j+1
-                                #     elif horagmt==4:
-                                #         if '0' == str(int(hora[i]) +2 -horagmt)  and hor !='3':
-                                #             j=j+1
-                                #             if hor=='24':
-                                #                 hor='0'
-                                #     elif horagmt == 5:
-                                #         if '0' == str(int(hora[i]) +4 -horagmt)  and hor !='3':
-                                #             j=j+1
-                                #             if hor=='24':
-                                #                 hor='0'
-                                # else:
-                                if horazulu == 5:
-                                    if hora[i] == '19':
-                                        j = j + 1
-                                    if hora[i] == '22':
-                                        dia=dia-1
-                                elif horazulu == 4:
-                                    if hora[i] == '20':
-                                        j = j + 1
-                                    if hora[i] == '23':
-                                        dia=dia-1
-    
-                                elif horazulu == 3:
-                                    if hora[i] == '21':
-                                        j = j + 1
-                                elif horazulu == 2:
-                                    if hora[i] == '22':
-                                        j = j + 1
-                                #
-    
-                                d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor + ':00'
-                               # print('chegou aqui 14')
-                               # print(d)
-                               # print(d[0:10])
-                                
                                 dd.append(datetime.strptime(d, dateFormatter))
                                 datazulu.append(datetime.strptime(d, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
