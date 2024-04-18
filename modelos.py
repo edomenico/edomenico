@@ -220,7 +220,7 @@ def main():
                                                     apenasDigitos = apenasDigitos + taraux
                                             tar.append(apenasDigitos)
                                             print('chegou aqui 8')
-                                            printstring(rows[i].contents[j]))
+                                            print(string(rows[i].contents[j]))
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append(rows[i].contents[j].string)
