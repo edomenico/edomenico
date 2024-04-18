@@ -245,7 +245,7 @@ def main():
                                                     b = re.sub('[^0-9]', '', str(rows[i].contents[j].contents[0])[3:35])
                                                     #apenasDigitos=apenasDigitos+wdiraux
                                                     print('chegou aqui 12')
-                                                    print(int(b)
+                                                    print(int(b))
                                             wdir.append(int(b))
                             except:
                                 continue
