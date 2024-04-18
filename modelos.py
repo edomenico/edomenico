@@ -194,7 +194,7 @@ def main():
                                         print(ddd)
                                         print((str(rows[1].contents[0])))
                                         hhh=(str(rows[1].contents[0])[28:29])
-                                        hhhh=(str(rows[1].contents[0])[37:38])
+                                        hhhh=(str(rows[1].contents[0])[36:38])
                                         
                                         print(hhh)
                                         print(hhhh)
