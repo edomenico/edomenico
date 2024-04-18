@@ -193,6 +193,11 @@ def main():
                                         print (datetime.now() + timedelta(days=j))
                                         print(ddd)
                                         print((str(rows[1].contents[0])))
+                                        hhh=(str(rows[1].contents[0])[28:29])
+                                        hhhh=(str(rows[1].contents[0])[37:38])
+                                        
+                                        print(hhh)
+                                        print(hhhh)
     
     
                                 else:
