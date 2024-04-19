@@ -74,8 +74,8 @@ def main():
             from bs4 import BeautifulSoup
             from time import sleep
             from datetime import datetime,timedelta
-            from datetime import date
-            from datetime import date
+            
+            
             from pytz import timezone
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.common.by import By
@@ -103,6 +103,7 @@ def main():
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
+            options.page_load_strategy = 'normal'
         
     
     
@@ -141,7 +142,7 @@ def main():
                         #driver = get_driver()
                         driver.get(link)
                         wait = WebDriverWait(driver, 60)
-                        time.sleep(30)
+                       # time.sleep(30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                        
     
@@ -370,7 +371,7 @@ def main():
             from bs4 import BeautifulSoup
             from time import sleep
             from datetime import datetime,timedelta
-            from datetime import date
+            
             from pytz import timezone
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.common.by import By
@@ -387,8 +388,10 @@ def main():
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
             from webdriver_manager.firefox import GeckoDriverManager
-            chrome_options = Options()
+            
             chrome_options.add_argument("--headless")
+            options.page_load_strategy = 'normal'
+            chrome_options = Options()
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
@@ -416,7 +419,7 @@ def main():
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 60)
-                        time.sleep(30)
+                        #time.sleep(30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         
                         html = driver.page_source
