@@ -1003,14 +1003,14 @@ def main():
             df = pd.DataFrame(result)
             df1 = pd.DataFrame(result)
            
-            ##########df.rename(
-            ##########    columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'ur', 5: 'pressao', 6: 'tp',
-            ##########             7: 'ceu',8: 'ncb',9: 'int vento',
-            ##########             10: 'dir vento', 11: 'raj vento', 12: 'visibilidade', 13: 'nbaixas'}, inplace=True)
             df.rename(
-                columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'tp',
-                         5: 'ceu',6: 'ncb',7: 'int vento',
-                         8: 'dir vento', 9: 'raj vento', 10: 'visibilidade'}, inplace=True)
+                columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'ur', 5: 'pressao', 6: 'tp',
+                         7: 'ceu',8: 'ncb',9: 'int vento',
+                         10: 'dir vento', 11: 'raj vento', 12: 'visibilidade', 13: 'nbaixas'}, inplace=True)
+            ##df.rename(
+             ##   columns={0: 'estacao', 1: 'data', 2: 'hora', 3: 'temp', 4: 'tp',
+              ##           5: 'ceu',6: 'ncb',7: 'int vento',
+               ##          8: 'dir vento', 9: 'raj vento', 10: 'visibilidade'}, inplace=True)
 
 
 
