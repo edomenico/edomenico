@@ -282,11 +282,11 @@ def main():
                         dd=[]
                         datazulu=[]
                         
-                        
+                        print('baixarmodeloNovoprojeto 6666')
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                
+                                print('baixarmodeloNovoprojeto 7777')
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
@@ -307,6 +307,7 @@ def main():
                                
                             except:
                                 continue
+                        print('baixarmodeloNovoprojeto 8888')
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
                        
                         
