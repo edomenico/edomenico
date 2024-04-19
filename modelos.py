@@ -993,12 +993,14 @@ def main():
 
 
         #usuario = st.radio("Escolha o usuário", ["Previsor(CMA-GL)", "Público Geral"], disabled=True,on_change='hidden')
-
-
+        
+        print(button)
+        print(city)
         if button or city:
             if not city:
                 pass
-            usu=1
+                
+            
             
             result, lat, lon = search2(city, usu)
             
