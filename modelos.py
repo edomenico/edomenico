@@ -272,7 +272,7 @@ def main():
                         
                         #for i in range(0,len(estacao),1):
                         if hhh=='0':
-                            hhh='0'+hhh
+                            hhh='00'
                         datahora1=ddd +" "+hhh+":00"
                         
                         print(datahora1)
