@@ -617,6 +617,7 @@ def main():
             df = pd.read_csv("cities_transformed3.csv")
         print (df)
         city_data = df[df['city'].str.lower() == city_name]
+        print(city_data)
         if not city_data.empty:
     
             lat = city_data['lat'].iloc[0]
