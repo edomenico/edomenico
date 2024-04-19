@@ -1137,4 +1137,4 @@ def main():
                 with st.expander(label="Mostrar dados:"):
                     st.table(df)
 
-main
+main()
