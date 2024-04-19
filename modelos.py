@@ -691,8 +691,8 @@ def main():
         """Function to request information from OpenWeatherMap API giving the necessary details"""
         #try:
     
-       
-    
+        print('authenticate2------0')
+        print(city)
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
         print('authenticate2------1')
