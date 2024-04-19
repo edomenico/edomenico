@@ -262,7 +262,7 @@ def main():
     
                         print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
-
+                        print('baixarmodeloNovoprojeto 10000')
                         #for i in range(0,len(estacao),1):
                         if hhh=='0':
                             hhh='0'+hhh
@@ -286,7 +286,7 @@ def main():
                         dd=[]
                         datazulu=[]
                         
-                        print('baixarmodeloNovoprojeto 10000')
+                       
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
