@@ -1016,6 +1016,8 @@ def main():
 
             
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
+            print('final')
+            print(df)
            
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
