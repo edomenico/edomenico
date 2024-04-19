@@ -100,10 +100,11 @@ def main():
             # self.driver.set_window_size(1120, 550)
             print('baixarmodeloNovoprojeto')
             print(estacao)
-            options = Options()
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+        
             options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
-            options.page_load_strategy = 'normal'
+            
         
     
     
@@ -141,7 +142,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        wait = WebDriverWait(driver, 60)
+                        wait = WebDriverWait(driver, 20)
                        # time.sleep(30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                        
