@@ -509,6 +509,7 @@ def main():
                                             
     
                                         elif i==5:
+                                            press=str(int(rows[i].contents[j].string)*33.8639)
                                             pressao.append(rows[i].contents[j].string)
                                             print('chegou aqui 5')
                                             print(rows[i].contents[j].string)
