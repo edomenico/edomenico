@@ -68,14 +68,12 @@ def main():
     def baixarmodeloNovoprojeto(estacao):
             import re
             import urllib.parse
-            import time as time
             import pandas as pd
             from selenium import webdriver
             from bs4 import BeautifulSoup
             from time import sleep
             from datetime import datetime,timedelta
-            
-            
+            from datetime import date
             from pytz import timezone
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.common.by import By
@@ -100,16 +98,14 @@ def main():
             # self.driver.set_window_size(1120, 550)
             print('baixarmodeloNovoprojeto')
             print(estacao)
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+        
+    
+    
             chrome_options = Options()
             chrome_options.add_argument("--headless")
-        
-            options.add_argument('--disable-gpu')
-            
-        
-    
-    
-            #chrome_options = Options()
-            #chrome_options.add_argument("--headless")
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
@@ -142,8 +138,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        wait = WebDriverWait(driver, 20)
-                       # time.sleep(30)
+                        wait = WebDriverWait(driver, 30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                        
     
@@ -372,7 +367,7 @@ def main():
             from bs4 import BeautifulSoup
             from time import sleep
             from datetime import datetime,timedelta
-            
+            from datetime import date
             from pytz import timezone
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.common.by import By
@@ -391,8 +386,6 @@ def main():
             from webdriver_manager.firefox import GeckoDriverManager
             chrome_options = Options()
             chrome_options.add_argument("--headless")
-            options.page_load_strategy = 'normal'
-            
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
@@ -419,8 +412,7 @@ def main():
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
-                        wait = WebDriverWait(driver, 60)
-                        #time.sleep(30)
+                        wait = WebDriverWait(driver, 30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         
                         html = driver.page_source
@@ -517,8 +509,6 @@ def main():
                                             
     
                                         elif i==5:
-                                           # press=str(int(rows[i].contents[j].string)*33.8639)
-                                           # pressao.append(press)
                                             pressao.append(rows[i].contents[j].string)
                                             print('chegou aqui 5')
                                             print(rows[i].contents[j].string)
