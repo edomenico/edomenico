@@ -1023,9 +1023,11 @@ def main():
             if not city:
                 pass
                 
+            try:
             
-            
-            result, lat, lon = search2(city, usu)
+                result, lat, lon = search2(city, usu)
+            except:
+                result, lat, lon = search2(city, usu)
             
             # st.write(result)
             df = pd.DataFrame(result)
