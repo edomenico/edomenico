@@ -503,7 +503,9 @@ def main():
                                             
     
                                         elif i==5:
-                                            pres=str(int(int(rows[i].contents[j].string)*33.8639))
+                                            pres1=(int(rows[i].contents[j].string))*33.8639
+                                            pres1=int(pres1)
+                                            pres1=str(pres1)
                                             #pressao.append(rows[i].contents[j].string)
                                             pressao.append(pres)
                                             
