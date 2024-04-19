@@ -998,6 +998,7 @@ def main():
         if button or city:
             if not city:
                 pass
+            usu=1
             
             result, lat, lon = search2(city, usu)
             
