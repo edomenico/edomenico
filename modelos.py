@@ -220,6 +220,7 @@ def main():
                                             cldcb.append(nucb)
                                             tp.append(tep)
                                             vis.append(visi)
+                                            print('baixarmodeloNovoprojeto 3333')
                                             
                                         elif i==3:
                                             apenasDigitos = ''
@@ -230,6 +231,7 @@ def main():
                                                     #apenasDigitos = apenasDigitos + taraux
                                             bb= (int(b) - 32) * 5/9
                                             tar.append(str(int(bb)))
+                                            print('baixarmodeloNovoprojeto 4444')
                                             
                                                 
                                             #tar.append(rows[i].contents[j].string)
@@ -254,7 +256,7 @@ def main():
                             except:
                                 continue
     
-                        
+                        print('baixarmodeloNovoprojeto 5555')
                         estacao=[arqi['estacao'][no]]*len(wdir)
 
                         #for i in range(0,len(estacao),1):
