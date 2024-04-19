@@ -191,6 +191,7 @@ def main():
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
+                                        print((rows[i].contents[j].string))
                                         print('baixarmodelo 1111')
                                         #print(rows[1].contents[0])
                                         
