@@ -138,7 +138,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 60)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                        
     
@@ -412,7 +412,7 @@ def main():
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
-                        wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 60)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         
                         html = driver.page_source
