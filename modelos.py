@@ -195,6 +195,7 @@ def main():
                                         print(rows[1].contents[0])
                                         
                                         hhh=(str(rows[1].contents[0])[28:29])
+                                        print(hhh)
                                         hhhh=(str(rows[1].contents[0])[36:38])
                                         
                                         
