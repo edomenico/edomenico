@@ -760,7 +760,7 @@ def main():
                 # st.write(extracted_data)
             return extracted_data, lat, lon
         except:
-            main()
+            continue
     
     
     
