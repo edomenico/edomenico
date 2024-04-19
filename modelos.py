@@ -267,7 +267,7 @@ def main():
                         if hhh=='0':
                             hhh='0'+hhh
                         datahora1=ddd +" "+hhh+":00"
-                        print('baixarmodeloNovoprojeto 10000')
+                        
                         
                         
                             
@@ -278,6 +278,7 @@ def main():
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
+                        print('baixarmodeloNovoprojeto 10000')
                        
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
