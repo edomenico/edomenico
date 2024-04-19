@@ -269,7 +269,7 @@ def main():
     
                         print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
-                        
+                        print (hhh)
                         #for i in range(0,len(estacao),1):
                         if hhh=='0<':
                             hhh='00'
