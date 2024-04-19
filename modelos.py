@@ -759,8 +759,8 @@ def main():
             extracted_data = sort_data2(data)
                 # st.write(extracted_data)
             return extracted_data, lat, lon
-        except:
-            search2(city,usu)
+        except Exception as e:
+            print(f"Cannot locate this city. Reason: {e}")
     
     
     
