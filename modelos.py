@@ -994,8 +994,8 @@ def main():
 
         #usuario = st.radio("Escolha o usuário", ["Previsor(CMA-GL)", "Público Geral"], disabled=True,on_change='hidden')
         
-        print(button)
-        print(city)
+        button='SBRJ'
+        city='SBRJ'
         if button or city:
             if not city:
                 pass
