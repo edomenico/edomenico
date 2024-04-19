@@ -125,8 +125,10 @@ def main():
                     else:
                         arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                     arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
-                    arqi = arqi.reset_index(drop=True)
+                    print('baixarmodeloNovoprojeto 2')
                     
+                    arqi = arqi.reset_index(drop=True)
+                    print(arqi)
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
