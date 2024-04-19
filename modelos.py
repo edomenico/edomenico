@@ -610,10 +610,12 @@ def main():
         """Function to lookup the names of city"""
         print('cheguei aqui -2')
         print(city_name)
+        print(usu)
         if usu==1:
             df = pd.read_csv("cities_transformed3.csv")
         else:
             df = pd.read_csv("cities_transformed3.csv")
+        print (df)
         city_data = df[df['city'].str.lower() == city_name]
         if not city_data.empty:
     
@@ -720,7 +722,7 @@ def main():
     def search2(city,usu):
         try:
             print('cheguei -1')
-            city='SBJR'
+            
             lat, lon = lookup_coord2(city,usu)
                 # st.write(lat)
             print('cheguei 0')
