@@ -198,11 +198,11 @@ def main():
                                         print(hhh)
                                         if hhh=='0':
                                             hhh='00'
-                                        hhhh=(str(rows[1].contents[0])[36:38])
+                                        #hhhh=(str(rows[1].contents[0])[36:38])
                                         
                                         
-                                        if hhhh=='PM':
-                                            hhh=str(int(hhh)+12)
+                                        #if hhhh=='PM':
+                                          #  hhh=str(int(hhh)+12)
                                         
     
     
@@ -212,7 +212,7 @@ def main():
                                         if i==1:
                                             
                                            
-                                            hhh=(str(rows[1].contents[0])[28:30])
+                                            hhh=(str(rows[1].contents[0])[28:29])
                                             
                                             
                                             
