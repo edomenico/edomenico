@@ -139,7 +139,7 @@ def main():
                         #driver = get_driver()
                         driver.get(link)
                         wait = WebDriverWait(driver, 60)
-                        time.sleep(20)
+                        time.sleep(30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                        
     
@@ -414,7 +414,7 @@ def main():
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 60)
-                        time.sleep(5)
+                        time.sleep(30)
                         wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         
                         html = driver.page_source
