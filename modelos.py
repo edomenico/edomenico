@@ -750,7 +750,7 @@ def main():
             return extracted_data, lat, lon
         except Exception as e:
             #print(f"Cannot locate this city. Reason: {e}")
-            st.sidebar.checkbox('Mostrar mapa')
+            mapa=st.sidebar.checkbox('Mostrar mapa')
             
     
     
