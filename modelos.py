@@ -522,7 +522,7 @@ def main():
                         #estacao='SBGL'*len(tar)
                         estacao=[estacao.upper() for x in range(len(tar))]
                         print(hhh)
-                        if hhh=='0':
+                        if hhh=='0<':
                             hhh='00'
                         datahora1=ddd +" "+hhh+":00"
                         print('chegou aqui 7')
