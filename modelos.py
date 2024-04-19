@@ -133,6 +133,8 @@ def main():
                         link = (arqi['endereco'][no])
                         
                         horazulu=arqi['horzulu'][no]
+                        print('meteograma 1')
+                        print(horazulu)
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
