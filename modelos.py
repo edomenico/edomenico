@@ -175,7 +175,7 @@ def main():
                         tp=[]
     
                         cldcb=[]
-    
+                        print('baixarmodeloNovoprojeto 2222')
                         for i in range(0,8,1): #variável
                             try:
                                 #if i==7:
