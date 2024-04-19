@@ -133,8 +133,8 @@ def main():
                         link = (arqi['endereco'][no])
                         
                         horazulu=arqi['horzulu'][no]
-                        print('meteograma 1')
-                        print(horazulu)
+                       # print('meteograma 1')
+                       # print(horazulu)
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
@@ -542,8 +542,8 @@ def main():
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
                         d=d+timedelta(hours=int(horazulu))
-                        print('cheguei aqui meteograma 2')
-                        print(horazulu)
+                        #print('cheguei aqui meteograma 2')
+                        #print(horazulu)
                         #print(d)
                         j=0
                         dd=[]
