@@ -608,7 +608,8 @@ def main():
     
     def lookup_coord2(city_name,usu):
         """Function to lookup the names of city"""
-        
+        print('cheguei aqui -2')
+        print(city_name)
         if usu==1:
             df = pd.read_csv("cities_transformed3.csv")
         else:
