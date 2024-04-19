@@ -271,7 +271,7 @@ def main():
                         estacao=[arqi['estacao'][no]]*len(wdir)
                         
                         #for i in range(0,len(estacao),1):
-                        if hhh=='0':
+                        if hhh=='0<':
                             hhh='00'
                         datahora1=ddd +" "+hhh+":00"
                         
