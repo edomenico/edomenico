@@ -236,15 +236,19 @@ def main():
                                                 
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
-                                            prp.append(str(rows[i].contents[j]))
+                                            prp.append((rows[i].contents[j].string))
+                                            print('baixarmodeloNovoprojeto 5555')
                                            
                                         elif i==5:
                                             wspd.append(int(rows[i].contents[j].string))
+                                            print('baixarmodeloNovoprojeto 6666')
                                            
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
+                                            print('baixarmodeloNovoprojeto 7777')
                                            
                                         else:
+                                            print('baixarmodeloNovoprojeto 8888')
                                             apenasDigitos =''
     
                                             for wdiraux in str(rows[i].contents[j].contents[0])[3:35]:
@@ -256,7 +260,7 @@ def main():
                             except:
                                 continue
     
-                        print('baixarmodeloNovoprojeto 5555')
+                        print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
 
                         #for i in range(0,len(estacao),1):
@@ -282,7 +286,7 @@ def main():
                         dd=[]
                         datazulu=[]
                         
-                        print('baixarmodeloNovoprojeto 6666')
+                        print('baixarmodeloNovoprojeto 10000')
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
