@@ -98,10 +98,25 @@ def main():
             # self.driver.set_window_size(1120, 550)
             print('baixarmodeloNovoprojeto')
             print(estacao)
-            options = webdriver.ChromeOptions()
-
-            options.page_load_strategy = 'normal'
-            driver = webdriver.Chrome(options=options)
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+        
+    
+    
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
+            #firefoxOptions = Options()
+            #firefoxOptions.add_argument("--headless")
+            #service = Service(GeckoDriverManager().install())
+            #driver = webdriver.Firefox(
+            #options=firefoxOptions,
+            #service=service,
+            #)
+            #for no in range(0, len(arqi), 1):
             for jj in range(0,1,1):
                 try:
     
@@ -369,10 +384,11 @@ def main():
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
             from webdriver_manager.firefox import GeckoDriverManager
-            options = webdriver.ChromeOptions()
-
-            options.page_load_strategy = 'normal'
-            driver = webdriver.Chrome(options=options)
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
             
 
 
