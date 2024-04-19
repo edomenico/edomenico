@@ -262,11 +262,12 @@ def main():
     
                         print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
-                        print('baixarmodeloNovoprojeto 10000')
+                        
                         #for i in range(0,len(estacao),1):
                         if hhh=='0':
                             hhh='0'+hhh
                         datahora1=ddd +" "+hhh+":00"
+                        print('baixarmodeloNovoprojeto 10000')
                         
                         
                             
