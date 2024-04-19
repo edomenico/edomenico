@@ -92,12 +92,12 @@ def main():
             from webdriver_manager.firefox import GeckoDriverManager
     
     
-    
+            
     
            # driver = webdriver.Firefox()
             # self.driver.set_window_size(1120, 550)
-    
-    
+            print('baixarmodeloNovoprojeto')
+            print(estacao)
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
