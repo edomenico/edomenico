@@ -622,6 +622,8 @@ def main():
     
             lat = city_data['lat'].iloc[0]
             lon = city_data['lon'].iloc[0]
+            print(lat)
+            print(lon)
             return lat, lon
         else:
             return None
