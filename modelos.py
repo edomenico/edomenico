@@ -272,6 +272,8 @@ def main():
                         print(hhh)
                         if hhh=='0<':
                             hhh='00'
+                        else:
+                            hhh='12'
                         datahora1=ddd +" "+hhh+":00"
                         print('datahora')
                         print(datahora1)
@@ -516,6 +518,8 @@ def main():
                         print(hhh)
                         if hhh=='0<':
                             hhh='00'
+                        else:
+                            hhh='12'
                         datahora1=ddd +" "+hhh+":00"
                         print('cheguei aqui meteograma 2')
                         print(datahora1)
