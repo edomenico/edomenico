@@ -749,7 +749,9 @@ def main():
                 # st.write(extracted_data)
             return extracted_data, lat, lon
         except Exception as e:
-            print(f"Cannot locate this city. Reason: {e}")
+            #print(f"Cannot locate this city. Reason: {e}")
+            st.sidebar.checkbox('Mostrar mapa')
+            
     
     
     
