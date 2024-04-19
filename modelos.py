@@ -183,8 +183,10 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                        
+                                        print('baixarmodelo 0000')
+                                        print(rows[0].contents)
                                         ddd=str(rows[0].contents[0])[55:65]
+                                        print(ddd)
                                         
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
