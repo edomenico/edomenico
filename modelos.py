@@ -191,6 +191,8 @@ def main():
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
+                                        print('baixarmodelo 1111')
+                                        print(rows[1].contents[0])
                                         
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
