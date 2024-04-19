@@ -388,10 +388,10 @@ def main():
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
             from webdriver_manager.firefox import GeckoDriverManager
-            
+            chrome_options = Options()
             chrome_options.add_argument("--headless")
             options.page_load_strategy = 'normal'
-            chrome_options = Options()
+            
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
