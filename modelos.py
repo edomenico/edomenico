@@ -190,7 +190,7 @@ def main():
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
                                        
-                                        #print(rows[1].contents[0])
+                                        ##print(rows[1].contents[0])
                                         
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         
@@ -265,18 +265,18 @@ def main():
                             except:
                                 continue
     
-                        print('cheguei aqui')
+                        #print('cheguei aqui')
                         estacao=[arqi['estacao'][no]]*len(wdir)
-                        print (hhh)
+                        #print (hhh)
                         #for i in range(0,len(estacao),1):
-                        print(hhh)
+                        #print(hhh)
                         if hhh=='0<':
                             hhh='00'
                         else:
                             hhh='12'
                         datahora1=ddd +" "+hhh+":00"
-                        print('datahora')
-                        print(datahora1)
+                        #print('datahora')
+                        #print(datahora1)
                         
                             
                         
@@ -406,7 +406,7 @@ def main():
                         link1=link[0:posicaoi] + '/meteogram' + link[posicaoi:posicaof]
                         #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                         #horazulu=3
-                        print('Loading...')
+                        #print('Loading...')
                         
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
@@ -492,10 +492,10 @@ def main():
                                             
                                              
                                             
-                                            # print(bb)
+                                            # #print(bb)
                                              #tar.append(bb)
                                              #bb= (apenasDigitos2 - 32) * 5/9
-                                             #print(bb)
+                                             ##print(bb)
 
                                              #tdr.append(bb)
 
@@ -518,15 +518,15 @@ def main():
     
                         #estacao='SBGL'*len(tar)
                         estacao=[estacao.upper() for x in range(len(tar))]
-                        print('cheguei aqui meteograma 1')
-                        print(hhh)
+                        #print('cheguei aqui meteograma 1')
+                        #print(hhh)
                         if hhh=='0<':
                             hhh='00'
                         else:
                             hhh='12'
                         datahora1=ddd +" "+hhh+":00"
-                        print('cheguei aqui meteograma 2')
-                        print(datahora1)
+                        #print('cheguei aqui meteograma 2')
+                        #print(datahora1)
                         
                             
                         
@@ -541,7 +541,8 @@ def main():
                         d=datetime.strptime(d, dateFormatter)
                         d=d+timedelta(hours=int(horazulu))
                         print('cheguei aqui meteograma 2')
-                        print(d)
+                        print(horazulu)
+                        #print(d)
                         j=0
                         dd=[]
                         datazulu=[]
@@ -555,8 +556,9 @@ def main():
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
                                 d=d+timedelta(hours=int(horazulu))
+                                print(d)
                                 
-                                #print(timestring)
+                                ##print(timestring)
                                # dd.append(datetime.strptime(d, dateFormatter))
                                # datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
@@ -567,7 +569,7 @@ def main():
                                 # dd.append(datetime.strptime(d, dateFormatter))
                             # for k in range(0,len(neb),1):
                             #     cc = ''
-                            #     #print(cc,' ',neb[k])
+                            #     ##print(cc,' ',neb[k])
                             #     cc = cc + 3
                             #     if cc > 24:
                             #         cc=3
@@ -575,12 +577,12 @@ def main():
     
     
                                 # cc=rows[i].contents[i].string
-                                # print(type(cc))
+                                # #print(type(cc))
                                 # #forecast[id] = []
                                 # #i = 0
                                 # for cell in cells:
                                 #     if ('DIRPW' in id): # or ('DIRPW' in id):
-                                #         print(id + " " + str(i))
+                                #         #print(id + " " + str(i))
                                 #         value = cell.find('span').find('svg').find('g')["transform"]
                                 #     else:
                                 #         value = cell.get_text()
@@ -706,18 +708,18 @@ def main():
         """Function to request information from OpenWeatherMap API giving the necessary details"""
         #try:
     
-        print('authenticate2------0')
-        print(city)
+        #print('authenticate2------0')
+        #print(city)
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
-        print('authenticate2------1')
+        #print('authenticate2------1')
         ###city='SBJR'
         #####horazulu='3'
         ###link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
         ##horazulu='3'
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
-        #print(data2)
+        ##print(data2)
         
        
     
@@ -725,7 +727,7 @@ def main():
         #    st.error(f"Could not get the data because {e}. Exiting...")
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
-        print('authenticate2')
+        #print('authenticate2')
         data=pd.merge(data1, data2, how='inner', on='datahora')
         
         data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
@@ -753,7 +755,7 @@ def main():
                 # st.write(extracted_data)
             return extracted_data, lat, lon
         except Exception as e:
-            #print(f"Cannot locate this city. Reason: {e}")
+            ##print(f"Cannot locate this city. Reason: {e}")
             authenticate2(city)
             
     
@@ -824,7 +826,7 @@ def main():
             # st.write(extracted_data)
             return extracted_data, lat, lon
         except Exception as e:
-            print(f"Cannot locate this city. Reason: {e}")
+            #print(f"Cannot locate this city. Reason: {e}")
 
 
     def emoji(emoji):
