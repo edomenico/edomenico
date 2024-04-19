@@ -718,7 +718,7 @@ def main():
     
     def search2(city,usu):
         try:
-            rint('cheguei -1')
+            print('cheguei -1')
             lat, lon = lookup_coord2(city,usu)
                 # st.write(lat)
             print('cheguei 0')
