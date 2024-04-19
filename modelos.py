@@ -1137,4 +1137,10 @@ def main():
                 with st.expander(label="Mostrar dados:"):
                     st.table(df)
 
-main()
+if __name__ == '__main__':
+    #if streamlit._is_running_with_streamlit:
+    main()
+    #else:
+    #    sys.argv = ["streamlit", "run", sys.argv[0]]
+    #    #app.run_server(debug=True, port=8881)
+      #  sys.exit(stcli.main())
