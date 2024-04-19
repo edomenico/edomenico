@@ -268,7 +268,7 @@ def main():
                             hhh='0'+hhh
                         datahora1=ddd +" "+hhh+":00"
                         
-                        
+                        print(datahora1)
                         
                             
                         
