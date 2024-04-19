@@ -759,7 +759,7 @@ def main():
             extracted_data = sort_data2(data)
                 # st.write(extracted_data)
             return extracted_data, lat, lon
-        except Exception as e:
+        except:
             main()
     
     
