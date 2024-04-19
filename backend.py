@@ -60,9 +60,11 @@ def authenticate(lat, lon):
             st.error("Failed to get data. Reason: ", response.json()['message'])
             exit()
     except Exception as e:
-        st.error(f"Could not get the data because {e}. Exiting...")
-        st.stop()
-    data = response.json()
+        #st.error(f"Could not get the data because {e}. Exiting...")
+        #st.stop()
+        continue
+    data = response.j
+    son()
 
     return data
 
