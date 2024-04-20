@@ -96,7 +96,8 @@ def main():
     
            # driver = webdriver.Firefox()
             # self.driver.set_window_size(1120, 550)
-            
+            print('baixarmodeloNovoprojeto')
+            print(estacao)
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
@@ -124,17 +125,15 @@ def main():
                     else:
                         arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                     arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
-                    
+                    print('baixarmodeloNovoprojeto 2')
                     
                     arqi = arqi.reset_index(drop=True)
-                    
+                    print(arqi)
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
                         
                         horazulu=arqi['horzulu'][no]
-                       # print('meteograma 1')
-                       # print(horazulu)
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
@@ -176,7 +175,7 @@ def main():
                         tp=[]
     
                         cldcb=[]
-                        
+                        print('baixarmodeloNovoprojeto 2222')
                         for i in range(0,8,1): #variável
                             try:
                                 #if i==7:
@@ -184,21 +183,23 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                        
+                                        print('baixarmodelo 0000')
+                                        #print(rows[0].contents[0])
                                         ddd=str(rows[0].contents[0])[55:65]
-                                        
+                                        print(ddd)
                                         
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                       
-                                        ##print(rows[1].contents[0])
+                                        print((rows[i].contents[j].string))
+                                        print('baixarmodelo 1111')
+                                        #print(rows[1].contents[0])
                                         
                                         hhh=(str(rows[1].contents[0])[28:29])
-                                        
+                                        #print(hhh)
                                         if hhh=='0':
                                             hhh='00'
-                                        
+                                        #hhhh=(str(rows[1].contents[0])[36:38])
                                         
                                         
                                         #if hhhh=='PM':
@@ -227,7 +228,7 @@ def main():
                                             cldcb.append(nucb)
                                             tp.append(tep)
                                             vis.append(visi)
-                                            
+                                            print('baixarmodeloNovoprojeto 3333')
                                             
                                         elif i==3:
                                             apenasDigitos = ''
@@ -238,24 +239,24 @@ def main():
                                                     #apenasDigitos = apenasDigitos + taraux
                                             bb= (int(b) - 32) * 5/9
                                             tar.append(str(int(bb)))
-                                            
+                                            print('baixarmodeloNovoprojeto 4444')
                                             
                                                 
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append((rows[i].contents[j].string))
-                                            
+                                            print('baixarmodeloNovoprojeto 5555')
                                            
                                         elif i==5:
                                             wspd.append(int(rows[i].contents[j].string))
-                                            
+                                            print('baixarmodeloNovoprojeto 6666')
                                            
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
-                                            
+                                            print('baixarmodeloNovoprojeto 7777')
                                            
                                         else:
-                                           
+                                            print('baixarmodeloNovoprojeto 8888')
                                             apenasDigitos =''
     
                                             for wdiraux in str(rows[i].contents[j].contents[0])[3:35]:
@@ -267,18 +268,16 @@ def main():
                             except:
                                 continue
     
-                        #print('cheguei aqui')
+                        print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
-                        #print (hhh)
+                        print (hhh)
                         #for i in range(0,len(estacao),1):
-                        #print(hhh)
+                        print(hhh)
                         if hhh=='0<':
                             hhh='00'
-                        else:
-                            hhh='12'
                         datahora1=ddd +" "+hhh+":00"
-                        #print('datahora')
-                        #print(datahora1)
+                        
+                        print(datahora1)
                         
                             
                         
@@ -288,7 +287,7 @@ def main():
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
-                        
+                        print('baixarmodeloNovoprojeto 10000')
                        
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
@@ -302,7 +301,7 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                
+                                print('baixarmodeloNovoprojeto 7777')
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
@@ -323,7 +322,7 @@ def main():
                                
                             except:
                                 continue
-                        
+                        print('baixarmodeloNovoprojeto 8888')
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
                        
                         
@@ -408,7 +407,7 @@ def main():
                         link1=link[0:posicaoi] + '/meteogram' + link[posicaoi:posicaof]
                         #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                         #horazulu=3
-                        #print('Loading...')
+                        print('Loading...')
                         
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
@@ -454,14 +453,18 @@ def main():
                                
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                       
+                                        print('chegou aqui 1')
                                         ddd=str(rows[0].contents[0])[55:65]
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                      
+                                        print (datetime.now() + timedelta(days=j))
+                                        print(ddd)
+                                        print((str(rows[1].contents[0])))
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
-                                       
+                                        print('chegou aqui 2')
+                                        print(hhh)
+                                        print(hhhh)
                                         if hhhh=='PM':
                                             hhh=str(int(hhh)+12)
     
@@ -472,7 +475,8 @@ def main():
                                         if i==1:
                                             
                                            
-                                            
+                                            print('chegou aqui 3')
+                                            print((str(rows[i].contents[j])))
                                             hhh=(str(rows[1].contents[0])[28:30])
                                             
     
@@ -485,19 +489,19 @@ def main():
                                              #tar.append(apenasDigitos1)
                                              #tdr.append(apenasDigitos2)
                                              #bb= (apenasDigitos1 - 32) * 5/9
-                                             
+                                             print('chegou aqui 4')
                                              bb= str(int((int(apenasDigitos1) - 32) * 5/9))
-                                             
+                                             print(bb)
                                              tar.append(bb)
                                              bb= str(int((int(apenasDigitos2) - 32) * 5/9))
                                              tdr.append(bb)
-                                            
+                                             print( bb)
                                              
                                             
-                                            # #print(bb)
+                                            # print(bb)
                                              #tar.append(bb)
                                              #bb= (apenasDigitos2 - 32) * 5/9
-                                             ##print(bb)
+                                             #print(bb)
 
                                              #tdr.append(bb)
 
@@ -505,46 +509,42 @@ def main():
                                             
     
                                         elif i==5:
-                                           # pres1=(int(rows[i].contents[j].string))*33.8639
-                                           # pres1=int(pres1)
-                                           # pres1=str(pres1)
                                             pressao.append(rows[i].contents[j].string)
-                                           # pressao.append(pres)
-                                            
+                                            print('chegou aqui 5')
+                                            print(rows[i].contents[j].string)
                                         elif i==7:
                                             nbaixa.append(rows[i].contents[j].string)
-                                            
+                                            print('chegou aqui 5')
+                                            print(rows[i].contents[j].string)
+    
                             except:
                                 continue
     
     
                         #estacao='SBGL'*len(tar)
                         estacao=[estacao.upper() for x in range(len(tar))]
-                        #print('cheguei aqui meteograma 1')
-                        #print(hhh)
+                        print(hhh)
                         if hhh=='0<':
                             hhh='00'
-                        else:
-                            hhh='12'
                         datahora1=ddd +" "+hhh+":00"
-                        #print('cheguei aqui meteograma 2')
-                        #print(datahora1)
+                        print('chegou aqui 7')
+                        print(datahora1)
                         
                             
                         
-                      
+                        print(estacao)
+                        print(len(estacao))
                         dia=datahora1[8:10]
                         mes=datahora1[5:7]
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
-                        
+                        print(d)
+                        print('chegou aqui 8')
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
                         d=d+timedelta(hours=int(horazulu))
-                        #print('cheguei aqui meteograma 2')
-                        #print(horazulu)
-                        #print(d)
+                        print(d)
                         j=0
                         dd=[]
                         datazulu=[]
@@ -553,14 +553,13 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                
+                                print(d)
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
                                 d=d+timedelta(hours=int(horazulu))
-                                print(d)
-                                
-                                ##print(timestring)
+                                print('chegou aqui 9')
+                                #print(timestring)
                                # dd.append(datetime.strptime(d, dateFormatter))
                                # datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
@@ -571,7 +570,7 @@ def main():
                                 # dd.append(datetime.strptime(d, dateFormatter))
                             # for k in range(0,len(neb),1):
                             #     cc = ''
-                            #     ##print(cc,' ',neb[k])
+                            #     #print(cc,' ',neb[k])
                             #     cc = cc + 3
                             #     if cc > 24:
                             #         cc=3
@@ -579,12 +578,12 @@ def main():
     
     
                                 # cc=rows[i].contents[i].string
-                                # #print(type(cc))
+                                # print(type(cc))
                                 # #forecast[id] = []
                                 # #i = 0
                                 # for cell in cells:
                                 #     if ('DIRPW' in id): # or ('DIRPW' in id):
-                                #         #print(id + " " + str(i))
+                                #         print(id + " " + str(i))
                                 #         value = cell.find('span').find('svg').find('g')["transform"]
                                 #     else:
                                 #         value = cell.get_text()
@@ -593,7 +592,7 @@ def main():
                             except:
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd,tar,tdr,pressao,nbaixa,datazulu))
-                        
+                        print('chegou aqui 10')
     
                         df= pd.DataFrame(
                             lista_de_tuplas,
@@ -624,25 +623,28 @@ def main():
                 except:
                     continue
             driver.quit()
-           
+            print(df1)
             return df1
     
     
     def lookup_coord2(city_name,usu):
         """Function to lookup the names of city"""
-        
+        print('cheguei aqui -2')
+        print(city_name)
+        print(usu)
         if usu==1:
             df = pd.read_csv("cities_transformed3.csv")
         else:
             df = pd.read_csv("cities_transformed3.csv")
-        
+        print (df)
         city_data = df[df['city'].str.lower() == city_name]
-       
+        print(city_data)
         if not city_data.empty:
     
             lat = city_data['lat'].iloc[0]
             lon = city_data['lon'].iloc[0]
-            
+            print(lat)
+            print(lon)
             return lat, lon
         else:
             return None
@@ -710,26 +712,26 @@ def main():
         """Function to request information from OpenWeatherMap API giving the necessary details"""
         #try:
     
-        #print('authenticate2------0')
-        #print(city)
+        print('authenticate2------0')
+        print(city)
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
-        #print('authenticate2------1')
+        print('authenticate2------1')
         ###city='SBJR'
         #####horazulu='3'
         ###link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
         ##horazulu='3'
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
-        ##print(data2)
-        
+        #print(data2)
+        print('authenticate2------2')
        
     
         #except Exception as e:
         #    st.error(f"Could not get the data because {e}. Exiting...")
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
-        #print('authenticate2')
+        print('authenticate2')
         data=pd.merge(data1, data2, how='inner', on='datahora')
         
         data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
@@ -743,23 +745,22 @@ def main():
     
     def search2(city,usu):
         try:
-            
+            print('cheguei -1')
             
             lat, lon = lookup_coord2(city,usu)
                 # st.write(lat)
-          
+            print('cheguei 0')
             
             data = authenticate2(city)
                 # st.write(data)
-           
+            print('cheguei aqui search2')
+            print(data)
             
             extracted_data = sort_data2(data)
                 # st.write(extracted_data)
             return extracted_data, lat, lon
         except Exception as e:
             print(f"Cannot locate this city. Reason: {e}")
-            #authenticate2(city)
-            
     
     
     
@@ -1027,11 +1028,9 @@ def main():
             if not city:
                 pass
                 
-            try:
             
-                result, lat, lon = search2(city, usu)
-            except:
-                result, lat, lon = search2(city, usu)
+            
+            result, lat, lon = search2(city, usu)
             
             # st.write(result)
             df = pd.DataFrame(result)
@@ -1050,7 +1049,8 @@ def main():
 
             
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
-           
+            print('final')
+            print(df)
            
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
