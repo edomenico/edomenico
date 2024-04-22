@@ -275,6 +275,8 @@ def main():
                         print(hhh)
                         if hhh=='0<':
                             hhh='00'
+                        else:
+                            hhh='12'
                         datahora1=ddd +" "+hhh+":00"
                         
                         print(datahora1)
@@ -526,6 +528,8 @@ def main():
                         print(hhh)
                         if hhh=='0<':
                             hhh='00'
+                        else:
+                            hhh='12'
                         datahora1=ddd +" "+hhh+":00"
                         print('chegou aqui 7')
                         print(datahora1)
