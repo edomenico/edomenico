@@ -804,12 +804,16 @@ def main2():
 
                  # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
                 url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local='+estacao1+'&msg=metar&data_ini=' + ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM'
+                print('cheguei 1')
+                print(url)
                 res = requests.get(url)
                 soup = BeautifulSoup(res.content, "lxml")
                 s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
                 s = s.replace('null', '"placeholder"')
                 s = s.replace('- ', ',')
                 p = s.split(',')
+                print('cheguei 2')
+                print(p)
                 cab = ',Localidade,Tipo,Data,Mensagem'
                 arquivo = []
                 f.write(cab)
