@@ -794,6 +794,8 @@ def main2():
                 intervalo=1
             else:
                 intervalo=(datahfim - datahini).days
+            print('cheguei aqui 3')
+            print(intervalo)
 
             for j in range(0,intervalo,1):
                 datahinic=datahini + timedelta(days=j)
