@@ -788,7 +788,7 @@ def main2():
             from pandas.io.json import json_normalize
             from bs4 import BeautifulSoup
             dtini = '20240426'
-            estacao1=estacao1[0:len(estacao1)-1]
+            #estacao1=estacao1[0:len(estacao1)-1]
             f = open("metar111.csv", "w")
             if (datahfim - datahini).days==0:
                 intervalo=1
