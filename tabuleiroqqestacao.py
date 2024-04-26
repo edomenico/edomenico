@@ -179,13 +179,15 @@ def main2():
 
             for i in range(len(arqi)):
 
-                if arqi.Mensagem[
-                    i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
+                if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
                     c = 6
 
-                if arqi.Mensagem[i].find('COR') > -1:
-                    novamens = 'METAR ' + arqi.Mensagem[i][
-                                          arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
+                if len(str(arqi.Mensagem[i])) ==3:
+                      ggggg=1
+                      mensagem1='NAN'
+
+                elif arqi.Mensagem[i].find('COR') > -1:
+                    novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
 
                     mensagem1 = novamens.split()
                     mens = novamens
@@ -639,7 +641,7 @@ def main2():
             estacao=nome_estacao
             areasel = area_2
             areaprev = 2
-        pdf = redemet_baixa(1, areasel, to_data, from_data, estacao)
+        pdf = redemet_baixa2(1, areasel, to_data, from_data, estacao)
 
         pdff = trata_redemet(areaprev)
        # edited_df = st.data_editor(pdff)
@@ -775,6 +777,63 @@ def main2():
                 df.to_csv("metar.csv", header=True)
                 # df.to_csv('example.csv')
                 return df
+    def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+
+            import datetime
+            import time
+            import requests
+            import pandas as pd
+            import json
+            from datetime import datetime, timedelta, date
+            from pandas.io.json import json_normalize
+            from bs4 import BeautifulSoup
+            dtini = '20240426'
+            estacao1=estacao1[0:len(estacao1)-1]
+            f = open("metar111.csv", "w")
+            if (datahfim - datahini).days==0:
+                intervalo=1
+            else:
+                intervalo=(datahfim - datahini).days
+
+            for j in range(0,intervalo,1):
+                datahinic=datahini + timedelta(days=j)
+                ano = str(datahinic)[0:4]
+                mes = str(datahinic)[5:7]
+                dia = str(datahinic)[8:10]
+                datainicio = dia + '/' + mes + '/' + ano
+
+                 # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
+                url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local='+estacao1+'&msg=metar&data_ini=' + ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM'
+                res = requests.get(url)
+                soup = BeautifulSoup(res.content, "lxml")
+                s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
+                s = s.replace('null', '"placeholder"')
+                s = s.replace('- ', ',')
+                p = s.split(',')
+                cab = ',Localidade,Tipo,Data,Mensagem'
+                arquivo = []
+                f.write(cab)
+                arquivo.append(cab)
+                for i in range(1, len(p), 1):
+                    if p[i].find('METAR') > -1:
+                        b = 'METAR'
+                    else:
+                        b = 'SPECI'
+                    if p[i].find('SB') > -1:
+                        a = p[i][p[i].find('SB'):p[i].find('SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                    elif p[i].find('SSKW') > -1:
+                        a = 'SSKW'
+                    elif p[i].find('SWPI') > -1:
+                        a = 'SWPI'
+                    elif p[i].find('SWEI') > -1:
+                        a = 'SWEI'
+
+                    montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                    arquivo.append(montalinha)
+                    f.write("\n" + montalinha)
+            f.close
+            return arquivo
+
 
 
 
