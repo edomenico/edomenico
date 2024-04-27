@@ -152,7 +152,7 @@ def main2():
                                # index_col=0,
                                parse_dates=True,
                                dayfirst=True,
-                               decimal='.')
+                               decimal='.',on_bad_lines='skip')
             wspd = []
             wdir = []
             estacao = []
@@ -796,6 +796,10 @@ def main2():
                 intervalo=(datahfim - datahini).days
             print('cheguei aqui 3')
             print(intervalo)
+            cab = ',Localidade,Tipo,Data,Mensagem'
+            arquivo = []
+            f.write(cab)
+            arquivo.append(cab)
 
             for j in range(0,intervalo,1):
                 datahinic=datahini + timedelta(days=j)
@@ -816,10 +820,7 @@ def main2():
                 p = s.split(',')
                 print('cheguei 2')
                 print(p)
-                cab = ',Localidade,Tipo,Data,Mensagem'
-                arquivo = []
-                f.write(cab)
-                arquivo.append(cab)
+               
                 for i in range(1, len(p), 1):
                     if p[i].find('METAR') > -1:
                         b = 'METAR'
