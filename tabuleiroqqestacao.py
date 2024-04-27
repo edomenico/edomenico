@@ -834,6 +834,8 @@ def main2():
                         a = 'SWPI'
                     elif p[i].find('SWEI') > -1:
                         a = 'SWEI'
+                    elif p[i].find('SNRU') > -1:
+                        a = 'SWEI'
 
                     montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
                     arquivo.append(montalinha)
