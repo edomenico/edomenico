@@ -779,11 +779,10 @@ def min_max2(df):
     ####df['data'].unique()[0:len(df['data'].unique()) - 1]
     #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
     df['data']=df.data.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
+    auxy=df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
     fig = px.scatter(title='Temperatura máxima e mínima')
     fig.add_scatter(x=df['data'].unique()[0:len(df['data'].unique()) - 1], y=df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1], name='Temperatura Máxima')
     fig.add_scatter(x=df['data'].unique()[0:len(df['data'].unique()) - 1], y=df.groupby('data')['temp'].min()[0:len(df['data'].unique()) - 1], name='Temperatura Mínima')
-    #fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp'].max(), name='Temperatura Máxima')
-    #fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp'].min(), name='Temperatura Mínima')
     fig.update_yaxes(title="Temperatura (°C)")
     st.plotly_chart(fig, use_container_width=True)
 
