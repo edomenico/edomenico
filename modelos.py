@@ -797,6 +797,7 @@ def main():
     
     
     def min_max2(df):
+        from datetime import datetime
         """Container for minimum and maximum temperatures"""
             # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
             # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
@@ -804,6 +805,8 @@ def main():
             # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
         ####df['data'].unique()[0:len(df['data'].unique()) - 1]
         #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
+        df['data']=df.data.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
+        auxy=df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
         fig = px.scatter(title='Temperatura máxima e mínima')
         fig.add_scatter(x=df['data'].unique()[0:len(df['data'].unique()) - 1], y=df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1], name='Temperatura Máxima')
         fig.add_scatter(x=df['data'].unique()[0:len(df['data'].unique()) - 1], y=df.groupby('data')['temp'].min()[0:len(df['data'].unique()) - 1], name='Temperatura Mínima')
