@@ -801,7 +801,7 @@ def main2():
             f.write(cab)
             arquivo.append(cab)
 
-            for j in range(0,intervalo,1):
+            for j in range(0,intervalo+1,1):
                 datahinic=datahini + timedelta(days=j)
                 ano = str(datahinic)[0:4]
                 mes = str(datahinic)[5:7]
