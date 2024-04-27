@@ -228,7 +228,7 @@ def main2():
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
                         if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
                                 'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
-                                or mensagem1[j].find('SNBR') > -1 or mensagem1[j].find('SNGI') > -1 or mensagem1[j].find('SNTF') > -1\
+                                or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find('SNGI') > -1 or mensagem1[j].find('SNTF') > -1\
                                 or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
                             estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
