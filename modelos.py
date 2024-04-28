@@ -197,7 +197,7 @@ def main():
                                         if i==1:
                                             
                                            
-                                            hhh=(str(rows[1].contents[0])[28:29])
+                                            hhh=(str(rows[1].contents[0])[28:30])
                                             
                                             
                                             
