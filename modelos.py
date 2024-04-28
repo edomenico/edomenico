@@ -183,27 +183,11 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                        print('baixarmodelo 0000')
-                                        #print(rows[0].contents[0])
-                                        ddd=str(rows[0].contents[0])[55:65]
-                                        print(ddd)
-                                        
-                                        
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                        print((rows[i].contents[j].string))
-                                        print('baixarmodelo 1111')
-                                        #print(rows[1].contents[0])
-                                        
-                                        hhh=(str(rows[1].contents[0])[28:29])
-                                        #print(hhh)
-                                        if hhh=='0':
-                                            hhh='00'
-                                        #hhhh=(str(rows[1].contents[0])[36:38])
                                         
                                         
-                                        #if hhhh=='PM':
-                                          #  hhh=str(int(hhh)+12)
+                                        
                                         
     
     
@@ -273,7 +257,7 @@ def main():
                         print (hhh)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
-                        if hhh=='0<':
+                        if hhh=='1':
                             hhh='00'
                         else:
                             hhh='12'
