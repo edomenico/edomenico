@@ -139,7 +139,7 @@ def main():
                         #driver = get_driver()
                         driver.implicitly_wait(20)
                         driver.get(link)
-                        myDynamicElement = driver.find_element_by_id("myDynamicElement")
+                        myDynamicElement = driver.find_element_by_id("detail-data-table")
 
                         
                         #wait = WebDriverWait(driver, 30)
@@ -421,7 +421,7 @@ def main():
                         driver.implicitly_wait(20)
                         driver.get(link)
                         
-                        myDynamicElement = driver.find_element_by_id("myDynamicElement")
+                        myDynamicElement = driver.find_element_by_id("detail-data-table")
 
                         
                         html = driver.page_source
