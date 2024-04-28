@@ -183,11 +183,27 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
+                                        print('baixarmodelo 0000')
+                                        #print(rows[0].contents[0])
+                                        ddd=str(rows[0].contents[0])[55:65]
+                                        print(ddd)
+                                        
+                                        
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
+                                        print((rows[i].contents[j].string))
+                                        print('baixarmodelo 1111')
+                                        #print(rows[1].contents[0])
+                                        
+                                        hhh=(str(rows[1].contents[0])[28:29])
+                                        #print(hhh)
+                                        if hhh=='0':
+                                            hhh='00'
+                                        #hhhh=(str(rows[1].contents[0])[36:38])
                                         
                                         
-                                        
+                                        #if hhhh=='PM':
+                                          #  hhh=str(int(hhh)+12)
                                         
     
     
@@ -196,8 +212,8 @@ def main():
     
                                         if i==1:
                                             
-                                            hora.append(rows[i].contents[j].string)
-                                            hhh=(str(rows[1].contents[0])[28:30])
+                                           
+                                            hhh=(str(rows[1].contents[0])[28:29])
                                             
                                             
                                             
@@ -255,7 +271,6 @@ def main():
                         print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
                         print (hhh)
-                        print(ddd)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
                         if hhh=='0<':
@@ -343,8 +358,6 @@ def main():
                 except:
                     continue
             driver.quit()
-            print('aqui df')
-            print(df1)
             
             return link,df1,horazulu
     
@@ -707,8 +720,7 @@ def main():
         print(city)
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
-        print('authenticate2------data1')
-        print(data1)
+        print('authenticate2------1')
         ###city='SBJR'
         #####horazulu='3'
         ###link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
@@ -716,8 +728,7 @@ def main():
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
         #print(data2)
-        print('authenticate2------data22')
-        print(data2)
+        print('authenticate2------2')
        
     
         #except Exception as e:
