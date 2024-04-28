@@ -257,7 +257,7 @@ def main():
                         print (hhh)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
-                        if hhh=='1':
+                        if hhh=='0':
                             hhh='00'
                         else:
                             hhh='12'
