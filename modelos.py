@@ -358,6 +358,8 @@ def main():
                 except:
                     continue
             driver.quit()
+            print('aqui df')
+            print(df)
             
             return link,df1,horazulu
     
