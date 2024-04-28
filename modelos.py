@@ -343,7 +343,7 @@ def main():
                     continue
             driver.quit()
             print('aqui df')
-            #print(df)
+            print(df1)
             
             return link,df1,horazulu
     
