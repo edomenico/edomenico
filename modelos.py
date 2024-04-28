@@ -137,6 +137,8 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
+                        
+                        driver.get(link)
                         while response.status_code != 200:
                             driver.get(link)
                             wait = WebDriverWait(driver, 30)
@@ -414,6 +416,7 @@ def main():
                         
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
+                        driver.get(link)
                         while response.status_code != 200:
                             driver.get(link)
                             wait = WebDriverWait(driver, 30)
