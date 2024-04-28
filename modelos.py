@@ -196,7 +196,7 @@ def main():
     
                                         if i==1:
                                             
-                                           
+                                            hora.append(rows[i].contents[j].string)
                                             hhh=(str(rows[1].contents[0])[28:30])
                                             
                                             
