@@ -139,8 +139,8 @@ def main():
                         #driver = get_driver()
                         driver.implicitly_wait(20)
                         driver.get(link)
-                        myDynamicElement = driver.find_element_by_id("detail-data-table")
-
+                        #myDynamicElement = driver.find_element_by_id("device-desktop")
+                        element =WebDriverWait(driver, timeout=20).until(EC.presence_of_element_located(("By.id="detail-data-table")))
                         
                         #wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
@@ -421,7 +421,8 @@ def main():
                         driver.implicitly_wait(20)
                         driver.get(link)
                         
-                        myDynamicElement = driver.find_element_by_id("detail-data-table")
+                        #myDynamicElement = driver.find_element_by_id("detail-data-table")
+                        element =WebDriverWait(driver, timeout=20).until(EC.presence_of_element_located(("By.id="detail-data-table")))
 
                         
                         html = driver.page_source
