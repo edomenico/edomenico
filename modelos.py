@@ -511,7 +511,11 @@ def main():
                                             
     
                                         elif i==5:
-                                            pressao.append(rows[i].contents[j].string)
+                                            if (rows[i].contents[j].string) != 'None':
+                                                auxpres=str(int(33.8638*float((rows[i].contents[j].string))))
+                                                pressao.append(auxpres)
+                                            else:
+                                                pressao.append(rows[i].contents[j].string)
                                             print('chegou aqui 5')
                                             print(rows[i].contents[j].string)
                                         elif i==7:
