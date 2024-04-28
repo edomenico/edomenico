@@ -511,7 +511,7 @@ def main():
                                             
     
                                         elif i==5:
-                                            if (rows[i].contents[j].string) != 'None':
+                                            if (rows[i].contents[j].string) != '--':
                                                 auxpres=str(int(33.8638*float((rows[i].contents[j].string))))
                                                 pressao.append(auxpres)
                                             else:
