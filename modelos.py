@@ -139,9 +139,11 @@ def main():
                         #driver = get_driver()
                         driver.implicitly_wait(20)
                         driver.get(link)
+                        myDynamicElement = driver.find_element_by_id("myDynamicElement")
+
                         
-                        wait = WebDriverWait(driver, 30)
-                        wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+                        #wait = WebDriverWait(driver, 30)
+                        #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                        
     
                         forecast = {}
@@ -419,8 +421,8 @@ def main():
                         driver.implicitly_wait(20)
                         driver.get(link)
                         
-                        wait = WebDriverWait(driver, 30)
-                        wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+                        myDynamicElement = driver.find_element_by_id("myDynamicElement")
+
                         
                         html = driver.page_source
                         forecast = {}
