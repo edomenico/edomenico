@@ -139,8 +139,9 @@ def main():
                         #driver = get_driver()
                         driver.implicitly_wait(20)
                         driver.get(link)
+                        driver.refresh()
                         #myDynamicElement = driver.find_element_by_id("device-desktop")
-                        element =WebDriverWait(driver, timeout=20).until(EC.presence_of_element_located(("By.id=detail-data-table")))
+                        #element =WebDriverWait(driver, timeout=20).until(EC.presence_of_element_located(("By.id=detail-data-table")))
                         
                         #wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
@@ -418,11 +419,12 @@ def main():
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link)
-                        driver.implicitly_wait(20)
+                        #driver.implicitly_wait(20)
                         driver.get(link)
+                        driver.refresh()
                         
                         #myDynamicElement = driver.find_element_by_id("detail-data-table")
-                        element =WebDriverWait(driver, timeout=20).until(EC.presence_of_element_located(("By.id=detail-data-table")))
+                        #element =WebDriverWait(driver, timeout=20).until(EC.presence_of_element_located(("By.id=detail-data-table")))
 
                         
                         html = driver.page_source
