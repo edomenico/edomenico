@@ -763,9 +763,9 @@ def main():
                     data = authenticate2(city)
                 except Exception as str_error:
                     pass
-
-                if str_error:
-                    sleep(2)  # wait for 2 seconds before trying to fetch the data again
+                else:
+                    break
+                
             
             
                 # st.write(data)
