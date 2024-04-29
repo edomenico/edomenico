@@ -689,6 +689,8 @@ def main():
             td=(weather_data['tdr'][i])
             ur= str(round(100 - 5 * (int(temp) - int(td))))
             nbaixas=str(weather_data['nbaixa'][i])
+            print('NUVENS BAIXAS')
+            print(nbaixas)
             if nbaixas[-1]=='k':
                 nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*3281)
             elif nbaixas=='--':
