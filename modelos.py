@@ -139,9 +139,10 @@ def main():
                         #driver = get_driver()
                         driver.get(link)
                         wait = WebDriverWait(driver, 30)
-                        wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+                        #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+                        wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                        
-    
+                        
                         forecast = {}
     
                     # while True:
@@ -415,8 +416,8 @@ def main():
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 30)
-                        wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-                        
+                        #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+                        wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         html = driver.page_source
                         forecast = {}
     
