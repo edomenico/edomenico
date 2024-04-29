@@ -750,14 +750,24 @@ def main():
         return data4
     
     def search2(city,usu):
+        from time import sleep
         try:
             print('cheguei -1')
             
             lat, lon = lookup_coord2(city,usu)
                 # st.write(lat)
             print('cheguei 0')
+
+            for x in range(0, 4):  # try 4 times
+                try:
+                    data = authenticate2(city)
+                except Exception as str_error:
+                    pass
+
+                if str_error:
+                    sleep(2)  # wait for 2 seconds before trying to fetch the data again
             
-            data = authenticate2(city)
+            
                 # st.write(data)
             print('cheguei aqui search2')
             print(data)
@@ -1038,10 +1048,9 @@ def main():
                 pass
                 
             
-            try:
-                result, lat, lon = search2(city, usu)
-            except:
-                pass
+            
+            result, lat, lon = search2(city, usu)
+            
                 
             
             # st.write(result)
