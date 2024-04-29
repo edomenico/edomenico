@@ -512,12 +512,12 @@ def main():
                                             
     
                                         elif i==5:
-                                            if str((rows[i].contents[j].string))!='None':
-                                                auxpres=str(int(int((rows[i].contents[j].string)) * 1.33322))
-                                                pressao.append(auxpres)
-                                            else:
+                                           # if str((rows[i].contents[j].string))!='None':
+                                           #     auxpres=str(int(int((rows[i].contents[j].string)) * 1.33322))
+                                           #     pressao.append(auxpres)
+                                           # else:
                                                 
-                                                pressao.append(rows[i].contents[j].string)
+                                            pressao.append(rows[i].contents[j].string)
                                             print('chegou aqui 5')
                                             print(rows[i].contents[j].string)
                                         elif i==7:
