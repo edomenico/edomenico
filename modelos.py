@@ -417,7 +417,7 @@ def main():
                         driver.get(link1)
                         wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-                        WebDriverWait(driver,100).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane"))
+                        WebDriverWait(driver,100).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
                         html = driver.page_source
                         forecast = {}
     
