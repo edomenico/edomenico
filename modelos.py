@@ -1041,7 +1041,7 @@ def main():
             try:
                 result, lat, lon = search2(city, usu)
             except:
-                result, lat, lon = search2(city, usu)
+                pass
                 
             
             # st.write(result)
