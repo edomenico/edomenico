@@ -1040,7 +1040,7 @@ def main():
             
             try:
                 result, lat, lon = search2(city, usu)
-            except ValueError as ve:
+            except:
                 result, lat, lon = search2(city, usu)
                 
             
