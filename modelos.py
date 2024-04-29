@@ -214,7 +214,7 @@ def main():
                                         if i==1:
                                             
                                            
-                                            hhh=(str(rows[1].contents[0])[28:29])
+                                            hhh=(str(rows[1].contents[0])[28:30])
                                             
                                             
                                             
@@ -274,10 +274,9 @@ def main():
                         print (hhh)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
-                        if hhh=='0':
+                        if hhh=='0<':
                             hhh='00'
-                        else:
-                            hhh='12'
+                        
                         datahora1=ddd +" "+hhh+":00"
                         
                         print(datahora1)
@@ -295,6 +294,7 @@ def main():
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
                         d=d+timedelta(hours=int(horazulu))
+                        
                         
                         j=0
                         dd=[]
@@ -530,8 +530,7 @@ def main():
                         print(hhh)
                         if hhh=='0<':
                             hhh='00'
-                        else:
-                            hhh='12'
+                        
                         datahora1=ddd +" "+hhh+":00"
                         print('chegou aqui 7')
                         print(datahora1)
