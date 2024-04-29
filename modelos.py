@@ -513,7 +513,7 @@ def main():
     
                                         elif i==5:
                                             if (rows[i].contents[j].string) !='':
-                                                auxpres=str(int(int((rows[5].contents[1].string)) * 1.33322))
+                                                auxpres=str(int(int((rows[i].contents[j].string)) * 1.33322))
                                                 pressao.append(auxpres)
                                             else:
                                                 
