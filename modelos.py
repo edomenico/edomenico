@@ -1038,8 +1038,11 @@ def main():
                 pass
                 
             
-            
-            result, lat, lon = search2(city, usu)
+            try:
+                result, lat, lon = search2(city, usu)
+            except ValueError as ve:
+                result, lat, lon = search2(city, usu)
+                
             
             # st.write(result)
             df = pd.DataFrame(result)
