@@ -853,7 +853,7 @@ def main():
     
     def min_max2(df):
         from datetime import datetime
-        #"""Container for minimum and maximum temperatures"""
+        """Container for minimum and maximum temperatures"""
             # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
             # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
             # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
@@ -942,7 +942,8 @@ def main():
         # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
 
         fig = px.scatter(title='Temperatura máxima e mínima')
-        fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_max'].max(), name='Temperatura Máxima')
+        fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_max'].max(), name='Temperatura Máxima'
+                       )
         fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_min'].min(), name='Temperatura Mínima')
         fig.update_yaxes(title="Temperatura (°C)")
         st.plotly_chart(fig, use_container_width=True)
