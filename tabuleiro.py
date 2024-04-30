@@ -141,12 +141,12 @@ def main():
             estado=areasele
             areatrab=areasele
     
-            arqi = pd.read_csv('metar.csv',
+            arqi = pd.read_csv('metar111.csv',
                                sep=',',
                                # index_col=0,
                                parse_dates=True,
                                dayfirst=True,
-                               decimal='.')
+                               decimal='.',on_bad_lines='skip')
             wspd = []
             wdir = []
             estacao = []
