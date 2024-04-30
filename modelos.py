@@ -134,6 +134,8 @@ def main():
                         link = (arqi['endereco'][no])
                         
                         horazulu=arqi['horzulu'][no]
+                        horazulu='3'
+                        
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
@@ -427,7 +429,7 @@ def main():
                         posicaof=str.find(link,"pressure")+8
                         link1=link[0:posicaoi] + '/meteogram' + link[posicaoi:posicaof]
                         #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
-                        #horazulu=3
+                        horazulu='3'
                         print('Loading...')
                         
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
