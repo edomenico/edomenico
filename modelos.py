@@ -274,7 +274,7 @@ def main():
                         print (hhh)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
-                        if hhh=='0<':
+                        if hhh=='1<':
                             hhh='00'
                         
                         datahora1=ddd +" "+hhh+":00"
@@ -532,7 +532,7 @@ def main():
                         #estacao='SBGL'*len(tar)
                         estacao=[estacao.upper() for x in range(len(tar))]
                         print(hhh)
-                        if hhh=='0<':
+                        if hhh=='1<':
                             hhh='00'
                         
                         datahora1=ddd +" "+hhh+":00"
