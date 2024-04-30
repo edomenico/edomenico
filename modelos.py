@@ -1201,7 +1201,7 @@ def main():
 
                 with st.expander(label="Mostrar dados:"):
                     df1=df
-                    df1['data']=(str(df['timestamp'].iloc[0])[0:10])
+                    df1['data']=(str(df['timestamp'])[0:10])
                     st.table(df1)
 
 main()
