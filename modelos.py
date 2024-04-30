@@ -1203,7 +1203,7 @@ def main():
                     df1=df
                     df1.drop('data', inplace=True, axis=1)
                     df1.drop('hora', inplace=True, axis=1)
-                    		pressao	tp	ceu	ncb	int vento	dir vento	raj vento	visibilidade	nbaixas
+                    		#pressao	tp	ceu	ncb	int vento	dir vento	raj vento	visibilidade	nbaixas
                     df1 = df1.reindex(['estacao',timestamp', 'temp', 'ur','pressao', 'tp','ceu','ncb','int vento','dir vento','raj vento','visibilidade','nbaixas'], axis=1)
                     #df1['data']=(str(df['timestamp'].iloc)[0:10])
                     st.table(df1)
