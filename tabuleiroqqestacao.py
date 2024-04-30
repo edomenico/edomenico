@@ -974,24 +974,24 @@ def main2():
                                 var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 29};
                                 return mapping[tick];
                            """)
-                if diaini == 21:
-            if mesini == 2:
-                if (date.today().year % 4) != 0:
-                    p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 1, 10: 2};
-                                        return mapping[tick];
-                                   """)
+            if diaini == 21:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 1, 10: 2};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 1};
+                                                                    return mapping[tick];
+                                                               """)
+        
                 else:
                     p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 1};
-                                                                return mapping[tick];
-                                                           """)
-    
-            else:
-                p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 30};
-                            return mapping[tick];
-                       """)
+                                var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 30};
+                                return mapping[tick];
+                           """)
             if diaini == 22:
 
                 if mesini == 2:
