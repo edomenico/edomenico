@@ -853,7 +853,7 @@ def main():
     
     def min_max2(df):
         from datetime import datetime
-        """Container for minimum and maximum temperatures"""
+        #"""Container for minimum and maximum temperatures"""
             # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
             # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
             # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
@@ -935,7 +935,7 @@ def main():
 
 
     def min_max():
-        """Container for minimum and maximum temperatures"""
+       ## """Container for minimum and maximum temperatures"""
         # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
         # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
         # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
@@ -1078,7 +1078,11 @@ def main():
                 st.divider()
 
                 with st.expander(label="Mostrar dados:"):
-                    st.table(df)
+                    df1=df
+                    df1.drop('sea_level', inplace=True, axis=1)
+                    df1.drop('grnd_level', inplace=True, axis=1)
+                    
+                    st.table(df1)
     elif modelo=="ECMWF":
 
 
