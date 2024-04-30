@@ -877,6 +877,8 @@ def main():
                                 return mapping[tick];
                            """)
             if diaini == 21:
+                print('DIA INICIO')
+                print(diaini)
                 if mesini == 2:
                     if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
