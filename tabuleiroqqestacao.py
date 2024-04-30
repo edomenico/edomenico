@@ -840,7 +840,7 @@ def main2():
                     montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
                     arquivo.append(montalinha)
                     f.write("\n" + montalinha)
-            f.close
+            #f.close
             return arquivo
 
 
