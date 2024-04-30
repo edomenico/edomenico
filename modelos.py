@@ -1113,7 +1113,7 @@ def main():
 
             
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
-            df['data'] = df['data'][0:10]
+           
             print('final')
             print(df)
            
@@ -1200,7 +1200,9 @@ def main():
                 st.divider()
 
                 with st.expander(label="Mostrar dados:"):
-                    st.table(df)
+                    df1=df
+                    df1['data']=(str(df['timestamp'].iloc[0])[0:10])
+                    st.table(df1)
 
 main()
 
