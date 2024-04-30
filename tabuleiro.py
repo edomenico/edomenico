@@ -1300,6 +1300,10 @@ def main():
                             dia_fim = '28'
                             mes_fim = str(date_fim.month - 1)
                             ano_fim = str(date_fim.year)
+                    else:
+                        dia_fim = '30'
+                        mes_fim = str(date_fim.month - 1)
+                        ano_fim = str(date_fim.year)
 
                 
                 else:
@@ -2308,13 +2312,13 @@ def main():
             if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/02/24)'],horizontal=True)
                 if selecionaperiodo=='Últimos 10 dias':
-                    datainicial = datetime.utcnow() - timedelta(8)
+                    datainicial = datetime.utcnow() - timedelta(9)
                 else:
                     too_data = st.date_input('Dia Inicial:', start_datee)
                     datainicial=too_data
                    # datainicial= datainicial-timedelta(9)
             else:
-                datainicial = datetime.utcnow() - timedelta(8)
+                datainicial = datetime.utcnow() - timedelta(9)
         #st.divider()
         st.write('Visualização dos dados')
         with st.container(border=True):
