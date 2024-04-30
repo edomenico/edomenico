@@ -274,8 +274,26 @@ def main():
                         print (hhh)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
-                        if hhh=='1<':
+                       if hhh=='0<':
                             hhh='00'
+                        elif hhh=='1<':
+                            hhh='01'
+                        elif hhh=='2<':
+                            hhh='02'
+                        elif hhh=='3<':
+                            hhh='03'
+                        elif hhh=='4<':
+                            hhh='04'
+                        elif hhh=='5<':
+                            hhh='05'
+                        elif hhh=='6<':
+                            hhh='06'
+                        elif hhh=='7<':
+                            hhh='07'
+                        elif hhh=='8<':
+                            hhh='08'
+                        elif hhh=='9<':
+                            hhh='09'
                         
                         datahora1=ddd +" "+hhh+":00"
                         
@@ -532,8 +550,26 @@ def main():
                         #estacao='SBGL'*len(tar)
                         estacao=[estacao.upper() for x in range(len(tar))]
                         print(hhh)
-                        if hhh=='1<':
+                        if hhh=='0<':
                             hhh='00'
+                        elif hhh=='1<':
+                            hhh='01'
+                        elif hhh=='2<':
+                            hhh='02'
+                        elif hhh=='3<':
+                            hhh='03'
+                        elif hhh=='4<':
+                            hhh='04'
+                        elif hhh=='5<':
+                            hhh='05'
+                        elif hhh=='6<':
+                            hhh='06'
+                        elif hhh=='7<':
+                            hhh='07'
+                        elif hhh=='8<':
+                            hhh='08'
+                        elif hhh=='9<':
+                            hhh='09'
                         
                         datahora1=ddd +" "+hhh+":00"
                         print('chegou aqui 7')
