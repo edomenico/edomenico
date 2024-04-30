@@ -733,8 +733,8 @@ def main():
                 nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*1000)
             elif nbaixas=='--':
                 #nbaixas = 'Nil'
-            #else:
-            #    nbaixas=str(int(int((nbaixas))*3.281))
+            else:
+                nbaixas=str(int(int((nbaixas))))
             #if len(nbaixas)>5:
             #    nbaixas=nbaixas[0:5]
     
