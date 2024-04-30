@@ -732,7 +732,7 @@ def main():
             if nbaixas[-1]=='k':
                 nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*1000)
             elif nbaixas=='--':
-                #nbaixas = 'Nil'
+                nbaixas = 'Nil'
             else:
                 nbaixas=str(int(int((nbaixas))))
             #if len(nbaixas)>5:
