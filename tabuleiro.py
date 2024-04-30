@@ -751,6 +751,8 @@ def main():
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
     def tabuleiro(est,areatrab,datainicio):
+        print('DATAINICIO')
+        print(datainicio)
         
         def formata():
             from bokeh.models import FuncTickFormatter, FixedTicker
