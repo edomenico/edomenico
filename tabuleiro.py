@@ -2374,7 +2374,7 @@ def main():
                     my_bar.progress(50, text="Em andamento...")
                         # for percent_complete in range(100):
                         #     time.sleep(0.01)
-                    pt = rest(2,to_data,from_data)
+                    #pt = rest(2,to_data,from_data)
         
                     my_bar.progress(100, text="Terminou")
             st.divider()
