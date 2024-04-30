@@ -604,7 +604,7 @@ def main():
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
-                                d=d+timedelta(hours=3))
+                                d=d+timedelta(hours=3)
                                 print('chegou aqui 9')
                                 #print(timestring)
                                # dd.append(datetime.strptime(d, dateFormatter))
