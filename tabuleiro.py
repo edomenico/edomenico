@@ -644,7 +644,7 @@ def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
             f.close
             return arquivo
         
-        def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+    def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
             import datetime
             import time
             import requests
