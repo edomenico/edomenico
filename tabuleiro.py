@@ -812,7 +812,7 @@ def main():
             areaprev = 2
             estacao = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
         pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
-    
+        
         pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
         def _data_url_to_image(data_url: str) -> Image:
@@ -2374,7 +2374,7 @@ def main():
                     my_bar.progress(50, text="Em andamento...")
                         # for percent_complete in range(100):
                         #     time.sleep(0.01)
-                    #pt = rest(2,to_data,from_data)
+                    pt = rest(2,to_data,from_data)
         
                     my_bar.progress(100, text="Terminou")
             st.divider()
