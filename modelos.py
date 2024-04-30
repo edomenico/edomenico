@@ -730,13 +730,13 @@ def main():
             print('NUVENS BAIXAS')
             print(nbaixas)
             if nbaixas[-1]=='k':
-                nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*3281)
+                nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*1000)
             elif nbaixas=='--':
-                nbaixas = 'Nil'
-            else:
-                nbaixas=str(int(int((nbaixas))*3.281))
-            if len(nbaixas)>5:
-                nbaixas=nbaixas[0:5]
+                #nbaixas = 'Nil'
+            #else:
+            #    nbaixas=str(int(int((nbaixas))*3.281))
+            #if len(nbaixas)>5:
+            #    nbaixas=nbaixas[0:5]
     
             tp=weather_data['tp'][i]
             if tp=='':
