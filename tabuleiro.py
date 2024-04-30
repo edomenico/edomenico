@@ -578,7 +578,7 @@ def main():
     
             return df1
 
-def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+    def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
 
             import datetime
             import time
@@ -645,6 +645,7 @@ def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
             return arquivo
         
     def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+            
             import datetime
             import time
             import requests
