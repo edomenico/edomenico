@@ -1081,6 +1081,10 @@ def main():
                     df1=df
                     df1.drop('sea_level', inplace=True, axis=1)
                     df1.drop('grnd_level', inplace=True, axis=1)
+                    df1.drop('temp_min', inplace=True, axis=1)
+                    df1.drop('temp_max', inplace=True, axis=1)
+
+                    temp_min
                     
                     st.table(df1)
     elif modelo=="ECMWF":
