@@ -176,18 +176,22 @@ def main():
     
                 if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
                     c = 6
-    
-                if arqi.Mensagem[i].find('COR') > -1:
+
+                if len(str(arqi.Mensagem[i])) ==3:
+                      ggggg=1
+                      mensagem1='NAN'
+
+                elif arqi.Mensagem[i].find('COR') > -1:
                     novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
-    
-    
+
                     mensagem1 = novamens.split()
-                    mens=novamens
-    
+                    mens = novamens
+
                 else:
-    
+
                     mensagem1 = arqi.Mensagem[i].split()
-                    mens=arqi.Mensagem[i]
+                    mens = arqi.Mensagem[i]
+
     
                 # print(len(mensagem1))
     
