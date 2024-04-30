@@ -274,7 +274,7 @@ def main():
                         print (hhh)
                         #for i in range(0,len(estacao),1):
                         print(hhh)
-                       if hhh=='0<':
+                        if hhh=='0<':
                             hhh='00'
                         elif hhh=='1<':
                             hhh='01'
