@@ -1113,6 +1113,7 @@ def main():
 
             
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
+            df['data'] = df['data'][0:10]
             print('final')
             print(df)
            
