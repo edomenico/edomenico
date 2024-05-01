@@ -827,17 +827,9 @@ def main2():
                     else:
                         b = 'SPECI'
                     if p[i].find(estacao1) > -1:
+                        
                         a = estacao1
-                    #if p[i].find('SB') > -1:
-                    #    a = p[i][p[i].find('SB'):p[i].find('SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
-                   # elif p[i].find('SSKW') > -1:
-                   #     a = 'SSKW'
-                   # elif p[i].find('SWPI') > -1:
-                   #     a = 'SWPI'
-                  #  elif p[i].find('SWEI') > -1:
-                  #      a = 'SWEI'
-                   # elif p[i].find('SNRU') > -1:
-                   #     a = 'SNRU'
+                    
 
                     montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
                     arquivo.append(montalinha)
