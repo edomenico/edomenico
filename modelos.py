@@ -981,6 +981,8 @@ def main():
                                  name='Temperatura Mínima'), secondary_y=False)
         fig.update_yaxes(title="Temperatura (°C)")
         fig.update_xaxes(title="dia")
+        fig.update_layout(title_text="Temperaturas Máxima e Mínima")
+
 
 
 
