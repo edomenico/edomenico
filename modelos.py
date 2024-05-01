@@ -539,6 +539,8 @@ def main():
                                             #print(rows[i].contents[j].string)
 
                                         elif i==5:
+                                            print('chegou aqui 5555555')
+                                            print(rows[i].contents[j].string)
                                             if (rows[i].contents[j].string) !=None:
                                                 pressao.append(str(int((rows[i].contents[j].string)) * 1.33322))
                                             else:
