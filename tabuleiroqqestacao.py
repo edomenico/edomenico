@@ -229,8 +229,7 @@ def main2():
                         if j==1:
                             if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
                                     'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1 \
-                                    or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao) > -1\
-                                    or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
+                                    or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao) > -1 or mensagem1[j].find('SDYH') > -1:
                                 estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
                         #      GGGGGGGGG = 1
