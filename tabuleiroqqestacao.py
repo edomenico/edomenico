@@ -99,7 +99,7 @@ def main2():
 
         global pt
 
-        def trata_redemet(areasele):
+        def trata_redemet(areasele,estacao):
             
             import matplotlib.pyplot as plt
             import matplotlib.dates as md
@@ -226,11 +226,12 @@ def main2():
 
                         # campo 3 vento
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
-                        #if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
-                        #        'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
-                        #        or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find('SNGI') > -1 or mensagem1[j].find('SNTF') > -1\
-                        #        or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
-                        #    estacao.append(mensagem1[j])
+                        if j==1:
+                            if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
+                                    'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
+                                    or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao) > -1 or mensagem1[j].find('SNTF') > -1\
+                                    or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
+                                estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
                         #      GGGGGGGGG = 1
                         estacao.append(mensagem1[j])
@@ -643,7 +644,7 @@ def main2():
             areaprev = 2
         pdf = redemet_baixa2(1, areasel, to_data, from_data, estacao)
 
-        pdff = trata_redemet(areaprev)
+        pdff = trata_redemet(areaprev,estacao)
        # edited_df = st.data_editor(pdff)
         return pdff
 
