@@ -540,7 +540,7 @@ def main():
 
                                         elif i==5:
                                             if (rows[i].contents[j].string) !=None:
-                                                pressao.append(str(int((rows[5].contents[1].string)) * 1.33322))
+                                                pressao.append(str(int((rows[5].contents[j].string)) * 1.33322))
                                             else:
                                                 pressao.append(rows[i].contents[j].string) 
 
