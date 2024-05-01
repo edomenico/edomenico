@@ -531,15 +531,20 @@ def main():
                                             
                                             
     
-                                        elif i==5:
-                                           # if str((rows[i].contents[j].string))!='None':
-                                           #     auxpres=str(int(int((rows[i].contents[j].string)) * 1.33322))
-                                           #     pressao.append(auxpres)
-                                           # else:
+                                        #elif i==5:
+                                           
                                                 
-                                            pressao.append(rows[i].contents[j].string)
-                                            print('chegou aqui 5')
-                                            print(rows[i].contents[j].string)
+                                            #pressao.append(rows[i].contents[j].string)
+                                            #print('chegou aqui 5')
+                                            #print(rows[i].contents[j].string)
+
+                                                                            elif i==5:
+                                        if (rows[i].contents[j].string) !=None:
+                                            pressao.append(str(int((rows[5].contents[1].string)) * 1.33322))
+                                        else:
+                                            pressao.append(rows[i].contents[j].string) 
+
+                                        
                                         elif i==7:
                                             nbaixa.append(rows[i].contents[j].string)
                                             print('chegou aqui 5')
