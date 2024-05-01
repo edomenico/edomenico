@@ -959,7 +959,7 @@ def main():
         import plotly.express as px
         import plotly.graph_objects as go
         from plotly.subplots import make_subplots
-        """Container for minimum and maximum temperatures"""
+       ## """Container for minimum and maximum temperatures"""
         # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
         # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
         # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
