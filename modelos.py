@@ -935,17 +935,40 @@ def main():
 
 
     def min_max():
-       ## """Container for minimum and maximum temperatures"""
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+        """Container for minimum and maximum temperatures"""
         # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
         # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
         # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
         # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
 
-        fig = px.scatter(title='Temperatura máxima e mínima')
-        fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_max'].max(), name='Temperatura Máxima'
-                       )
-        fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_min'].min(), name='Temperatura Mínima')
+        fig = go.Figure()
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
+        x =x=df['data'].unique()
+        y1 = df.groupby('data')['temp_max'].max()
+        y2 = df.groupby('data')['temp_min'].min()
+
+        fig.add_trace(go.Scatter(x=x, y=y1,
+                                 mode='lines',
+                                 marker_color='red',
+                                 name='Temperatura Máxima'), secondary_y=False)
+        fig.add_trace(go.Scatter(x=x, y=y2,
+                                 mode='lines',
+                                 marker_color='blue',
+                                 name='Temperatura Mínima'), secondary_y=False)
         fig.update_yaxes(title="Temperatura (°C)")
+        fig.update_xaxes(title="dia")
+
+
+
+
+        # fig = px.scatter(title='Temperatura máxima e mínima')
+        # fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_max'].max(), name='Temperatura Máxima')
+        # fig.add_scatter(x=df['data'].unique(), y=df.groupby('data')['temp_min'].min(), name='Temperatura Mínima')
+        # fig.update_yaxes(title="Temperatura (°C)")
         st.plotly_chart(fig, use_container_width=True)
 
 
