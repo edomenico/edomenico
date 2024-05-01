@@ -226,14 +226,14 @@ def main2():
 
                         # campo 3 vento
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
-                        if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
-                                'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
-                                or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find('SNGI') > -1 or mensagem1[j].find('SNTF') > -1\
-                                or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
-                            estacao.append(mensagem1[j])
+                        #if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
+                        #        'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
+                        #        or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find('SNGI') > -1 or mensagem1[j].find('SNTF') > -1\
+                        #        or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
+                        #    estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
                         #      GGGGGGGGG = 1
-
+                        estacao.append(mensagem1[j])
                         # if k==190:
                         # print('k= ',k,estacao[k])
                         # print('data',datahora[k-1])
@@ -826,16 +826,18 @@ def main2():
                         b = 'METAR'
                     else:
                         b = 'SPECI'
-                    if p[i].find('SB') > -1:
-                        a = p[i][p[i].find('SB'):p[i].find('SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
-                    elif p[i].find('SSKW') > -1:
-                        a = 'SSKW'
-                    elif p[i].find('SWPI') > -1:
-                        a = 'SWPI'
-                    elif p[i].find('SWEI') > -1:
-                        a = 'SWEI'
-                    elif p[i].find('SNRU') > -1:
-                        a = 'SNRU'
+                    if p[i].find(estacao1) > -1:
+                        a = estacao1
+                    #if p[i].find('SB') > -1:
+                    #    a = p[i][p[i].find('SB'):p[i].find('SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                   # elif p[i].find('SSKW') > -1:
+                   #     a = 'SSKW'
+                   # elif p[i].find('SWPI') > -1:
+                   #     a = 'SWPI'
+                  #  elif p[i].find('SWEI') > -1:
+                  #      a = 'SWEI'
+                   # elif p[i].find('SNRU') > -1:
+                   #     a = 'SNRU'
 
                     montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
                     arquivo.append(montalinha)
