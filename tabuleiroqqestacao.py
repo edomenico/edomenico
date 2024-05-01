@@ -49,7 +49,7 @@ global diaini, mesini
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 def main2():
-    def rest(areas, to_data, from_data,nome_estacao):
+    def rest(areas, to_data, from_data, nome_estacao):
         import re
         from bs4 import BeautifulSoup
         from selenium import webdriver
@@ -57,20 +57,20 @@ def main2():
         from datetime import datetime, timedelta
         import datetime
         import time
-        
+
         # Set up the Chrome driver
         from selenium.webdriver.chrome.options import Options
         from selenium.webdriver.common.by import By
         from selenium.webdriver.support.wait import WebDriverWait
         from selenium.webdriver.support import expected_conditions as EC
         import time  # to simulate a real time data, time loop
-        
+
         import numpy as np  # np mean, np random
         import pandas as pd  # read csv, df manipulation
         import plotly.express as px  # interactive charts
         import sys
-        #from streamlit.web import cli as stcli
-        
+        # from streamlit.web import cli as stcli
+
         import streamlit
         from streamlit import runtime
         from streamlit_toggle import toggle
@@ -79,15 +79,15 @@ def main2():
         from datetime import datetime, timedelta
         import os
         import glob
-    
+
         import time  # to simulate a real time data, time loop
-    
+
         import numpy as np  # np mean, np random
         import pandas as pd  # read csv, df manipulation
         import plotly.express as px  # interactive charts
         import sys
-        #from streamlit.web import cli as stcli
-        
+        # from streamlit.web import cli as stcli
+
         import streamlit
         from streamlit import runtime
         from streamlit_toggle import toggle
@@ -100,7 +100,7 @@ def main2():
         global pt
 
         def trata_redemet(areasele,estacao):
-            
+
             import matplotlib.pyplot as plt
             import matplotlib.dates as md
             import dateutil
@@ -182,9 +182,9 @@ def main2():
                 if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
                     c = 6
 
-                if len(str(arqi.Mensagem[i])) ==3:
-                      ggggg=1
-                      mensagem1='NAN'
+                if len(str(arqi.Mensagem[i])) == 3:
+                    ggggg = 1
+                    mensagem1 = 'NAN'
 
                 elif arqi.Mensagem[i].find('COR') > -1:
                     novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
@@ -221,20 +221,21 @@ def main2():
                         if j == 2:
                             # data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
                             data_hora = mensagem1[j][2:4] + ':00'  # + mensagem1[j][4:6]
-                            #if estacao[k] == 'SBFN' and data_hora == "20:00":
+                            # if estacao[k] == 'SBFN' and data_hora == "20:00":
                             #    GGGGGGGGG = 1
 
                         # campo 3 vento
                         # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
                         if j==1:
                             if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
-                                    'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1\
-                                    or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao) > -1 or mensagem1[j].find('SNTF') > -1\
+                                    'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1 \
+                                    or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao) > -1 or mensagem1[
+                                j].find('SNTF') > -1 \
                                     or mensagem1[j].find('SDYH') > -1 or mensagem1[j].find('SNVB') > -1:
                                 estacao.append(mensagem1[j])
                         # if estacao[k] == 'SBFZ':
                         #      GGGGGGGGG = 1
-                        estacao.append(mensagem1[j])
+
                         # if k==190:
                         # print('k= ',k,estacao[k])
                         # print('data',datahora[k-1])
@@ -571,11 +572,11 @@ def main2():
             # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
             # arqiago['data_hora'] = x
             if areatrab == 1:
-                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                arqiant = pd.read_csv('metar_trat_teste1.csv',
                                       sep=',',
                                       decimal='.')
             else:
-                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                arqiant = pd.read_csv('metar_trat_teste2.csv',
                                       sep=',',
                                       decimal='.')
 
@@ -629,7 +630,7 @@ def main2():
         # to_data = st.sidebar.date_input('Inicio:', start_date)
         # from_data = st.sidebar.date_input('Fim:', end_date)
         datainicio = datetime.utcnow()
-        if nome_estacao =='N':
+        if nome_estacao == 'N':
             if areas == 1:
                 areasel = area_1
                 areaprev = 1
@@ -639,13 +640,13 @@ def main2():
                 areaprev = 2
                 estacao = 'SBRD,SBVH,SWEI,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
         else:
-            estacao=nome_estacao
+            estacao = nome_estacao
             areasel = area_2
             areaprev = 2
         pdf = redemet_baixa2(1, areasel, to_data, from_data, estacao)
 
         pdff = trata_redemet(areaprev,estacao)
-       # edited_df = st.data_editor(pdff)
+        # edited_df = st.data_editor(pdff)
         return pdff
 
     def _data_url_to_image(data_url: str) -> Image:
@@ -653,198 +654,196 @@ def main2():
         _, _data_url = data_url.split(";base64,")
         return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
-    def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
-            # Create Chrome options
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-        
-            # Create the driver with the options
-            browser = webdriver.Chrome(options=chrome_options)
-        
-            # Load the page with Selenium
-            #browser.get(url)
-        
-            # Wait up to 10 seconds for the page to load
-            # Wait for the page to finish loading all JavaScript
-            wait = WebDriverWait(browser, 20)
-    
-    
-            
-            
-            if escolha == 1:
-                # datai = "01/06/2020 00:00"
-                # dataf = "02/06/2020 23:00"
-                #datahi = datetime.strftime(datahini, '%d/%m/%Y')
-                #datahf = datetime.strftime(datahfim, '%d/%m/%Y')
-               # tempo = datahfim - datahini
-    
-                if datahini == datahfim:
-                    intervalo = 0
-                else:
-                    intervalo = (datahfim - datahini).days
-                #mes = datahini.month
-                # nome = "SBSC,SBAR,SBBH,SBBR,SBBV,SBCB,SBCG,SBCP,SBCT,SBCY,SBEN,SBES,SBFL,SBFN,SBFS,SBFZ,SBGL,SBGO,SBGR,SBIL,SBJF,SBJP,SBLB,SBME,SBMM,SBMO,SBMQ,SBNF,SBNT,SBPA,SBPJ,SBPV,SBRB,SBRF,SBRJ,SBSL,SBSP,SBST,SBSV,SBTE,SBMN,SBBE,SBVT,SBSG"
-                nome = estacao1
-                for i in range(intervalo + 1):
-                    try:
-                        # abre o Firefox
-                        #browser = webdriver.Firefox(executable_path='geckodriver.exe')
-                        # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
-                        # browser = webdriver.Chrome(executable_path='chrome.EXE')
-                        # chama a página da redemet para consulta
-        
-                        # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                        browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                        #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                        # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
-                        # if (datahi.day + i)==31:
-                        if i != 0:
-                            datacoris = datahini + timedelta(days=i)
-                            datacoris = datacoris + timedelta(minutes=0)
-                            datacorfs = datacoris + timedelta(hours=23)
-                            # datacori=datahf
-                        else:
-                            # datacori = datahini + timedelta(days=i)
-                            datacoris = datahini + timedelta(minutes=0)
-                            datacorfs = datahini + timedelta(hours=23)
-    
-                        datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
-                        # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-                        # datacorf=  datacori + timedelta(hours=23)
-                        datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
-                        datacorfs = datacorfs[0:10] + ' 23:00'
-        
-                        # espera 5s
-                        time.sleep(30)
-                        # tira a checkbox para mensagem recente
-                        #driver.find_element(By.ID, url) 
-                        el = browser.find_element(By.ID, "consulta_recente")
-                        el.click()
-                        #browser.find_element_by_id("consulta_recente").click()
-        
-                        # preenche o nome das estações para consulta
-                        
-                        element = browser.find_element(By.ID, "msg_localidade")
-                        element.send_keys(nome)
-        
-                        # preenche a data inicial e final
-        
-                        element = browser.find_element(By.ID, "consulta_data_ini").clear()
-                        
-                        element = browser.find_element(By.ID,"consulta_data_ini").click()
-                        element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
-                        element = browser.find_element(By.ID,"consulta_data_fim").clear()
-                        element = browser.find_element(By.ID,"consulta_data_fim").click()
-                        element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
-        
-                        # envia a consulta
-                        botao = browser.find_element(By.ID,"consulta_localidade")
-                        time.sleep(20)
-                        botao.click()
-        
-                        # espera 10s
-                        time.sleep(20)
-        
-                        ## coloca todo o resultado numa página
-                        # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
-                        # select_fr.select_by_index(3)
-        
-                        table = browser.find_element(By.ID,'msg_resultado')
-        
-                        # df = pd.read_html(str(table))
-                        # print(table)
-                        table_html = table.get_attribute('outerHTML')
-                        # print(df[0])
-        
-                        # print(table)
-                        if i == 0:
-                            df = pd.read_html(str(table_html))
-                            df = df[0]
-                        else:
-                            df2 = pd.read_html(str(table_html))
-                            df2 = df2[0]
-        
-                            df = df.append(df2, ignore_index=True)
-                            print(df)
-        
-                        # print(df.loc[(df["Localidade"] == 'SBSC')])
-                        df.to_csv("metar.csv", header=True)
-                        #browser.quit()
-                    except:
-                        continue
-                print(df)
-                # df = df.drop(columns=['Unnamed: 0'])
-                os.chdir("/mount/src/edomenico/area1")
-                df.to_csv("metar.csv", header=True)
-                # df.to_csv('example.csv')
-                return df
+    def redemet_baixa(escolha, ar, datahini, datahfim, estacao1):
+        # Create Chrome options
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+
+        # Create the driver with the options
+        browser = webdriver.Chrome(options=chrome_options)
+
+        # Load the page with Selenium
+        # browser.get(url)
+
+        # Wait up to 10 seconds for the page to load
+        # Wait for the page to finish loading all JavaScript
+        wait = WebDriverWait(browser, 20)
+
+        if escolha == 1:
+            # datai = "01/06/2020 00:00"
+            # dataf = "02/06/2020 23:00"
+            # datahi = datetime.strftime(datahini, '%d/%m/%Y')
+            # datahf = datetime.strftime(datahfim, '%d/%m/%Y')
+            # tempo = datahfim - datahini
+
+            if datahini == datahfim:
+                intervalo = 0
+            else:
+                intervalo = (datahfim - datahini).days
+            # mes = datahini.month
+            # nome = "SBSC,SBAR,SBBH,SBBR,SBBV,SBCB,SBCG,SBCP,SBCT,SBCY,SBEN,SBES,SBFL,SBFN,SBFS,SBFZ,SBGL,SBGO,SBGR,SBIL,SBJF,SBJP,SBLB,SBME,SBMM,SBMO,SBMQ,SBNF,SBNT,SBPA,SBPJ,SBPV,SBRB,SBRF,SBRJ,SBSL,SBSP,SBST,SBSV,SBTE,SBMN,SBBE,SBVT,SBSG"
+            nome = estacao1
+            for i in range(intervalo + 1):
+                try:
+                    # abre o Firefox
+                    # browser = webdriver.Firefox(executable_path='geckodriver.exe')
+                    # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
+                    # browser = webdriver.Chrome(executable_path='chrome.EXE')
+                    # chama a página da redemet para consulta
+
+                    # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
+                    browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                    # browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
+                    # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
+                    # if (datahi.day + i)==31:
+                    if i != 0:
+                        datacoris = datahini + timedelta(days=i)
+                        datacoris = datacoris + timedelta(minutes=0)
+                        datacorfs = datacoris + timedelta(hours=23)
+                        # datacori=datahf
+                    else:
+                        # datacori = datahini + timedelta(days=i)
+                        datacoris = datahini + timedelta(minutes=0)
+                        datacorfs = datahini + timedelta(hours=23)
+
+                    datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
+                    # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
+                    # datacorf=  datacori + timedelta(hours=23)
+                    datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
+                    datacorfs = datacorfs[0:10] + ' 23:00'
+
+                    # espera 5s
+                    time.sleep(30)
+                    # tira a checkbox para mensagem recente
+                    # driver.find_element(By.ID, url)
+                    el = browser.find_element(By.ID, "consulta_recente")
+                    el.click()
+                    # browser.find_element_by_id("consulta_recente").click()
+
+                    # preenche o nome das estações para consulta
+
+                    element = browser.find_element(By.ID, "msg_localidade")
+                    element.send_keys(nome)
+
+                    # preenche a data inicial e final
+
+                    element = browser.find_element(By.ID, "consulta_data_ini").clear()
+
+                    element = browser.find_element(By.ID, "consulta_data_ini").click()
+                    element = browser.find_element(By.ID, "consulta_data_ini").send_keys(datacoris)
+                    element = browser.find_element(By.ID, "consulta_data_fim").clear()
+                    element = browser.find_element(By.ID, "consulta_data_fim").click()
+                    element = browser.find_element(By.ID, "consulta_data_fim").send_keys(datacorfs)
+
+                    # envia a consulta
+                    botao = browser.find_element(By.ID, "consulta_localidade")
+                    time.sleep(20)
+                    botao.click()
+
+                    # espera 10s
+                    time.sleep(20)
+
+                    ## coloca todo o resultado numa página
+                    # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
+                    # select_fr.select_by_index(3)
+
+                    table = browser.find_element(By.ID, 'msg_resultado')
+
+                    # df = pd.read_html(str(table))
+                    # print(table)
+                    table_html = table.get_attribute('outerHTML')
+                    # print(df[0])
+
+                    # print(table)
+                    if i == 0:
+                        df = pd.read_html(str(table_html))
+                        df = df[0]
+                    else:
+                        df2 = pd.read_html(str(table_html))
+                        df2 = df2[0]
+
+                        df = df.append(df2, ignore_index=True)
+                        print(df)
+
+                    # print(df.loc[(df["Localidade"] == 'SBSC')])
+                    df.to_csv("metar.csv", header=True)
+                    # browser.quit()
+                except:
+                    continue
+            print(df)
+            # df = df.drop(columns=['Unnamed: 0'])
+            os.chdir("/mount/src/edomenico/area1")
+            df.to_csv("metar.csv", header=True)
+            # df.to_csv('example.csv')
+            return df
+
     def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
 
-            import datetime
-            import time
-            import requests
-            import pandas as pd
-            import json
-            from datetime import datetime, timedelta, date
-            from pandas.io.json import json_normalize
-            from bs4 import BeautifulSoup
-            dtini = '20240426'
-            #estacao1=estacao1[0:len(estacao1)-1]
-            f = open("metar111.csv", "w")
-            if (datahfim - datahini).days==0:
-                intervalo=1
-            else:
-                intervalo=(datahfim - datahini).days
-            print('cheguei aqui 3')
-            print(intervalo)
-            cab = ',Localidade,Tipo,Data,Mensagem'
-            arquivo = []
-            f.write(cab)
-            arquivo.append(cab)
+        import datetime
+        import time
+        import requests
+        import pandas as pd
+        import json
+        from datetime import datetime, timedelta, date
+        from pandas.io.json import json_normalize
+        from bs4 import BeautifulSoup
+        dtini = '20240426'
+        # estacao1=estacao1[0:len(estacao1)-1]
+        f = open("metar111.csv", "w")
+        if (datahfim - datahini).days == 0:
+            intervalo = 1
+        else:
+            intervalo = (datahfim - datahini).days
+        print('cheguei aqui 3')
+        print(intervalo)
+        cab = ',Localidade,Tipo,Data,Mensagem'
+        arquivo = []
+        f.write(cab)
+        arquivo.append(cab)
 
-            for j in range(0,intervalo+1,1):
-                datahinic=datahini + timedelta(days=j)
-                ano = str(datahinic)[0:4]
-                mes = str(datahinic)[5:7]
-                dia = str(datahinic)[8:10]
-                datainicio = dia + '/' + mes + '/' + ano
+        for j in range(0, intervalo+1, 1):
+            datahinic = datahini + timedelta(days=j)
+            ano = str(datahinic)[0:4]
+            mes = str(datahinic)[5:7]
+            dia = str(datahinic)[8:10]
+            datainicio = dia + '/' + mes + '/' + ano
 
-                 # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
-                url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local='+estacao1+'&msg=metar&data_ini=' + ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM'
-                print('cheguei 1')
-                print(url)
-                res = requests.get(url)
-                soup = BeautifulSoup(res.content, "lxml")
-                s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
-                s = s.replace('null', '"placeholder"')
-                s = s.replace('- ', ',')
-                p = s.split(',')
-                print('cheguei 2')
-                print(p)
-               
-                for i in range(1, len(p), 1):
-                    if p[i].find('METAR') > -1:
-                        b = 'METAR'
-                    else:
-                        b = 'SPECI'
-                    if p[i].find(estacao1) > -1:
-                        
-                        a = estacao1
-                    
+            # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
+            url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=' + estacao1 + '&msg=metar&data_ini=' + ano + mes + dia + '00&data_fim=' + ano + mes + dia + '23&saida_html=SIM'
+            print('cheguei 1')
+            print(url)
+            res = requests.get(url)
+            soup = BeautifulSoup(res.content, "lxml")
+            s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
+            s = s.replace('null', '"placeholder"')
+            s = s.replace('- ', ',')
+            p = s.split(',')
+            print('cheguei 2')
+            print(p)
 
-                    montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
-                    arquivo.append(montalinha)
-                    f.write("\n" + montalinha)
-            #f.close
-            return arquivo
+            for i in range(1, len(p), 1):
+                if p[i].find('METAR') > -1:
+                    b = 'METAR'
+                else:
+                    b = 'SPECI'
+                if p[i].find(estacao1) > -1:
+                    a = estacao1  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                # elif p[i].find('SSKW') > -1:
+                #     a = 'SSKW'
+                # elif p[i].find('SWPI') > -1:
+                #     a = 'SWPI'
+                # elif p[i].find('SWEI') > -1:
+                #     a = 'SWEI'
+                # elif p[i].find('SNRU') > -1:
+                #     a = 'SNRU'
 
+                montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                arquivo.append(montalinha)
+                f.write("\n" + montalinha)
+        f.close
+        return arquivo
 
-
-
-
-
-
-    def tabuleiro(est, areatrab, datainicio,pt1,pt2):
+    def tabuleiro(est, areatrab, datainicio, pt1, pt2):
         def formata():
             from bokeh.models import FuncTickFormatter, FixedTicker
             p.xaxis.ticker = FixedTicker(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -981,7 +980,7 @@ def main2():
                                                                     var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 1};
                                                                     return mapping[tick];
                                                                """)
-        
+
                 else:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                 var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 30};
@@ -1251,7 +1250,7 @@ def main2():
             # estacao_area = 'SBVH'
             # estacao_area ='SBEG,'
             arqi1 = pd.read_csv('metar_trat_teste2.csv')
-        
+
         estacao_area = est
         noestacao = estacao_area.split(',')
 
@@ -1383,10 +1382,6 @@ def main2():
                             dia_fim = '28'
                             mes_fim = str(date_fim.month - 1)
                             ano_fim = str(date_fim.year)
-                    else:
-                        dia_fim = '30'
-                        mes_fim = str(date_fim.month - 1)
-                        ano_fim = str(date_fim.year)
                 else:
                     dia_fim = str(date_fim.day - 1)
                     ano_fim = str(date_fim.year)
@@ -2393,57 +2388,56 @@ def main2():
                 print(f"Unexpected {err=}, {type(err)=}")
                 source_code = ("ERRO - DADOS INCONSISTENTES - MODIFIQUE AS OPÇÕES E TENTE DE NOVO")
             return source_code
+
     def page2():
-        
-        
-        pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
-                                    sep=',',
-                                    decimal='.')
-        pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
-                                    sep=',',
-                                    decimal='.')
-        #st.markdown("# Page 2 ❄️")
+
+        pt1 = pd.read_csv('metar_trat_teste1.csv',
+                          sep=',',
+                          decimal='.')
+        pt2 = pd.read_csv('metar_trat_teste2.csv',
+                          sep=',',
+                          decimal='.')
+        # st.markdown("# Page 2 ❄️")
         start_date = datetime.today()
         end_date = datetime.today()
-        #to_date = datetime.today()
-        title=''
-        entrou=0
+        # to_date = datetime.today()
+        title = ''
+        entrou = 0
         with st.sidebar:
-            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
+            title = (st.text_input('Escolha a estação', 'SBMQ', max_chars=4)).upper()
             st.write('Escolha o período para visualizar')
-            to_data = st.date_input('Inicio:', start_date,format="DD/MM/YYYY")
-            datai=to_data
-            from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
+            to_data = st.date_input('Inicio:', start_date, format="DD/MM/YYYY")
+            datai = to_data
+            from_data = st.date_input('Fim:', end_date, format="DD/MM/YYYY")
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
                 my_bar = st.progress(50, text=progress_text)
                 pt = rest(1, to_data, from_data, title)
                 my_bar.progress(100, text="Terminou...")
-                entrou=1
-            st.markdown(
-            """
-            
-            e-mail: edomenico813@gmail.com
-
-           
-            """
-            )
-        #if entrou==1:
-        p = tabuleiro(title, 3, datai,pt1,pt2)
+                entrou = 1
+            # st.markdown(
+            #     """
+            #
+            #     e-mail: edomenico813@gmail.com
+            #
+            #
+            #     """
+            # )
+        # if entrou==1:
+        p = tabuleiro(title, 3, datai, pt1, pt2)
 
         import streamlit.components.v1 as components
 
         st.components.v1.html(p, height=2300, width=1700, scrolling=True)
 
-       # st.markdown("# Page 2 ❄️")
-        
+    # st.markdown("# Page 2 ❄️")
 
     def page3():
-       
+
         st.markdown("#Rosa dos Ventos - Em construção 🎉")
-        
-        
-        #st.sidebar.markdown("# Page 3 🎉")
+
+        # st.sidebar.markdown("# Page 3 🎉")
+
     page_names_to_funcs = {
         "Tabuleiro - Outros": page2,
         "Rosa dos Ventos": page3,
