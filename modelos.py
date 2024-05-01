@@ -542,7 +542,7 @@ def main():
                                             print('chegou aqui 5555555')
                                             print(rows[i].contents[j].string)
                                             if (rows[i].contents[j].string) !=None:
-                                                pressao.append(str(float((rows[i].contents[j].string)) * 1.33322))
+                                                pressao.append(str(float((rows[i].contents[j].string)) * 33.863))
                                             else:
                                                 pressao.append(rows[i].contents[j].string) 
 
