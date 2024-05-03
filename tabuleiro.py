@@ -2602,7 +2602,7 @@ def main():
             df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
             #df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
 
-            st.header(df['estacao'].iloc[0])
+            st.header(df['estacao'].iloc[-1])
             #st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
             st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
             col1, col2, col3 = st.columns(3)
