@@ -1583,6 +1583,7 @@ def main2():
                 arqi['tp'] = arqi['tp'].replace(['+TSRA'], '+' + a)
                 arqi['tp'] = arqi['tp'].replace(['TSRA'], a)
                 arqi['tp'] = arqi['tp'].replace(['-RA'], '-' + b)
+                arqi['tp'] = arqi['tp'].replace(['-DZRA'], '-' + b)
                 arqi['tp'] = arqi['tp'].replace(['RA'], b)
                 arqi['tp'] = arqi['tp'].replace(['+RA'], '+' + b)
                 arqi['tp'] = arqi['tp'].replace(['RADZ'], b)
