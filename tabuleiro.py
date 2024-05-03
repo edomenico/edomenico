@@ -620,7 +620,7 @@ def main():
             #estacao1=estacao1[0:len(estacao1)-1]
             f = open("metar111.csv", "w")
             if (datahfim - datahini).days==0:
-                intervalo=1
+                intervalo=0
             else:
                 intervalo=(datahfim - datahini).days
             print('cheguei aqui 3')
