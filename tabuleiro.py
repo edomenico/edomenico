@@ -2645,7 +2645,7 @@ def main():
             with col3:
                 # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                 col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
-                col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
+                col3.metric("Vento(graus/kt)", f"{int(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
                 
                 col3.metric("Altura nuvens baixas(x100ft)", f"{df['altn1'].iloc[-1]}")
 
@@ -2674,7 +2674,7 @@ def main():
                 # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
                 # df1['vis'] = pd.to_numeric(df1['vis'], downcast='signed')
                 # df1['wspd'] = pd.to_numeric(df1['wspd'], downcast='signed')
-                df1['wdir'] = pd.to_numeric(df1['wdir'], downcast='signed')
+                #df1['wdir'] = pd.to_numeric(df1['wdir'], downcast='signed')
                 # df1['gust'] = pd.to_numeric(df1['gust'], downcast='signed')
                 # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
                 # df1['altn1'] = pd.to_numeric(df1['altn1'], downcast='signed')
