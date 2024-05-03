@@ -2646,7 +2646,7 @@ def main():
                 # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                 col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
                 col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
-                f"{(df['dryt'].iloc[-1])}")
+                
                 col3.metric("Altura nuvens baixas(x100ft)", f"{df['altn1'].iloc[-1]}")
 
             st.divider()
