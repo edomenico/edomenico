@@ -2434,11 +2434,11 @@ def main2():
             st.write('Escolha o período para visualizar')
             to_data = st.date_input('Inicio:', start_date,format="DD/MM/YYYY")
             datai=to_data
-            from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
+            #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
                 my_bar = st.progress(50, text=progress_text)
-                pt = rest(1, to_data, from_data, title)
+                pt = rest(1, to_data, to_data, title)
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
             st.markdown(
