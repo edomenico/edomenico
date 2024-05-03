@@ -68,8 +68,8 @@ def main():
         return ur
     def obterarq(estacaop,areap,datainicial):
         import plotly.graph_objects as go
-        import metpy.calc as mpcalc
-        from metpy.units import units
+        #import metpy.calc as mpcalc
+        #from metpy.units import units
 
         import numpy as np
         #from datetime import datetime
