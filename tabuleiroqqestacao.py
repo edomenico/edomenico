@@ -817,6 +817,7 @@ def main2():
                 intervalo=1
             else:
                 intervalo=(datahfim - datahini).days
+            intervalo=9
             print('cheguei aqui 3')
             print(intervalo)
             cab = ',Localidade,Tipo,Data,Mensagem'
