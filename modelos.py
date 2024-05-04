@@ -1247,7 +1247,7 @@ def main():
 
                     # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
                     col1.metric("Céu", sceu)
-                    col1.metric("Umidade", f"{df['ur'].iloc[ll]}")
+                    col1.metric("Umidade(%)", f"{df['ur'].iloc[ll]}")
 
                 with col2:
                     if df['tp'].iloc[ll] == 'BR':
