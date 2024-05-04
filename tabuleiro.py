@@ -2502,8 +2502,7 @@ def main():
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
-            on2 = st.toggle('Consultar outro período')
-            ong=st.toggle('Mostrar gráfico')
+            
             if on:    
                # st.write('Atualização dos Dados (Área 1 e Área 2)')
                 #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
@@ -2540,6 +2539,7 @@ def main():
         
                     my_bar.progress(100, text="Terminou")
             #st.divider()
+            on2 = st.toggle('Consultar outro período')
             
             if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/02/24)'],horizontal=True)
@@ -2551,6 +2551,7 @@ def main():
                    # datainicial= datainicial-timedelta(9)
             else:
                 datainicial = datetime.utcnow() - timedelta(9)
+            ong=st.toggle('Mostrar gráfico')
         
         
         #st.divider()
