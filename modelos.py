@@ -1254,12 +1254,15 @@ def main():
 
                     col1, col2 = st.columns((5, 5))
                     with col1:
+                        
                         temp_time_series2(df)
                     with col2:
-                        weather_pie(df)
+                        
+                        weather_pie2(df)
 
                     col3, col4 = st.columns((5, 5))
                     with col3:
+                        
                         min_max2(df)
                     with col4:
                         vento2(df)
@@ -1279,5 +1282,6 @@ def main():
                     st.table(df1)
 
 main()
+
 
 
