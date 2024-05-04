@@ -1194,66 +1194,75 @@ def main():
             #     pass
 
             with st.container():
+                from datetime import tzinfo, timedelta, datetime
                 stp = ""
+                horz= datetime.utcnow()
 
-                st.header(f"{city.capitalize().upper()}, BR {emoji(df['tp'].iloc[0])}")
-                st.subheader(str(df['timestamp'].iloc[0])[0:16] + 'UTC')
+                ll=0
+                while horz.strftime("%d/%m/%Y %H:00")>df['timestamp'][ll]:
+                    ll=ll+1
+                    horz=horz + timedelta(hours=1)
+
+                datcomp=horz.strftime("%d/%m/%Y %H:00")
+
+
+
+
+                st.header(f"{city.capitalize().upper()}, BR {emoji(df['tp'].iloc[ll])}")
+                st.subheader(str(df['timestamp'].iloc[ll])[0:16] + 'UTC')
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    col1.metric("Temperatura(°C)", f"{(df['temp'].iloc[0])}")
-                    if df['ceu'].iloc[0] == 'FEW':
+                    col1.metric("Temperatura(°C)", f"{(df['temp'].iloc[ll])}")
+                    if df['ceu'].iloc[ll] == 'FEW':
                         sceu = 'Poucas nuvens'
-                    elif df['ceu'].iloc[0] == 'SCT':
+                    elif df['ceu'].iloc[ll] == 'SCT':
                         sceu = 'Parcialmente nublado'
-                    elif df['ceu'].iloc[0] == 'BKN':
+                    elif df['ceu'].iloc[ll] == 'BKN':
                         sceu = 'Nublado'
-                    elif df['ceu'].iloc[0] == 'OVC':
+                    elif df['ceu'].iloc[ll] == 'OVC':
                         sceu = 'Encoberto'
                     else:
                         sceu = 'Claro'
 
                     # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
                     col1.metric("Céu", sceu)
-                    col1.metric("Umidade", f"{df['ur'].iloc[0]}")
+                    col1.metric("Umidade", f"{df['ur'].iloc[ll]}")
 
                 with col2:
-                    if df['tp'].iloc[0] == 'BR':
+                    if df['tp'].iloc[ll] == 'BR':
                         stp = 'Névoa'
-                    elif df['tp'].iloc[0] == 'RA':
+                    elif df['tp'].iloc[ll] == 'RA':
                         stp = 'Chuva'
-                    elif df['tp'].iloc[0] == 'TS':
+                    elif df['tp'].iloc[ll] == 'TS':
                         stp = 'Trovoada'
-                    elif df['tp'].iloc[0] == 'TSRA':
+                    elif df['tp'].iloc[ll] == 'TSRA':
                         stp = 'Trovoada com chuva'
                     else:
                         stp = 'Nil'
                     # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
                     col2.metric("Tempo presente", stp)
-                    col2.metric("Visibilidade(m)", f"{df['visibilidade'].iloc[0]}")
-                    col2.metric("Pressão(hPa)", f"{df['pressao'].iloc[0]}")
+                    col2.metric("Visibilidade(m)", f"{df['visibilidade'].iloc[ll]}")
+                    col2.metric("Pressão(hPa)", f"{df['pressao'].iloc[ll]}")
                 with col3:
                     # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
-                    col3.metric("Rajada(kt)", f"{(df['raj vento'].iloc[0])}")
-                    col3.metric("Vento(graus/kt)", f"{(df['dir vento'].iloc[0])} / {int(df['int vento'].iloc[0])}")
-                    col3.metric("Altura nuvens baixas(ft)", f"{df['nbaixas'].iloc[0]}")
+                    col3.metric("Rajada(kt)", f"{(df['raj vento'].iloc[ll])}")
+                    col3.metric("Vento(graus/kt)", f"{(df['dir vento'].iloc[ll])} / {int(df['int vento'].iloc[ll])}")
+                    col3.metric("Altura nuvens baixas(ft)", f"{df['nbaixas'].iloc[ll]}")
 
                 st.divider()
                 with st.container():
 
                     col1, col2 = st.columns((5, 5))
                     with col1:
-                        
-                        temp_time_series2(df)
+                        novo_projeto2.temp_time_series2(df)
                     with col2:
-                        
-                        weather_pie2(df)
+                        novo_projeto2.weather_pie(df)
 
                     col3, col4 = st.columns((5, 5))
                     with col3:
-                        
-                        min_max2(df)
+                        novo_projeto2.min_max2(df)
                     with col4:
-                        vento2(df)
+                        novo_projeto2.vento2(df)
 
                 if show_map and city:
                     st.map(pd.DataFrame({'lat': [lat], 'lon': [lon]}), use_container_width=True)
