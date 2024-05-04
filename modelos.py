@@ -706,7 +706,27 @@ def main():
     
     def sort_data2(weather_data):
         """"Function to extract data from json"""
-       
+        def umidade(ta,td):
+            if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
+                ur='--'
+            else:
+                a=float(ta)
+                b=float(td)
+                if a < b:
+                    ur='--'
+                else:
+                    if a >= 0:
+                        aa=7.5*a/(237.5+a)
+                    else:
+                        aa=9.5*a/(265.5+a)
+                    u_b=7.5*b
+                    c=237.3+b
+                    d=((-aa*c)+u_b)/c
+                    urr=(10**d)*100
+                    if urr>100:
+                        urr=100
+                    ur=str(int(urr))
+            return ur
         
     
         extracted_data = []
@@ -732,7 +752,8 @@ def main():
     
             chuva=weather_data['prp'][i]
             td=(weather_data['tdr'][i])
-            ur= str(round(100 - 5 * (int(temp) - int(td))))
+            #ur= str(round(100 - 5 * (int(temp) - int(td))))
+            ur=umidade(temp,td)
             nbaixas=str(weather_data['nbaixa'][i])
             print('NUVENS BAIXAS')
             print(nbaixas)
