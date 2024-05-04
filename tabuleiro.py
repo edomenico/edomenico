@@ -128,6 +128,7 @@ def main():
 
     def weather_pie(df):
         ###"""Container for pie chart of weather conditions"""
+        df['tp'].replace({'<NA>': float('nan'), pd.NA: 'Nil'}, inplace=True)
         labels = list(set(df['tp']))
         values = [sum([i == j for i in df['tp']]) for j in labels]
         fig = px.pie(values=values, labels=labels, title="Condições do tempo", hover_name=labels, names=labels)
