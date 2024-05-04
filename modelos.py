@@ -1254,15 +1254,15 @@ def main():
 
                     col1, col2 = st.columns((5, 5))
                     with col1:
-                        novo_projeto2.temp_time_series2(df)
+                        temp_time_series2(df)
                     with col2:
-                        novo_projeto2.weather_pie(df)
+                        weather_pie(df)
 
                     col3, col4 = st.columns((5, 5))
                     with col3:
-                        novo_projeto2.min_max2(df)
+                        min_max2(df)
                     with col4:
-                        novo_projeto2.vento2(df)
+                        vento2(df)
 
                 if show_map and city:
                     st.map(pd.DataFrame({'lat': [lat], 'lon': [lon]}), use_container_width=True)
