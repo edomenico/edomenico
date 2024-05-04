@@ -835,7 +835,7 @@ def main():
         """Container for temperature time series"""
         temp_time_df = pd.DataFrame(
             {'temp': df['temp'], 'ur': df['ur'],'timestamp': df['timestamp']})
-        fig = px.line(temp_time_df, x='datahora', y=['temp', 'ur'],
+        fig = px.line(temp_time_df, x='timestamp', y=['temp', 'ur'],
                       title='Temperatura(°C) e Umidade Relativa(%)')
         fig.update_yaxes(title="Valor")
             #fig.update_xaxes(title="dia")
@@ -890,7 +890,7 @@ def main():
                                  marker_color='blue',
                                  name='Temperatura Mínima'), secondary_y=False)
         fig.update_yaxes(title="Temperatura (°C)")
-        fig.update_xaxes(title="datahora")
+        fig.update_xaxes(title="dia")
         fig.update_layout(title_text="Temperaturas Máxima e Mínima")
     
         st.plotly_chart(fig, use_container_width=True)
@@ -1194,57 +1194,48 @@ def main():
             #     pass
 
             with st.container():
-                from datetime import tzinfo, timedelta, datetime
                 stp = ""
-                horz= datetime.utcnow()
 
-                ll=0
-                while horz.strftime("%d/%m/%Y %H:00")>df['timestamp'][ll]:
-                    ll=ll+1
-                    horz=horz + timedelta(hours=ll)
-                ll=ll+1
-                datcomp=horz.strftime("%d/%m/%Y %H:00")
-
-                st.header(f"{city.capitalize().upper()}, BR {emoji(df['tp'].iloc[ll])}")
-                st.subheader(str(df['timestamp'].iloc[ll])[0:16] + 'UTC')
+                st.header(f"{city.capitalize().upper()}, BR {emoji(df['tp'].iloc[0])}")
+                st.subheader(str(df['timestamp'].iloc[0])[0:16] + 'UTC')
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    col1.metric("Temperatura(°C)", f"{(df['temp'].iloc[ll])}")
-                    if df['ceu'].iloc[ll] == 'FEW':
+                    col1.metric("Temperatura(°C)", f"{(df['temp'].iloc[0])}")
+                    if df['ceu'].iloc[0] == 'FEW':
                         sceu = 'Poucas nuvens'
-                    elif df['ceu'].iloc[ll] == 'SCT':
+                    elif df['ceu'].iloc[0] == 'SCT':
                         sceu = 'Parcialmente nublado'
-                    elif df['ceu'].iloc[ll] == 'BKN':
+                    elif df['ceu'].iloc[0] == 'BKN':
                         sceu = 'Nublado'
-                    elif df['ceu'].iloc[ll] == 'OVC':
+                    elif df['ceu'].iloc[0] == 'OVC':
                         sceu = 'Encoberto'
                     else:
                         sceu = 'Claro'
 
-                    # col1.metric("Céu", f"{df['ceu'].iloc[ll]}")
+                    # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
                     col1.metric("Céu", sceu)
-                    col1.metric("Umidade", f"{df['ur'].iloc[ll]}")
+                    col1.metric("Umidade", f"{df['ur'].iloc[0]}")
 
                 with col2:
-                    if df['tp'].iloc[ll] == 'BR':
+                    if df['tp'].iloc[0] == 'BR':
                         stp = 'Névoa'
-                    elif df['tp'].iloc[ll] == 'RA':
+                    elif df['tp'].iloc[0] == 'RA':
                         stp = 'Chuva'
-                    elif df['tp'].iloc[ll] == 'TS':
+                    elif df['tp'].iloc[0] == 'TS':
                         stp = 'Trovoada'
-                    elif df['tp'].iloc[ll] == 'TSRA':
+                    elif df['tp'].iloc[0] == 'TSRA':
                         stp = 'Trovoada com chuva'
                     else:
                         stp = 'Nil'
-                    # col2.metric("Tempo presente", f"{(df['tp'].iloc[ll])}")
+                    # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
                     col2.metric("Tempo presente", stp)
-                    col2.metric("Visibilidade(m)", f"{df['visibilidade'].iloc[ll]}")
-                    col2.metric("Pressão(hPa)", f"{df['pressao'].iloc[ll]}")
+                    col2.metric("Visibilidade(m)", f"{df['visibilidade'].iloc[0]}")
+                    col2.metric("Pressão(hPa)", f"{df['pressao'].iloc[0]}")
                 with col3:
-                    # col3.metric("Tempo", f"{df['tp'].iloc[ll]}")
-                    col3.metric("Rajada(kt)", f"{(df['raj vento'].iloc[ll])}")
-                    col3.metric("Vento(graus/kt)", f"{(df['dir vento'].iloc[ll])} / {int(df['int vento'].iloc[ll])}")
-                    col3.metric("Altura nuvens baixas(ft)", f"{df['nbaixas'].iloc[ll]}")
+                    # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
+                    col3.metric("Rajada(kt)", f"{(df['raj vento'].iloc[0])}")
+                    col3.metric("Vento(graus/kt)", f"{(df['dir vento'].iloc[0])} / {int(df['int vento'].iloc[0])}")
+                    col3.metric("Altura nuvens baixas(ft)", f"{df['nbaixas'].iloc[0]}")
 
                 st.divider()
                 with st.container():
@@ -1279,4 +1270,5 @@ def main():
                     st.table(df1)
 
 main()
+
 
