@@ -48,89 +48,165 @@ from PIL import Image
 global diaini, mesini
 from bokeh.resources import CDN
 from bokeh.embed import file_html
-def umidade(ta,td):
-        if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
-            ur='--'
-        else:
-            a=float(ta)
-            b=float(td)
-            if a < b:
-                ur='--'
-            else:
-                if a >= 0:
-                    aa=7.5*a/(237.5+a)
-                else:
-                    aa=9.5*a/(265.5+a)
-                u_b=7.5*b
-                c=237.3+b
-                d=((-aa*c)+u_b)/c
-                urr=(10**d)*100
-                if urr>100:
-                    urr=100
-                ur=str(int(urr))
-        return ur
-def obterarq(estacaop,areap,datainicial):
-        import plotly.graph_objects as go
-        import metpy.calc as mpcalc
-        from metpy.units import units
 
-        import numpy as np
-        #from datetime import datetime
-        #from datetime import date
-        import pandas as pd
-        import re
-        import plotly
-
-        import plotly.express as px
-
-        # %% histogram with wind directions
-        #date_inicio = datetime.strptime(datainicial, '%d/%m/%y')
-        datainicial=datainicial + timedelta(0)
-        pd.set_option('max_columns', None)
-        pd.set_option('max_columns', None)
-        # arqi1=pd.read_csv('metar_trat_area2_tabuleiro_rosa.csv')
-        if areap==1:
-            arqi1 = pd.read_csv('metar_trat_teste1.csv')
-        else:
-            arqi1 = pd.read_csv('metar_trat_teste2.csv')
-
-        arqi = arqi1.loc[(arqi1['estacao'] == estacaop)]
-        #arqi = arqi.reset_index(drop=True)
-        x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
-        arqi['data_hora'] = x
-        ddata = arqi.data_hora
-        diai = arqi['data_hora']
-        ur=[]
-        arqi['drytt'] = arqi['dryt']
-        arqi['drytt'].fillna(0, inplace=True)
-        arqi['dewpt'] = arqi['dewp']
-        arqi['dewpt'].fillna(0, inplace=True)
-        arqi.sort_values(by=['data_hora'], inplace=True)
-        arqi = arqi.reset_index(drop=True)
-        arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%d/%m/%Y %H:%M'))]
-        arqi.sort_values(by=['data_hora'], inplace=True)
-        arqi = arqi.reset_index(drop=True)
-
-        for pp in range(0,len(arqi),1):
-
-
-            #ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
-            #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
-            umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
-            ur.append(int(umid))
-        arqi['ur']=ur
-        arqi.sort_values(by=['data_hora'], inplace=True)
-        arqi = arqi.reset_index(drop=True)
-
-
-
-
-
-
-        return arqi
 
 
 def main2():
+        def umidade(ta,td):
+                if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
+                    ur='--'
+                else:
+                    a=float(ta)
+                    b=float(td)
+                    if a < b:
+                        ur='--'
+                    else:
+                        if a >= 0:
+                            aa=7.5*a/(237.5+a)
+                        else:
+                            aa=9.5*a/(265.5+a)
+                        u_b=7.5*b
+                        c=237.3+b
+                        d=((-aa*c)+u_b)/c
+                        urr=(10**d)*100
+                        if urr>100:
+                            urr=100
+                        ur=str(int(urr))
+                return ur
+        def obterarq(estacaop,areap,datainicial):
+                import plotly.graph_objects as go
+                import metpy.calc as mpcalc
+                from metpy.units import units
+        
+                import numpy as np
+                #from datetime import datetime
+                #from datetime import date
+                import pandas as pd
+                import re
+                import plotly
+        
+                import plotly.express as px
+        
+                # %% histogram with wind directions
+                #date_inicio = datetime.strptime(datainicial, '%d/%m/%y')
+                datainicial=datainicial + timedelta(0)
+                pd.set_option('max_columns', None)
+                pd.set_option('max_columns', None)
+                # arqi1=pd.read_csv('metar_trat_area2_tabuleiro_rosa.csv')
+                if areap==1:
+                    arqi1 = pd.read_csv('metar_trat_teste1.csv')
+                else:
+                    arqi1 = pd.read_csv('metar_trat_teste2.csv')
+        
+                arqi = arqi1.loc[(arqi1['estacao'] == estacaop)]
+                #arqi = arqi.reset_index(drop=True)
+                x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
+                arqi['data_hora'] = x
+                ddata = arqi.data_hora
+                diai = arqi['data_hora']
+                ur=[]
+                arqi['drytt'] = arqi['dryt']
+                arqi['drytt'].fillna(0, inplace=True)
+                arqi['dewpt'] = arqi['dewp']
+                arqi['dewpt'].fillna(0, inplace=True)
+                arqi.sort_values(by=['data_hora'], inplace=True)
+                arqi = arqi.reset_index(drop=True)
+                arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%d/%m/%Y %H:%M'))]
+                arqi.sort_values(by=['data_hora'], inplace=True)
+                arqi = arqi.reset_index(drop=True)
+        
+                for pp in range(0,len(arqi),1):
+        
+        
+                    #ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
+                    #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
+                    umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
+                    ur.append(int(umid))
+                arqi['ur']=ur
+                arqi.sort_values(by=['data_hora'], inplace=True)
+                arqi = arqi.reset_index(drop=True)
+                return arqi
+
+        def weather_pie(df):
+                ###"""Container for pie chart of weather conditions"""
+                df['tp'].replace({'<NA>': float('nan'), pd.NA: 'Nil'}, inplace=True)
+        
+                labels = list(set(df['tp']))
+                values = [sum([i == j for i in df['tp']]) for j in labels]
+                fig = px.pie(values=values, labels=labels, title="Condições do tempo", hover_name=labels, names=labels)
+                st.plotly_chart(fig, use_container_width=True)
+
+        def min_max2(df):
+                from datetime import datetime
+                import plotly
+                import plotly.express as px
+                import plotly.graph_objects as go
+                from plotly.subplots import make_subplots
+                # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
+                # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
+                # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
+                # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
+                ####df['data'].unique()[0:len(df['data'].unique()) - 1]
+                #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
+                # auxy=df.groupby('data')['temp'].max()[0:len(df['timestamp'].unique()) - 1]
+                # auxy=auxy.sort_index(ascending=True)
+                # df['data']=pd.to_datetime(df['data'])
+                df['data1'] = df['datahora'].str.slice(0, 10)
+                df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
+                auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
+                fig = go.Figure()
+                fig = make_subplots(specs=[[{"secondary_y": True}]], subplot_titles='Temperaturas Máxima e Mìnima')
+                x = df['data'].unique()[0:len(df['data'].unique()) - 1]
+                y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
+                y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique()) - 1]
+        
+                fig.add_trace(go.Scatter(x=x, y=y1,
+                                         mode='lines',
+                                         marker_color='red',
+                                         name='Temperatura Máxima'), secondary_y=False)
+                fig.add_trace(go.Scatter(x=x, y=y2,
+                                         mode='lines',
+                                         marker_color='blue',
+                                         name='Temperatura Mínima'), secondary_y=False)
+                fig.update_yaxes(title="Temperatura (°C)")
+                fig.update_xaxes(title="Data")
+                fig.update_layout(title_text="Temperaturas Máxima e Mínima")
+        
+                st.plotly_chart(fig, use_container_width=True)
+                return
+        def vento2(df):
+                ##"""Container for temperature time series"""
+                # vento_df = pd.DataFrame(
+                #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+        
+                fig = px.scatter(title='Vento')
+                fig.add_scatter(x=df['data_hora'], y=df['wspd'], name='Int.vento(kt)')
+                fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
+                fig.update_yaxes(title="Valor")
+                fig.update_xaxes(title="Data")
+                st.plotly_chart(fig, use_container_width=True)
+                return
+
+        def temp_time_series2(df):
+                ###"""Container for temperature time series"""
+                temp_time_df = pd.DataFrame(
+                    {'temp': df['dryt'], 'ur': df['ur'], 'timestamp': df['data_hora']})
+                fig = px.line(temp_time_df, x='timestamp', y=['temp', 'ur'],
+                              title='Temperatura(°C) e Umidade Relativa(%)')
+                fig.update_yaxes(title="Valor")
+                fig.update_xaxes(title="Data")
+                new = {'temp': 'Temperatura Atual(°C)', 'ur': 'Umidade (%)'}
+                fig.for_each_trace(lambda t: t.update(name=new[t.name]))
+                # fig.update_legends(selector={'actual_temp': 'Air Temperature'})
+                # fig = px.scatter(title='Temp')
+                # fig.add_scatter(x=df['timestamp'], y=df['actual_temp'],mode='lines',name='Actual Temperature')
+                # fig.add_scatter(x=df['timestamp'], y=df['feels_like_temp'],mode='lines',name='Feels-like Temperature')
+                # fig.update_xaxes(title="Date", tickformat="%d-%m-%Y")
+                # fig.update_yaxes(title="Temperature (°C)", range=[df['min_temp'].min(), df['max_temp'].max()])
+                st.plotly_chart(fig, use_container_width=True)    
+
+
+        
     def rest(areas, to_data, from_data,nome_estacao):
         import re
         from bs4 import BeautifulSoup
@@ -2514,7 +2590,7 @@ def main2():
             )
         if ong:
 
-                df = obterarq(title, noarea, datainicial)
+                df = obterarq(title, 2, datai)
                 with st.container():
                     df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
                     df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
