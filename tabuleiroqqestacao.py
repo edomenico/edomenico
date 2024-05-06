@@ -2444,6 +2444,7 @@ def main2():
                 pt = rest(1, to_data, to_data, title)
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
+            ong=st.toggle('Mostrar gráfico')
             st.markdown(
             """
             
