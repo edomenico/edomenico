@@ -48,704 +48,569 @@ from PIL import Image
 global diaini, mesini
 from bokeh.resources import CDN
 from bokeh.embed import file_html
-
+def umidade(ta,td):
+        if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
+            ur='--'
+        else:
+            a=float(ta)
+            b=float(td)
+            if a < b:
+                ur='--'
+            else:
+                if a >= 0:
+                    aa=7.5*a/(237.5+a)
+                else:
+                    aa=9.5*a/(265.5+a)
+                u_b=7.5*b
+                c=237.3+b
+                d=((-aa*c)+u_b)/c
+                urr=(10**d)*100
+                if urr>100:
+                    urr=100
+                ur=str(int(urr))
+        return ur
 
 
 def main2():
-        def umidade(ta,td):
-                if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
-                    ur='--'
-                else:
-                    a=float(ta)
-                    b=float(td)
-                    if a < b:
-                        ur='--'
-                    else:
-                        if a >= 0:
-                            aa=7.5*a/(237.5+a)
-                        else:
-                            aa=9.5*a/(265.5+a)
-                        u_b=7.5*b
-                        c=237.3+b
-                        d=((-aa*c)+u_b)/c
-                        urr=(10**d)*100
-                        if urr>100:
-                            urr=100
-                        ur=str(int(urr))
-                return ur
-        def obterarq(estacaop,areap,datainicial):
-                import plotly.graph_objects as go
-                import metpy.calc as mpcalc
-                from metpy.units import units
+    def rest(areas, to_data, from_data,nome_estacao):
+        import re
+        from bs4 import BeautifulSoup
+        from selenium import webdriver
+        import pandas as pd
+        from datetime import datetime, timedelta
+        import datetime
+        import time
         
-                import numpy as np
-                #from datetime import datetime
-                #from datetime import date
-                import pandas as pd
-                import re
-                import plotly
+        # Set up the Chrome driver
+        from selenium.webdriver.chrome.options import Options
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.wait import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
+        import time  # to simulate a real time data, time loop
         
-                import plotly.express as px
+        import numpy as np  # np mean, np random
+        import pandas as pd  # read csv, df manipulation
+        import plotly.express as px  # interactive charts
+        import sys
+        #from streamlit.web import cli as stcli
         
-                # %% histogram with wind directions
-                #date_inicio = datetime.strptime(datainicial, '%d/%m/%y')
-                datainicial=datainicial + timedelta(0)
-                pd.set_option('max_columns', None)
-                pd.set_option('max_columns', None)
-                # arqi1=pd.read_csv('metar_trat_area2_tabuleiro_rosa.csv')
-                if areap==1:
-                    arqi1 = pd.read_csv('metar_trat_teste1.csv')
-                else:
-                    arqi1 = pd.read_csv('metar_trat_teste2.csv')
+        import streamlit
+        from streamlit import runtime
+        from streamlit_toggle import toggle
+        from streamlit.web import cli as stcli
+        import streamlit as st
+        from datetime import datetime, timedelta
+        import os
+        import glob
+    
+        import time  # to simulate a real time data, time loop
+    
+        import numpy as np  # np mean, np random
+        import pandas as pd  # read csv, df manipulation
+        import plotly.express as px  # interactive charts
+        import sys
+        #from streamlit.web import cli as stcli
         
-                arqi = arqi1.loc[(arqi1['estacao'] == estacaop)]
-                #arqi = arqi.reset_index(drop=True)
-                x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
-                arqi['data_hora'] = x
-                ddata = arqi.data_hora
-                diai = arqi['data_hora']
-                ur=[]
-                arqi['drytt'] = arqi['dryt']
-                arqi['drytt'].fillna(0, inplace=True)
-                arqi['dewpt'] = arqi['dewp']
-                arqi['dewpt'].fillna(0, inplace=True)
-                arqi.sort_values(by=['data_hora'], inplace=True)
-                arqi = arqi.reset_index(drop=True)
-                arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%d/%m/%Y %H:%M'))]
-                arqi.sort_values(by=['data_hora'], inplace=True)
-                arqi = arqi.reset_index(drop=True)
-        
-                for pp in range(0,len(arqi),1):
-        
-        
-                    #ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
-                    #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
-                    umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
-                    ur.append(int(umid))
-                arqi['ur']=ur
-                arqi.sort_values(by=['data_hora'], inplace=True)
-                arqi = arqi.reset_index(drop=True)
-                return arqi
+        import streamlit
+        from streamlit import runtime
+        from streamlit_toggle import toggle
+        from streamlit.web import cli as stcli
+        import streamlit as st
+        from datetime import datetime, timedelta
+        import os
+        import glob
 
-        def weather_pie(df):
-                ###"""Container for pie chart of weather conditions"""
-                df['tp'].replace({'<NA>': float('nan'), pd.NA: 'Nil'}, inplace=True)
-        
-                labels = list(set(df['tp']))
-                values = [sum([i == j for i in df['tp']]) for j in labels]
-                fig = px.pie(values=values, labels=labels, title="Condições do tempo", hover_name=labels, names=labels)
-                st.plotly_chart(fig, use_container_width=True)
+        global pt
 
-        def min_max2(df):
-                from datetime import datetime
-                import plotly
-                import plotly.express as px
-                import plotly.graph_objects as go
-                from plotly.subplots import make_subplots
-                # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
-                # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
-                # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
-                # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
-                ####df['data'].unique()[0:len(df['data'].unique()) - 1]
-                #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
-                # auxy=df.groupby('data')['temp'].max()[0:len(df['timestamp'].unique()) - 1]
-                # auxy=auxy.sort_index(ascending=True)
-                # df['data']=pd.to_datetime(df['data'])
-                df['data1'] = df['datahora'].str.slice(0, 10)
-                df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
-                auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
-                fig = go.Figure()
-                fig = make_subplots(specs=[[{"secondary_y": True}]], subplot_titles='Temperaturas Máxima e Mìnima')
-                x = df['data'].unique()[0:len(df['data'].unique()) - 1]
-                y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
-                y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique()) - 1]
-        
-                fig.add_trace(go.Scatter(x=x, y=y1,
-                                         mode='lines',
-                                         marker_color='red',
-                                         name='Temperatura Máxima'), secondary_y=False)
-                fig.add_trace(go.Scatter(x=x, y=y2,
-                                         mode='lines',
-                                         marker_color='blue',
-                                         name='Temperatura Mínima'), secondary_y=False)
-                fig.update_yaxes(title="Temperatura (°C)")
-                fig.update_xaxes(title="Data")
-                fig.update_layout(title_text="Temperaturas Máxima e Mínima")
-        
-                st.plotly_chart(fig, use_container_width=True)
-                return
-        def vento2(df):
-                ##"""Container for temperature time series"""
-                # vento_df = pd.DataFrame(
-                #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
-        
-                fig = px.scatter(title='Vento')
-                fig.add_scatter(x=df['data_hora'], y=df['wspd'], name='Int.vento(kt)')
-                fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
-                fig.update_yaxes(title="Valor")
-                fig.update_xaxes(title="Data")
-                st.plotly_chart(fig, use_container_width=True)
-                return
-
-        def temp_time_series2(df):
-                ###"""Container for temperature time series"""
-                temp_time_df = pd.DataFrame(
-                    {'temp': df['dryt'], 'ur': df['ur'], 'timestamp': df['data_hora']})
-                fig = px.line(temp_time_df, x='timestamp', y=['temp', 'ur'],
-                              title='Temperatura(°C) e Umidade Relativa(%)')
-                fig.update_yaxes(title="Valor")
-                fig.update_xaxes(title="Data")
-                new = {'temp': 'Temperatura Atual(°C)', 'ur': 'Umidade (%)'}
-                fig.for_each_trace(lambda t: t.update(name=new[t.name]))
-                # fig.update_legends(selector={'actual_temp': 'Air Temperature'})
-                # fig = px.scatter(title='Temp')
-                # fig.add_scatter(x=df['timestamp'], y=df['actual_temp'],mode='lines',name='Actual Temperature')
-                # fig.add_scatter(x=df['timestamp'], y=df['feels_like_temp'],mode='lines',name='Feels-like Temperature')
-                # fig.update_xaxes(title="Date", tickformat="%d-%m-%Y")
-                # fig.update_yaxes(title="Temperature (°C)", range=[df['min_temp'].min(), df['max_temp'].max()])
-                st.plotly_chart(fig, use_container_width=True)    
-
-
-        
-        def rest(areas, to_data, from_data,nome_estacao):
-                import re
-                from bs4 import BeautifulSoup
-                from selenium import webdriver
-                import pandas as pd
-                from datetime import datetime, timedelta
-                import datetime
-                import time
-                
-                # Set up the Chrome driver
-                from selenium.webdriver.chrome.options import Options
-                from selenium.webdriver.common.by import By
-                from selenium.webdriver.support.wait import WebDriverWait
-                from selenium.webdriver.support import expected_conditions as EC
-                import time  # to simulate a real time data, time loop
-                
-                import numpy as np  # np mean, np random
-                import pandas as pd  # read csv, df manipulation
-                import plotly.express as px  # interactive charts
-                import sys
-                #from streamlit.web import cli as stcli
-                
-                import streamlit
-                from streamlit import runtime
-                from streamlit_toggle import toggle
-                from streamlit.web import cli as stcli
-                import streamlit as st
-                from datetime import datetime, timedelta
-                import os
-                import glob
+        def trata_redemet(areasele,estacao1):
             
-                import time  # to simulate a real time data, time loop
-            
-                import numpy as np  # np mean, np random
-                import pandas as pd  # read csv, df manipulation
-                import plotly.express as px  # interactive charts
-                import sys
-                #from streamlit.web import cli as stcli
-                
-                import streamlit
-                from streamlit import runtime
-                from streamlit_toggle import toggle
-                from streamlit.web import cli as stcli
-                import streamlit as st
-                from datetime import datetime, timedelta
-                import os
-                import glob
-        
-                global pt
+            import matplotlib.pyplot as plt
+            import matplotlib.dates as md
+            import dateutil
 
-                def trata_redemet(areasele,estacao1):
-                    
-                    import matplotlib.pyplot as plt
-                    import matplotlib.dates as md
-                    import dateutil
-        
-                    import pandas as pd
-                    import os, sys
-                    import numpy as np
-                    from random import randint
-                    import re
-                    from datetime import datetime
-        
-                    import string
-        
-                    def criadataframe():
-                        global df, arqi
-                        COLUNAS = [
-                            'estacao',
-                            'datahora',
-                            'wspd',
-                            'wdir',
-                            'gust',
-                            'dryt',
-                            'dewp',
-                            'pres',
-                            'vis',
-                            'tp',
-                            'altn1',
-                            'qn1',
-                            'altn2',
-                            'qn2',
-                            'altn3',
-                            'qn3',
-                            'altn4',
-                            'qn4',
-                            'altncb',
-                            'qncb',
-                            'metar',
-                            'speci'
-                        ]
-        
-                        df = pd.DataFrame(columns=COLUNAS)
-        
-                    criadataframe()
-                    estado = areasele
-                    areatrab = areasele
-        
-                    arqi = pd.read_csv('metar111.csv',
-                                       sep=',',
-                                       # index_col=0,
-                                       parse_dates=True,
-                                       dayfirst=True,
-                                       decimal='.',on_bad_lines='skip')
-                    wspd = []
-                    wdir = []
-                    estacao = []
-                    dryt = []
-                    dewp = []
-                    pres = []
-                    vis = []
-                    datahora = []
-                    altn1 = []
-                    altn2 = []
-                    altn3 = []
-                    altn4 = []
-                    altncb = []
-                    qn1 = []
-                    qn2 = []
-                    qn3 = []
-                    qn4 = []
-                    qncb = []
-                    tp = []
-                    gust = []
-                    k = -1
-                    metar = []
-                    speci = []
-        
-                    for i in range(len(arqi)):
-        
-                        if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
-                            c = 6
-        
-                        if len(str(arqi.Mensagem[i])) ==3:
-                              ggggg=1
-                              mensagem1='NAN'
-        
-                        elif arqi.Mensagem[i].find('COR') > -1:
-                            novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
-        
-                            mensagem1 = novamens.split()
-                            mens = novamens
-        
-                        else:
-        
-                            mensagem1 = arqi.Mensagem[i].split()
-                            mens = arqi.Mensagem[i]
-        
-                        # print(len(mensagem1))
-        
-                        if mensagem1[0] == 'METAR' or mensagem1[0] == 'SPECI':
-                            k = k + 1
-                            aviso = False
-                            entrou = False
-                            camada1 = False
-                            camada2 = False
-                            camada3 = False
-                            camada4 = False
-                            tempopres = False
-                            nuvemcb = False
-                            tempentrou = False
-        
-                            for j in range(1, len(mensagem1), 1):
-        
-                                # if estacao[j] == 'SBFZ':
-                                #     GGGGGGGGG = 1
-        
-                                if mensagem1[j].find('AUTO') > -1:
-                                    aviso = True
-                                if j == 2:
-                                    # data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
-                                    data_hora = mensagem1[j][2:4] + ':00'  # + mensagem1[j][4:6]
-                                    #if estacao[k] == 'SBFN' and data_hora == "20:00":
-                                    #    GGGGGGGGG = 1
-        
-                                # campo 3 vento
-                                # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
-                                if j==1:
-                                    if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
-                                            'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1 \
-                                            or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao1) > -1 or mensagem1[j].find('SDYH') > -1:
-                                        estacao.append(mensagem1[j])
-                                # if estacao[k] == 'SBFZ':
-                                #      GGGGGGGGG = 1
-        
-                                # if k==190:
-                                # print('k= ',k,estacao[k])
-                                # print('data',datahora[k-1])
-        
-                                if mensagem1[j].find('KT') > -1:
-                                    if len(wdir) == len(dryt):
-                                        if (mensagem1[j][0:3]) == 'VRB' or (mensagem1[j][0:3]) == '///':
-        
-                                            wdir.append('NaN')
-                                        else:
-                                            if mensagem1[j][0:3] == "OOO":
-                                                wdir.append(0)
-                                            else:
-                                                try:
-                                                    wdir.append(float(mensagem1[j][0:3]))
-                                                except ValueError:
-                                                    wdir.append('NaN')
-        
-                                        if (mensagem1[j][3:5]) == '//' or mensagem1[j].find('P') > -1:
-                                            wspd.append('NaN')
-                                        else:
-                                            if mensagem1[j][3:5] == 'OO':
-                                                wspd.append(0)
-                                            else:
-                                                try:
-                                                    wspd.append(float(mensagem1[j][3:5]))
-                                                except ValueError:
-                                                    wspd.append('NaN')
-        
-                                        if mensagem1[j].find('G') > -1:
-                                            gust.append(mensagem1[j][6:8])
-                                        else:
-                                            gust.append('NaN')
-        
-                                if mensagem1[j].find('CAVOK') > -1 and aviso == False and entrou == False:
-                                    vis.append('9999')
-                                    entrou = True
-                                    altn1.append('NaN')
-                                    altn2.append('NaN')
-                                    altn3.append('NaN')
-                                    altn4.append('NaN')
-                                    qn1.append('NaN')
-                                    qn2.append('NaN')
-                                    qn3.append('NaN')
-                                    qn4.append('NaN')
-                                    camada1 = True
-                                    camada2 = True
-                                    camada3 = True
-                                    camada4 = True
-                                    print('cavok', mensagem1[j])
-        
-                                # sbxx data vento visi
-                                if j == 4 and mensagem1[j].find('CAVOK') == -1 and aviso == False and mensagem1[j].find(
-                                        'V') == -1 and mensagem1[j].find('F') == -1 and mensagem1[j].find('S') == -1 and \
-                                        mensagem1[j].find('B') == -1 and mensagem1[j].find(
-                                    'O') == -1 and entrou == False:
-                                    vis.append(mensagem1[j])
-                                    entrou = True
-                                    print('j4 1', mensagem1[j])
-        
-                                # vento variavel nao cavok
-                                if j == 5 and mensagem1[j - 1].find('V') > -1 and mensagem1[j].find('CAVOK') == -1 and \
-                                        mensagem1[
-                                            j - 1].find('CAVOK') == -1 and mensagem1[j].find(
-                                    'R') == -1 and entrou == False:
-                                    vis.append(mensagem1[j])
-                                    entrou = True
-                                    print('j5 1', mensagem1[j])
-        
-                                # automatica
-                                if j == 5 and aviso == True and entrou == False and (
-                                        mensagem1[j].find('V') == -1 or mensagem1[j].find('CAVOK') > -1):
-                                    if mensagem1[j].find('CAVOK') > -1:
-                                        vis.append('9999')
-                                        altn1.append('NaN')
-                                        altn2.append('NaN')
-                                        altn3.append('NaN')
-                                        altn4.append('NaN')
-                                        qn1.append('NaN')
-                                        qn2.append('NaN')
-                                        qn3.append('NaN')
-                                        qn4.append('NaN')
-                                        camada1 = True
-                                        camada2 = True
-                                        camada3 = True
-                                        camada4 = True
+            import pandas as pd
+            import os, sys
+            import numpy as np
+            from random import randint
+            import re
+            from datetime import datetime
+
+            import string
+
+            def criadataframe():
+                global df, arqi
+                COLUNAS = [
+                    'estacao',
+                    'datahora',
+                    'wspd',
+                    'wdir',
+                    'gust',
+                    'dryt',
+                    'dewp',
+                    'pres',
+                    'vis',
+                    'tp',
+                    'altn1',
+                    'qn1',
+                    'altn2',
+                    'qn2',
+                    'altn3',
+                    'qn3',
+                    'altn4',
+                    'qn4',
+                    'altncb',
+                    'qncb',
+                    'metar',
+                    'speci'
+                ]
+
+                df = pd.DataFrame(columns=COLUNAS)
+
+            criadataframe()
+            estado = areasele
+            areatrab = areasele
+
+            arqi = pd.read_csv('metar111.csv',
+                               sep=',',
+                               # index_col=0,
+                               parse_dates=True,
+                               dayfirst=True,
+                               decimal='.',on_bad_lines='skip')
+            wspd = []
+            wdir = []
+            estacao = []
+            dryt = []
+            dewp = []
+            pres = []
+            vis = []
+            datahora = []
+            altn1 = []
+            altn2 = []
+            altn3 = []
+            altn4 = []
+            altncb = []
+            qn1 = []
+            qn2 = []
+            qn3 = []
+            qn4 = []
+            qncb = []
+            tp = []
+            gust = []
+            k = -1
+            metar = []
+            speci = []
+
+            for i in range(len(arqi)):
+
+                if arqi.Mensagem[i] == 'METAR SBJR 171300Z 22002KT 9000 4000SW SCT010 SCT025 BKN040 24/21 Q1018=':
+                    c = 6
+
+                if len(str(arqi.Mensagem[i])) ==3:
+                      ggggg=1
+                      mensagem1='NAN'
+
+                elif arqi.Mensagem[i].find('COR') > -1:
+                    novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
+
+                    mensagem1 = novamens.split()
+                    mens = novamens
+
+                else:
+
+                    mensagem1 = arqi.Mensagem[i].split()
+                    mens = arqi.Mensagem[i]
+
+                # print(len(mensagem1))
+
+                if mensagem1[0] == 'METAR' or mensagem1[0] == 'SPECI':
+                    k = k + 1
+                    aviso = False
+                    entrou = False
+                    camada1 = False
+                    camada2 = False
+                    camada3 = False
+                    camada4 = False
+                    tempopres = False
+                    nuvemcb = False
+                    tempentrou = False
+
+                    for j in range(1, len(mensagem1), 1):
+
+                        # if estacao[j] == 'SBFZ':
+                        #     GGGGGGGGG = 1
+
+                        if mensagem1[j].find('AUTO') > -1:
+                            aviso = True
+                        if j == 2:
+                            # data_hora=mensagem1[j][2:4]+':'+mensagem1[j][4:6]
+                            data_hora = mensagem1[j][2:4] + ':00'  # + mensagem1[j][4:6]
+                            #if estacao[k] == 'SBFN' and data_hora == "20:00":
+                            #    GGGGGGGGG = 1
+
+                        # campo 3 vento
+                        # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
+                        if j==1:
+                            if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
+                                    'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SWLC') > -1 \
+                                    or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find(estacao1) > -1 or mensagem1[j].find('SDYH') > -1:
+                                estacao.append(mensagem1[j])
+                        # if estacao[k] == 'SBFZ':
+                        #      GGGGGGGGG = 1
+
+                        # if k==190:
+                        # print('k= ',k,estacao[k])
+                        # print('data',datahora[k-1])
+
+                        if mensagem1[j].find('KT') > -1:
+                            if len(wdir) == len(dryt):
+                                if (mensagem1[j][0:3]) == 'VRB' or (mensagem1[j][0:3]) == '///':
+
+                                    wdir.append('NaN')
+                                else:
+                                    if mensagem1[j][0:3] == "OOO":
+                                        wdir.append(0)
                                     else:
-                                        vis.append(mensagem1[j])
-                                        print('j5 2', mensagem1[j])
-                                    entrou = True
-        
-                                if (mensagem1[j] == ('////') and entrou == False):
-                                    vis.append('NaN')
-                                    entrou = True
-        
-                                if j == 6 and aviso == True and entrou == False and mensagem1[j].find('/') == -1:
-                                    if mensagem1[j].find('CAVOK') > -1:
-                                        vis.append('9999')
-                                        altn1.append('NaN')
-                                        altn2.append('NaN')
-                                        altn3.append('NaN')
-                                        altn4.append('NaN')
-                                        qn1.append('NaN')
-                                        qn2.append('NaN')
-                                        qn3.append('NaN')
-                                        qn4.append('NaN')
-                                        camada1 = True
-                                        camada2 = True
-                                        camada3 = True
-                                        camada4 = True
-        
-                                    else:
-                                        vis.append(mensagem1[j])
-                                    entrou = True
-        
-                                if mensagem1[j].find('Q') > -1 and mensagem1[j].find(
-                                        'S') != 0:  # and bool(re.search(r'\d', mensagem1[j])):
-                                    if (mensagem1[j][1:5]) == '////':
-                                        pres.append('NaN')
-                                    else:
-        
                                         try:
-                                            # print(mensagem1[j])
-        
-                                            pres.append(float(mensagem1[j][1:5]))
-        
-        
+                                            wdir.append(float(mensagem1[j][0:3]))
                                         except ValueError:
-                                            pres.append('NaN')
-                                            if len(pres) != len(dryt):
-                                                dryt.append('NaN')
-                                            if len(pres) != len(dewp):
-                                                dewp.append('NaN')
-        
-                                    break
-        
-                                # if tempentrou== False:
-                                #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
-                                #              'Q') > -1:
-                                # print(mensagem1[j])
-                                if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
-        
-                                    # print(mensagem1[j][0:2])
-                                    # print(mensagem1[j][3:5])
-                                    #  print(mensagem1[j + 1])
-                                    if (mensagem1[j][0:2]) == '//':
-        
-                                        dryt.append('NaN')
+                                            wdir.append('NaN')
+
+                                if (mensagem1[j][3:5]) == '//' or mensagem1[j].find('P') > -1:
+                                    wspd.append('NaN')
+                                else:
+                                    if mensagem1[j][3:5] == 'OO':
+                                        wspd.append(0)
                                     else:
-                                        dryt.append(float(mensagem1[j][0:2]))
-                                    if (mensagem1[j][3:5]) == '//':
-                                        dewp.append('NaN')
-                                    else:
-                                        if mensagem1[j][3:5].find('M') > -1:
-                                            dewp.append(float(mensagem1[j][4:6]) * -1)
-                                        else:
-        
-                                            dewp.append(float(mensagem1[j][3:5]))
-                                            # tempentrou = True
-        
-                                if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find(
-                                        'BKN') > -1 or \
-                                        mensagem1[j].find('OVC') > -1:
-                                    if mensagem1[j].find('CB') < 0 and mensagem1[j].find('TCU') < 0:
-                                        if camada1 == False:
-                                            if (mensagem1[j][3:6]).isnumeric():
-                                                try:
-                                                    altn1.append(float(mensagem1[j][3:6]))
-                                                except ValueError:
-                                                    altn1.append('NaN')
-                                            else:
-                                                altn1.append((mensagem1[j][3:6]))
-                                            qn1.append((mensagem1[j][0:3]))
-                                            camada1 = True
-        
-                                        elif camada2 == False:
-                                            if (mensagem1[j][3:6]).isnumeric():
-                                                try:
-                                                    altn2.append(float(mensagem1[j][3:6]))
-                                                except ValueError:
-                                                    altn2.append('NaN')
-        
-                                            else:
-                                                altn2.append((mensagem1[j][3:6]))
-                                            qn2.append((mensagem1[j][0:3]))
-                                            camada2 = True
-        
-                                        elif camada3 == False:
-                                            if (mensagem1[j][3:5]).isnumeric():
-                                                try:
-                                                    altn3.append(float(mensagem1[j][3:5]))
-                                                except ValueError:
-                                                    altn3.append('NaN')
-                                            else:
-                                                altn3.append((mensagem1[j][3:5]))
-                                            qn3.append((mensagem1[j][0:3]))
-                                            camada3 = True
-                                        else:
-        
-                                            if (mensagem1[j][3:5]).isnumeric():
-                                                altn4.append(float(mensagem1[j][3:5]))
-                                            else:
-                                                altn4.append((mensagem1[j][3:5]))
-                                            qn4.append((mensagem1[j][0:3]))
-                                            camada4 = True
-                                if mensagem1[j].find('CB') > -1 and len(mensagem1[j]) > 4 and nuvemcb == False:
-                                    altncb.append(((mensagem1[j][3:6])))
-                                    qncb.append((mensagem1[j][0:3]))
-                                    nuvemcb = True
-                                if mensagem1[j].find('TCU') > -1 and len(mensagem1[j]) > 4 and nuvemcb == False:
-                                    altncb.append(((mensagem1[j][3:7])))
-                                    qncb.append((mensagem1[j][0:3]))
-                                    nuvemcb = True
-        
-                                if aviso == True and mensagem1[j].find('NCD') > -1:
-                                    altn1.append('NaN')
-                                    altn2.append('NaN')
-                                    altn3.append('NaN')
-                                    altn4.append('NaN')
-                                    qn1.append('NaN')
-                                    qn2.append('NaN')
-                                    qn3.append('NaN')
-                                    qn4.append('NaN')
-                                    camada1 = True
-                                    camada2 = True
-                                    camada3 = True
-                                    camada4 = True
-        
-                                if mensagem1[j].find('NSC') > -1:
-                                    altn1.append('NaN')
-                                    altn2.append('NaN')
-                                    altn3.append('NaN')
-                                    altn4.append('NaN')
-                                    qn1.append('NaN')
-                                    qn2.append('NaN')
-                                    qn3.append('NaN')
-                                    qn4.append('NaN')
-                                    camada1 = True
-                                    camada2 = True
-                                    camada3 = True
-                                    camada4 = True
-        
-                                if mensagem1[j].find('VV') > -1:
-                                    altn1.append((mensagem1[j][2:5]))
-                                    altn2.append('NaN')
-                                    altn3.append('NaN')
-                                    altn4.append('NaN')
-                                    qn1.append('OVC')
-                                    qn2.append('NaN')
-                                    qn3.append('NaN')
-                                    qn4.append('NaN')
-                                    camada1 = True
-                                    camada2 = True
-                                    camada3 = True
-                                    camada4 = True
-        
-                                if (mensagem1[j].find('RA') > -1 or mensagem1[j].find('DZ') > -1 or mensagem1[j].find(
-                                        'BR') > -1 or
-                                    mensagem1[j].find('HZ') > -1 or mensagem1[j].find('FG') > -1 or mensagem1[j].find(
-                                            'FU') > -1 or mensagem1[j].find('VC') > -1 or
-                                    mensagem1[j].find('TS') > -1) and mensagem1[j].find('SB') == -1 and mensagem1[
-                                    j].find(
-                                    'OVC') == -1 and tempopres == False:
-                                    tp.append((mensagem1[j][0:len(mensagem1[j])]))
-                                    tempopres = True
-        
-                            datahora.append(arqi['Data'][i] + ' ' + data_hora)
-                            try:
-                                xhor = datetime.strptime(datahora[k], '%d/%m/%Y %H:%M')
-                            except ValueError:
-                                if k > 0:
-                                    datahora[k] = datahora[k - 1]
-                            else:
-                                datahora[k] = xhor
-                            if nuvemcb == False:
-                                altncb.append('NaN')
-                                qncb.append('NaN')
-                            if camada1 == False:
+                                        try:
+                                            wspd.append(float(mensagem1[j][3:5]))
+                                        except ValueError:
+                                            wspd.append('NaN')
+
+                                if mensagem1[j].find('G') > -1:
+                                    gust.append(mensagem1[j][6:8])
+                                else:
+                                    gust.append('NaN')
+
+                        if mensagem1[j].find('CAVOK') > -1 and aviso == False and entrou == False:
+                            vis.append('9999')
+                            entrou = True
+                            altn1.append('NaN')
+                            altn2.append('NaN')
+                            altn3.append('NaN')
+                            altn4.append('NaN')
+                            qn1.append('NaN')
+                            qn2.append('NaN')
+                            qn3.append('NaN')
+                            qn4.append('NaN')
+                            camada1 = True
+                            camada2 = True
+                            camada3 = True
+                            camada4 = True
+                            print('cavok', mensagem1[j])
+
+                        # sbxx data vento visi
+                        if j == 4 and mensagem1[j].find('CAVOK') == -1 and aviso == False and mensagem1[j].find(
+                                'V') == -1 and mensagem1[j].find('F') == -1 and mensagem1[j].find('S') == -1 and \
+                                mensagem1[j].find('B') == -1 and mensagem1[j].find(
+                            'O') == -1 and entrou == False:
+                            vis.append(mensagem1[j])
+                            entrou = True
+                            print('j4 1', mensagem1[j])
+
+                        # vento variavel nao cavok
+                        if j == 5 and mensagem1[j - 1].find('V') > -1 and mensagem1[j].find('CAVOK') == -1 and \
+                                mensagem1[
+                                    j - 1].find('CAVOK') == -1 and mensagem1[j].find(
+                            'R') == -1 and entrou == False:
+                            vis.append(mensagem1[j])
+                            entrou = True
+                            print('j5 1', mensagem1[j])
+
+                        # automatica
+                        if j == 5 and aviso == True and entrou == False and (
+                                mensagem1[j].find('V') == -1 or mensagem1[j].find('CAVOK') > -1):
+                            if mensagem1[j].find('CAVOK') > -1:
+                                vis.append('9999')
                                 altn1.append('NaN')
-                                qn1.append('NaN')
-        
-                            if camada2 == False:
                                 altn2.append('NaN')
-                                qn2.append('NaN')
-                            if camada3 == False:
                                 altn3.append('NaN')
-                                qn3.append('NaN')
-        
-                            if camada4 == False:
                                 altn4.append('NaN')
+                                qn1.append('NaN')
+                                qn2.append('NaN')
+                                qn3.append('NaN')
                                 qn4.append('NaN')
-        
-                            if (entrou == False):
-                                vis.append('-10000')
-                                entrou = True
-        
-                            if tempopres == False:
-                                tp.append('NaN')
-                            if len(dryt) != len(qn1):
-                                print(estacao[k], datahora[k])
-                            if mensagem1[0] == 'SPECI':
-                                speci.append(mens)
-                                print('aqui', datahora[k])
-                                print(mens)
-                                metar.append('-')
+                                camada1 = True
+                                camada2 = True
+                                camada3 = True
+                                camada4 = True
                             else:
-                                metar.append(mens)
-                                speci.append('-')
-                            if estacao[k] == 'SWPI':
-                                yyyyyyyyy = 1
-                            if vis[k] == '////':
-                                vis[k] = '-9999'
-                            if len(wspd) != len(pres):
+                                vis.append(mensagem1[j])
+                                print('j5 2', mensagem1[j])
+                            entrou = True
+
+                        if (mensagem1[j] == ('////') and entrou == False):
+                            vis.append('NaN')
+                            entrou = True
+
+                        if j == 6 and aviso == True and entrou == False and mensagem1[j].find('/') == -1:
+                            if mensagem1[j].find('CAVOK') > -1:
+                                vis.append('9999')
+                                altn1.append('NaN')
+                                altn2.append('NaN')
+                                altn3.append('NaN')
+                                altn4.append('NaN')
+                                qn1.append('NaN')
+                                qn2.append('NaN')
+                                qn3.append('NaN')
+                                qn4.append('NaN')
+                                camada1 = True
+                                camada2 = True
+                                camada3 = True
+                                camada4 = True
+
+                            else:
+                                vis.append(mensagem1[j])
+                            entrou = True
+
+                        if mensagem1[j].find('Q') > -1 and mensagem1[j].find(
+                                'S') != 0:  # and bool(re.search(r'\d', mensagem1[j])):
+                            if (mensagem1[j][1:5]) == '////':
                                 pres.append('NaN')
-                                if len(pres) != len(dryt):
-                                    dryt.append('NaN')
-                                    dewp.append('NaN')
-                            df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [
-                                dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
-                                            altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [
-                                            altn4[k]] + [qn4[k]] + [
-                                            altncb[k]] + [qncb[k]] + [metar[k]] + [speci[k]]
-                            # f.sort_values(by=['First Column', 'Second Column', ...], inplace=True)
-        
-                            df.sort_values(by=['estacao', 'datahora'], inplace=True)
-        
-                            df.to_csv('metar_trat_' + str(estado) + '.csv', encoding='utf-8', index=False,
-                                      date_format='%d/%m/%Y %H:%M')
-        
-                    # -----------------------juntar arquivos
-                    arqiago = pd.read_csv('metar_trat_' + str(estado) + '.csv',
-                                          sep=',',
-                                          decimal='.')
-                    # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
-                    # arqiago['data_hora'] = x
-                    if areatrab == 1:
-                        arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
-                                              sep=',',
-                                              decimal='.')
+                            else:
+
+                                try:
+                                    # print(mensagem1[j])
+
+                                    pres.append(float(mensagem1[j][1:5]))
+
+
+                                except ValueError:
+                                    pres.append('NaN')
+                                    if len(pres) != len(dryt):
+                                        dryt.append('NaN')
+                                    if len(pres) != len(dewp):
+                                        dewp.append('NaN')
+
+                            break
+
+                        # if tempentrou== False:
+                        #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
+                        #              'Q') > -1:
+                        # print(mensagem1[j])
+                        if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
+
+                            # print(mensagem1[j][0:2])
+                            # print(mensagem1[j][3:5])
+                            #  print(mensagem1[j + 1])
+                            if (mensagem1[j][0:2]) == '//':
+
+                                dryt.append('NaN')
+                            else:
+                                dryt.append(float(mensagem1[j][0:2]))
+                            if (mensagem1[j][3:5]) == '//':
+                                dewp.append('NaN')
+                            else:
+                                if mensagem1[j][3:5].find('M') > -1:
+                                    dewp.append(float(mensagem1[j][4:6]) * -1)
+                                else:
+
+                                    dewp.append(float(mensagem1[j][3:5]))
+                                    # tempentrou = True
+
+                        if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find(
+                                'BKN') > -1 or \
+                                mensagem1[j].find('OVC') > -1:
+                            if mensagem1[j].find('CB') < 0 and mensagem1[j].find('TCU') < 0:
+                                if camada1 == False:
+                                    if (mensagem1[j][3:6]).isnumeric():
+                                        try:
+                                            altn1.append(float(mensagem1[j][3:6]))
+                                        except ValueError:
+                                            altn1.append('NaN')
+                                    else:
+                                        altn1.append((mensagem1[j][3:6]))
+                                    qn1.append((mensagem1[j][0:3]))
+                                    camada1 = True
+
+                                elif camada2 == False:
+                                    if (mensagem1[j][3:6]).isnumeric():
+                                        try:
+                                            altn2.append(float(mensagem1[j][3:6]))
+                                        except ValueError:
+                                            altn2.append('NaN')
+
+                                    else:
+                                        altn2.append((mensagem1[j][3:6]))
+                                    qn2.append((mensagem1[j][0:3]))
+                                    camada2 = True
+
+                                elif camada3 == False:
+                                    if (mensagem1[j][3:5]).isnumeric():
+                                        try:
+                                            altn3.append(float(mensagem1[j][3:5]))
+                                        except ValueError:
+                                            altn3.append('NaN')
+                                    else:
+                                        altn3.append((mensagem1[j][3:5]))
+                                    qn3.append((mensagem1[j][0:3]))
+                                    camada3 = True
+                                else:
+
+                                    if (mensagem1[j][3:5]).isnumeric():
+                                        altn4.append(float(mensagem1[j][3:5]))
+                                    else:
+                                        altn4.append((mensagem1[j][3:5]))
+                                    qn4.append((mensagem1[j][0:3]))
+                                    camada4 = True
+                        if mensagem1[j].find('CB') > -1 and len(mensagem1[j]) > 4 and nuvemcb == False:
+                            altncb.append(((mensagem1[j][3:6])))
+                            qncb.append((mensagem1[j][0:3]))
+                            nuvemcb = True
+                        if mensagem1[j].find('TCU') > -1 and len(mensagem1[j]) > 4 and nuvemcb == False:
+                            altncb.append(((mensagem1[j][3:7])))
+                            qncb.append((mensagem1[j][0:3]))
+                            nuvemcb = True
+
+                        if aviso == True and mensagem1[j].find('NCD') > -1:
+                            altn1.append('NaN')
+                            altn2.append('NaN')
+                            altn3.append('NaN')
+                            altn4.append('NaN')
+                            qn1.append('NaN')
+                            qn2.append('NaN')
+                            qn3.append('NaN')
+                            qn4.append('NaN')
+                            camada1 = True
+                            camada2 = True
+                            camada3 = True
+                            camada4 = True
+
+                        if mensagem1[j].find('NSC') > -1:
+                            altn1.append('NaN')
+                            altn2.append('NaN')
+                            altn3.append('NaN')
+                            altn4.append('NaN')
+                            qn1.append('NaN')
+                            qn2.append('NaN')
+                            qn3.append('NaN')
+                            qn4.append('NaN')
+                            camada1 = True
+                            camada2 = True
+                            camada3 = True
+                            camada4 = True
+
+                        if mensagem1[j].find('VV') > -1:
+                            altn1.append((mensagem1[j][2:5]))
+                            altn2.append('NaN')
+                            altn3.append('NaN')
+                            altn4.append('NaN')
+                            qn1.append('OVC')
+                            qn2.append('NaN')
+                            qn3.append('NaN')
+                            qn4.append('NaN')
+                            camada1 = True
+                            camada2 = True
+                            camada3 = True
+                            camada4 = True
+
+                        if (mensagem1[j].find('RA') > -1 or mensagem1[j].find('DZ') > -1 or mensagem1[j].find(
+                                'BR') > -1 or
+                            mensagem1[j].find('HZ') > -1 or mensagem1[j].find('FG') > -1 or mensagem1[j].find(
+                                    'FU') > -1 or mensagem1[j].find('VC') > -1 or
+                            mensagem1[j].find('TS') > -1) and mensagem1[j].find('SB') == -1 and mensagem1[
+                            j].find(
+                            'OVC') == -1 and tempopres == False:
+                            tp.append((mensagem1[j][0:len(mensagem1[j])]))
+                            tempopres = True
+
+                    datahora.append(arqi['Data'][i] + ' ' + data_hora)
+                    try:
+                        xhor = datetime.strptime(datahora[k], '%d/%m/%Y %H:%M')
+                    except ValueError:
+                        if k > 0:
+                            datahora[k] = datahora[k - 1]
                     else:
-                        arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
-                                              sep=',',
-                                              decimal='.')
-        
-                    df1 = pd.concat([arqiant, arqiago])
-                    df1.sort_values(by=['datahora', 'estacao'], inplace=True)
-                    df1 = df1.drop_duplicates(['estacao', 'datahora', 'speci'])
-        
-                    if areatrab == 1:
-                        df1.to_csv('metar_trat_teste1.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+                        datahora[k] = xhor
+                    if nuvemcb == False:
+                        altncb.append('NaN')
+                        qncb.append('NaN')
+                    if camada1 == False:
+                        altn1.append('NaN')
+                        qn1.append('NaN')
+
+                    if camada2 == False:
+                        altn2.append('NaN')
+                        qn2.append('NaN')
+                    if camada3 == False:
+                        altn3.append('NaN')
+                        qn3.append('NaN')
+
+                    if camada4 == False:
+                        altn4.append('NaN')
+                        qn4.append('NaN')
+
+                    if (entrou == False):
+                        vis.append('-10000')
+                        entrou = True
+
+                    if tempopres == False:
+                        tp.append('NaN')
+                    if len(dryt) != len(qn1):
+                        print(estacao[k], datahora[k])
+                    if mensagem1[0] == 'SPECI':
+                        speci.append(mens)
+                        print('aqui', datahora[k])
+                        print(mens)
+                        metar.append('-')
                     else:
-                        df1.to_csv('metar_trat_teste2.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
-        
-                    return df1
+                        metar.append(mens)
+                        speci.append('-')
+                    if estacao[k] == 'SWPI':
+                        yyyyyyyyy = 1
+                    if vis[k] == '////':
+                        vis[k] = '-9999'
+                    if len(wspd) != len(pres):
+                        pres.append('NaN')
+                        if len(pres) != len(dryt):
+                            dryt.append('NaN')
+                            dewp.append('NaN')
+                    df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [
+                        dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
+                                    altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [
+                                    altn4[k]] + [qn4[k]] + [
+                                    altncb[k]] + [qncb[k]] + [metar[k]] + [speci[k]]
+                    # f.sort_values(by=['First Column', 'Second Column', ...], inplace=True)
+
+                    df.sort_values(by=['estacao', 'datahora'], inplace=True)
+
+                    df.to_csv('metar_trat_' + str(estado) + '.csv', encoding='utf-8', index=False,
+                              date_format='%d/%m/%Y %H:%M')
+
+            # -----------------------juntar arquivos
+            arqiago = pd.read_csv('metar_trat_' + str(estado) + '.csv',
+                                  sep=',',
+                                  decimal='.')
+            # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
+            # arqiago['data_hora'] = x
+            if areatrab == 1:
+                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                      sep=',',
+                                      decimal='.')
+            else:
+                arqiant = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                      sep=',',
+                                      decimal='.')
+
+            df1 = pd.concat([arqiant, arqiago])
+            df1.sort_values(by=['datahora', 'estacao'], inplace=True)
+            df1 = df1.drop_duplicates(['estacao', 'datahora', 'speci'])
+
+            if areatrab == 1:
+                df1.to_csv('metar_trat_teste1.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+            else:
+                df1.to_csv('metar_trat_teste2.csv', encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
+
+            return df1
 
         # --------------------------------------------------------
 
@@ -805,12 +670,12 @@ def main2():
        # edited_df = st.data_editor(pdff)
         return pdff
 
-        def _data_url_to_image(data_url: str) -> Image:
-                """Convert DataURL string to the image."""
-                _, _data_url = data_url.split(";base64,")
-                return Image.open(io.BytesIO(base64.b64decode(_data_url)))
+    def _data_url_to_image(data_url: str) -> Image:
+        """Convert DataURL string to the image."""
+        _, _data_url = data_url.split(";base64,")
+        return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
-        def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
+    def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
             # Create Chrome options
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -935,7 +800,7 @@ def main2():
                 df.to_csv("metar.csv", header=True)
                 # df.to_csv('example.csv')
                 return df
-        def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+    def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
 
             import datetime
             import time
@@ -1001,364 +866,364 @@ def main2():
 
 
 
-        def tabuleiro(est, areatrab, datainicio,pt1,pt2):
-                def formata():
-                    from bokeh.models import FuncTickFormatter, FixedTicker
-                    p.xaxis.ticker = FixedTicker(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    def tabuleiro(est, areatrab, datainicio,pt1,pt2):
+        def formata():
+            from bokeh.models import FuncTickFormatter, FixedTicker
+            p.xaxis.ticker = FixedTicker(ticks=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+            if diaini == 1:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 1, 2: 2, 3: 3, 4: 4, 5:5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10};
+                    return mapping[tick];
+                """)
+            if diaini == 2:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 2, 2: 3, 3: 4, 4: 5, 5:6, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11};
+                    return mapping[tick];
+                """)
+
+            if diaini == 3:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 3, 2: 4, 3: 5, 4: 6, 5:7, 6: 8, 7: 9, 8: 10, 9: 11, 10: 12};
+                    return mapping[tick];
+                """)
+
+            if diaini == 4:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 4, 2: 5, 3: 6, 4: 7, 5:8, 6: 9, 7: 10, 8: 11, 9: 12, 10: 13};
+                    return mapping[tick];
+                """)
+
+            if diaini == 5:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 5, 2: 6, 3: 7, 4: 8, 5:9, 6: 10, 7: 11, 8: 12, 9: 13, 10: 14};
+                    return mapping[tick];
+                """)
+
+            if diaini == 6:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 6, 2: 7, 3: 8, 4: 9, 5:10, 6: 11, 7: 12, 8: 13, 9: 14, 10: 15};
+                    return mapping[tick];
+                """)
+
+            if diaini == 7:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 7, 2: 8, 3: 9, 4: 10, 5:11, 6: 12, 7: 13, 8: 14, 9: 15, 10: 16};
+                    return mapping[tick];
+                """)
+            if diaini == 8:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 8, 2: 9, 3: 10, 4: 11, 5:12, 6: 13, 7: 14, 8: 15, 9: 16, 10: 17};
+                    return mapping[tick];
+                """)
+            if diaini == 9:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                    var mapping = {1: 9, 2: 10, 3: 11, 4: 12, 5:13, 6: 14, 7: 15, 8: 16, 9: 17, 10: 18};
+                    return mapping[tick];
+                """)
+            if diaini == 10:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                       var mapping = {1: 10, 2: 11, 3: 12, 4: 13, 5:14, 6: 15, 7: 16, 8: 17, 9: 18, 10: 19};
+                       return mapping[tick];
+                   """)
+            if diaini == 11:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                       var mapping = {1: 11, 2: 12, 3: 13, 4: 14, 5:15, 6: 16, 7: 17, 8: 18, 9: 19, 10: 20};
+                       return mapping[tick];
+                   """)
+            if diaini == 12:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                          var mapping = {1: 12, 2: 13, 3: 14, 4: 15, 5:16, 6: 17, 7: 18, 8: 19, 9: 20, 10: 21};
+                          return mapping[tick];
+                      """)
+            if diaini == 13:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                          var mapping = {1: 13, 2: 14, 3: 15, 4: 16, 5:17, 6: 18, 7: 19, 8: 20, 9: 21, 10: 22};
+                          return mapping[tick];
+                      """)
+            if diaini == 14:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                          var mapping = {1: 14, 2: 15, 3: 16, 4: 17, 5:18, 6: 19, 7: 20, 8: 21, 9: 22, 10: 23};
+                          return mapping[tick];
+                      """)
+            if diaini == 15:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                            var mapping = {1: 15, 2: 16, 3: 17, 4: 18, 5:19, 6: 20, 7: 21, 8: 22, 9: 23, 10: 24};
+                            return mapping[tick];
+                      """)
+            if diaini == 16:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                            var mapping = {1: 16, 2: 17, 3: 18, 4: 19, 5:20, 6: 21, 7: 22, 8: 23, 9: 24, 10: 25};
+                            return mapping[tick];
+                       """)
+            if diaini == 17:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                            var mapping = {1: 17, 2: 18, 3: 19, 4: 20, 5:21, 6: 22, 7: 23, 8: 24, 9: 25, 10: 26};
+                            return mapping[tick];
+                       """)
+            if diaini == 18:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                            var mapping = {1: 18, 2: 19, 3: 20, 4: 21, 5:22, 6: 23, 7: 24, 8: 25, 9: 26, 10: 27};
+                            return mapping[tick];
+                       """)
+            if diaini == 19:
+                p.xaxis.formatter = FuncTickFormatter(code="""
+                            var mapping = {1: 19, 2: 20, 3: 21, 4: 22, 5:23, 6: 24, 7: 25, 8: 26, 9: 27, 10: 28};
+                            return mapping[tick];
+                       """)
+            if diaini == 20:
+
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 1};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 29};
+                                                                    return mapping[tick];
+                                                               """)
+
+                else:
+
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 29};
+                                return mapping[tick];
+                           """)
+            if diaini == 21:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                            var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 1, 10: 2};
+                                            return mapping[tick];
+                                       """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                    var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 1};
+                                                                    return mapping[tick];
+                                                               """)
         
-                    if diaini == 1:
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 30};
+                                return mapping[tick];
+                           """)
+            if diaini == 22:
+
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 1, 2: 2, 3: 3, 4: 4, 5:5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10};
-                            return mapping[tick];
-                        """)
-                    if diaini == 2:
+                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
+                                            return mapping[tick];
+                                       """)
+                    else:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 2, 2: 3, 3: 4, 4: 5, 5:6, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11};
-                            return mapping[tick];
-                        """)
-        
-                    if diaini == 3:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 3, 2: 4, 3: 5, 4: 6, 5:7, 6: 8, 7: 9, 8: 10, 9: 11, 10: 12};
-                            return mapping[tick];
-                        """)
-        
-                    if diaini == 4:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 4, 2: 5, 3: 6, 4: 7, 5:8, 6: 9, 7: 10, 8: 11, 9: 12, 10: 13};
-                            return mapping[tick];
-                        """)
-        
-                    if diaini == 5:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 5, 2: 6, 3: 7, 4: 8, 5:9, 6: 10, 7: 11, 8: 12, 9: 13, 10: 14};
-                            return mapping[tick];
-                        """)
-        
-                    if diaini == 6:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 6, 2: 7, 3: 8, 4: 9, 5:10, 6: 11, 7: 12, 8: 13, 9: 14, 10: 15};
-                            return mapping[tick];
-                        """)
-        
-                    if diaini == 7:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 7, 2: 8, 3: 9, 4: 10, 5:11, 6: 12, 7: 13, 8: 14, 9: 15, 10: 16};
-                            return mapping[tick];
-                        """)
-                    if diaini == 8:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 8, 2: 9, 3: 10, 4: 11, 5:12, 6: 13, 7: 14, 8: 15, 9: 16, 10: 17};
-                            return mapping[tick];
-                        """)
-                    if diaini == 9:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                            var mapping = {1: 9, 2: 10, 3: 11, 4: 12, 5:13, 6: 14, 7: 15, 8: 16, 9: 17, 10: 18};
-                            return mapping[tick];
-                        """)
-                    if diaini == 10:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                               var mapping = {1: 10, 2: 11, 3: 12, 4: 13, 5:14, 6: 15, 7: 16, 8: 17, 9: 18, 10: 19};
+                                                                    var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 1, 10: 2};
+                                                                    return mapping[tick];
+                                                               """)
+
+                elif mesini == 1 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                           var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 31};
+                                           return mapping[tick];
+                                       """)
+                else:
+
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                               var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
                                return mapping[tick];
                            """)
-                    if diaini == 11:
+            if diaini == 23:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                               var mapping = {1: 11, 2: 12, 3: 13, 4: 14, 5:15, 6: 16, 7: 17, 8: 18, 9: 19, 10: 20};
-                               return mapping[tick];
-                           """)
-                    if diaini == 12:
+                                            var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 1, 8: 2, 9: 3, 10: 4};
+                                            return mapping[tick];
+                                       """)
+                    else:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                  var mapping = {1: 12, 2: 13, 3: 14, 4: 15, 5:16, 6: 17, 7: 18, 8: 19, 9: 20, 10: 21};
-                                  return mapping[tick];
+                                                                    var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 1, 9: 2, 10: 3};
+                                                                    return mapping[tick];
+                                                               """)
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                           var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 30, 9: 31, 10: 1};
+                                           return mapping[tick];
+                                       """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                                       var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 30, 9: 1, 10: 2};
+                                                       return mapping[tick];
+                                                   """)
+
+            if diaini == 24:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 1, 8: 2, 9: 3, 10: 4};
+                                                                   return mapping[tick];
+                                                              """)
+
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 30, 8: 31, 9:1, 10:2};
+                                   return mapping[tick];
                               """)
-                    if diaini == 13:
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                              var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 30, 8: 1, 9:2, 10:3};
+                                              return mapping[tick];
+                                         """)
+
+            if diaini == 25:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                  var mapping = {1: 13, 2: 14, 3: 15, 4: 16, 5:17, 6: 18, 7: 19, 8: 20, 9: 21, 10: 22};
-                                  return mapping[tick];
+                                               var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
+                                                                   return mapping[tick];
+                                                              """)
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 30, 7: 31, 8: 1, 9: 2, 10: 3};
+                                   return mapping[tick];
                               """)
-                    if diaini == 14:
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 30, 7: 1, 8: 2, 9: 3, 10: 4};
+                                               return mapping[tick];
+                                          """)
+
+            if diaini == 26:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                  var mapping = {1: 14, 2: 15, 3: 16, 4: 17, 5:18, 6: 19, 7: 20, 8: 21, 9: 22, 10: 23};
-                                  return mapping[tick];
-                              """)
-                    if diaini == 15:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                                    var mapping = {1: 15, 2: 16, 3: 17, 4: 18, 5:19, 6: 20, 7: 21, 8: 22, 9: 23, 10: 24};
-                                    return mapping[tick];
-                              """)
-                    if diaini == 16:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                                    var mapping = {1: 16, 2: 17, 3: 18, 4: 19, 5:20, 6: 21, 7: 22, 8: 23, 9: 24, 10: 25};
-                                    return mapping[tick];
-                               """)
-                    if diaini == 17:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                                    var mapping = {1: 17, 2: 18, 3: 19, 4: 20, 5:21, 6: 22, 7: 23, 8: 24, 9: 25, 10: 26};
-                                    return mapping[tick];
-                               """)
-                    if diaini == 18:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                                    var mapping = {1: 18, 2: 19, 3: 20, 4: 21, 5:22, 6: 23, 7: 24, 8: 25, 9: 26, 10: 27};
-                                    return mapping[tick];
-                               """)
-                    if diaini == 19:
-                        p.xaxis.formatter = FuncTickFormatter(code="""
-                                    var mapping = {1: 19, 2: 20, 3: 21, 4: 22, 5:23, 6: 24, 7: 25, 8: 26, 9: 27, 10: 28};
-                                    return mapping[tick];
-                               """)
-                    if diaini == 20:
-        
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                    var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 1};
-                                                    return mapping[tick];
-                                               """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                            var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 29};
-                                                                            return mapping[tick];
-                                                                       """)
-        
-                        else:
-        
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 20, 2: 21, 3: 22, 4: 23, 5:24, 6: 25, 7: 26, 8: 27, 9: 28, 10: 29};
-                                        return mapping[tick];
-                                   """)
-                    if diaini == 21:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                    var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 1, 10: 2};
-                                                    return mapping[tick];
-                                               """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                            var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 1};
-                                                                            return mapping[tick];
-                                                                       """)
-                
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                        var mapping = {1: 21, 2: 22, 3: 23, 4: 24, 5:25, 6: 26, 7: 27, 8: 28, 9: 29, 10: 30};
-                                        return mapping[tick];
-                                   """)
-                    if diaini == 22:
-        
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                    var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
-                                                    return mapping[tick];
-                                               """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 1, 10: 2};
-                                                                            return mapping[tick];
-                                                                       """)
-        
-                        elif mesini == 1 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                   var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 31};
-                                                   return mapping[tick];
-                                               """)
-                        else:
-        
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                       var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
-                                       return mapping[tick];
-                                   """)
-                    if diaini == 23:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                    var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 1, 8: 2, 9: 3, 10: 4};
-                                                    return mapping[tick];
-                                               """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                            var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 1, 9: 2, 10: 3};
-                                                                            return mapping[tick];
-                                                                       """)
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                   var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 30, 9: 31, 10: 1};
-                                                   return mapping[tick];
-                                               """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                               var mapping = {1: 23, 2: 24, 3: 25, 4: 26, 5:27, 6: 28, 7: 29, 8: 30, 9: 1, 10: 2};
-                                                               return mapping[tick];
-                                                           """)
-        
-                    if diaini == 24:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
-                                                       return mapping[tick];
-                                                  """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                           var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 1, 8: 2, 9: 3, 10: 4};
-                                                                           return mapping[tick];
-                                                                      """)
-        
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 30, 8: 31, 9:1, 10:2};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                      var mapping = {1: 24, 2: 25, 3: 26, 4: 27, 5:28, 6: 29, 7: 30, 8: 1, 9:2, 10:3};
-                                                      return mapping[tick];
-                                                 """)
-        
-                    if diaini == 25:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
-                                                       return mapping[tick];
-                                                  """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                           var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
-                                                                           return mapping[tick];
-                                                                      """)
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 30, 7: 31, 8: 1, 9: 2, 10: 3};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 25, 2: 26, 3: 27, 4: 28, 5:29, 6: 30, 7: 1, 8: 2, 9: 3, 10: 4};
-                                                       return mapping[tick];
-                                                  """)
-        
-                    if diaini == 26:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                           var mapping = {1: 26, 2: 27, 3: 28, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
-                                                           return mapping[tick];
-                                                      """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                                   var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
-                                                                                   return mapping[tick];
-                                                                              """)
-        
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-        
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:30, 6: 31, 7: 1, 8: 2, 9: 3, 10: 4};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:30, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
-                                                       return mapping[tick];
-                                                  """)
-        
-                    if diaini == 27:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 27, 2: 28, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
-                                                       return mapping[tick];
-                                                  """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                           var mapping = {1: 27, 2: 28, 3: 29, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
-                                                                           return mapping[tick];
-                                                                      """)
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-        
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 27, 2: 28, 3: 29, 4: 30, 5:31, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 27, 2: 28, 3: 29, 4: 30, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
-                                                       return mapping[tick];
-                                                  """)
-                    if diaini == 28:
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 28, 2: 1, 2: 2, 3: 3, 4:4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9};
-                                                       return mapping[tick];
-                                                  """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                           var mapping = {1: 28, 2: 29, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
-                                                                           return mapping[tick];
-                                                                      """)
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 28, 2: 29, 3: 30, 4: 31, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 28, 2: 29, 3: 30, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
-                                                       return mapping[tick];
-                                                  """)
-        
-                    if diaini == 29:
-        
-                        if mesini == 2:
-                            if (date.today().year % 4) != 0:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 28, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
-                                                       return mapping[tick];
-                                                  """)
-                            else:
-                                p.xaxis.formatter = FuncTickFormatter(code="""
-                                                                           var mapping = {1: 29, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
-                                                                           return mapping[tick];
-                                                                      """)
-        
-                        elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 29, 2: 30, 3: 31, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 29, 2: 30, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
-                                                       return mapping[tick];
-                                                  """)
-        
-                    if diaini == 30:
-        
-                        if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 30, 2: 31, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                       var mapping = {1: 30, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
-                                                       return mapping[tick];
-                                                  """)
-        
-                    if diaini == 31:
-                        if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 8 or mesini == 10 or mesini == 12:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                           var mapping = {1: 31, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
-                                           return mapping[tick];
-                                      """)
-                        else:
-                            p.xaxis.formatter = FuncTickFormatter(code="""
-                                                   var mapping = {1: 1, 2: 2, 3: 3, 4: 4, 5:5, 6: 6, 7: 7, 8: 7, 9: 9, 10: 10};
+                                                   var mapping = {1: 26, 2: 27, 3: 28, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
                                                    return mapping[tick];
                                               """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                           var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
+                                                                           return mapping[tick];
+                                                                      """)
+
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:30, 6: 31, 7: 1, 8: 2, 9: 3, 10: 4};
+                                   return mapping[tick];
+                              """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 26, 2: 27, 3: 28, 4: 29, 5:30, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
+                                               return mapping[tick];
+                                          """)
+
+            if diaini == 27:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 27, 2: 28, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 27, 2: 28, 3: 29, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
+                                                                   return mapping[tick];
+                                                              """)
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 27, 2: 28, 3: 29, 4: 30, 5:31, 6: 1, 7: 2, 8: 3, 9: 4, 10: 5};
+                                   return mapping[tick];
+                              """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 27, 2: 28, 3: 29, 4: 30, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
+                                               return mapping[tick];
+                                          """)
+            if diaini == 28:
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 28, 2: 1, 2: 2, 3: 3, 4:4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 28, 2: 29, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                                                   return mapping[tick];
+                                                              """)
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 28, 2: 29, 3: 30, 4: 31, 5:1, 6: 2, 7: 3, 8: 4, 9: 5, 10: 6};
+                                   return mapping[tick];
+                              """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 28, 2: 29, 3: 30, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
+                                               return mapping[tick];
+                                          """)
+
+            if diaini == 29:
+
+                if mesini == 2:
+                    if (date.today().year % 4) != 0:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 28, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                               return mapping[tick];
+                                          """)
+                    else:
+                        p.xaxis.formatter = FuncTickFormatter(code="""
+                                                                   var mapping = {1: 29, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                                                   return mapping[tick];
+                                                              """)
+
+                elif mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 29, 2: 30, 3: 31, 4: 1, 5:2, 6: 3, 7: 4, 8: 5, 9: 6, 10: 7};
+                                   return mapping[tick];
+                              """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 29, 2: 30, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                               return mapping[tick];
+                                          """)
+
+            if diaini == 30:
+
+                if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 30, 2: 31, 3: 1, 4: 2, 5:3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 8};
+                                   return mapping[tick];
+                              """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                               var mapping = {1: 30, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                               return mapping[tick];
+                                          """)
+
+            if diaini == 31:
+                if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 8 or mesini == 10 or mesini == 12:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                   var mapping = {1: 31, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
+                                   return mapping[tick];
+                              """)
+                else:
+                    p.xaxis.formatter = FuncTickFormatter(code="""
+                                           var mapping = {1: 1, 2: 2, 3: 3, 4: 4, 5:5, 6: 6, 7: 7, 8: 7, 9: 9, 10: 10};
+                                           return mapping[tick];
+                                      """)
 
         # EMOJI_EMB_VIZ_FILE = 'emoji_embeddings.csv'
         #
@@ -2551,143 +2416,43 @@ def main2():
                 print(f"Unexpected {err=}, {type(err)=}")
                 source_code = ("ERRO - DADOS INCONSISTENTES - MODIFIQUE AS OPÇÕES E TENTE DE NOVO")
             return source_code
-        def page2():
+    def page2():
         
         
-                pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
-                                            sep=',',
-                                            decimal='.')
-                pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
-                                            sep=',',
-                                            decimal='.')
-                #st.markdown("# Page 2 ❄️")
-                start_date = datetime.today()
-                end_date = datetime.today()
-                #to_date = datetime.today()
-                title=''
-                entrou=0
-                with st.sidebar:
-                    title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
-                    st.write('Escolha o período para visualizar')
-                    #st.write('(a partir de 01/02/2024)')
-                    to_data = st.date_input('Início (a partir de 01/02/2024)', start_date,format="DD/MM/YYYY")
-                    datai=to_data
-                    #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
-                    if st.button('Iniciar'):
-                        progress_text = "Processando... Aguarde."
-                        my_bar = st.progress(50, text=progress_text)
-                        pt = rest(1, to_data, to_data, title)
-                        my_bar.progress(100, text="Terminou...")
-                        entrou=1
-                    ong=st.toggle('Mostrar gráfico')
-                    st.markdown(
-                    """
-                    
-                    e-mail: edomenico813@gmail.com
-        
-                   
-                    """
-                    )
-        if ong:
+        pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                    sep=',',
+                                    decimal='.')
+        pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                    sep=',',
+                                    decimal='.')
+        #st.markdown("# Page 2 ❄️")
+        start_date = datetime.today()
+        end_date = datetime.today()
+        #to_date = datetime.today()
+        title=''
+        entrou=0
+        with st.sidebar:
+            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
+            st.write('Escolha o período para visualizar')
+            #st.write('(a partir de 01/02/2024)')
+            to_data = st.date_input('Início (a partir de 01/02/2024)', start_date,format="DD/MM/YYYY")
+            datai=to_data
+            #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
+            if st.button('Iniciar'):
+                progress_text = "Processando... Aguarde."
+                my_bar = st.progress(50, text=progress_text)
+                pt = rest(1, to_data, to_data, title)
+                my_bar.progress(100, text="Terminou...")
+                entrou=1
+            st.markdown(
+            """
+            
+            e-mail: edomenico813@gmail.com
 
-                df = obterarq(title, 2, datai)
-                with st.container():
-                    df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
-                    df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
-                    df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
-                    df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
-                    df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
-                    df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
-                    df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
-                    df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
-                    df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
-                    df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
-                    df['altn3'] = pd.to_numeric(df['altn3'], downcast='signed')
-                    df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
-                    #df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
-        
-                    st.header(df['estacao'].iloc[-1])
-                    #st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
-                    st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
-                    col1, col2, col3 = st.columns(3)
-                    with col1:
-                        #col1.metric("Temperatura(°C)", f"{(int(df['dryt'].iloc[-1]))}")
-                        col1.metric("Temperatura(°C)", f"{(df['dryt'].iloc[-1])}")
-                        if df['qn1'].iloc[-1] == 'FEW':
-                            sceu = 'Poucas nuvens'
-                        elif df['qn1'].iloc[-1] == 'SCT':
-                            sceu = 'Parcialmente nublado'
-                        elif df['qn1'].iloc[-1] == 'BKN':
-                            sceu = 'Nublado'
-                        elif df['qn1'].iloc[-1] == 'OVC':
-                            sceu = 'Encoberto'
-                        else:
-                            sceu = 'Claro'
-        
-                        # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
-                        col1.metric("Céu", sceu)
-                        col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
-        
-                    with col2:
-                        if df['tp'].iloc[-1] == 'BR':
-                            stp = 'Névoa'
-                        elif df['tp'].iloc[-1] == 'RA':
-                            stp = 'Chuva'
-                        elif df['tp'].iloc[-1] == 'TS':
-                            stp = 'Trovoada'
-                        elif df['tp'].iloc[-1] == 'TSRA':
-                            stp = 'Trovoada com chuva'
-                        else:
-                            stp = 'Nil'
-                        # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
-                        col2.metric("Tempo presente", stp)
-                        col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
-                        col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
-                    with col3:
-                        # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
-                        col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
-                        col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
-                        
-                        col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
-        
-                    st.divider()
-        
-                    with st.container():
-        
-        
-                        col1, col2= st.columns((5, 5))
-                        with col1:
-                            min_max2(df)
-                        with col2:
-                            vento2(df)
-                        col3, col4 = st.columns((5, 5))
-                        with col3:
-                            temp_time_series2(df)
-                        with col4:
-                            weather_pie(df)
-                    st.divider()
-        
-                    with st.expander(label="Mostrar dados:"):
-                        df1=df
-        
-                        # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
-                        # df1['dewp'] = pd.to_numeric(df1['dewp'], downcast='signed')
-                        # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
-                        # df1['vis'] = pd.to_numeric(df1['vis'], downcast='signed')
-                        # df1['wspd'] = pd.to_numeric(df1['wspd'], downcast='signed')
-                        # df1['wdir'] = pd.to_numeric(df1['wdir'], downcast='signed')
-                        # df1['gust'] = pd.to_numeric(df1['gust'], downcast='signed')
-                        # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
-                        # df1['altn1'] = pd.to_numeric(df1['altn1'], downcast='signed')
-                        # df1['altn2'] = pd.to_numeric(df1['altn2'], downcast='signed')
-                        # df1['altn3'] = pd.to_numeric(df1['altn3'], downcast='signed')
-                        # df1['altn4'] = pd.to_numeric(df1['altn4'], downcast='signed')
-                        # df1['altncb'] = pd.to_numeric(df1['altncb'], downcast='signed')
-                        df1.drop('data_hora', inplace=True, axis=1)
-                        df1.drop('drytt', inplace=True, axis=1)
-                        df1.drop('dewpt', inplace=True, axis=1)
-                        st.table(df1)
-                #if entrou==1:
+           
+            """
+            )
+        #if entrou==1:
         p = tabuleiro(title, 3, datai,pt1,pt2)
 
         import streamlit.components.v1 as components
@@ -2697,25 +2462,28 @@ def main2():
        # st.markdown("# Page 2 ❄️")
         
 
-        def page3():
+    def page3():
        
-                st.markdown("#Rosa dos Ventos - Em construção 🎉")
-                
-                
-                #st.sidebar.markdown("# Page 3 🎉")
-                page_names_to_funcs = {
-                        "Tabuleiro - Outros": page2,
-                        "Rosa dos Ventos": page3,
-                            }
+        st.markdown("#Rosa dos Ventos - Em construção 🎉")
         
-                selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
-                page_names_to_funcs[selected_page]()
+        
+        #st.sidebar.markdown("# Page 3 🎉")
+    page_names_to_funcs = {
+        "Tabuleiro - Outros": page2,
+        "Rosa dos Ventos": page3,
+    }
+
+    selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
+    page_names_to_funcs[selected_page]()
 st.set_page_config(
         page_title="Tabuleiro - Outros",
         page_icon="✅",
-         layout="wide",
-            )
+        layout="wide",
+    )
 st.session_state
 main2()
+
+
+
 
 
