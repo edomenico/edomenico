@@ -2551,43 +2551,43 @@ def main2():
                 print(f"Unexpected {err=}, {type(err)=}")
                 source_code = ("ERRO - DADOS INCONSISTENTES - MODIFIQUE AS OPÇÕES E TENTE DE NOVO")
             return source_code
-    def page2():
+        def page2():
         
         
-        pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
-                                    sep=',',
-                                    decimal='.')
-        pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
-                                    sep=',',
-                                    decimal='.')
-        #st.markdown("# Page 2 ❄️")
-        start_date = datetime.today()
-        end_date = datetime.today()
-        #to_date = datetime.today()
-        title=''
-        entrou=0
-        with st.sidebar:
-            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
-            st.write('Escolha o período para visualizar')
-            #st.write('(a partir de 01/02/2024)')
-            to_data = st.date_input('Início (a partir de 01/02/2024)', start_date,format="DD/MM/YYYY")
-            datai=to_data
-            #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
-            if st.button('Iniciar'):
-                progress_text = "Processando... Aguarde."
-                my_bar = st.progress(50, text=progress_text)
-                pt = rest(1, to_data, to_data, title)
-                my_bar.progress(100, text="Terminou...")
-                entrou=1
-            ong=st.toggle('Mostrar gráfico')
-            st.markdown(
-            """
-            
-            e-mail: edomenico813@gmail.com
-
-           
-            """
-            )
+                pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+                                            sep=',',
+                                            decimal='.')
+                pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+                                            sep=',',
+                                            decimal='.')
+                #st.markdown("# Page 2 ❄️")
+                start_date = datetime.today()
+                end_date = datetime.today()
+                #to_date = datetime.today()
+                title=''
+                entrou=0
+                with st.sidebar:
+                    title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
+                    st.write('Escolha o período para visualizar')
+                    #st.write('(a partir de 01/02/2024)')
+                    to_data = st.date_input('Início (a partir de 01/02/2024)', start_date,format="DD/MM/YYYY")
+                    datai=to_data
+                    #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
+                    if st.button('Iniciar'):
+                        progress_text = "Processando... Aguarde."
+                        my_bar = st.progress(50, text=progress_text)
+                        pt = rest(1, to_data, to_data, title)
+                        my_bar.progress(100, text="Terminou...")
+                        entrou=1
+                    ong=st.toggle('Mostrar gráfico')
+                    st.markdown(
+                    """
+                    
+                    e-mail: edomenico813@gmail.com
+        
+                   
+                    """
+                    )
         if ong:
 
                 df = obterarq(title, 2, datai)
