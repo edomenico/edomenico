@@ -2708,12 +2708,12 @@ def main2():
                         "Rosa dos Ventos": page3,
                             }
         
-            selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
-            page_names_to_funcs[selected_page]()
-        st.set_page_config(
-                page_title="Tabuleiro - Outros",
-                page_icon="✅",
-                layout="wide",
+                selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
+                page_names_to_funcs[selected_page]()
+st.set_page_config(
+        page_title="Tabuleiro - Outros",
+        page_icon="✅",
+         layout="wide",
             )
 st.session_state
 main2()
