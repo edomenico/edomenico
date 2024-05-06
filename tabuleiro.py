@@ -2630,13 +2630,13 @@ def main():
                 col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
 
             with col2:
-                if df['tp'].iloc[0] == 'BR':
+                if df['tp'].iloc[-1] == 'BR':
                     stp = 'Névoa'
-                elif df['tp'].iloc[0] == 'RA':
+                elif df['tp'].iloc[-1] == 'RA':
                     stp = 'Chuva'
-                elif df['tp'].iloc[0] == 'TS':
+                elif df['tp'].iloc[-1] == 'TS':
                     stp = 'Trovoada'
-                elif df['tp'].iloc[0] == 'TSRA':
+                elif df['tp'].iloc[-1] == 'TSRA':
                     stp = 'Trovoada com chuva'
                 else:
                     stp = 'Nil'
