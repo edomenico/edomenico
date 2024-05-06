@@ -2606,7 +2606,7 @@ def main2():
                     df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
                     #df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
         
-                    st.header(df['estacao'].iloc[0])
+                    st.header(df['estacao'].iloc[-1])
                     #st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
                     st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
                     col1, col2, col3 = st.columns(3)
@@ -2629,13 +2629,13 @@ def main2():
                         col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
         
                     with col2:
-                        if df['tp'].iloc[0] == 'BR':
+                        if df['tp'].iloc[-1] == 'BR':
                             stp = 'Névoa'
-                        elif df['tp'].iloc[0] == 'RA':
+                        elif df['tp'].iloc[-1] == 'RA':
                             stp = 'Chuva'
-                        elif df['tp'].iloc[0] == 'TS':
+                        elif df['tp'].iloc[-1] == 'TS':
                             stp = 'Trovoada'
-                        elif df['tp'].iloc[0] == 'TSRA':
+                        elif df['tp'].iloc[-1] == 'TSRA':
                             stp = 'Trovoada com chuva'
                         else:
                             stp = 'Nil'
@@ -2647,7 +2647,8 @@ def main2():
                         # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                         col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
                         col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
-                        col3.metric("Altura nuvens baixas(x100ft)", f"{df['altn1'].iloc[-1]}")
+                        
+                        col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
         
                     st.divider()
         
