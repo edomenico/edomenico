@@ -2514,7 +2514,7 @@ def main2():
             )
         if ong:
 
-                df = obterarq(nomedaestacao, noarea, datainicial)
+                df = obterarq(title, noarea, datainicial)
                 with st.container():
                     df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
                     df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
