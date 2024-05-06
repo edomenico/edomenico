@@ -2697,24 +2697,24 @@ def main2():
        # st.markdown("# Page 2 ❄️")
         
 
-    def page3():
+        def page3():
        
-        st.markdown("#Rosa dos Ventos - Em construção 🎉")
+                st.markdown("#Rosa dos Ventos - Em construção 🎉")
+                
+                
+                #st.sidebar.markdown("# Page 3 🎉")
+            page_names_to_funcs = {
+                "Tabuleiro - Outros": page2,
+                "Rosa dos Ventos": page3,
+            }
         
-        
-        #st.sidebar.markdown("# Page 3 🎉")
-    page_names_to_funcs = {
-        "Tabuleiro - Outros": page2,
-        "Rosa dos Ventos": page3,
-    }
-
-    selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
-    page_names_to_funcs[selected_page]()
-st.set_page_config(
-        page_title="Tabuleiro - Outros",
-        page_icon="✅",
-        layout="wide",
-    )
+            selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
+            page_names_to_funcs[selected_page]()
+        st.set_page_config(
+                page_title="Tabuleiro - Outros",
+                page_icon="✅",
+                layout="wide",
+            )
 st.session_state
 main2()
 
