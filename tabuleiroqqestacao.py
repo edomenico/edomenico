@@ -2453,7 +2453,105 @@ def main2():
            
             """
             )
-        #if entrou==1:
+        if ong:
+
+                df = obterarq(nomedaestacao, noarea, datainicial)
+                with st.container():
+                    df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
+                    df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
+                    df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
+                    df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
+                    df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
+                    df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
+                    df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
+                    df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
+                    df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
+                    df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
+                    df['altn3'] = pd.to_numeric(df['altn3'], downcast='signed')
+                    df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
+                    #df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
+        
+                    st.header(df['estacao'].iloc[0])
+                    #st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
+                    st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        #col1.metric("Temperatura(°C)", f"{(int(df['dryt'].iloc[-1]))}")
+                        col1.metric("Temperatura(°C)", f"{(df['dryt'].iloc[-1])}")
+                        if df['qn1'].iloc[-1] == 'FEW':
+                            sceu = 'Poucas nuvens'
+                        elif df['qn1'].iloc[-1] == 'SCT':
+                            sceu = 'Parcialmente nublado'
+                        elif df['qn1'].iloc[-1] == 'BKN':
+                            sceu = 'Nublado'
+                        elif df['qn1'].iloc[-1] == 'OVC':
+                            sceu = 'Encoberto'
+                        else:
+                            sceu = 'Claro'
+        
+                        # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
+                        col1.metric("Céu", sceu)
+                        col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
+        
+                    with col2:
+                        if df['tp'].iloc[0] == 'BR':
+                            stp = 'Névoa'
+                        elif df['tp'].iloc[0] == 'RA':
+                            stp = 'Chuva'
+                        elif df['tp'].iloc[0] == 'TS':
+                            stp = 'Trovoada'
+                        elif df['tp'].iloc[0] == 'TSRA':
+                            stp = 'Trovoada com chuva'
+                        else:
+                            stp = 'Nil'
+                        # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
+                        col2.metric("Tempo presente", stp)
+                        col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
+                        col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
+                    with col3:
+                        # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
+                        col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
+                        col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
+                        col3.metric("Altura nuvens baixas(x100ft)", f"{df['altn1'].iloc[-1]}")
+        
+                    st.divider()
+        
+                    with st.container():
+        
+        
+                        col1, col2= st.columns((5, 5))
+                        with col1:
+                            min_max2(df)
+                        with col2:
+                            vento2(df)
+                        col3, col4 = st.columns((5, 5))
+                        with col3:
+                            temp_time_series2(df)
+                        with col4:
+                            weather_pie(df)
+                    st.divider()
+        
+                    with st.expander(label="Mostrar dados:"):
+                        df1=df
+        
+                        # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
+                        # df1['dewp'] = pd.to_numeric(df1['dewp'], downcast='signed')
+                        # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
+                        # df1['vis'] = pd.to_numeric(df1['vis'], downcast='signed')
+                        # df1['wspd'] = pd.to_numeric(df1['wspd'], downcast='signed')
+                        # df1['wdir'] = pd.to_numeric(df1['wdir'], downcast='signed')
+                        # df1['gust'] = pd.to_numeric(df1['gust'], downcast='signed')
+                        # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
+                        # df1['altn1'] = pd.to_numeric(df1['altn1'], downcast='signed')
+                        # df1['altn2'] = pd.to_numeric(df1['altn2'], downcast='signed')
+                        # df1['altn3'] = pd.to_numeric(df1['altn3'], downcast='signed')
+                        # df1['altn4'] = pd.to_numeric(df1['altn4'], downcast='signed')
+                        # df1['altncb'] = pd.to_numeric(df1['altncb'], downcast='signed')
+                        df1.drop('data_hora', inplace=True, axis=1)
+                        df1.drop('drytt', inplace=True, axis=1)
+                        df1.drop('dewpt', inplace=True, axis=1)
+                        st.table(df1)
+                #if entrou==1:
         p = tabuleiro(title, 3, datai,pt1,pt2)
 
         import streamlit.components.v1 as components
