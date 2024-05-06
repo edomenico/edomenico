@@ -2703,10 +2703,10 @@ def main2():
                 
                 
                 #st.sidebar.markdown("# Page 3 🎉")
-            page_names_to_funcs = {
-                "Tabuleiro - Outros": page2,
-                "Rosa dos Ventos": page3,
-            }
+                page_names_to_funcs = {
+                        "Tabuleiro - Outros": page2,
+                        "Rosa dos Ventos": page3,
+                            }
         
             selected_page = st.sidebar.selectbox("Selecione a aplicação", page_names_to_funcs.keys())
             page_names_to_funcs[selected_page]()
