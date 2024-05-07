@@ -2650,8 +2650,8 @@ def main2():
                         col1, col2= st.columns((5, 5))
                         with col1:
                             min_max2(df)
-                        #with col2:
-                           # vento2(df)
+                        with col2:
+                            vento2(df)
                         col3, col4 = st.columns((5, 5))
                         with col3:
                             temp_time_series2(df)
