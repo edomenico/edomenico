@@ -73,14 +73,14 @@ def main2():
                     urr=100
                 ur=str(int(urr))
         return ur
-    def obterarq(estacaop,areap,datainicial):
+    def obterarq(estacaop, areap, datainicial):
         import plotly.graph_objects as go
-        #import metpy.calc as mpcalc
-        #from metpy.units import units
+        import metpy.calc as mpcalc
+        from metpy.units import units
 
         import numpy as np
-        #from datetime import datetime
-        #from datetime import date
+        # from datetime import datetime
+        # from datetime import date
         import pandas as pd
         import re
         import plotly
@@ -88,23 +88,23 @@ def main2():
         import plotly.express as px
 
         # %% histogram with wind directions
-        #date_inicio = datetime.strptime(datainicial, '%d/%m/%y')
-        datainicial=datainicial + timedelta(0)
+        # date_inicio = datetime.strptime(datainicial, '%d/%m/%y')
+        datainicial = datainicial + timedelta(0)
         pd.set_option('max_columns', None)
         pd.set_option('max_columns', None)
         # arqi1=pd.read_csv('metar_trat_area2_tabuleiro_rosa.csv')
-        if areap==1:
+        if areap == 1:
             arqi1 = pd.read_csv('metar_trat_teste1.csv')
         else:
             arqi1 = pd.read_csv('metar_trat_teste2.csv')
 
         arqi = arqi1.loc[(arqi1['estacao'] == estacaop)]
-        #arqi = arqi.reset_index(drop=True)
+        # arqi = arqi.reset_index(drop=True)
         x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
         arqi['data_hora'] = x
         ddata = arqi.data_hora
         diai = arqi['data_hora']
-        ur=[]
+        ur = []
         arqi['drytt'] = arqi['dryt']
         arqi['drytt'].fillna(0, inplace=True)
         arqi['dewpt'] = arqi['dewp']
@@ -115,21 +115,14 @@ def main2():
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
 
-        for pp in range(0,len(arqi),1):
-
-
-            #ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
-            #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
-            umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
+        for pp in range(0, len(arqi), 1):
+            # ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
+            # ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
+            umid = umidade(arqi['drytt'][pp], arqi['dewpt'][pp])
             ur.append(int(umid))
-        arqi['ur']=ur
+        arqi['ur'] = ur
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
-
-
-
-
-
 
         return arqi
     def weather_pie(df):
