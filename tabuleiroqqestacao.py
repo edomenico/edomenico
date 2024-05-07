@@ -2581,7 +2581,7 @@ def main2():
         #if entrou==1:
         if ong:
 
-                df = obterarq(nomedaestacao, 2, datai)
+                df = obterarq(title, 2, datai)
                 with st.container():
                         
                     df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
