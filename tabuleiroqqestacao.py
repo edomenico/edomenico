@@ -48,7 +48,11 @@ from PIL import Image
 global diaini, mesini
 from bokeh.resources import CDN
 from bokeh.embed import file_html
-def umidade(ta,td):
+
+
+
+def main2():
+    def umidade(ta,td):
         if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
             ur='--'
         else:
@@ -69,9 +73,130 @@ def umidade(ta,td):
                     urr=100
                 ur=str(int(urr))
         return ur
+    def obterarq(estacaop,areap,datainicial):
+        import plotly.graph_objects as go
+        #import metpy.calc as mpcalc
+        #from metpy.units import units
+
+        import numpy as np
+        #from datetime import datetime
+        #from datetime import date
+        import pandas as pd
+        import re
+        import plotly
+
+        import plotly.express as px
+
+        # %% histogram with wind directions
+        #date_inicio = datetime.strptime(datainicial, '%d/%m/%y')
+        datainicial=datainicial + timedelta(0)
+        pd.set_option('max_columns', None)
+        pd.set_option('max_columns', None)
+        # arqi1=pd.read_csv('metar_trat_area2_tabuleiro_rosa.csv')
+        if areap==1:
+            arqi1 = pd.read_csv('metar_trat_teste1.csv')
+        else:
+            arqi1 = pd.read_csv('metar_trat_teste2.csv')
+
+        arqi = arqi1.loc[(arqi1['estacao'] == estacaop)]
+        #arqi = arqi.reset_index(drop=True)
+        x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqi.datahora]
+        arqi['data_hora'] = x
+        ddata = arqi.data_hora
+        diai = arqi['data_hora']
+        ur=[]
+        arqi['drytt'] = arqi['dryt']
+        arqi['drytt'].fillna(0, inplace=True)
+        arqi['dewpt'] = arqi['dewp']
+        arqi['dewpt'].fillna(0, inplace=True)
+        arqi.sort_values(by=['data_hora'], inplace=True)
+        arqi = arqi.reset_index(drop=True)
+        arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%d/%m/%Y %H:%M'))]
+        arqi.sort_values(by=['data_hora'], inplace=True)
+        arqi = arqi.reset_index(drop=True)
+
+        for pp in range(0,len(arqi),1):
 
 
-def main2():
+            #ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
+            #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
+            umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
+            ur.append(int(umid))
+        arqi['ur']=ur
+        arqi.sort_values(by=['data_hora'], inplace=True)
+        arqi = arqi.reset_index(drop=True)
+
+
+
+
+
+
+        return arqi
+    def weather_pie(df):
+        ###"""Container for pie chart of weather conditions"""
+        df['tp'].replace({'<NA>': float('nan'), pd.NA: 'Nil'}, inplace=True)
+        labels = list(set(df['tp']))
+        values = [sum([i == j for i in df['tp']]) for j in labels]
+        fig = px.pie(values=values, labels=labels, title="Condições do tempo", hover_name=labels, names=labels)
+        st.plotly_chart(fig, use_container_width=True)
+    def min_max2(df):
+        from datetime import datetime
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+        # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
+        # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
+        # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
+        # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
+        ####df['data'].unique()[0:len(df['data'].unique()) - 1]
+        #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
+        # auxy=df.groupby('data')['temp'].max()[0:len(df['timestamp'].unique()) - 1]
+        # auxy=auxy.sort_index(ascending=True)
+        # df['data']=pd.to_datetime(df['data'])
+        df['data1'] = df['datahora'].str.slice(0, 10)
+        df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
+        auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
+        fig = go.Figure()
+        fig = make_subplots(specs=[[{"secondary_y": True}]], subplot_titles='Temperaturas Máxima e Mìnima')
+        x = df['data'].unique()[0:len(df['data'].unique()) - 1]
+        y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
+        y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique()) - 1]
+
+        fig.add_trace(go.Scatter(x=x, y=y1,
+                                 mode='lines',
+                                 marker_color='red',
+                                 name='Temperatura Máxima'), secondary_y=False)
+        fig.add_trace(go.Scatter(x=x, y=y2,
+                                 mode='lines',
+                                 marker_color='blue',
+                                 name='Temperatura Mínima'), secondary_y=False)
+        fig.update_yaxes(title="Temperatura (°C)")
+        fig.update_xaxes(title="Data")
+        fig.update_layout(title_text="Temperaturas Máxima e Mínima")
+
+        st.plotly_chart(fig, use_container_width=True)
+        return
+    def temp_time_series2(df):
+        ###"""Container for temperature time series"""
+        temp_time_df = pd.DataFrame(
+            {'temp': df['dryt'], 'ur': df['ur'], 'timestamp': df['data_hora']})
+        fig = px.line(temp_time_df, x='timestamp', y=['temp', 'ur'],
+                      title='Temperatura(°C) e Umidade Relativa(%)')
+        fig.update_yaxes(title="Valor")
+        fig.update_xaxes(title="Data")
+        new = {'temp': 'Temperatura Atual(°C)', 'ur': 'Umidade (%)'}
+        fig.for_each_trace(lambda t: t.update(name=new[t.name]))
+        # fig.update_legends(selector={'actual_temp': 'Air Temperature'})
+        # fig = px.scatter(title='Temp')
+        # fig.add_scatter(x=df['timestamp'], y=df['actual_temp'],mode='lines',name='Actual Temperature')
+        # fig.add_scatter(x=df['timestamp'], y=df['feels_like_temp'],mode='lines',name='Feels-like Temperature')
+        # fig.update_xaxes(title="Date", tickformat="%d-%m-%Y")
+        # fig.update_yaxes(title="Temperature (°C)", range=[df['min_temp'].min(), df['max_temp'].max()])
+        st.plotly_chart(fig, use_container_width=True)
+
+
+        
     def rest(areas, to_data, from_data,nome_estacao):
         import re
         from bs4 import BeautifulSoup
@@ -2444,6 +2569,7 @@ def main2():
                 pt = rest(1, to_data, to_data, title)
                 my_bar.progress(100, text="Terminou...")
                 entrou=1
+            ong=st.toggle('Mostrar gráfico')
             st.markdown(
             """
             
@@ -2453,6 +2579,86 @@ def main2():
             """
             )
         #if entrou==1:
+        if ong:
+
+                df = obterarq(nomedaestacao, 2, datai)
+                with st.container():
+                        
+                    df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
+                    df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
+                    df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
+                    df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
+                    df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
+                    df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
+                    df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
+                    df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
+                    df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
+                    df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
+                    df['altn3'] = pd.to_numeric(df['altn3'], downcast='signed')
+                    df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
+                    #df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
+                    st.header(df['estacao'].iloc[-1])
+                    #st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
+                    st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        #col1.metric("Temperatura(°C)", f"{(int(df['dryt'].iloc[-1]))}")
+                        col1.metric("Temperatura(°C)", f"{(df['dryt'].iloc[-1])}")
+                        if df['qn1'].iloc[-1] == 'FEW':
+                            sceu = 'Poucas nuvens'
+                        elif df['qn1'].iloc[-1] == 'SCT':
+                            sceu = 'Parcialmente nublado'
+                        elif df['qn1'].iloc[-1] == 'BKN':
+                            sceu = 'Nublado'
+                        elif df['qn1'].iloc[-1] == 'OVC':
+                            sceu = 'Encoberto'
+                        else:
+                            sceu = 'Claro'
+        
+                        # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
+                        col1.metric("Céu", sceu)
+                        col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
+                    with col2:
+                        if df['tp'].iloc[-1] == 'BR':
+                            stp = 'Névoa'
+                        elif df['tp'].iloc[-1] == 'RA':
+                            stp = 'Chuva'
+                        elif df['tp'].iloc[-1] == 'TS':
+                            stp = 'Trovoada'
+                        elif df['tp'].iloc[-1] == 'TSRA':
+                            stp = 'Trovoada com chuva'
+                        else:
+                            stp = 'Nil'
+                        # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
+                        col2.metric("Tempo presente", stp)
+                        col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
+                        col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
+                    with col3:
+                        # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
+                        col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
+                        col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
+                        
+                        col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
+                    st.divider()
+
+                    with st.container():
+                        col1, col2= st.columns((5, 5))
+                        with col1:
+                            min_max2(df)
+                        with col2:
+                            vento2(df)
+                        col3, col4 = st.columns((5, 5))
+                        with col3:
+                            temp_time_series2(df)
+                        with col4:
+                            weather_pie(df)
+                    st.divider()
+                    with st.expander(label="Mostrar dados:"):
+                        df1=df
+                        
+                
+
+            
         p = tabuleiro(title, 3, datai,pt1,pt2)
 
         import streamlit.components.v1 as components
