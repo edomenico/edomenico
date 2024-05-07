@@ -151,7 +151,7 @@ def main():
         # auxy=auxy.sort_index(ascending=True)
         # df['data']=pd.to_datetime(df['data'])
         #df['data1'] = df['datahora'].str.slice(0, 10)
-        df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
+        df['data'] = df.data.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
         auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
         fig = go.Figure()
         fig = make_subplots(specs=[[{"secondary_y": True}]], subplot_titles='Temperaturas Máxima e Mìnima')
