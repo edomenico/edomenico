@@ -170,6 +170,18 @@ def main2():
 
         st.plotly_chart(fig, use_container_width=True)
         return
+    def vento2(df):
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        fig = px.scatter(title='Vento')
+        fig.add_scatter(x=df['data_hora'], y=df['wspd'], name='Int.vento(kt)')
+        fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
+        fig.update_yaxes(title="Valor")
+        fig.update_xaxes(title="Data")
+        st.plotly_chart(fig, use_container_width=True)
+        return
     def temp_time_series2(df):
         ###"""Container for temperature time series"""
         temp_time_df = pd.DataFrame(
