@@ -897,7 +897,7 @@ def main():
         df['data']=df.data.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
         auxy=df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
         fig = go.Figure()
-        fig = make_subplots(specs=[[{"secondary_y": True}]],subplot_titles='Temperaturas Máxima e Mìnima')
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
         x=df['data'].unique()[0:len(df['data'].unique()) - 1]
         y1=df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
         y2 =df.groupby('data')['temp'].min()[0:len(df['data'].unique()) - 1]
