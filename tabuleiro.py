@@ -2629,7 +2629,7 @@ def main():
                 col1.metric("Céu", sceu)
                 col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
 
-            with col2:
+                with col2:
                         if df['tp'].iloc[-1] == 'BR':
                             stp = 'Névoa úmida'
                         elif df['tp'].iloc[-1] == 'RA':
