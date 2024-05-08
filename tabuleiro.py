@@ -2630,16 +2630,34 @@ def main():
                 col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
 
             with col2:
-                if df['tp'].iloc[-1] == 'BR':
-                    stp = 'Névoa'
-                elif df['tp'].iloc[-1] == 'RA':
-                    stp = 'Chuva'
-                elif df['tp'].iloc[-1] == 'TS':
-                    stp = 'Trovoada'
-                elif df['tp'].iloc[-1] == 'TSRA':
-                    stp = 'Trovoada com chuva'
-                else:
-                    stp = 'Nil'
+                        if df['tp'].iloc[-1] == 'BR':
+                            stp = 'Névoa úmida'
+                        elif df['tp'].iloc[-1] == 'RA':
+                            stp = 'Chuva moderada'
+                        elif df['tp'].iloc[-1] == 'TS':
+                            stp = 'Trovoada'
+                        elif df['tp'].iloc[-1] == 'TSRA':
+                            stp = 'Trovoada com chuva'
+                        elif df['tp'].iloc[-1] == '+TSRA':
+                            stp = 'Trovoada com chuva forte'
+                        elif df['tp'].iloc[-1] == '-TSRA':
+                            stp = 'Trovoada com chuva fraca'
+                        elif df['tp'].iloc[-1] == '+RA':
+                            stp = 'Chuva forte'
+                        elif df['tp'].iloc[-1] == '-RA':
+                            stp = 'Chuva fraca'
+                        elif df['tp'].iloc[-1] == 'HZ':
+                            stp = 'Névoa seca'
+                        elif df['tp'].iloc[-1] == 'FU':
+                            stp = 'Fumaça'
+                        elif df['tp'].iloc[-1] == 'DZ':
+                            stp = 'Chuvisco moderado'
+                        elif df['tp'].iloc[-1] == '-DZ':
+                            stp = 'Chuvisco fraco'
+                        elif df['tp'].iloc[-1] == '+DZ':
+                            stp = 'Chuvisco forte'
+                        else:
+                            stp = 'Nil'
                 # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
                 col2.metric("Tempo presente", stp)
                 col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
