@@ -2656,6 +2656,20 @@ def main():
                             stp = 'Chuvisco fraco'
                         elif df['tp'].iloc[-1] == '+DZ':
                             stp = 'Chuvisco forte'
+                        elif df['tp'].iloc[-1] == 'SHRA':
+                            stp = 'Pancada de chuva moderada'
+                        elif df['tp'].iloc[-1] == '-SHRA':
+                            stp = 'Pancada de chuva fraca'
+                        elif df['tp'].iloc[-1] == '+SHRA':
+                            stp = 'Pancada de chuva forte'
+                        elif df['tp'].iloc[-1] == 'VCSH':
+                            stp = 'Pancada de chuva na vizinhança'
+                        elif df['tp'].iloc[-1] == 'VCTS':
+                            stp = 'Trovoada na vizinhança'
+                        elif df['tp'].iloc[-1] == 'FG':
+                            stp = 'Nevoeiro'
+                        elif df['tp'].iloc[-1] == 'BCFG':
+                            stp = 'Banco de nevoeiro'
                         else:
                             stp = 'Nil'
                 # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
