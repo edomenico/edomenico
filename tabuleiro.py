@@ -2641,11 +2641,11 @@ def main():
                         elif df['tp'].iloc[-1] == '+TSRA':
                             stp = 'Trovoada com chuva forte'
                         elif df['tp'].iloc[-1] == '-TSRA':
-                            stp = 'Trovoada com chuva fraca'
+                            stp = 'Trovoada com chuva leve'
                         elif df['tp'].iloc[-1] == '+RA':
                             stp = 'Chuva forte'
                         elif df['tp'].iloc[-1] == '-RA':
-                            stp = 'Chuva fraca'
+                            stp = 'Chuva leve'
                         elif df['tp'].iloc[-1] == 'HZ':
                             stp = 'Névoa seca'
                         elif df['tp'].iloc[-1] == 'FU':
@@ -2653,13 +2653,13 @@ def main():
                         elif df['tp'].iloc[-1] == 'DZ':
                             stp = 'Chuvisco moderado'
                         elif df['tp'].iloc[-1] == '-DZ':
-                            stp = 'Chuvisco fraco'
+                            stp = 'Chuvisco leve'
                         elif df['tp'].iloc[-1] == '+DZ':
                             stp = 'Chuvisco forte'
                         elif df['tp'].iloc[-1] == 'SHRA':
                             stp = 'Pancada de chuva moderada'
                         elif df['tp'].iloc[-1] == '-SHRA':
-                            stp = 'Pancada de chuva fraca'
+                            stp = 'Pancada de chuva leve'
                         elif df['tp'].iloc[-1] == '+SHRA':
                             stp = 'Pancada de chuva forte'
                         elif df['tp'].iloc[-1] == 'VCSH':
