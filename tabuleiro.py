@@ -2592,7 +2592,8 @@ def main():
             """
         )
     if ong:
-
+        print('antes de entrar')
+        print(datainicial)
         df = obterarq(nomedaestacao, noarea, datainicial)
         with st.container():
             df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
