@@ -105,6 +105,8 @@ def main():
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
         arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%d/%m/%Y %H:%M'))]
+        print('chegou aqui')
+        print(datainicial.strftime('%d/%m/%Y %H:%M'))
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
 
