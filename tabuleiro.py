@@ -46,7 +46,7 @@ from bokeh.embed import file_html
 
 def main():
     def umidade(ta,td):
-        if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
+        if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--' or int(td) > int(ta):
             ur='--'
         else:
             a=float(ta)
