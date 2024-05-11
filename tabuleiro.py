@@ -137,7 +137,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
 
-        def min_max2(df):
+    def min_max2(df):
             from datetime import datetime
             import plotly
             import plotly.express as px
