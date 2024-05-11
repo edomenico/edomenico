@@ -118,7 +118,10 @@ def main():
             #print(arqi['drytt'][pp])
             #print(arqi['dewpt'][pp])
             umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
-            ur.append(int(umid))
+            if umid=='--':
+                ur.append(-99)
+            else:
+                ur.append(int(umid))
         arqi['ur']=ur
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
