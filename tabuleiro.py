@@ -117,7 +117,7 @@ def main():
             #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
             #print(arqi['drytt'][pp])
             #print(arqi['dewpt'][pp])
-            umid=umidade(float(arqi['drytt'][pp]),float(arqi['dewpt'][pp]))
+            umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
             ur.append(float(umid))
         arqi['ur']=ur
         arqi.sort_values(by=['data_hora'], inplace=True)
