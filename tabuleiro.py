@@ -137,44 +137,45 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
 
-    def min_max2(df):
-        from datetime import datetime
-        import plotly
-        import plotly.express as px
-        import plotly.graph_objects as go
-        from plotly.subplots import make_subplots
-        # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
-        # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
-        # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
-        # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
-        ####df['data'].unique()[0:len(df['data'].unique()) - 1]
-        #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
-        # auxy=df.groupby('data')['temp'].max()[0:len(df['timestamp'].unique()) - 1]
-        # auxy=auxy.sort_index(ascending=True)
-        # df['data']=pd.to_datetime(df['data'])
-        df['data1'] = df['datahora'].str.slice(0, 10)
-        df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
-        auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
-        fig = go.Figure()
-        fig = make_subplots(specs=[[{"secondary_y": True}]])
-        x = df['data'].unique()[0:len(df['data'].unique()) - 1]
-        y1 = df.groupby('data')['dryt'].max()[1:len(df['data'].unique()) - 1]
-        y2 = df.groupby('data')['dryt'].min()[1:len(df['data'].unique()) - 1]
-
-        fig.add_trace(go.Scatter(x=x, y=y1,
-                                 mode='lines',
-                                 marker_color='red',
-                                 name='Temperatura Máxima'), secondary_y=False)
-        fig.add_trace(go.Scatter(x=x, y=y2,
-                                 mode='lines',
-                                 marker_color='blue',
-                                 name='Temperatura Mínima'), secondary_y=False)
-        fig.update_yaxes(title="Temperatura (°C)")
-        fig.update_xaxes(title="Data")
-        fig.update_layout(title_text="Temperaturas Máxima e Mínima")
-
-        st.plotly_chart(fig, use_container_width=True)
-        return
+        def min_max2(df):
+            from datetime import datetime
+            import plotly
+            import plotly.express as px
+            import plotly.graph_objects as go
+            from plotly.subplots import make_subplots
+            # min_max_df = pd.DataFrame({'max_temp': df.groupby('date')['max_temp'].max(), 'date': df['date'].unique(), 'min_temp':df.groupby('date')['min_temp'].min()})
+            # fig = px.line(min_max_df, x= 'date', y=['max_temp','min_temp'],title='Minimum and Maximum Temperature')
+            # new = {'max_temp':'Maximum Temperature', 'min_temp': 'Minimum Temperature'}
+            # fig.for_each_trace(lambda t: t.update(name = new[t.name]))
+            ####df['data'].unique()[0:len(df['data'].unique()) - 1]
+            #####df.groupby('data')['temp'].max()[0:len(df['data'].unique()) - 1]
+            # auxy=df.groupby('data')['temp'].max()[0:len(df['timestamp'].unique()) - 1]
+            # auxy=auxy.sort_index(ascending=True)
+            # df['data']=pd.to_datetime(df['data'])
+            df['data1'] = df['datahora'].str.slice(0, 10)
+            df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
+            auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
+            fig = go.Figure()
+            #fig = make_subplots(specs=[[{"secondary_y": True}]], subplot_titles='Temperaturas Máxima e Mìnima')
+            fig = make_subplots(specs=[[{"secondary_y": True}]])
+            x = df['data'].unique()[0:len(df['data'].unique()) - 1]
+            y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) - 1]
+            y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique()) - 1]
+    
+            fig.add_trace(go.Scatter(x=x, y=y1,
+                                     mode='lines',
+                                     marker_color='red',
+                                     name='Temperatura Máxima'), secondary_y=False)
+            fig.add_trace(go.Scatter(x=x, y=y2,
+                                     mode='lines',
+                                     marker_color='blue',
+                                     name='Temperatura Mínima'), secondary_y=False)
+            fig.update_yaxes(title="Temperatura (°C)")
+            fig.update_xaxes(title="Data")
+            fig.update_layout(title_text="Temperaturas Máxima e Mínima")
+    
+            st.plotly_chart(fig, use_container_width=True)
+            return
 
     def vento2(df):
         ##"""Container for temperature time series"""
