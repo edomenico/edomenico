@@ -114,11 +114,11 @@ def main():
 
 
             #ur.append (round(mpcalc.relative_humidity_from_dewpoint(float((arqi.drytt[pp])) * units.degC, float((arqi.dewpt[pp])) * units.degC).magnitude * 100), 0)
-            #ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
-            print(arqi['drytt'][pp])
-            print(arqi['dewpt'][pp])
-            umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
-            ur.append(int(umid))
+            ur.append(round(100 - 5 * (float(arqi['dryt'][pp]) - float(arqi['dewp'][pp]))))
+            #print(arqi['drytt'][pp])
+            #print(arqi['dewpt'][pp])
+            #umid=umidade(arqi['drytt'][pp],arqi['dewpt'][pp])
+            #ur.append(int(umid))
         arqi['ur']=ur
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
