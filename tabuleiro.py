@@ -1682,7 +1682,10 @@ def main():
                         # uuu = (
                         # round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
                         # ur.append(uuu)
-                        uuu = umidade(at,atb)
+                        if at < atb:
+                            ur.append(int(uuu))
+                        else:
+                            uuu = umidade(at,atb)
                         ur.append(int(uuu))
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
