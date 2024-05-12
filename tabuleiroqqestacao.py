@@ -53,7 +53,7 @@ from bokeh.embed import file_html
 
 def main2():
     def umidade(ta,td):
-        if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--':
+        if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--' or (int(ta) <int(tb)):
             ur='--'
         else:
             a=float(ta)
@@ -1677,8 +1677,11 @@ def main2():
                         # uuu = (
                         # round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
                         # ur.append(uuu)
-                        uuu = umidade(at,atb)
-                        ur.append(int(uuu))
+                        if at<atb:
+                            ur.append('-')
+                        else:
+                            uuu = umidade(at,atb)
+                            ur.append(int(uuu))
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
                 #     else:
