@@ -1683,7 +1683,7 @@ def main():
                         # round(mpcalc.relative_humidity_from_dewpoint(at * units.degC, atb * units.degC).magnitude * 100), 0)
                         # ur.append(uuu)
                         if at < atb:
-                            ur.append(int(uuu))
+                            ur.append('-')
                         else:
                             uuu = umidade(at,atb)
                         ur.append(int(uuu))
