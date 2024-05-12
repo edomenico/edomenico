@@ -1686,7 +1686,7 @@ def main():
                             ur.append('-')
                         else:
                             uuu = umidade(at,atb)
-                        ur.append(int(uuu))
+                            ur.append(int(uuu))
                 #     if at == 0 or atb==0:
                 #         ur.append('NaN')
                 #     else:
