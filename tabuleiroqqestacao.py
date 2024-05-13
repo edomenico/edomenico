@@ -111,7 +111,7 @@ def main2():
         arqi['dewpt'].fillna(0, inplace=True)
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
-        arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%d/%m/%Y %H:%M'))]
+        arqi = arqi.loc[(arqi['data_hora'] >= datainicial.strftime('%Y-%m-%d %H:%M'))]
         arqi.sort_values(by=['data_hora'], inplace=True)
         arqi = arqi.reset_index(drop=True)
 
