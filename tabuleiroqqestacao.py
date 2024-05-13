@@ -2704,6 +2704,11 @@ def main2():
                         df1.drop('data_hora', inplace=True, axis=1)
                         df1.drop('drytt', inplace=True, axis=1)
                         df1.drop('dewpt', inplace=True, axis=1)
+                        df1.drop('metar', inplace=True, axis=1)
+                        df1.drop('speci', inplace=True, axis=1)
+                        df1.drop('data', inplace=True, axis=1)
+                        df1.drop('data1', inplace=True, axis=1)
+                
                         st.table(df1)
                 
 
