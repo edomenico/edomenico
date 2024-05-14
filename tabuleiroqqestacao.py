@@ -2701,6 +2701,7 @@ def main2():
                     st.divider()
                     with st.expander(label="Mostrar dados:"):
                         df1=df
+                        
                         df1.drop('data_hora', inplace=True, axis=1)
                         df1.drop('drytt', inplace=True, axis=1)
                         df1.drop('dewpt', inplace=True, axis=1)
