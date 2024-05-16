@@ -1490,7 +1490,10 @@ def main2():
                         #
                         #
                         else:
-                            noespec[jj] = '1'
+                            if len(str(arqi['speci'][jj])) >10:
+                                stop[jj] = 'A'
+                            else:
+                                noespec[jj]='1'
 
                         #         especi.append('-')
                 # arqi['especial'] = arqi['especi'].str[:10]
