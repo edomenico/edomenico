@@ -2575,7 +2575,7 @@ def main2():
             title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
             st.write('Escolha o período para visualizar')
             #st.write('(a partir de 01/02/2024)')
-            to_data = st.date_input('Início (a partir de 01/02/2024)', start_date,format="DD/MM/YYYY")
+            to_data = st.date_input('Início ', start_date,format="DD/MM/YYYY")
             datai=to_data
             #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
             if st.button('Iniciar'):
