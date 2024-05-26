@@ -2506,7 +2506,7 @@ def main():
     area_1 = ['SBJR','SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
               'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG','SNRU', 'SBFN', 'SBPL',
               'SBPJ']
-    area_2 = ['SBRD', 'SBVH', 'SBJI', ,'SSKW','SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
+    area_2 = ['SBRD', 'SBVH', 'SBJI','SSKW','SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
               'SBBV']
     start_date = datetime.today()
