@@ -1874,10 +1874,10 @@ def main():
                     if auxwdir == 'VRB':
                         FFFF = 1
                     if arqi.wdir[iwdir] < 100:
-                        #if ("VRB" in str(arqi.metar[iwdir])):
-                        #    wdirwdir.append('VRB')
-                        #else:
-                        wdirwdir.append('0' + auxwdir[0:1])
+                        if ("VRB" in str(arqi.metar[iwdir][0:30])):
+                            wdirwdir.append('VRB')
+                        else:
+                            wdirwdir.append('0' + auxwdir[0:1])
                     else:
                         wdirwdir.append(auxwdir[0:2])
                 arqi["wdirstr"] = wdirwdir
