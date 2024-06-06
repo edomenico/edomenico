@@ -1719,6 +1719,7 @@ def main2():
                 arqi['dryt'].fillna('xx', inplace=True)
                 arqi['dewp'].fillna('xx', inplace=True)
 
+                
                 arqi['tp'] = arqi['tp'].replace(['-TSRA'], '-' + a)
                 arqi['tp'] = arqi['tp'].replace(['+TSRA'], '+' + a)
                 arqi['tp'] = arqi['tp'].replace(['TSRA'], a)
