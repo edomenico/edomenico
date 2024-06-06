@@ -719,7 +719,7 @@ def main():
         with col2:
             estacaodoano= st.radio("Escolha a estação",
             ["Verão", "Outono", "Inverno", "Primavera"],horizontal=True)
-            horaria=st.toggle('Horário (UTC)')
+            horaria=st.toggle('Horária (UTC)')
     elif frequencia=="Mensal":
         with col2:
             mesdoano = st.radio("Escolha o mês",
