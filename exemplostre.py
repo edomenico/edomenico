@@ -1,4 +1,4 @@
-import time  # to simulate a real time data, time loop
+Horimport time  # to simulate a real time data, time loop
 import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
 import plotly.express as px  # interactive charts
@@ -724,10 +724,10 @@ def main():
         with col2:
             mesdoano = st.radio("Escolha o mês",
                                     ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"], horizontal=True)
-            horaria = st.toggle('Horário (UTC)')
+            horaria = st.toggle('Horária (UTC)')
     elif frequencia=="Todos os dados":
         with col2:
-            horaria = st.toggle('Horário (UTC)')
+            horaria = st.toggle('Horária (UTC)')
 
     if frequencia=="Todos os dados":
         estacaodoano="Nenhuma"
