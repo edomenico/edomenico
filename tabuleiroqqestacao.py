@@ -1995,6 +1995,9 @@ def main2():
 
                 p.xgrid.grid_line_color = "#aaaaee"
 
+                p.yaxis.major_label_text_font_size = "20px"
+                p.xaxis.major_label_text_font_size = "20px"
+
                 # arqi['diaaa'].mask(arqi['diaa'] == "0", "24", inplace=True)
                 # arqi["diaaaa"] = arqi["diaaa"].astype(int)
 
