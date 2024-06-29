@@ -1737,6 +1737,7 @@ def main2():
                 arqi['tp'] = arqi['tp'].replace(['+DZ'], "+" + d)
                 arqi['tp'] = arqi['tp'].replace(['FU'], g)
                 arqi['tp'] = arqi['tp'].replace(['VCFG'], e)
+                arqi['tp'] = arqi['tp'].replace(['PRFG'], e)
                 arqi['tp'] = arqi['tp'].replace(['MIFG'], e)
                 arqi['tp'] = arqi['tp'].replace(['FG'], e)
                 arqi['tp'] = arqi['tp'].replace(['BCFG'], e)
