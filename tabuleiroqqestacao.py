@@ -532,7 +532,7 @@ def main2():
                         #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
                         #              'Q') > -1:
                         # print(mensagem1[j])
-                         if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
+                        if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
 
                             # print(mensagem1[j][0:2])
                             # print(mensagem1[j][3:5])
