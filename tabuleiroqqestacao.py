@@ -516,6 +516,7 @@ def main2():
                                     # print(mensagem1[j])
 
                                     pres.append(float(mensagem1[j][1:5]))
+                                    break
 
 
                                 except ValueError:
@@ -531,7 +532,7 @@ def main2():
                         #  if mensagem1[j].find('/') > -1 and bool(re.search(r'\d', mensagem1[j])) and mensagem1[j + 1].find(
                         #              'Q') > -1:
                         # print(mensagem1[j])
-                        if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
+                         if mensagem1[j].find('/') > -1 and mensagem1[j + 1].find('Q') > -1:
 
                             # print(mensagem1[j][0:2])
                             # print(mensagem1[j][3:5])
@@ -540,16 +541,30 @@ def main2():
 
                                 dryt.append('NaN')
                             else:
-                                dryt.append(float(mensagem1[j][0:2]))
+                                #dryt.append(float(mensagem1[j][0:2]))
+                                if mensagem1[j][0:2].find('M') > -1:
+                                    dryt.append(float(mensagem1[j][1:3]) * -1)
+
+                                else:
+
+                                    if mensagem1[j][0:2].isnumeric():
+                                        dryt.append(float(mensagem1[j][0:2]))
+                                    else:
+                                        dryt.append('NaN')
                             if (mensagem1[j][3:5]) == '//':
                                 dewp.append('NaN')
                             else:
-                                if mensagem1[j][3:5].find('M') > -1:
-                                    dewp.append(float(mensagem1[j][4:6]) * -1)
+                                if mensagem1[j][0:2].find('M') > -1:
+                                    dewp.append(float(mensagem1[j][5:7]) * -1)
                                 else:
-
-                                    dewp.append(float(mensagem1[j][3:5]))
-                                    # tempentrou = True
+                                    if mensagem1[j][3:5].find('M') > -1:
+                                        dewp.append(float(mensagem1[j][4:6]) * -1)
+                                    else:
+                                        if mensagem1[j][3:5].isnumeric():
+                                            dewp.append(float(mensagem1[j][3:5]))
+                                        else:
+                                            dewp.append('NaN')
+                                        # tempentrou = True
 
                         if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find(
                                 'BKN') > -1 or \
