@@ -2629,7 +2629,7 @@ def main2():
                     df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
                     df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
                     df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
-                    df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
+                    df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed',errors='coerce')
                     df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
                     df['altn3'] = pd.to_numeric(df['altn3'], downcast='signed')
                     df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
