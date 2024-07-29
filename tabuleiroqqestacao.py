@@ -2624,7 +2624,7 @@ def main2():
                     df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
                     df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
                     df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
-                    df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
+                    df['vis'] = pd.to_numeric(df['vis'], downcast='signed',errors='coerce')
                     df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
                     df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
                     df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
