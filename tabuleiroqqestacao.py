@@ -274,7 +274,8 @@ def main2():
         st.plotly_chart(fig, use_container_width=True)
 
         return
-     def vis2(df):
+     
+    def vis2(df):
 
 
         #df['hora'] = df['data_hora'].dt.hour
