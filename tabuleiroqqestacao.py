@@ -274,6 +274,80 @@ def main2():
         st.plotly_chart(fig, use_container_width=True)
 
         return
+     def vis2(df):
+
+
+        #df['hora'] = df['data_hora'].dt.hour
+
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        fig = px.scatter(title='Visibilidade')
+
+        fig.add_scatter(x=df['data_hora'], y=df['vis'], name='Visibilidade(m)')
+        #fig.add_histogram(x=df['hora'], y=df['vis'], name='Visibilidade(m)',xbins=dict(size=0.5), opacity=0.75,histfunc='avg')
+        fig.update_yaxes(title="Valor")
+        fig.update_xaxes(title="Data Hora")
+        #fig.update_layout(bargap=0.2)
+        st.plotly_chart(fig, use_container_width=True)
+
+        return
+
+    def wdir3(df):
+        import plotly.graph_objects as go
+        df['hora'] = df['data_hora'].dt.hour
+        fig = go.Figure()
+        fig.add_trace(go.Histogram(
+            x=df['hora'],
+            y=df['wdir'],
+            name='Direção média',  # name used in legend and hover labels
+            xbins=dict(size=0.5),
+            marker_color='green',
+            opacity=0.75,
+            histfunc='avg'
+        ))
+
+        fig.add_trace(go.Histogram(
+            x=df['hora'],
+            y=df['wdir'],
+            name='Visibilidade máxima',  # name used in legend and hover labels
+            xbins=dict(size=0.5),
+            opacity=0.75,
+            histfunc='max',
+            marker_color='red'
+        ))
+
+        fig.add_trace(go.Histogram(
+            x=df['hora'],
+            y=df['wdir'],
+            name='Direção mínima',  # name used in legend and hover labels
+            xbins=dict(size=0.5),
+            opacity=0.75,
+            histfunc='min',
+            marker_color='blue'
+        ))
+
+        # df['hora'] = df['data_hora'].dt.hour
+
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        # fig = px.scatter(title='Visibilidade')
+        #
+        # fig.add_scatter(x=df['data_hora'], y=df['vis'], name='Visibilidade(m)')
+        # fig.add_histogram(x=df['hora'], y=df['vis'], name='Visibilidade(m)',xbins=dict(size=0.5), opacity=0.75,histfunc='avg')
+        fig.update_yaxes(title="Valor")
+        fig.update_xaxes(title="Data Hora")
+        fig.update_layout(title='Direção Horária')
+        # fig.update_layout(bargap=0.2)
+        st.plotly_chart(fig, use_container_width=True)
+
+        return
+    
+
+   
 
 
         
@@ -2798,7 +2872,7 @@ def main2():
                         with col5:
                             vis3(df)
                         with col6:
-                            vis2(df)
+                            wdir2(df)
                     st.divider()
                     with st.expander(label="Mostrar dados:"):
                         df1=df
