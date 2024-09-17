@@ -276,7 +276,7 @@ def main2():
         return
 
 
-    def dryt(df):
+    def dryt1(df):
         import plotly.graph_objects as go
         df['hora'] = df['data_hora'].dt.hour
         fig = go.Figure()
@@ -322,7 +322,7 @@ def main2():
         # fig.add_histogram(x=df['hora'], y=df['vis'], name='Visibilidade(m)',xbins=dict(size=0.5), opacity=0.75,histfunc='avg')
         fig.update_yaxes(title="Valor")
         fig.update_xaxes(title="Data Hora")
-        fig.update_layout(title='Visibilidade Horária')
+        fig.update_layout(title='Temperatura Horária')
         # fig.update_layout(bargap=0.2)
         st.plotly_chart(fig, use_container_width=True)
 
@@ -2924,7 +2924,7 @@ def main2():
                             weather_pie(df)
                         col5, col6 = st.columns((5, 5))
                         with col5:
-                            dryt(df)
+                            dryt1(df)
                         with col6:
                             wdir3(df)
                     st.divider()
