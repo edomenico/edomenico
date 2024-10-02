@@ -2615,7 +2615,7 @@ def main():
             df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
             df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
             df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
-            df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
+           # df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
             df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
             df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
             df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
@@ -2694,7 +2694,7 @@ def main():
                 col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
             with col3:
                 # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
-                col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
+                #col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
                 col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
                 
                 col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
