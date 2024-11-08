@@ -1731,6 +1731,7 @@ def main():
                 arqi['tp'] = arqi['tp'].replace(['VCTS'], c)
                 arqi['tp'] = arqi['tp'].replace(['TS'], l)
                 arqi['tp'] = arqi['tp'].replace(['DZ'], d)
+                arqi['tp'] = arqi['tp'].replace(['FZDZ'], d)
                 arqi['tp'] = arqi['tp'].replace(['-DZ'], "-" + d)
                 arqi['tp'] = arqi['tp'].replace(['+DZ'], "+" + d)
                 arqi['tp'] = arqi['tp'].replace(['FU'], g)
