@@ -2926,7 +2926,7 @@ def main2():
                         with col5:
                             dryt1(df)
                         with col6:
-                            vis3(df)
+                            wdir3(df)
                     st.divider()
                     with st.expander(label="Mostrar dados:"):
                         df1=df
