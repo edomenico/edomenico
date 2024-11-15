@@ -365,7 +365,7 @@ def main2():
         fig.add_trace(go.Histogram(
             x=df['hora'],
             y=df['wdir'],
-            name='Visibilidade máxima',  # name used in legend and hover labels
+            name='Direção máxima',  # name used in legend and hover labels
             xbins=dict(size=0.5),
             opacity=0.75,
             histfunc='max',
