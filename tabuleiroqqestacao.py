@@ -2793,7 +2793,7 @@ def main2():
         title=''
         entrou=0
         with st.sidebar:
-            title = (st.text_input('Escolha a estação','SBMQ',max_chars=4)).upper()
+            title = (st.text_input('Escolha a estação','SBGL',max_chars=4)).upper()
             st.write('Escolha o período para visualizar')
             #st.write('(a partir de 01/02/2024)')
             to_data = st.date_input('Início ', start_date,format="DD/MM/YYYY")
