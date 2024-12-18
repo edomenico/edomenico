@@ -156,7 +156,7 @@ def main2():
         auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) ]
         fig = go.Figure()
         fig = make_subplots(specs=[[{"secondary_y": True}]])
-        x = df['data'].unique()[0:len(df['data'].unique()) - 1]
+        x = df['data'].unique()[0:len(df['data'].unique()) ]
         y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) ]
         y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique()) ]
 
