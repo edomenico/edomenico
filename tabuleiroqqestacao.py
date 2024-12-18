@@ -153,12 +153,12 @@ def main2():
         # df['data']=pd.to_datetime(df['data'])
         df['data1'] = df['datahora'].str.slice(0, 10)
         df['data'] = df.data1.apply(lambda linha: datetime.strptime(linha, "%d/%m/%Y"))
-        auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) ]
+        auxy = df.groupby('data')['dryt'].max()[0:len(df['data'].unique())-1 ]
         fig = go.Figure()
         fig = make_subplots(specs=[[{"secondary_y": True}]])
-        x = df['data'].unique()[0:len(df['data'].unique()) ]
-        y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique()) ]
-        y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique()) ]
+        x = df['data'].unique()[0:len(df['data'].unique())- 1 ]
+        y1 = df.groupby('data')['dryt'].max()[0:len(df['data'].unique())-1 ]
+        y2 = df.groupby('data')['dryt'].min()[0:len(df['data'].unique())-1 ]
 
         fig.add_trace(go.Scatter(x=x, y=y1,
                                  mode='lines',
