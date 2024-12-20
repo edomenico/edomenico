@@ -241,24 +241,26 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
            '040', '041', '042', '043', '044', '045', '046', '047', '048', '049', '050']
     with st.container(border=True):
         st.markdown("## :gear: Corpo Principal")
-        if "visibility" not in st.session_state:
-            st.session_state.visibility = "visible"
-            st.session_state.disabled = False
-        col001, col002 = st.columns(2)
+        st.markdown("## :gear: Corpo Principal")
+        # if "visibility" not in st.session_state:
+        #     st.session_state.visibility = "visible"
+        #     st.session_state.disabled = False
+        # col001, col002 = st.columns(2)
+        #
+        # with col001:
+        #     st.checkbox("Disable selectbox widget", key="disabled")
+        #     st.radio(
+        #         "Set selectbox label visibility 👉",
+        #         key="visibility",
+        #         options=["visible", "hidden", "collapsed"],
+        #     )
 
+        col001, col002,col003,col004,col005 = st.columns(5)
         with col001:
-            st.checkbox("Disable selectbox widget", key="disabled")
-            st.radio(
-                "Set selectbox label visibility 👉",
-                key="visibility",
-                options=["visible", "hidden", "collapsed"],
-            )
-
-        with col002:
             option = st.selectbox(
                 'Código ICAO: ', estarea,
-                label_visibility=st.session_state.visibility,
-                disabled=st.session_state.disabled,
+                # label_visibility=st.session_state.visibility,
+                # disabled=st.session_state.disabled,
             )
 
 
