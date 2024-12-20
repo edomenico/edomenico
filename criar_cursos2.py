@@ -10,7 +10,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
         aux2 = []
         aux3=[]
         diainicio1=diainicio
-        if selhora=='Padrão':
+        if selhora=='Padrão' or selhora=='Padrão1':
             varia=2
         else:
             varia=int(selhora)
@@ -89,7 +89,27 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
         import pandas as pd
         import streamlit as st
 
-        hormudab = st.text_input('Hora Mudança', max_chars=9)
+        with st.container(border=True):
+            col001, col002 = st.columns(2)
+
+            with col001:
+                selhora1 = st.radio(
+                    "Selecionar período 👉",
+                    ["Padrão", "Definir"], horizontal=True
+                )
+
+            with col002:
+                # selhora=="2"
+
+                sele = analisahorabecmg(selhora1, diainicio, horainicio, val)
+                hormudab1 = st.selectbox('Hora1 Mudança', sele,
+
+                                         )
+        col00, col001 = st.columns(2)
+        # col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
+        with col00:
+            if selhora1 == "Padrão" or selhora1 == "Padrão1":
+                horamudusua = st.text_input('Horário Mudança', max_chars=15)
         col11, col12, col13, col14, col15, col16 = st.columns(6)
         # col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
         with col11:
@@ -148,17 +168,17 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
 
             with col001:
 
-               selhora=st.radio(
+               selhora1=st.radio(
                     "Selecionar período 👉",
-                   ["Padrão", "Definir"],horizontal=True
+                   ["Padrão1", "Definir1"],horizontal=True
                 )
 
 
             with col002:
                 #selhora=="2"
 
-                sele=analisahorabecmg(selhora, diainicio, horainicio, val)
-                hormudab1 = st.selectbox('Hora1 Mudança', sele,
+                sele1=analisahorabecmg(selhora1, diainicio, horainicio, val)
+                hormudab2 = st.selectbox('Hora Mudança1', sele1,
 
                 )
 
@@ -187,8 +207,8 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
         col00,col001 = st.columns(2)
         # col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
         with col00:
-            if selhora=="Padrão":
-                    horamudusua1 = st.text_input('Horário Mudança', max_chars=15)
+            if selhora1=="Padrão" or  selhora1=="Padrão1":
+                    horamudusua1 = st.text_input('Horário Mudança1', max_chars=15)
         col11, col12, col13, col14, col15, col16 = st.columns(6)
         with col11:
             bdirgmb1 = st.selectbox('Direção do Vento1', ventodir)
@@ -241,7 +261,6 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
            '040', '041', '042', '043', '044', '045', '046', '047', '048', '049', '050']
     with st.container(border=True):
         st.markdown("## :gear: Corpo Principal")
-        #st.markdown("## :gear: Corpo Principal")
         # if "visibility" not in st.session_state:
         #     st.session_state.visibility = "visible"
         #     st.session_state.disabled = False
@@ -256,12 +275,11 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
         #     )
 
         col001, col002,col003,col004,col005 = st.columns(5)
-        with col005:
-            option = st.selectbox(
-                'Código ICAO: ', estarea,
-                # label_visibility=st.session_state.visibility,
-                # disabled=st.session_state.disabled,
-            )
+        option = st.selectbox(
+            'Código ICAO: ', estarea,
+            # label_visibility=st.session_state.visibility,
+            # disabled=st.session_state.disabled,
+        )
 
 
         with st.form("form_taf"):
@@ -349,7 +367,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
                 }
 
                 try:
-                    df = pd.read_csv("taf.csv")
+                    df = pd.read_csv("data/taf.csv")
                 except FileNotFoundError:
                     df = pd.DataFrame(
                         columns=[
@@ -378,14 +396,14 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
                     )
                 df = pd.concat([df, pd.DataFrame([novo_taf])], ignore_index=True)
 
-                df.to_csv("taf.csv", index=False)
+                df.to_csv("data/taf.csv", index=False)
                 st.success("TAF criado com sucesso!")
     on = st.toggle("Grupo de Mudanças")
     if on:
         with st.container(border=True):
             st.markdown("## :gear: Grupo de Mudanças")
             options = ["BECMG", "FM", "PROB30", "PROB40", "TEMPO", "PROB30 TEMPO", "PROB40 TEMPO"]
-            selection = st.radio("Mudanças", options,horizontal=True)
+            selection = st.segmented_control("Mudanças", options, selection_mode="single")
 
             # if selection:
             if selection == "BECMG":
