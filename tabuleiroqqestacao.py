@@ -1964,6 +1964,9 @@ def main2():
                 arqi['tp'] = arqi['tp'].replace(['+SHRA'], "+" + m)
                 arqi['tp'] = arqi['tp'].replace(['SHRA'], m)
                 arqi['tp'] = arqi['tp'].replace(['+TSGRRA'],"+" + o)
+                arqi['tp'] = arqi['tp'].replace(['TSGRRA'],o)
+                arqi['tp'] = arqi['tp'].replace(['-TSGRRA'],"-"+o)
+
                
 
                 arqi['aviso'] = arqi['aviso'].replace(['A'], n)
