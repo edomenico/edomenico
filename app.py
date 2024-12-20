@@ -14,7 +14,7 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 
-import criar_cursos
+
 import criar_cursos2
 from home import home
 import listar_cursos
