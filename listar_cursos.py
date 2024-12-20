@@ -8,6 +8,6 @@ def listar():
     """Função de Listar Cursos."""
     st.title("Listagem de TAF")
     try:
-        st.dataframe(pd.read_csv("data/taf.csv"))
+        st.dataframe(pd.read_csv("taf.csv"))
     except:
         st.warning("Nenhum curso dísponível encontrado!")
