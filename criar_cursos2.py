@@ -241,7 +241,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
            '040', '041', '042', '043', '044', '045', '046', '047', '048', '049', '050']
     with st.container(border=True):
         st.markdown("## :gear: Corpo Principal")
-        st.markdown("## :gear: Corpo Principal")
+        #st.markdown("## :gear: Corpo Principal")
         # if "visibility" not in st.session_state:
         #     st.session_state.visibility = "visible"
         #     st.session_state.disabled = False
