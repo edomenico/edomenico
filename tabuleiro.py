@@ -1382,6 +1382,9 @@ def main():
         l = (emoji.emojize("\U0001f329"))  # trovoada
         m = (emoji.emojize("\U0001f53d"))  # pancadas de chuva
         n = (emoji.emojize("\U0001f4dd"))  # pancadas de chuva
+        o =  (emoji.emojize("\U0001f9ca"))  # granizo
+
+
 
         # pd.set_option('max_columns', None)
         #areatrab = 1  # dado entrada
@@ -1747,6 +1750,7 @@ def main():
                 arqi['tp'] = arqi['tp'].replace(['-SHRA'], "-" + m)
                 arqi['tp'] = arqi['tp'].replace(['+SHRA'], "+" + m)
                 arqi['tp'] = arqi['tp'].replace(['SHRA'], m)
+                arqi['tp'] = arqi['tp'].replace(['+TSGRRA'],"+" + o)
                 arqi['aviso'] = arqi['aviso'].replace(['A'], n)
                 # fim
 
