@@ -134,9 +134,9 @@ def main():
         st.error("Usuário/Senha is inválido")
     elif st.session_state["authentication_status"] is None:
         st.warning("Por Favor, utilize seu usuário e senha!")
-if __name__ == '__main__':
-    if runtime.exists():
-        main()
-    else:
-        sys.argv = ["streamlit", "run", sys.argv[0]]
-        sys.exit(stcli.main())
+#if __name__ == '__main__':
+  #  if runtime.exists():
+main()
+  #  else:
+     #   sys.argv = ["streamlit", "run", sys.argv[0]]
+      #  sys.exit(stcli.main())
