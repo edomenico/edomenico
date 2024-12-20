@@ -349,7 +349,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
                 }
 
                 try:
-                    df = pd.read_csv("data/taf.csv")
+                    df = pd.read_csv("taf.csv")
                 except FileNotFoundError:
                     df = pd.DataFrame(
                         columns=[
@@ -378,7 +378,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
                     )
                 df = pd.concat([df, pd.DataFrame([novo_taf])], ignore_index=True)
 
-                df.to_csv("data/taf.csv", index=False)
+                df.to_csv("taf.csv", index=False)
                 st.success("TAF criado com sucesso!")
     on = st.toggle("Grupo de Mudanças")
     if on:
