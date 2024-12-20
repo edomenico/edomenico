@@ -1,0 +1,16 @@
+credentials:
+  usernames:
+    lborba:
+      email: testando@gmail.com
+      logged_in: False
+      name: Luciano Borba
+      password: abcd1234
+    edomenico:
+      email: edomenico813@gmail.com
+      logged_in: False
+      name: Eduardo Domenico
+      password: abcd
+cookie:
+  expiry_days: 1
+  key: some_signature_key
+  name: some_cookie_name
