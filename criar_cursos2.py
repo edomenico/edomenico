@@ -383,7 +383,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
         with st.container(border=True):
             st.markdown("## :gear: Grupo de Mudanças")
             options = ["BECMG", "FM", "PROB30", "PROB40", "TEMPO", "PROB30 TEMPO", "PROB40 TEMPO"]
-            selection = st.radio("Mudanças", options)
+            selection = st.radio("Mudanças", options,horizontal=True)
 
             # if selection:
             if selection == "BECMG":
