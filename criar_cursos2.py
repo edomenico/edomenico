@@ -256,7 +256,7 @@ def form_curso(estarea, horainicio, dataenvio, diainicio, estacao):
         #     )
 
         col001, col002,col003,col004,col005 = st.columns(5)
-        with col001:
+        with col005:
             option = st.selectbox(
                 'Código ICAO: ', estarea,
                 # label_visibility=st.session_state.visibility,
