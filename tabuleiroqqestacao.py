@@ -1740,7 +1740,7 @@ def main2():
                 mes_fim = str(date_fim.month)
                 # datafim =1
                 if date_fim.day == 1 and (
-                        date_fim.month == 4 or date_fim.month == 6 or date_fim.month == 8 or date_fim.month == 9 or date_fim.month == 11 ):
+                        date_fim.month == 4 or date_fim.month == 6 or date_fim.month == 8 or date_fim.month == 9 or date_fim.month == 11 or date_fim.month == 1):
                     dia_fim = '31'
                     mes_fim = str(date_fim.month - 1)
                     ano_fim = str(date_fim.year)
