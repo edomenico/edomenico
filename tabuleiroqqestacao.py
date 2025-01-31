@@ -1763,11 +1763,13 @@ def main2():
                         ano_fim = str(date_fim.year)
                 else:
                     dia_fim = str(date_fim.day - 1)
+                    print('Ainda estou aqui')
                     dia_fim = '31'
                     #dia_fim = str(date_fim.day)
                     ano_fim = str(date_fim.year)
 
                 datatit = dia_ini + '/' + mes_ini + '/' + ano_ini + ' a ' + dia_fim + '/' + mes_fim + '/' + ano_fim
+                print(datatit)
                 arqi = arqi.loc[(arqi['data_hora'] >= date_inicio)]
                 arqi = arqi.loc[(arqi['data_hora'] < date_fim)]
                 arqi.sort_values(by=['estacao', 'data_hora'], inplace=True)
