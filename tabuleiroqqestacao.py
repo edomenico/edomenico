@@ -1762,7 +1762,7 @@ def main2():
                         mes_fim = str(date_fim.month - 1)
                         ano_fim = str(date_fim.year)
 
-                        else:
+                    else:
                         
                         dia_fim = '30'
                         mes_fim = str(date_fim.month - 1)
