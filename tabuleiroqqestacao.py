@@ -1763,6 +1763,7 @@ def main2():
                         ano_fim = str(date_fim.year)
                 else:
                     dia_fim = str(date_fim.day - 1)
+                    dia_fim = '31'
                     #dia_fim = str(date_fim.day)
                     ano_fim = str(date_fim.year)
 
