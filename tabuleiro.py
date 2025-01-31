@@ -1551,7 +1551,8 @@ def main():
 
                 
                 else:
-                    dia_fim = str(date_fim.day - 1)
+                    #dia_fim = str(date_fim.day- 1)
+                    dia_fim = str(date_fim.day)
                     ano_fim = str(date_fim.year)
 
                 datatit = dia_ini + '/' + mes_ini + '/' + ano_ini + ' a ' + dia_fim + '/' + mes_fim + '/' + ano_fim
