@@ -2139,7 +2139,7 @@ def main2():
                         auxvis[inuv] = 'CVK'
                     if int(arqi['vis'][inuv]) != 99 and arqi['qn1'][inuv] == "":
                         auxqn1[inuv] = 'NSC'
-                        arqi['qn1'][inuv].mask(arqi['qn1'][inuv] == "", 'NSC', inplace=True)
+                        #arqi['qn1'][inuv].mask(arqi['qn1'][inuv] == "", 'NSC', inplace=True)
                 arqi['qn1'] = auxqn1[:]
                 arqi['qn1'].mask(arqi['qn1'] == '0', '', inplace=True)
                 arqi['vis'] = auxvis[:]
