@@ -1141,7 +1141,7 @@ def main():
                 if mesini == 2:
                     if (date.today().year % 4) != 0:
                         p.xaxis.formatter = FuncTickFormatter(code="""
-                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 29, 9: 30, 10: 1};
+                                            var mapping = {1: 22, 2: 23, 3: 24, 4: 25, 5:26, 6: 27, 7: 28, 8: 1, 9: 2, 10: 3};
                                             return mapping[tick];
                                        """)
                     else:
