@@ -848,11 +848,11 @@ def main2():
                             camada4 = True
 
                         if mensagem1[j].find('VV') > -1:
-                            altn1.append((mensagem1[j][2:5]))
+                            altn1.append((mensagem1[j][2:6]))
                             altn2.append('NaN')
                             altn3.append('NaN')
                             altn4.append('NaN')
-                            qn1.append('VV')
+                            qn1.append('OVC')
                             qn2.append('NaN')
                             qn3.append('NaN')
                             qn4.append('NaN')
