@@ -852,7 +852,7 @@ def main2():
                             altn2.append('NaN')
                             altn3.append('NaN')
                             altn4.append('NaN')
-                            qn1.append('OVC')
+                            qn1.append('VV')
                             qn2.append('NaN')
                             qn3.append('NaN')
                             qn4.append('NaN')
