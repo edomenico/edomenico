@@ -852,7 +852,7 @@ def main2():
                             altn2.append('NaN')
                             altn3.append('NaN')
                             altn4.append('NaN')
-                            qn1.append('OVC')
+                            qn1.append('VVv')
                             qn2.append('NaN')
                             qn3.append('NaN')
                             qn4.append('NaN')
@@ -867,7 +867,7 @@ def main2():
                                     'FU') > -1 or mensagem1[j].find('VC') > -1 or
                             mensagem1[j].find('TS') > -1) and mensagem1[j].find('SB') == -1 and mensagem1[
                             j].find(
-                            'OVC') == -1 and tempopres == False:
+                            'VV') == -1 and tempopres == False:
                             tp.append((mensagem1[j][0:len(mensagem1[j])]))
                             tempopres = True
 
