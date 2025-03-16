@@ -767,7 +767,7 @@ def main2():
 
                         if mensagem1[j].find('FEW') > -1 or mensagem1[j].find('SCT') > -1 or mensagem1[j].find(
                                 'BKN') > -1 or \
-                                mensagem1[j].find('OVC') > -1:
+                                mensagem1[j].find('OVC') > -1 or mensagem1[j].find('VV'):
                             if mensagem1[j].find('CB') < 0 and mensagem1[j].find('TCU') < 0:
                                 if camada1 == False:
                                     if (mensagem1[j][3:6]).isnumeric():
