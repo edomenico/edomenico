@@ -1901,9 +1901,9 @@ def main():
                 for ialt1 in range(0, len(arqi['altn1']), 1):
                     auxalt1 = (arqi.altn1[ialt1])
                     auxauxqn1 = str(arqi.qn1[ialt1])
-                    if auxalt1 == '000':
+                    if arqi['metar'][ialt1].find('VV00') > -1:
 
-                        qn1qn1.append(' VV')
+                        qn1qn1.append('VV')
                     else:
                         # alt1alt1.append(auxalt1)
                         qn1qn1.append(auxauxqn1)
