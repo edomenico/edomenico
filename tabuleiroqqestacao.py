@@ -2037,6 +2037,7 @@ def main2():
                 arqi['altn1'].mask(arqi['altn1'] == '03.', '003', inplace=True)
                 arqi['altn1'].mask(arqi['altn1'] == '02.', '002', inplace=True)
                 arqi['altn1'].mask(arqi['altn1'] == '01.', '001', inplace=True)
+                arqi['altn1'].mask(arqi['altn1'] == '00.', '000', inplace=True)
 
                 # fim------------------
 
@@ -2114,6 +2115,25 @@ def main2():
                     else:
                         wdirwdir.append(auxwdir[0:2])
                 arqi["wdirstr"] = wdirwdir
+                # tratamento nuvem
+
+                qn1qn1 = []
+                # qn1
+                # altn1
+                for ialt1 in range(0, len(arqi['altn1']), 1):
+                    auxalt1 = (arqi.altn1[ialt1])
+                    auxauxqn1 = str(arqi.qn1[ialt1])
+                    if auxalt1 == '000':
+
+                        qn1qn1.append(' VV')
+                    else:
+                        # alt1alt1.append(auxalt1)
+                        qn1qn1.append(auxauxqn1)
+
+                # arqi["alt1"] = alt1alt1
+                auxqn1 = qn1qn1
+
+                
                 # colocando a direçãof
                 # tratando a VISIBILIDADE
                 # inicio-----------------
