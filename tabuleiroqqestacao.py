@@ -2123,13 +2123,24 @@ def main2():
                 for ialt1 in range(0, len(arqi['altn1']), 1):
                     auxalt1 = (arqi.altn1[ialt1])
                     auxauxqn1 = str(arqi.qn1[ialt1])
-                    if arqi['metar'][ialt1].find('VV00') > -1:
-
-                        qn1qn1.append(' VV')
+                    #if arqi['metar'][ialt1].find('VV00') > -1:
+                    if auxauxqn1=='OVC':
+                        if arqi['metar'][ialt1].find('VV00') > -1:
+                            if arqi['metar'][ialt1].find('VV00') and  arqi['metar'][ialt1].find('SPECI')==-1:
+                    #if auxalt1 == '000':
+        
+                                qn1qn1.append('  VV')
+                            elif  (arqi['metar'][ialt1].find('OVC') >-1) and (arqi['metar'][ialt1].find('OVC') <  arqi['metar'][ialt1].find('VV00')):
+        
+                                qn1qn1.append(auxauxqn1)
+                            else:
+                                qn1qn1.append('  VV')
+                        else:
+                            qn1qn1.append(auxauxqn1)
                     else:
                         # alt1alt1.append(auxalt1)
                         qn1qn1.append(auxauxqn1)
-
+        
                 # arqi["alt1"] = alt1alt1
                 auxqn1 = qn1qn1
 
