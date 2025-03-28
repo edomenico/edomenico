@@ -1943,7 +1943,7 @@ def main():
                     if int(arqi['vis'][inuv]) == 99 and arqi['qn1'][inuv] == "" and arqi['tp'][inuv] == "" and arqi['qncb'][
                         inuv] == "":
                         auxvis[inuv] = 'CVK'
-                    if int(arqi['vis'][inuv]) != 99 and arqi['qn1'][inuv] == ""arqi['tp'][inuv] == "":
+                    if int(arqi['vis'][inuv]) != 99 and arqi['qn1'][inuv] == ""and arqi['tp'][inuv] == "":
                         
                         auxqn1[inuv] = 'NSC'
                         # arqi['qn1'][inuv].mask(arqi['qn1'][inuv] == "", 'NSC', inplace=True)
