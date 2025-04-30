@@ -1770,7 +1770,7 @@ def main2():
                     print(dia_fim)
                     #dia_fim = str(date_fim.day)
                     ano_fim = str(date_fim.year)
-                    print(diafim)
+                    print(dia_fim)
                     print('porra')
                 #dia_fim = '31'
                 datatit = dia_ini + '/' + mes_ini + '/' + ano_ini + ' a ' + dia_fim + '/' + mes_fim + '/' + ano_fim
