@@ -1738,8 +1738,8 @@ def main2():
                 ano_ini = str(date_inicio.year)
 
                 mes_fim = str(date_fim.month)
-                print(str(date_fim))
-                print('porra1')
+                print((date_fim.day))
+                print('porra2')
                 if date_fim.day == 1 and (
                         date_fim.month == 4 or date_fim.month == 6 or date_fim.month == 8 or date_fim.month == 9 or date_fim.month == 11 or date_fim.month == 1):
                     dia_fim = '31'
