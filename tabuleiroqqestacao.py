@@ -1767,7 +1767,7 @@ def main2():
                 else:
                     dia_fim = str(date_fim.day - 1)
                     print('Ainda estou aqui')
-                    print(date_fim)
+                    print(dia_fim)
                     #dia_fim = str(date_fim.day)
                     ano_fim = str(date_fim.year)
                 #dia_fim = '31'
