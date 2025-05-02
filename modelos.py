@@ -833,6 +833,7 @@ def main():
                 try:
                     data = authenticate2(city)
                 except Exception as str_error:
+                    print('cheguei aqui search222')
                     pass
                 else:
                     break
