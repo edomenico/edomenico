@@ -1200,7 +1200,7 @@ def main():
                 pass
                 
             
-            print('ei city ',city, 'usu ', usu)
+            print(city, usu)
             result, lat, lon = search2(city, usu)
             
                 
