@@ -97,14 +97,7 @@ def main():
         driver = webdriver.Firefox(options=firefoxOptions,service=service,)
 	    
             
-            #firefoxOptions = Options()
-            #firefoxOptions.add_argument("--headless")
-            #service = Service(GeckoDriverManager().install())
-            #driver = webdriver.Firefox(
-            #options=firefoxOptions,
-            #service=service,
-            #)
-            #for no in range(0, len(arqi), 1):
+            
         for jj in range(0,1,1):
                 try:
     
