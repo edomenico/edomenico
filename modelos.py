@@ -111,7 +111,7 @@ def main():
             #driver = webdriver.Chrome(options=chrome_options)
 	    driver = webdriver.Chrome()
             driver.implicitly_wait(20)
-           # 
+            
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
