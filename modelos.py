@@ -72,6 +72,7 @@ def main():
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.chrome.service import Service
             from webdriver_manager.chrome import ChromeDriverManager
+            from webdriver_manager.core.os_manager import ChromeType
             print('foi aqui 0')
             @st.experimental_singleton
             def get_driver():
