@@ -835,7 +835,7 @@ def main():
                 # st.write(lat)
             print('cheguei 0')
 
-            for x in range(0, 500):  # try 4 times
+            for x in range(0, 5):  # try 4 times
                 try:
                     data = authenticate2(city)
                 except Exception as str_error:
