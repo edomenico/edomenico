@@ -134,7 +134,7 @@ def main():
                         #horazulu='3'
                         
                         
-                        #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
+                        link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
                         print('apos link')
