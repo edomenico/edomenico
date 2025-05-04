@@ -66,35 +66,35 @@ def main():
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
     def baixarmodeloNovoprojeto(estacao):
-            import re
-            import urllib.parse
-            import pandas as pd
-            from selenium import webdriver
-            from bs4 import BeautifulSoup
-            from time import sleep
-            from datetime import datetime,timedelta
-            from datetime import date
-            from pytz import timezone
-            from selenium.webdriver.chrome.options import Options
-            from selenium.webdriver.common.by import By
-            from selenium.webdriver.support.wait import WebDriverWait
-            from selenium.webdriver.support import expected_conditions as EC
+        import re
+        import urllib.parse
+        import pandas as pd
+        from selenium import webdriver
+        from bs4 import BeautifulSoup
+        from time import sleep
+        from datetime import datetime,timedelta
+        from datetime import date
+        from pytz import timezone
+        from selenium.webdriver.chrome.options import Options
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.wait import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
             
-            from selenium.webdriver.chrome.service import Service
-            from webdriver_manager.chrome import ChromeDriverManager
+        from selenium.webdriver.chrome.service import Service
+        from webdriver_manager.chrome import ChromeDriverManager
             
-            from selenium.common.exceptions import TimeoutException
-            from selenium.webdriver.common.by import By
-            from selenium.webdriver.firefox.options import Options
-            from selenium.webdriver.firefox.service import Service
-            from selenium.webdriver.support import expected_conditions as EC
-            from selenium.webdriver.support.ui import WebDriverWait
-            from webdriver_manager.firefox import GeckoDriverManager
+        from selenium.common.exceptions import TimeoutException
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.firefox.options import Options
+	from selenium.webdriver.firefox.service import Service
+        from selenium.webdriver.support import expected_conditions as EC
+        from selenium.webdriver.support.ui import WebDriverWait
+        from webdriver_manager.firefox import GeckoDriverManager
     		
-    	    firefoxOptions = Options()
-            firefoxOptions.add_argument("--headless")
-            service = Service(GeckoDriverManager().install())
-            driver = webdriver.Firefox(options=firefoxOptions,service=service,)
+    	firefoxOptions = Options()
+        firefoxOptions.add_argument("--headless")
+        service = Service(GeckoDriverManager().install())
+        driver = webdriver.Firefox(options=firefoxOptions,service=service,)
 	    
             
             #firefoxOptions = Options()
@@ -105,7 +105,7 @@ def main():
             #service=service,
             #)
             #for no in range(0, len(arqi), 1):
-            for jj in range(0,1,1):
+        for jj in range(0,1,1):
                 try:
     
                     if jj==0:
@@ -366,9 +366,9 @@ def main():
                     #df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
                 except:
                     continue
-            driver.quit()
+        driver.quit()
             
-            return link,df1,horazulu
+        return link,df1,horazulu
     
     def baixaamodeloNovometeograma(estacao,link,horazulu):
             import re
