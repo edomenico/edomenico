@@ -66,63 +66,36 @@ def main():
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
     def baixarmodeloNovoprojeto(estacao):
-            import re
-            import urllib.parse
-            import pandas as pd
+            import streamlit as st
+
             from selenium import webdriver
-            from bs4 import BeautifulSoup
-            from time import sleep
-            from datetime import datetime, timedelta
-
-            #import chromedriver_autoinstaller
-            from webdriver_manager.chrome import ChromeDriverManager
-            from datetime import date
-            from pytz import timezone
             from selenium.webdriver.chrome.options import Options
-            from selenium.webdriver.common.by import By
-            from selenium.webdriver.support.wait import WebDriverWait
-            from selenium.webdriver.support import expected_conditions as EC
-
-
-            
             from selenium.webdriver.chrome.service import Service
-
-
-            # from selenium.webdriver.chrome.service import Service
-            # from webdriver_manager.chrome import ChromeDriverManager
-
-            # from selenium.common.exceptions import TimeoutException
-            # from selenium.webdriver.common.by import By
-            # from selenium.webdriver.firefox.options import Options
-            # from selenium.webdriver.firefox.service import Service
-            # from selenium.webdriver.support import expected_conditions as EC
-            # from selenium.webdriver.support.ui import WebDriverWait
-            #from webdriver_manager.firefox import GeckoDriverManager
-
-            # chromedriver_autoinstaller.install()
-            # driver = webdriver.Firefox()
-            # self.driver.set_window_size(1120, 550)
+            from webdriver_manager.chrome import ChromeDriverManager
             
-        
-#---------------------------------------------------------------------------------            
-            print('baixarmodeloNovoprojeto')
-            print(estacao)
+            @st.experimental_singleton
+            def get_driver():
+                return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+            
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
+            
+            driver = get_driver()
+            #driver.get('http://example.com')
+            
+            st.code(driver.page_source)
+
+
         
-    
-    
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
             print('foi aqui 1')
                 # Create the driver with the options
             #driver = webdriver.Chrome(ChromeDriverManager().install())
             #driver.implicitly_wait(120)
-            firefoxOptions = Options()
-            firefoxOptions.add_argument("--headless")
-            service = Service(GeckoDriverManager().install())
-            driver = webdriver.Firefox(options=firefoxOptions,service=service,)
+            #firefoxOptions = Options()
+            #firefoxOptions.add_argument("--headless")
+            #service = Service(GeckoDriverManager().install())
+            #driver = webdriver.Firefox(options=firefoxOptions,service=service,)
             print('foi aqui 2')
            
             print('foi aqui 3')
