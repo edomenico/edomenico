@@ -89,28 +89,13 @@ def main():
             from selenium.webdriver.firefox.service import Service
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
-            #from webdriver_manager.firefox import GeckoDriverManager
-    
-    
-            
-    
-           # driver = webdriver.Firefox()
-            # self.driver.set_window_size(1120, 550)
-            print('baixarmodeloNovoprojeto')
-            print(estacao)
-            options = Options()
-            options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
-        
-    
-    
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            
-                # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
-	    #driver = webdriver.Chrome()
-            driver.implicitly_wait(20)
+            from webdriver_manager.firefox import GeckoDriverManager
+    		
+    	    firefoxOptions = Options()
+            firefoxOptions.add_argument("--headless")
+            service = Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(options=firefoxOptions,service=service,)
+	    
             
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
@@ -414,24 +399,10 @@ def main():
     
             
     
-           # driver = webdriver.Firefox()
-            # self.driver.set_window_size(1120, 550)
-            print('baixarmodeloNovoprojeto')
-            print(estacao)
-            options = Options()
-            options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
-        
-    
-    
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            
-                # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
-	    #driver = webdriver.Chrome()
-
-            driver.implicitly_wait(20)
+            firefoxOptions = Options()
+            firefoxOptions.add_argument("--headless")
+            service = Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(options=firefoxOptions,service=service,)
             
 
 
