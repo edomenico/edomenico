@@ -75,7 +75,12 @@ def main():
             print('foi aqui 0')
             @st.experimental_singleton
             def get_driver():
-                return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+                return webdriver.Chrome(
+                    service=Service(
+                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+                    ),
+                    options=options,
+                )
             
             options = Options()
             options.add_argument('--disable-gpu')
