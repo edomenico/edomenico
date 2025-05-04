@@ -423,7 +423,7 @@ def main():
                         #horazulu='3'
                         print('Loading...')
                         
-                        #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
+                        link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
                         wait = WebDriverWait(driver, 30)
