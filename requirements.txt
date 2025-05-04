@@ -16,4 +16,4 @@ webdriver-manager
 DateTime~=4.3
 bs4~=0.0.1
 lxml
-
+seleniumbase
