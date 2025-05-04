@@ -129,7 +129,7 @@ def main():
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
-                        
+                        print('link: ',link)
                         horazulu=arqi['horzulu'][no]
                         #horazulu='3'
                         
