@@ -92,11 +92,14 @@ def main():
             # from selenium.webdriver.firefox.service import Service
             # from selenium.webdriver.support import expected_conditions as EC
             # from selenium.webdriver.support.ui import WebDriverWait
-            # from webdriver_manager.firefox import GeckoDriverManager
+            from webdriver_manager.firefox import GeckoDriverManager
 
             # chromedriver_autoinstaller.install()
             # driver = webdriver.Firefox()
             # self.driver.set_window_size(1120, 550)
+            
+        
+#---------------------------------------------------------------------------------            
             print('baixarmodeloNovoprojeto')
             print(estacao)
             options = Options()
@@ -109,11 +112,16 @@ def main():
             chrome_options.add_argument("--headless")
             print('foi aqui 1')
                 # Create the driver with the options
-            driver = webdriver.Chrome(ChromeDriverManager().install())
-            driver.implicitly_wait(120)
+            #driver = webdriver.Chrome(ChromeDriverManager().install())
+            #driver.implicitly_wait(120)
+            firefoxOptions = Options()
+            firefoxOptions.add_argument("--headless")
+            service = Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(options=firefoxOptions,service=service,)
             print('foi aqui 2')
            
             print('foi aqui 3')
+#--------------------------------------------------------------------------------
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
