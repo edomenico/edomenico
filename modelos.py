@@ -793,7 +793,7 @@ def main():
     
         print('authenticate2------0')
         print(city)
-    
+        print('nao entra')
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
         print('authenticate2------1')
         ###city='SBJR'
