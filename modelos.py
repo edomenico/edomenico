@@ -83,6 +83,11 @@ def main():
             from selenium.webdriver.support.wait import WebDriverWait
             from selenium.webdriver.support import expected_conditions as EC
 
+
+            
+            from selenium.webdriver.chrome.service import Service
+
+
             # from selenium.webdriver.chrome.service import Service
             # from webdriver_manager.chrome import ChromeDriverManager
 
@@ -92,7 +97,7 @@ def main():
             # from selenium.webdriver.firefox.service import Service
             # from selenium.webdriver.support import expected_conditions as EC
             # from selenium.webdriver.support.ui import WebDriverWait
-            from webdriver_manager.firefox import GeckoDriverManager
+            #from webdriver_manager.firefox import GeckoDriverManager
 
             # chromedriver_autoinstaller.install()
             # driver = webdriver.Firefox()
