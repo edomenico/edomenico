@@ -74,7 +74,7 @@ def main():
             from time import sleep
             from datetime import datetime, timedelta
 
-            import chromedriver_autoinstaller
+            #import chromedriver_autoinstaller
             from webdriver_manager.chrome import ChromeDriverManager
             from datetime import date
             from pytz import timezone
