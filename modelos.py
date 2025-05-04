@@ -106,10 +106,12 @@ def main():
     
             chrome_options = Options()
             chrome_options.add_argument("--headless")
-            print('foi aqui')
+            print('foi aqui 1')
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
+            print('foi aqui 2')
             driver.implicitly_wait(120)
+            print('foi aqui 3')
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -120,7 +122,7 @@ def main():
             #for no in range(0, len(arqi), 1):
             for jj in range(0,1,1):
                 try:
-    
+                    print('foi aqui 4')
                     if jj==0:
                         arqi = pd.read_csv('estacaomodeloecmwf.csv', encoding='iso-8859-1', delimiter=';')
                     else:
