@@ -1291,8 +1291,7 @@ def main():
                     st.table(df1)
 
 
-if __name__ == '__main__':
-	main()
+main()
 
 
 
