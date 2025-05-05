@@ -67,6 +67,7 @@ def main():
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
     def baixarmodeloNovoprojeto(estacao):
             import streamlit as st
+            import requests
 
             from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
@@ -75,43 +76,17 @@ def main():
             from webdriver_manager.core.os_manager import ChromeType
             print('foi aqui 0')
            
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-        
-            # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
-        
-            # Load the page with Selenium
-            #browser.get(url)
-        
-            # Wait up to 10 seconds for the page to load
-            # Wait for the page to finish loading all JavaScript
-            #wait = WebDriverWait(driver, 20)
             
-            #st.code(driver.page_source)
-
 
         
             print('foi aqui 1')
                 # Create the driver with the options
-            #driver = webdriver.Chrome(options=chrome_options)
-
-            #driver.implicitly_wait(120)
-            #firefoxOptions = Options()
-            #firefoxOptions.add_argument("--headless")
-            #service = Service(GeckoDriverManager().install())
-            #driver = webdriver.Firefox(options=firefoxOptions,service=service,)
+            #
             print('foi aqui 2')
            
             print('foi aqui 3')
 #--------------------------------------------------------------------------------
-            #firefoxOptions = Options()
-            #firefoxOptions.add_argument("--headless")
-            #service = Service(GeckoDriverManager().install())
-            #driver = webdriver.Firefox(
-            #options=firefoxOptions,
-            #service=service,
-            #)
+            
             #for no in range(0, len(arqi), 1):
             for jj in range(0,1,1):
                 try:
@@ -135,7 +110,7 @@ def main():
                         
                         link="https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR"
                         #driver = get_driver()
-                        driver.get(link)
+                        url=link
                         #wait = WebDriverWait(driver, 60)
                         print('apos link')
                         
@@ -147,8 +122,10 @@ def main():
     
                     # while True:
     
-                       
-                        s = BeautifulSoup(driver.page_source, "html.parser")
+                        res = requests.get(url)
+                        
+
+                        s = BeautifulSoup(res.content, "html.parser")
                         horagmt=arqi['horzulu'][no]
                         
                         # text_file = open("forecast.txt", "w")
