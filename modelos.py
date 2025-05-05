@@ -74,21 +74,19 @@ def main():
             from webdriver_manager.chrome import ChromeDriverManager
             from webdriver_manager.core.os_manager import ChromeType
             print('foi aqui 0')
-            @st.experimental_singleton
-            def get_driver():
-                return webdriver.Chrome(
-                    service=Service(
-                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-                    ),
-                    options=options,
-                )
-            
-            options = Options()
-            options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
-            print('foi aqui 00')
-            driver = get_driver()
-            #driver.get('http://example.com')
+           
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+        
+            # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
+        
+            # Load the page with Selenium
+            #browser.get(url)
+        
+            # Wait up to 10 seconds for the page to load
+            # Wait for the page to finish loading all JavaScript
+            wait = WebDriverWait(driver, 20)
             
             #st.code(driver.page_source)
 
