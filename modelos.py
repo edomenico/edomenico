@@ -829,11 +829,11 @@ def main():
                 # st.write(lat)
             print('cheguei 0')
 
-            for x in range(0, 20):  # try 4 times
+            for x in range(0, 500):  # try 4 times
                 try:
                     data = authenticate2(city)
-                    if len(data) > 0:
-                        break
+                    #if len(data) > 0:
+                      #  break
                     
                 except Exception as str_error:
                     print('cheguei aqui search222')
