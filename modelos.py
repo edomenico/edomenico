@@ -379,7 +379,7 @@ def main():
                 except:
                     continue
             driver.quit()
-            
+            print('baixarmodeloNovoprojeto rodou')
             return link,df1,horazulu
     
     def baixaamodeloNovometeograma(estacao,link,horazulu):
