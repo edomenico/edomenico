@@ -124,6 +124,8 @@ def main():
                     # while True:
     
                         res = requests.get(url)
+                        json = response.json()
+                        print(json)
                         print('apos link')
                         print(res)
 
