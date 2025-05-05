@@ -66,7 +66,7 @@ def main():
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
     def baixarmodeloNovoprojeto(estacao):
-             import streamlit as st
+            import streamlit as st
 
             from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
