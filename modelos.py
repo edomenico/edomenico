@@ -124,10 +124,11 @@ def main():
                     # while True:
     
                         res = requests.get(url)
-                        json = response.json()
-                        print(json)
+                        #json = response.json()
+                        #print(json)
                         print('apos link')
                         print(res)
+                        print(res.content)
 
                         s = BeautifulSoup(res.content, "html.parser")
                         horagmt=arqi['horzulu'][no]
