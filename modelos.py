@@ -86,7 +86,7 @@ def main():
         
             # Wait up to 10 seconds for the page to load
             # Wait for the page to finish loading all JavaScript
-            wait = WebDriverWait(driver, 20)
+            #wait = WebDriverWait(driver, 20)
             
             #st.code(driver.page_source)
 
