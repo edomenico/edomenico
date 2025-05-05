@@ -66,15 +66,29 @@ def main():
 
 #link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe' #meteograma
     def baixarmodeloNovoprojeto(estacao):
-            import streamlit as st
-            import requests
-            import json
+             import streamlit as st
 
             from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.chrome.service import Service
             from webdriver_manager.chrome import ChromeDriverManager
             from webdriver_manager.core.os_manager import ChromeType
+            print('foi aqui 0')
+            
+            def get_driver():
+                return webdriver.Chrome(
+                    service=Service(
+                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+                    ),
+                    options=options,
+                )
+            
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+            print('foi aqui 00')
+            driver = get_driver()
+            
             print('foi aqui 0')
            
             
@@ -110,8 +124,8 @@ def main():
                         
                         
                         link="https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR"
-                        #driver = get_driver()
-                        url=link
+                        driver = get_driver(link)
+                        #url=link
                         #wait = WebDriverWait(driver, 60)
                        
                         
