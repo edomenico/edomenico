@@ -87,7 +87,7 @@ def main():
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
             print('foi aqui 00')
-            #driver = get_driver()
+            driver = get_driver()
             #driver.get('http://example.com')
             
             #st.code(driver.page_source)
@@ -96,7 +96,7 @@ def main():
         
             print('foi aqui 1')
                 # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
+            #driver = webdriver.Chrome(options=chrome_options)
 
             #driver.implicitly_wait(120)
             #firefoxOptions = Options()
