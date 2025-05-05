@@ -109,7 +109,7 @@ def main():
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
-            driver.implicitly_wait(20)
+            #driver.implicitly_wait(20)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -830,7 +830,7 @@ def main():
                 # st.write(lat)
             print('cheguei 0')
 
-            for x in range(0, 1):  # try 4 times
+            for x in range(0, 50):  # try 4 times
                 try:
                     data = authenticate2(city)
                     break
