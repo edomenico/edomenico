@@ -68,6 +68,7 @@ def main():
     def baixarmodeloNovoprojeto(estacao):
             import streamlit as st
             import requests
+            import json
 
             from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
