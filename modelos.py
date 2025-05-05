@@ -112,7 +112,7 @@ def main():
                         #driver = get_driver()
                         url=link
                         #wait = WebDriverWait(driver, 60)
-                        print('apos link')
+                       
                         
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
@@ -123,7 +123,7 @@ def main():
                     # while True:
     
                         res = requests.get(url)
-                        
+                        print('apos link')
 
                         s = BeautifulSoup(res.content, "html.parser")
                         horagmt=arqi['horzulu'][no]
