@@ -97,7 +97,7 @@ def main():
             print('foi aqui 1')
                 # Create the driver with the options
             #driver = webdriver.Chrome(ChromeDriverManager().install())
-            #driver.implicitly_wait(120)
+            driver.implicitly_wait(120)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
