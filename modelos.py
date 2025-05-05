@@ -141,10 +141,9 @@ def main():
                         #json = response.json()
                         #print(json)
                         print('apos link')
-                        print(res)
-                        print(res.content)
-
-                        s = BeautifulSoup(res.content, "html.parser")
+                        
+                        html = driver.page_source
+                        s = BeautifulSoup(html, "html.parser")
                         horagmt=arqi['horzulu'][no]
                         
                         # text_file = open("forecast.txt", "w")
