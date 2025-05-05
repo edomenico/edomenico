@@ -109,6 +109,7 @@ def main():
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
+            driver.implicitly_wait(20)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
