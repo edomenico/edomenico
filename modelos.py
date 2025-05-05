@@ -124,6 +124,7 @@ def main():
     
                         res = requests.get(url)
                         print('apos link')
+                        print(res)
 
                         s = BeautifulSoup(res.content, "html.parser")
                         horagmt=arqi['horzulu'][no]
