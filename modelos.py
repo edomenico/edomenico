@@ -832,8 +832,7 @@ def main():
             for x in range(0, 500):  # try 4 times
                 try:
                     data = authenticate2(city)
-                    #if len(data) > 0:
-                      #  break
+                    break
                     
                 except Exception as str_error:
                     print('cheguei aqui search222')
