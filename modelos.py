@@ -152,7 +152,9 @@ def main():
     
     
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                        rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                       
+                        #rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                        rows = WebDriverWait(driver=driver, timeout=10).until(lambda s: s.find(id="detail-data-table").find("tbody").find_all("tr")))
                         print('cheguei aqui 6')
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
