@@ -90,13 +90,7 @@ def main():
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
             #from webdriver_manager.firefox import GeckoDriverManager
-            import streamlit as st
-
-            from selenium import webdriver
-            from webdriver_manager.chrome import ChromeDriverManager
-            from selenium.webdriver.chrome.service import Service
-            import time
-            from bs4 import BeautifulSoup
+    
     
             
     
@@ -104,15 +98,17 @@ def main():
             # self.driver.set_window_size(1120, 550)
             print('baixarmodeloNovoprojeto')
             print(estacao)
-            options = webdriver.ChromeOptions()
-    
+            options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
-            options.add_argument(f"--window-size={width}x{height}")
+        
+    
+    
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
             
-            service = Service()
-            driver = webdriver.Chrome(service=service, options=options)
-            
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -144,7 +140,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        time.sleep(5)
+                        wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
