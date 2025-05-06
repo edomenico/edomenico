@@ -75,36 +75,40 @@ def main():
             from datetime import datetime,timedelta
             from datetime import date
             from pytz import timezone
-            from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.support.wait import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            
             from selenium.webdriver.chrome.service import Service
             from webdriver_manager.chrome import ChromeDriverManager
-            from webdriver_manager.core.os_manager import ChromeType
-            import time
             
-            from selenium.webdriver.chrome import service as fs
-            from selenium.webdriver import ChromeOptions
-
-
-            options = ChromeOptions()
+            from selenium.common.exceptions import TimeoutException
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.firefox.options import Options
+            from selenium.webdriver.firefox.service import Service
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.support.ui import WebDriverWait
+            #from webdriver_manager.firefox import GeckoDriverManager
+    
+    
             
-
-            # option設定を追加
-            options.add_argument("--headless")  # ブラウザを画面に表示せずに起動できる（streamlit cloudでは、この設定は必須）
+    
+           # driver = webdriver.Firefox()
+            # self.driver.set_window_size(1120, 550)
+            print('baixarmodeloNovoprojeto')
+            print(estacao)
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+        
+    
+    
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
             
-            # webdriver_managerによりドライバーをインストール
-            CHROMEDRIVER = ChromeDriverManager().install()
-            service = fs.Service(CHROMEDRIVER)
-            driver = webdriver.Chrome(
-                                      options=options,
-                                      service=service
-                                     )
-            
-            # URLで指定したwebページを開く
-            
-            print('cheguei aqui 1')
-            #driver = get_driver(options=chrome_options)
-            print('cheguei aqui 2')
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -135,11 +139,8 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
-                        print('cheguei aqui 3')
-                        print(link)
                         driver.get(link)
-                        print('cheguei aqui 4')
-                       # wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
@@ -150,8 +151,6 @@ def main():
     
                        
                         s = BeautifulSoup(driver.page_source, "html.parser")
-                        print('cheguei aqui 5')
-                        
                         horagmt=arqi['horzulu'][no]
                         
                         # text_file = open("forecast.txt", "w")
@@ -161,10 +160,8 @@ def main():
     
     
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                       
-                        #rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
-                        rows = WebDriverWait(driver=driver, timeout=10).until(lambda s: s.find(id="detail-data-table").find("tbody").find_all("tr"))
-                        print('cheguei aqui 6')
+                        rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                        
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
@@ -438,7 +435,7 @@ def main():
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
-                       # wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
                         html = driver.page_source
@@ -832,7 +829,7 @@ def main():
                 # st.write(lat)
             print('cheguei 0')
 
-            for x in range(0, 4):  # try 4 times
+            for x in range(0, 500):  # try 4 times
                 try:
                     data = authenticate2(city)
                 except Exception as str_error:
