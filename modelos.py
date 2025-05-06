@@ -90,7 +90,13 @@ def main():
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
             #from webdriver_manager.firefox import GeckoDriverManager
-    
+            import streamlit as st
+
+            from selenium import webdriver
+            from webdriver_manager.chrome import ChromeDriverManager
+            from selenium.webdriver.chrome.service import Service
+            import time
+            from bs4 import BeautifulSoup
     
             
     
@@ -98,17 +104,12 @@ def main():
             # self.driver.set_window_size(1120, 550)
             print('baixarmodeloNovoprojeto')
             print(estacao)
-            options = Options()
-            options.add_argument('--disable-gpu')
+            options = webdriver.ChromeOptions()
             options.add_argument('--headless')
-        
-    
-    
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            
-                # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
+            options.add_argument('--disable-gpu')
+            options.add_argument('--window-size=1920,1200')
+            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
+                                      options=options)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
