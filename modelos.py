@@ -81,21 +81,29 @@ def main():
             from webdriver_manager.chrome import ChromeDriverManager
             from webdriver_manager.core.os_manager import ChromeType
             import time
+            
+            from selenium.webdriver.chrome import service as fs
+            from selenium.webdriver import ChromeOptions
+
 
     
-            def get_driver():
-                return webdriver.Chrome(
-                    service=Service(
-                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-                    ),
-                    options=options,
-                )
-        
-            options = Options()
-            options.add_argument("--disable-gpu")
-            options.add_argument("--headless")
+            
+
+            # option設定を追加
+            options.add_argument("--headless")  # ブラウザを画面に表示せずに起動できる（streamlit cloudでは、この設定は必須）
+            
+            # webdriver_managerによりドライバーをインストール
+            CHROMEDRIVER = ChromeDriverManager().install()
+            service = fs.Service(CHROMEDRIVER)
+            driver = webdriver.Chrome(
+                                      options=options,
+                                      service=service
+                                     )
+            
+            # URLで指定したwebページを開く
+            
             print('cheguei aqui 1')
-            driver = get_driver(options=chrome_options)
+            #driver = get_driver(options=chrome_options)
             print('cheguei aqui 2')
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
