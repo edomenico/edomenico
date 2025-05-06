@@ -80,6 +80,7 @@ def main():
             from selenium.webdriver.chrome.service import Service
             from webdriver_manager.chrome import ChromeDriverManager
             from webdriver_manager.core.os_manager import ChromeType
+            import time
 
     
             def get_driver():
