@@ -86,7 +86,7 @@ def main():
             from selenium.webdriver import ChromeOptions
 
 
-    
+            options = ChromeOptions()
             
 
             # option設定を追加
