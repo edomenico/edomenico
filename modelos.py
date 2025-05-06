@@ -95,7 +95,7 @@ def main():
             options.add_argument("--disable-gpu")
             options.add_argument("--headless")
             print('cheguei aqui 1')
-            driver = get_driver()
+            driver = get_driver(options=chrome_options)
             print('cheguei aqui 2')
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
