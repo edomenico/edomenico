@@ -1329,10 +1329,5 @@ def main():
                     #df1['data']=(str(df['timestamp'].iloc)[0:10])
                     st.table(df1)
 
-if __name__ == '__main__':
-    if runtime.exists():
-        main()
-    else:
-        sys.argv = ["streamlit", "run", sys.argv[0]]
-        sys.exit(stcli.main())
-
+main()
+    
