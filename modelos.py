@@ -105,11 +105,12 @@ def main():
     
             print('cheguei aqui 1')
             chrome_options = Options()
-            print('cheguei aqui 2')
+            
             chrome_options.add_argument("--headless")
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
+            print('cheguei aqui 2')
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
