@@ -109,7 +109,6 @@ def main():
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
-            #driver.implicitly_wait(20)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -380,7 +379,7 @@ def main():
                 except:
                     continue
             driver.quit()
-            print('baixarmodeloNovoprojeto rodou')
+            
             return link,df1,horazulu
     
     def baixaamodeloNovometeograma(estacao,link,horazulu):
@@ -833,8 +832,6 @@ def main():
             for x in range(0, 500):  # try 4 times
                 try:
                     data = authenticate2(city)
-                    break
-                    
                 except Exception as str_error:
                     print('cheguei aqui search222')
                     pass
@@ -1307,3 +1304,4 @@ def main():
                     st.table(df1)
 
 main()
+
