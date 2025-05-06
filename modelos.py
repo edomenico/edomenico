@@ -75,41 +75,26 @@ def main():
             from datetime import datetime,timedelta
             from datetime import date
             from pytz import timezone
+            from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
-            from selenium.webdriver.common.by import By
-            from selenium.webdriver.support.wait import WebDriverWait
-            from selenium.webdriver.support import expected_conditions as EC
-            
             from selenium.webdriver.chrome.service import Service
             from webdriver_manager.chrome import ChromeDriverManager
-            
-            from selenium.common.exceptions import TimeoutException
-            from selenium.webdriver.common.by import By
-            from selenium.webdriver.firefox.options import Options
-            from selenium.webdriver.firefox.service import Service
-            from selenium.webdriver.support import expected_conditions as EC
-            from selenium.webdriver.support.ui import WebDriverWait
-            #from webdriver_manager.firefox import GeckoDriverManager
+            from webdriver_manager.core.os_manager import ChromeType
+
     
-    
-            
-    
-           # driver = webdriver.Firefox()
-            # self.driver.set_window_size(1120, 550)
-            print('baixarmodeloNovoprojeto')
-            print(estacao)
-            options = Options()
-            options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
+            def get_driver():
+                return webdriver.Chrome(
+                    service=Service(
+                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+                    ),
+                    options=options,
+                )
         
-    
+            options = Options()
+            options.add_argument("--disable-gpu")
+            options.add_argument("--headless")
             print('cheguei aqui 1')
-            chrome_options = Options()
-            
-            chrome_options.add_argument("--headless")
-            
-                # Create the driver with the options
-            driver = webdriver.Chrome()
+            driver = get_driver()
             print('cheguei aqui 2')
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
