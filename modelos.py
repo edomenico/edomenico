@@ -109,7 +109,7 @@ def main():
             chrome_options.add_argument("--headless")
             
                 # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome()
             print('cheguei aqui 2')
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
