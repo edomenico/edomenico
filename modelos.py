@@ -110,6 +110,7 @@ def main():
             options.add_argument('--window-size=1920,1200')
             driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                                       options=options)
+            
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -141,7 +142,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        wait = WebDriverWait(driver, 30)
+                        time.sleep(5)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
