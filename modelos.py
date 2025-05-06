@@ -103,8 +103,9 @@ def main():
             options.add_argument('--headless')
         
     
-    
+            print('cheguei aqui 1')
             chrome_options = Options()
+            print('cheguei aqui 2')
             chrome_options.add_argument("--headless")
             
                 # Create the driver with the options
@@ -139,10 +140,10 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
-                        print('cheguei aqui 1')
+                        print('cheguei aqui 3')
                         print(link)
                         driver.get(link)
-                        print('cheguei aqui 2')
+                        print('cheguei aqui 4')
                        # wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
