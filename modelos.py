@@ -142,7 +142,7 @@ def main():
                        
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         print('cheguei aqui 5')
-                        print(s)
+                        
                         horagmt=arqi['horzulu'][no]
                         
                         # text_file = open("forecast.txt", "w")
@@ -153,7 +153,7 @@ def main():
     
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                         rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
-                        
+                        print('cheguei aqui 6')
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
@@ -821,7 +821,7 @@ def main():
                 # st.write(lat)
             print('cheguei 0')
 
-            for x in range(0, 500):  # try 4 times
+            for x in range(0, 4):  # try 4 times
                 try:
                     data = authenticate2(city)
                 except Exception as str_error:
