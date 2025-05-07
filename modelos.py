@@ -89,19 +89,26 @@ def main():
             from selenium.webdriver.firefox.service import Service
             from selenium.webdriver.support import expected_conditions as EC
             from selenium.webdriver.support.ui import WebDriverWait
-            import os, sys
-
-
-            def installff():
-              os.system('sbase install geckodriver')
-              os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
+            #from webdriver_manager.firefox import GeckoDriverManager
+    
+    
             
-            _ = installff()
-            from selenium import webdriver
-            from selenium.webdriver import FirefoxOptions
-            opts = FirefoxOptions()
-            opts.add_argument("--headless")
-            browser = webdriver.Firefox(options=opts)
+    
+           # driver = webdriver.Firefox()
+            # self.driver.set_window_size(1120, 550)
+            print('baixarmodeloNovoprojeto')
+            print(estacao)
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+        
+    
+    
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -1297,6 +1304,10 @@ def main():
                     st.table(df1)
 
 main()
+
+
+
+
 
 
 
