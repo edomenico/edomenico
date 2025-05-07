@@ -153,6 +153,7 @@ def main():
                         #driver = get_driver()
                         print('antes do link')
                         driver.get(link)
+                        time.sleep(20) 
                         print('depois do link')
                        # wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
