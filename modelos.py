@@ -153,7 +153,7 @@ def main():
                         #driver = get_driver()
                         print('antes do link')
                         driver.get(link)
-                        time.sleep(20) 
+                       
                         print('depois do link')
                        # wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
@@ -164,7 +164,7 @@ def main():
     
                     # while True:
     
-                       
+                       print('antes de s')
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
                         
