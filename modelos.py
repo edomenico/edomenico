@@ -151,7 +151,9 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
+                        print('antes do link')
                         driver.get(link)
+                        print('depois do link')
                        # wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
