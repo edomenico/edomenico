@@ -85,11 +85,11 @@ def main():
             
             from selenium.common.exceptions import TimeoutException
             from selenium.webdriver.common.by import By
-            from selenium.webdriver.firefox.options import Options
-            from selenium.webdriver.firefox.service import Service
-            from selenium.webdriver.support import expected_conditions as EC
-            from selenium.webdriver.support.ui import WebDriverWait
-            from webdriver_manager.firefox import GeckoDriverManager
+            #from selenium.webdriver.firefox.options import Options
+            #from selenium.webdriver.firefox.service import Service
+            #from selenium.webdriver.support import expected_conditions as EC
+            #from selenium.webdriver.support.ui import WebDriverWait
+            #from webdriver_manager.firefox import GeckoDriverManager
     
     
             
@@ -108,7 +108,7 @@ def main():
             chrome_options.add_argument("--headless")
             
                 # Create the driver with the options
-            driver = webdriver.Chrome()
+            driver = webdriver.Chrome(options=chrome_options)
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -140,7 +140,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        #wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
