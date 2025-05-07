@@ -168,14 +168,15 @@ def main():
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
                         print('depois de s')
+                        print(s)
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
                         # text_file.close()
     
     
     
-                        rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                        #rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                        #rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
+                        rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
                         print('depois de rows')
                         #s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
