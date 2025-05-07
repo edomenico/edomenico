@@ -113,7 +113,7 @@ def main():
                 # Create the driver with the options
             #driver = webdriver.Chrome(options=chrome_options)
             driver = webdriver.Chrome(ChromeDriverManager().install())
-            driver.implicitly_wait(20)
+            #driver.implicitly_wait(20)
            # driver = webdriver.Chrome()
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
@@ -146,7 +146,7 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
-                        wait = WebDriverWait(driver, 1040)
+                        #wait = WebDriverWait(driver, 1040)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
