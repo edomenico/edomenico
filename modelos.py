@@ -176,7 +176,9 @@ def main():
     
     
                         #rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
+                        s.find(class_="switch-wrapper svelte-19zjn9a").next()[2].click
                         rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                        
                         print('depois de rows')
                         #s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
