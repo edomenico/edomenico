@@ -73,6 +73,9 @@ def main():
             from bs4 import BeautifulSoup
             from time import sleep
             from datetime import datetime,timedelta
+
+            import chromedriver_autoinstaller
+            from webdriver_manager.chrome import ChromeDriverManager
             from datetime import date
             from pytz import timezone
             from selenium.webdriver.chrome.options import Options
@@ -80,47 +83,38 @@ def main():
             from selenium.webdriver.support.wait import WebDriverWait
             from selenium.webdriver.support import expected_conditions as EC
             
-            from selenium.webdriver.chrome.service import Service
-            from webdriver_manager.chrome import ChromeDriverManager
+            #from selenium.webdriver.chrome.service import Service
+            #from webdriver_manager.chrome import ChromeDriverManager
             
-            from selenium.common.exceptions import TimeoutException
-            from selenium.webdriver.common.by import By
-            #from selenium.webdriver.firefox.options import Options
-            #from selenium.webdriver.firefox.service import Service
-            from selenium.webdriver.support import expected_conditions as EC
-            from selenium.webdriver.support.ui import WebDriverWait
+            # from selenium.common.exceptions import TimeoutException
+            # from selenium.webdriver.common.by import By
+            # from selenium.webdriver.firefox.options import Options
+            # from selenium.webdriver.firefox.service import Service
+            # from selenium.webdriver.support import expected_conditions as EC
+            # from selenium.webdriver.support.ui import WebDriverWait
             #from webdriver_manager.firefox import GeckoDriverManager
     
     
             
-    
+            #chromedriver_autoinstaller.install()
            # driver = webdriver.Firefox()
             # self.driver.set_window_size(1120, 550)
-            print('baixarmodeloNovoprojeto')
-            print(estacao)
-            import streamlit as st
-
-            from selenium import webdriver
-            from selenium.webdriver.chrome.options import Options
-            from selenium.webdriver.chrome.service import Service
-            from webdriver_manager.chrome import ChromeDriverManager
-            from webdriver_manager.core.os_manager import ChromeType
-            print('foi aqui 0')
-            
-            def get_driver():
-                return webdriver.Chrome(
-                    service=Service(
-                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-                    ),
-                    options=options,
-                )
-            
+            #print('baixarmodeloNovoprojeto')
+            #print(estacao)
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
-            print('foi aqui 00')
-            driver = get_driver()
-
+            #
+            #
+            #
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            
+                # Create the driver with the options
+            #driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome(ChromeDriverManager().install())
+            driver.implicitly_wait(20)
+           # driver = webdriver.Chrome()
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -137,10 +131,10 @@ def main():
                     else:
                         arqi = pd.read_csv('estacaomodeloicon.csv', encoding='iso-8859-1', delimiter=';')
                     arqi = arqi.loc[(arqi['estacao'] == estacao.upper())]
-                    print('baixarmodeloNovoprojeto 2')
+                    #print('baixarmodeloNovoprojeto 2')
                     
                     arqi = arqi.reset_index(drop=True)
-                    print(arqi)
+                    #print(arqi)
                     for no in range(0, 1, 1):
     
                         link = (arqi['endereco'][no])
@@ -151,11 +145,8 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
-                        print('antes do link')
                         driver.get(link)
-                       
-                        print('depois do link')
-                       # wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 1040)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
@@ -164,23 +155,20 @@ def main():
     
                     # while True:
     
-                        print('antes de s')
+                       
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
-                        print('depois de s')
-                        print(s.find())
+                        
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
                         # text_file.close()
     
     
     
-                        #rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                        s.find(class_="switch-wrapper svelte-19zjn9a").next()[2].click
+                       # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                         rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
                         
-                        print('depois de rows')
-                        #s.find()
+                        s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
                         dataaux=[]
@@ -196,7 +184,7 @@ def main():
                         tp=[]
     
                         cldcb=[]
-                        print('baixarmodeloNovoprojeto 2222')
+                        #print('baixarmodeloNovoprojeto 2222')
                         for i in range(0,8,1): #variável
                             try:
                                 #if i==7:
@@ -204,20 +192,20 @@ def main():
                                 #for j in range(0,len)
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                        print('baixarmodelo 0000')
-                                        #print(rows[0].contents[0])
+                                        #print('baixarmodelo 0000')
+                                        ##print(rows[0].contents[0])
                                         ddd=str(rows[0].contents[0])[55:65]
-                                        print(ddd)
+                                        #print(ddd)
                                         
                                         
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                        print((rows[i].contents[j].string))
-                                        print('baixarmodelo 1111')
-                                        #print(rows[1].contents[0])
+                                        #print((rows[i].contents[j].string))
+                                        #print('baixarmodelo 1111')
+                                        ##print(rows[1].contents[0])
                                         
                                         hhh=(str(rows[1].contents[0])[28:29])
-                                        #print(hhh)
+                                        ##print(hhh)
                                         if hhh=='0':
                                             hhh='00'
                                         #hhhh=(str(rows[1].contents[0])[36:38])
@@ -249,7 +237,7 @@ def main():
                                             cldcb.append(nucb)
                                             tp.append(tep)
                                             vis.append(visi)
-                                            print('baixarmodeloNovoprojeto 3333')
+                                            #print('baixarmodeloNovoprojeto 3333')
                                             
                                         elif i==3:
                                             apenasDigitos = ''
@@ -258,26 +246,26 @@ def main():
                                                 b = re.sub('[^0-9]', '', str(rows[i].contents[j]))
                                                 #if taraux.isdigit():
                                                     #apenasDigitos = apenasDigitos + taraux
-                                            bb= (int(b) - 32) * 5/9
+                                            bb= b
                                             tar.append(str(int(bb)))
-                                            print('baixarmodeloNovoprojeto 4444')
+                                            #print('baixarmodeloNovoprojeto 4444')
                                             
                                                 
                                             #tar.append(rows[i].contents[j].string)
                                         elif i==4:
                                             prp.append((rows[i].contents[j].string))
-                                            print('baixarmodeloNovoprojeto 5555')
+                                            #print('baixarmodeloNovoprojeto 5555')
                                            
                                         elif i==5:
                                             wspd.append(int(rows[i].contents[j].string))
-                                            print('baixarmodeloNovoprojeto 6666')
+                                            #print('baixarmodeloNovoprojeto 6666')
                                            
                                         elif i==6:
                                             gust.append(rows[i].contents[j].string)
-                                            print('baixarmodeloNovoprojeto 7777')
+                                            #print('baixarmodeloNovoprojeto 7777')
                                            
                                         else:
-                                            print('baixarmodeloNovoprojeto 8888')
+                                            #print('baixarmodeloNovoprojeto 8888')
                                             apenasDigitos =''
     
                                             for wdiraux in str(rows[i].contents[j].contents[0])[3:35]:
@@ -289,11 +277,11 @@ def main():
                             except:
                                 continue
     
-                        print('baixarmodeloNovoprojeto 9999')
+                        #print('baixarmodeloNovoprojeto 9999')
                         estacao=[arqi['estacao'][no]]*len(wdir)
-                        print (hhh)
+                        #print (hhh)
                         #for i in range(0,len(estacao),1):
-                        print(hhh)
+                        #print(hhh)
                         if hhh=='0<':
                             hhh='00'
                         elif hhh=='1<':
@@ -317,7 +305,7 @@ def main():
                         
                         datahora1=ddd +" "+hhh+":00"
                         
-                        print(datahora1)
+                        #print(datahora1)
                         
                             
                         
@@ -327,7 +315,7 @@ def main():
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
-                        print('baixarmodeloNovoprojeto 10000')
+                        #print('baixarmodeloNovoprojeto 10000')
                        
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
@@ -342,7 +330,7 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                print('baixarmodeloNovoprojeto 7777')
+                                #print('baixarmodeloNovoprojeto 7777')
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
@@ -363,7 +351,7 @@ def main():
                                
                             except:
                                 continue
-                        print('baixarmodeloNovoprojeto 8888')
+                        #print('baixarmodeloNovoprojeto 8888')
                         lista_de_tuplas = list(zip(estacao,dd, wspd,wdir,gust,tar,prp,neb,cld,cldcb,vis,tp,datazulu))
                        
                         
@@ -390,7 +378,7 @@ def main():
                         mesf = str(datetime.now().month)
     
                     if jj==0:
-                        nomearq = 'dadosecmwf_area' + str(area) + '_' + diaf + mesf + '.csv'
+                        nomearq = 'dadosecmwf_area' + str(jj+1) + '_' + diaf + mesf + '.csv'
                     else:
                         nomearq = 'dadosicon_area' + str(area) + '_' + diaf + mesf + '.csv'
                     #df1.to_csv(nomearq)#, encoding='utf-8', index=False, date_format='%d/%m/%Y %H:%M')
@@ -407,29 +395,46 @@ def main():
             from selenium import webdriver
             from bs4 import BeautifulSoup
             from time import sleep
-            from datetime import datetime,timedelta
+            from datetime import datetime, timedelta
+
+            import chromedriver_autoinstaller
+            from webdriver_manager.chrome import ChromeDriverManager
             from datetime import date
             from pytz import timezone
             from selenium.webdriver.chrome.options import Options
             from selenium.webdriver.common.by import By
             from selenium.webdriver.support.wait import WebDriverWait
             from selenium.webdriver.support import expected_conditions as EC
-            
-            from selenium.webdriver.chrome.service import Service
-            from webdriver_manager.chrome import ChromeDriverManager
-            
-            from selenium.common.exceptions import TimeoutException
-            from selenium.webdriver.common.by import By
-            #from selenium.webdriver.firefox.options import Options
-            #from selenium.webdriver.firefox.service import Service
-            from selenium.webdriver.support import expected_conditions as EC
-            from selenium.webdriver.support.ui import WebDriverWait
-            #from webdriver_manager.firefox import GeckoDriverManager
+
+            # from selenium.webdriver.chrome.service import Service
+            # from webdriver_manager.chrome import ChromeDriverManager
+
+            # from selenium.common.exceptions import TimeoutException
+            # from selenium.webdriver.common.by import By
+            # from selenium.webdriver.firefox.options import Options
+            # from selenium.webdriver.firefox.service import Service
+            # from selenium.webdriver.support import expected_conditions as EC
+            # from selenium.webdriver.support.ui import WebDriverWait
+            # from webdriver_manager.firefox import GeckoDriverManager
+
+            # chromedriver_autoinstaller.install()
+            # driver = webdriver.Firefox()
+            # self.driver.set_window_size(1120, 550)
+            #print('baixarmodeloNovoprojeto')
+            #print(estacao)
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+            #
+            #
+            #
             chrome_options = Options()
             chrome_options.add_argument("--headless")
-            
-                # Create the driver with the options
-            driver = webdriver.Chrome(options=chrome_options)
+
+            # Create the driver with the options
+            # driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome(ChromeDriverManager().install())
+            driver.implicitly_wait(20)
             
 
 
@@ -448,12 +453,12 @@ def main():
                         link1=link[0:posicaoi] + '/meteogram' + link[posicaoi:posicaof]
                         #link='https://www.windy.com/-22.810/-43.253/meteogram?-23.020,-43.253,10,i:pressure'
                         #horazulu='3'
-                        print('Loading...')
+                        #print('Loading...')
                         
                         #link1='https://www.windy.com/-22.989/-43.375/meteogram?-23.187,-43.375,10,i:pressure'
                         
                         driver.get(link1)
-                        wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 1040)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
                         html = driver.page_source
@@ -494,18 +499,18 @@ def main():
                                
                                 if i==0:
                                     for j in range(0,len(rows[0].contents),1):
-                                        print('chegou aqui 1')
+                                        #print('chegou aqui 1')
                                         ddd=str(rows[0].contents[0])[55:65]
                                         dataaux.append(datetime.now() + timedelta(days=j))
                                         data.append(rows[i].contents[j].string)
-                                        print (datetime.now() + timedelta(days=j))
-                                        print(ddd)
-                                        print((str(rows[1].contents[0])))
+                                        #print (datetime.now() + timedelta(days=j))
+                                        #print(ddd)
+                                        #print((str(rows[1].contents[0])))
                                         hhh=(str(rows[1].contents[0])[28:29])
                                         hhhh=(str(rows[1].contents[0])[36:38])
-                                        print('chegou aqui 2')
-                                        print(hhh)
-                                        print(hhhh)
+                                        #print('chegou aqui 2')
+                                        #print(hhh)
+                                        #print(hhhh)
                                         if hhhh=='PM':
                                             hhh=str(int(hhh)+12)
     
@@ -516,8 +521,8 @@ def main():
                                         if i==1:
                                             
                                            
-                                            print('chegou aqui 3')
-                                            print((str(rows[i].contents[j])))
+                                            #print('chegou aqui 3')
+                                            #print((str(rows[i].contents[j])))
                                             hhh=(str(rows[1].contents[0])[28:30])
                                             
     
@@ -530,19 +535,21 @@ def main():
                                              #tar.append(apenasDigitos1)
                                              #tdr.append(apenasDigitos2)
                                              #bb= (apenasDigitos1 - 32) * 5/9
-                                             print('chegou aqui 4')
-                                             bb= str(int((int(apenasDigitos1) - 32) * 5/9))
-                                             print(bb)
+                                             #print('chegou aqui 4')
+                                             #bb= str(int((int(apenasDigitos1) - 32) * 5/9))
+                                             bb=str(int((int(apenasDigitos1))))
+                                             #print(bb)
                                              tar.append(bb)
-                                             bb= str(int((int(apenasDigitos2) - 32) * 5/9))
+                                             #bb= str(int((int(apenasDigitos2) - 32) * 5/9))
+                                             bb= str(int((int(apenasDigitos2))))
                                              tdr.append(bb)
-                                             print( bb)
+                                             #print( bb)
                                              
                                             
-                                            # print(bb)
+                                            # #print(bb)
                                              #tar.append(bb)
                                              #bb= (apenasDigitos2 - 32) * 5/9
-                                             #print(bb)
+                                             ##print(bb)
 
                                              #tdr.append(bb)
 
@@ -553,22 +560,23 @@ def main():
                                            
                                                 
                                            # pressao.append(rows[i].contents[j].string)
-                                            #print('chegou aqui 5')
-                                            #print(rows[i].contents[j].string)
+                                            ##print('chegou aqui 5')
+                                            ##print(rows[i].contents[j].string)
 
                                         elif i==5:
-                                            print('chegou aqui 5555555')
-                                            print(rows[i].contents[j].string)
+                                            #print('chegou aqui 5555555')
+                                            #print(rows[i].contents[j].string)
                                             if (rows[i].contents[j].string) !=None:
-                                                pressao.append(str(float((rows[i].contents[j].string)) * 33.863)[0:4])
+                                                #pressao.append(str(float((rows[i].contents[j].string)) * 33.863)[0:4])
+                                                pressao.append(str(float((rows[i].contents[j].string))))
                                             else:
                                                 pressao.append(rows[i].contents[j].string) 
 
                                         
                                         elif i==7:
                                             nbaixa.append(rows[i].contents[j].string)
-                                            print('chegou aqui 5')
-                                            print(rows[i].contents[j].string)
+                                            #print('chegou aqui 5')
+                                            #print(rows[i].contents[j].string)
     
                             except:
                                 continue
@@ -576,7 +584,7 @@ def main():
     
                         #estacao='SBGL'*len(tar)
                         estacao=[estacao.upper() for x in range(len(tar))]
-                        print(hhh)
+                        #print(hhh)
                         if hhh=='0<':
                             hhh='00'
                         elif hhh=='1<':
@@ -599,24 +607,24 @@ def main():
                             hhh='09'
                         
                         datahora1=ddd +" "+hhh+":00"
-                        print('chegou aqui 7')
-                        print(datahora1)
+                        #print('chegou aqui 7')
+                        #print(datahora1)
                         
                             
                         
-                        print(estacao)
-                        print(len(estacao))
+                        #print(estacao)
+                        #print(len(estacao))
                         dia=datahora1[8:10]
                         mes=datahora1[5:7]
                         ano=datahora1[0:4]
                         hor=datahora1[11:16]
                         d = str(dia) + '/' + str(mes) + '/' + str(ano) + ' ' + hor 
-                        print(d)
-                        print('chegou aqui 8')
+                        #print(d)
+                        #print('chegou aqui 8')
                         dateFormatter = "%d/%m/%Y %H:%M"
                         d=datetime.strptime(d, dateFormatter)
                         d=d+timedelta(hours=int(horazulu))
-                        print(d)
+                        #print(d)
                         j=0
                         dd=[]
                         datazulu=[]
@@ -625,13 +633,13 @@ def main():
                         #datetime.strptime(dateString, dateFormatter)
                         for i in range(0,len(estacao),1):
                             try:
-                                print(d)
+                                #print(d)
                                 dd.append(d)
                                 datazulu.append(d)
                                 #timestring = datetime.strptime((dada + timedelta(hours=3)), dateFormatter)
                                 d=d+timedelta(hours=3)
-                                print('chegou aqui 9')
-                                #print(timestring)
+                                #print('chegou aqui 9')
+                                ##print(timestring)
                                # dd.append(datetime.strptime(d, dateFormatter))
                                # datazulu.append(datetime.strptime(dddd, dateFormatter) + timedelta(hours=int(horazulu)))
                                 
@@ -642,7 +650,7 @@ def main():
                                 # dd.append(datetime.strptime(d, dateFormatter))
                             # for k in range(0,len(neb),1):
                             #     cc = ''
-                            #     #print(cc,' ',neb[k])
+                            #     ##print(cc,' ',neb[k])
                             #     cc = cc + 3
                             #     if cc > 24:
                             #         cc=3
@@ -650,12 +658,12 @@ def main():
     
     
                                 # cc=rows[i].contents[i].string
-                                # print(type(cc))
+                                # #print(type(cc))
                                 # #forecast[id] = []
                                 # #i = 0
                                 # for cell in cells:
                                 #     if ('DIRPW' in id): # or ('DIRPW' in id):
-                                #         print(id + " " + str(i))
+                                #         #print(id + " " + str(i))
                                 #         value = cell.find('span').find('svg').find('g')["transform"]
                                 #     else:
                                 #         value = cell.get_text()
@@ -664,7 +672,7 @@ def main():
                             except:
                                 continue
                         lista_de_tuplas = list(zip(estacao,dd,tar,tdr,pressao,nbaixa,datazulu))
-                        print('chegou aqui 10')
+                        #print('chegou aqui 10')
     
                         df= pd.DataFrame(
                             lista_de_tuplas,
@@ -695,28 +703,28 @@ def main():
                 except:
                     continue
             driver.quit()
-            print(df1)
+            #print(df1)
             return df1
     
     
     def lookup_coord2(city_name,usu):
         """Function to lookup the names of city"""
-        print('cheguei aqui -2')
-        print(city_name)
-        print(usu)
+        #print('cheguei aqui -2')
+        #print(city_name)
+        #print(usu)
         if usu==1:
             df = pd.read_csv("cities_transformed3.csv")
         else:
             df = pd.read_csv("cities_transformed3.csv")
-        print (df)
+        #print (df)
         city_data = df[df['city'].str.lower() == city_name]
-        print(city_data)
+        #print(city_data)
         if not city_data.empty:
     
             lat = city_data['lat'].iloc[0]
             lon = city_data['lon'].iloc[0]
-            print(lat)
-            print(lon)
+            #print(lat)
+            #print(lon)
             return lat, lon
         else:
             return None
@@ -773,8 +781,8 @@ def main():
             #ur= str(round(100 - 5 * (int(temp) - int(td))))
             ur=umidade(temp,td)
             nbaixas=str(weather_data['nbaixa'][i])
-            print('NUVENS BAIXAS')
-            print(nbaixas)
+            #print('NUVENS BAIXAS')
+            #print(nbaixas)
             if nbaixas[-1]=='k':
                 nbaixas=str(int(nbaixas[0:len(nbaixas)-1])*1000)
             elif nbaixas=='--':
@@ -807,26 +815,26 @@ def main():
         """Function to request information from OpenWeatherMap API giving the necessary details"""
         #try:
     
-        print('authenticate2------0')
-        print(city)
+        #print('authenticate2------0')
+        #print(city)
     
         link,data1,horazulu=baixarmodeloNovoprojeto(city)
-        print('authenticate2------1')
+        #print('authenticate2------1')
         ###city='SBJR'
         #####horazulu='3'
         ###link='https://www.windy.com/-22.910/-43.163/meteogram?-22.935,-43.163,13,m:c0YaeXe'
         ##horazulu='3'
         
         data2=baixaamodeloNovometeograma(city,link,horazulu)
-        #print(data2)
-        print('authenticate2------2')
+        ##print(data2)
+        #print('authenticate2------2')
        
     
         #except Exception as e:
         #    st.error(f"Could not get the data because {e}. Exiting...")
         #    st.stop()
         #data = pd.read_csv("dadosecmwf_area2_1104.csv")
-        print('authenticate2')
+        #print('authenticate2')
         data=pd.merge(data1, data2, how='inner', on='datahora')
         
         data1=data.drop(['tar_y', 'estacao_y', 'datazulu_y'], axis=1)
@@ -841,17 +849,17 @@ def main():
     def search2(city,usu):
         from time import sleep
         try:
-            print('cheguei -1')
+            #print('cheguei -1')
             
             lat, lon = lookup_coord2(city,usu)
                 # st.write(lat)
-            print('cheguei 0')
+            #print('cheguei 0')
 
-            for x in range(0, 500):  # try 4 times
+            for x in range(0, 1):  # try 4 times
                 try:
                     data = authenticate2(city)
                 except Exception as str_error:
-                    print('cheguei aqui search222')
+                    #print('cheguei aqui search222')
                     pass
                 else:
                     break
@@ -859,8 +867,8 @@ def main():
             
             
                 # st.write(data)
-            print('cheguei aqui search2')
-            print(data)
+            #print('cheguei aqui search2')
+            #print(data)
             
             extracted_data = sort_data2(data)
                 # st.write(extracted_data)
@@ -1215,8 +1223,8 @@ def main():
             
             df['timestamp'] = (df['data'] + ' ' + df['hora'])
            
-            print('final')
-            print(df)
+            #print('final')
+            #print(df)
            
             # if units == 'Celsius':
             #     df['temp'] = df['temp'] - 273.15
@@ -1321,11 +1329,12 @@ def main():
                     #df1['data']=(str(df['timestamp'].iloc)[0:10])
                     st.table(df1)
 
-main()
-
-
-
-
+if __name__ == '__main__':
+    if runtime.exists():
+        main()
+    else:
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
 
 
 
