@@ -164,7 +164,7 @@ def main():
     
                     # while True:
     
-                       print('antes de s')
+                        print('antes de s')
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
                         
