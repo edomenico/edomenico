@@ -139,7 +139,9 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
+                        print('antes do link')
                         driver.get(link)
+                        print('depois do link')
                         #wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
@@ -149,9 +151,11 @@ def main():
     
                     # while True:
     
-                       
+                        print('antes do s')
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
+                        print('depois do s')
+                        print(s)
                         
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
