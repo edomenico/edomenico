@@ -167,7 +167,7 @@ def main():
                         print('antes de s')
                         s = BeautifulSoup(driver.page_source, "html.parser")
                         horagmt=arqi['horzulu'][no]
-                        
+                        print('depois de s')
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
                         # text_file.close()
