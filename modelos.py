@@ -94,7 +94,16 @@ def main():
             print('baixarmodeloNovoprojeto')
             print(estacao)
             options = Options()
-            driver = webdriver.Chrome(options=options)
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+        
+    
+    
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
             
     
             
