@@ -153,6 +153,7 @@ def main():
     
                         print('antes do s')
                         s = BeautifulSoup(driver.page_source, "html.parser")
+                        s=driver.execute_script("return document.documentElement.outerHTML;")
                         horagmt=arqi['horzulu'][no]
                         print('depois do s')
                         print(s)
