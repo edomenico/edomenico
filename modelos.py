@@ -91,19 +91,25 @@ def main():
             #from selenium.webdriver.support.ui import WebDriverWait
             #from webdriver_manager.firefox import GeckoDriverManager
     
-    
-            
-    
-            
-            
             def get_driver():
-                return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
+                return webdriver.Chrome(
+                    service=Service(
+                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+                    ),
+                    options=options,
+                )
+            
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
-            
+            print('foi aqui 00')
             driver = get_driver()
+
+            
+    
+            
+            
+            
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
