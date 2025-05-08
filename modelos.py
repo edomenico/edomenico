@@ -91,19 +91,20 @@ def main():
             #from selenium.webdriver.support.ui import WebDriverWait
             #from webdriver_manager.firefox import GeckoDriverManager
     
-            def get_driver():
-                return webdriver.Chrome(
-                    service=Service(
-                        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-                    ),
-                    options=options,
-                )
-            
+            print('baixarmodeloNovoprojeto')
+            print(estacao)
             options = Options()
             options.add_argument('--disable-gpu')
             options.add_argument('--headless')
-            print('foi aqui 00')
-            driver = get_driver()
+        
+    
+    
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            
+                # Create the driver with the options
+            driver = webdriver.Chrome(options=chrome_options)
+
 
             
     
