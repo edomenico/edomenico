@@ -139,18 +139,20 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
+                        print('antes do link')
                         driver.get(link)
                         #wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
-                        
+                        print('depois do link')
                         forecast = {}
     
                     # while True:
     
                        
                         s = BeautifulSoup(driver.page_source, "html.parser")
+                        print('s')
                         horagmt=arqi['horzulu'][no]
                         
                         # text_file = open("forecast.txt", "w")
