@@ -85,12 +85,17 @@ def main():
             
             from selenium.common.exceptions import TimeoutException
             from selenium.webdriver.common.by import By
-            #from selenium.webdriver.firefox.options import Options
-            #from selenium.webdriver.firefox.service import Service
-            #from selenium.webdriver.support import expected_conditions as EC
-            #from selenium.webdriver.support.ui import WebDriverWait
-            #from webdriver_manager.firefox import GeckoDriverManager
+            from selenium.webdriver.firefox.options import Options
+            from selenium.webdriver.firefox.service import Service
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.support.ui import WebDriverWait
+            from webdriver_manager.firefox import GeckoDriverManager
     
+    
+            
+    
+           # driver = webdriver.Firefox()
+            # self.driver.set_window_size(1120, 550)
             print('baixarmodeloNovoprojeto')
             print(estacao)
             options = Options()
@@ -104,11 +109,6 @@ def main():
             
                 # Create the driver with the options
             driver = webdriver.Chrome(options=chrome_options)
-            
-    
-            
-            
-            
             #firefoxOptions = Options()
             #firefoxOptions.add_argument("--headless")
             #service = Service(GeckoDriverManager().install())
@@ -139,10 +139,8 @@ def main():
                         
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
-                        print('antes do link')
                         driver.get(link)
-                        print('depois do link')
-                        #wait = WebDriverWait(driver, 30)
+                        wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
                         #WebDriverWait(driver,20).until(EC.presence_of_element_located((By.CLASS_NAME, "leaflet-pane leaflet-map-pane")))
@@ -151,13 +149,9 @@ def main():
     
                     # while True:
     
-                        print('antes do s')
+                       
                         s = BeautifulSoup(driver.page_source, "html.parser")
-                        #s=driver.execute_script("return document.documentElement.outerHTML;")
-                        s=driver.find_element("xpath", "//*").get_attribute("outerHTML")
                         horagmt=arqi['horzulu'][no]
-                        print('depois do s')
-                        print(s)
                         
                         # text_file = open("forecast.txt", "w")
                         # text_file.write(s.find_all('script'))
@@ -835,11 +829,10 @@ def main():
                 # st.write(lat)
             print('cheguei 0')
 
-            for x in range(0, 500):  # try 4 times
+            for x in range(0, 100):  # try 4 times
                 try:
                     data = authenticate2(city)
                 except Exception as str_error:
-                    print('cheguei aqui search222')
                     pass
                 else:
                     break
@@ -1310,6 +1303,3 @@ def main():
                     st.table(df1)
 
 main()
-
-
-
