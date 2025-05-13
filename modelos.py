@@ -152,7 +152,7 @@ def main():
     
                        
                         s = BeautifulSoup(driver.page_source, "html.parser")
-                        print('s')
+                        print(s)
                         horagmt=arqi['horzulu'][no]
                         
                         # text_file = open("forecast.txt", "w")
