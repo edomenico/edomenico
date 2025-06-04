@@ -161,8 +161,8 @@ def main():
 
 
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
-                        rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
-
+                       # rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
+                        rows= s.find(id="plugin-detail").find_all("tr")
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
