@@ -141,6 +141,8 @@ def main():
                         #link='https://www.windy.com/-22.989/-43.375?-23.132,-43.375,10,i:pressure,m:c0QaeWR'
                         #driver = get_driver()
                         driver.get(link)
+                        
+                        print('depois do link')
                         #wait = WebDriverWait(driver, 30)
                         #wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
                         #wait.until(EC.presence_of_element_located((By.ID, "detail-data-table")))
@@ -152,6 +154,7 @@ def main():
 
 
                         s = BeautifulSoup(driver.page_source, "html.parser")
+                        print(s)
                         horagmt=arqi['horzulu'][no]
 
                         # text_file = open("forecast.txt", "w")
@@ -163,6 +166,7 @@ def main():
                        # rows = s.find("table", {"class": "grab"}).find("tbody").find_all("tr")
                        # rows= s.find(id="detail-data-table").find("tbody").find_all("tr")
                         rows= s.find(id="plugin-detail").find_all("tr")
+                        print(rows)
                         s.find()
                         # rows = s.find("table", {"class": "tabulka"}).find("tbody").find_all("tr", {"id": "tabid_0_0_WINDSPD"})
                         data=[]
