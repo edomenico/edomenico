@@ -387,7 +387,7 @@ def main():
 
             return link,df1,horazulu
 
-        def baixaamodeloNovometeograma(estacao,link,horazulu):
+    def baixaamodeloNovometeograma(estacao,link,horazulu):
             import re
             import urllib.parse
             import pandas as pd
