@@ -14,7 +14,6 @@ colorlover~=0.3.0
 Flask~=2.0.2
 folium~=0.12.1
 numpy~=1.21.1
-streamlit~=1.30.0
 pydeck~=0.8.1b0
 geos~=0.2.3
 matplotlib~=3.4.3
