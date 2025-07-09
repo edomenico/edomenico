@@ -2792,7 +2792,7 @@ def main():
     
     #streamlit_bokeh(p)
     st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
-    st.components.v1.html(p)
+    #st.components.v1.html(p)
     #st.bokeh_chart(p)
     #st.bokeh_chart(p, use_container_width=True)
     
@@ -2831,5 +2831,5 @@ st.set_page_config(
         page_icon="✅",
         layout="wide",
     )
-st.session_state
+#st.session_state
 main()
