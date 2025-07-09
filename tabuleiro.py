@@ -2790,8 +2790,8 @@ def main():
     import streamlit.components.v1 as components
     from streamlit_bokeh import streamlit_bokeh
     
-    streamlit_bokeh(p)
-    #st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
+    #streamlit_bokeh(p)
+    st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
     
     
             # from streamlit_bokeh_events import streamlit_bokeh_events
