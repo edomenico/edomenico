@@ -2788,7 +2788,7 @@ def main():
     p=tabuleiro(nomedaestacao,noarea,datainicial)
         
     import streamlit.components.v1 as components
-    from streamlit_bokeh import streamlit_bokeh
+    #from streamlit_bokeh import streamlit_bokeh
     
     #streamlit_bokeh(p)
     st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
