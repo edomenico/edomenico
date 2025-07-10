@@ -1845,7 +1845,7 @@ def main2():
 
                 # arqi["dryt"] = arqi["vis"].astype(str)/10
                 # arqi["vis"] = arqi["vis"].astype(round)
-
+                arqi['vis'] = arqi['vis'].astype(np.float32)
                 arqi["vis"] = round(arqi.vis / 100, 0)
 
                 arqi["diaa"] = arqi["diaa"].astype(str)
