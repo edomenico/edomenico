@@ -2560,24 +2560,10 @@ def main():
     with st.sidebar:
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
-            on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
+            on = st.toggle('Atualizar os dados (Áreas 1 e 2) - Redemet')
             
             if on:    
-               # st.write('Atualização dos Dados (Área 1 e Área 2)')
-                #atualizardados = st.radio('Atualizar', ['Último dia', 'Selecionar vários dias/Estação','Nenhum'], horizontal=True,index=2)
-        
-                # if st.button('Último dia'):
-                # #if atualizardados=='Último dia':
-                #
-                #     progress_text = "Processando... Aguarde."
-                #     my_bar = st.progress(0, text=progress_text)
-                #     pt = rest(1,to_data,from_data)
-                #     my_bar.progress(50, text="Em andamento...")
-                #     # for percent_complete in range(100):
-                #     #     time.sleep(0.01)
-                #     pt = rest(2,to_data,from_data)
-                #
-                #     my_bar.progress(100, text="Terminou")
+               
                 too_data = format(datetime.utcnow(), "%d/%m/%Y")
                 to_data = st.date_input('Inicio:', start_date)
                 from_data = st.date_input('Fim:', end_date)
@@ -2598,6 +2584,10 @@ def main():
         
                     my_bar.progress(100, text="Terminou")
             #st.divider()
+            on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
+            if on3:
+                if st.button('Atualizar_AWC'):
+            
             on2 = st.toggle('Consultar outro período')
             
             if on2:
