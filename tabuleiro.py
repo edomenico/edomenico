@@ -2557,9 +2557,9 @@ def main():
                 if st.button('Atualizar_AWC'):
                     progress_text = "Processando... Aguarde."
                     my_bar = st.progress(0, text=progress_text)
-                    pt1 = rest(1,to_data,from_data,'AWC')
+                    pt1 = rest(1,'AWC')
                     my_bar.progress(50, text="Em andamento...")
-                    pt1 = rest(2,to_data,from_data,'AWC')
+                    pt1 = rest(2,'AWC')
         
                     my_bar.progress(100, text="Terminou")
                     
