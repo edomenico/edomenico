@@ -945,7 +945,7 @@ def main():
             pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
         else:
             print('area sel',areasel)
-            pdf= baixa_aws(areasel)
+            pdf= baixa_aws(areaprev)
         
         pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
