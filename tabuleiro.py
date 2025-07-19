@@ -2588,7 +2588,7 @@ def main():
             if on3:
                 if st.button('Atualizar_AWC'):
             
-            on2 = st.toggle('Consultar outro período')
+                on2 = st.toggle('Consultar outro período')
             
             if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/05/25)'],horizontal=True)
