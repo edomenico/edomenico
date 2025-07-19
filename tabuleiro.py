@@ -2585,8 +2585,8 @@ def main():
                     my_bar.progress(100, text="Terminou")
             #st.divider()
             on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
-            if on3:
-                if st.button('Atualizar_AWC'):
+            #if on3:
+               # if st.button('Atualizar_AWC'):
             
             on2 = st.toggle('Consultar outro período')
             
