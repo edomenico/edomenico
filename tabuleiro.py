@@ -849,9 +849,9 @@ def main():
         
             metari = []
             dataaux = datetime.utcnow()
-            dataaux = datetime.utcnow() - timedelta(hours=48)
+            dataaux = datetime.utcnow() - timedelta(hours=72)
             mesnow = datetime.utcnow().month
-            mesant = (datetime.utcnow() - timedelta(hours=48)).month
+            mesant = (datetime.utcnow() - timedelta(hours=72)).month
             # diaini = list_item[0].contents[0].split()[1][0:2]
             controledia = False
             controlemens = False
@@ -943,6 +943,7 @@ def main():
         if tipo=='REDEMET':    
             pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
         else:
+            print('area sel',areasel)
             pdf= baixa_aws(areasel)
         
         pdff=trata_redemet(areaprev)
