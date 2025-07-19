@@ -213,7 +213,7 @@ def main():
         # fig.update_yaxes(title="Temperature (°C)", range=[df['min_temp'].min(), df['max_temp'].max()])
         st.plotly_chart(fig, use_container_width=True)
     
-    def rest(areas,to_data,from_data):
+    def rest(areas,to_data,from_data,tipo):
         import re
         from bs4 import BeautifulSoup
         from selenium import webdriver
@@ -819,128 +819,89 @@ def main():
             return arquivo
     
         
-        def redemet_baixa(escolha, ar, datahini, datahfim,estacao1):
-            # Create Chrome options
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
+        def baixa_aws(ar):
+            import urllib.request
+            import re
+            from bs4 import BeautifulSoup
+            import requests
+            import pandas as pd
         
-            # Create the driver with the options
-            browser = webdriver.Chrome(options=chrome_options)
+            from datetime import datetime, timedelta
+            # importe as funções BeautifulSoup para analisar os dados retornados do site
+            from bs4 import BeautifulSoup
         
-            # Load the page with Selenium
-            #browser.get(url)
+            # especifique o URL
+            if ar == 1:
+                url="https://aviationweather.gov/api/data/metar?ids=SBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=html&hours=72"
         
-            # Wait up to 10 seconds for the page to load
-            # Wait for the page to finish loading all JavaScript
-            wait = WebDriverWait(browser, 20)
-    
-    
+            else:
+                # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
+                url='https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=html&hours=72'
+            # Consulte o site e retorne o html para a variável 'page'
+        
+            res = requests.get(url)
+            soup = BeautifulSoup(res.content, "lxml")
+        
+            # Parse o html na variável 'page' e armazene-o no formato BeautifulSoup
+            p = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')').split('\n\n\n')
+            metar = []
+            data = []
+        
+            metari = []
+            dataaux = datetime.utcnow()
+            dataaux = datetime.utcnow() - timedelta(hours=48)
+            mesnow = datetime.utcnow().month
+            mesant = (datetime.utcnow() - timedelta(hours=48)).month
+            # diaini = list_item[0].contents[0].split()[1][0:2]
+            controledia = False
+            controlemens = False
+            for i in range(0, len(p), 1):
+                if p[i].find('METAR') > -1:
+                    b = 'METAR'
+                    controlemens = True
+                elif p[i].find('SPECI') > -1:
+                    b = 'SPECI'
+                    controlemens = True
+                if p[i].find('UTC') > -1:
+                    # diaini=p[i] [p[i].find('UTC') -5 :p[i].find('UTC') -3]
+                    diaini = p[i][p[i].find('UTC') + 4:p[i].find('UTC') + 6]
+                    controledia = True
+        
+                if p[i].find('Text:') > -1:
+                    inicio = p[i].find('Text:')
+                    a = p[i][p[i].find('SB'):p[i].find(
+                        'SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                elif p[i].find('SSKW') > -1:
+                    a = 'SSKW'
+                elif p[i].find('SWPI') > -1:
+                    a = 'SWPI'
+                elif p[i].find('SWEI') > -1:
+                    a = 'SWEI'
+                elif p[i].find('SNRU') > -1:
+                    a = 'SNRU'
+                if controlemens == True:
+                    montalinha = p[i][p[i].find('Text:') + 5: len(p[i])] + '='
+                    controlemens = False
+                if controledia == True:
+                    mes = mesnow
+                    ano = datetime.utcnow().year
+                    dataini = str(diaini) + '/' + str(mes) + '/' + str(ano)
+                    metar.append([dataini, 'METAR ' + montalinha])
+        
+                    controledia = False
+                # montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                # diaini = list_item[0].contents[0].split()[1][0:2]
+        
+            p = 1
+            data_df = pd.DataFrame(metar, columns=['Data', 'Mensagem'])
+            file = data_df.to_csv("metar.csv")
+        
             
-            
-            if escolha == 1:
-                # datai = "01/06/2020 00:00"
-                # dataf = "02/06/2020 23:00"
-                #datahi = datetime.strftime(datahini, '%d/%m/%Y')
-                #datahf = datetime.strftime(datahfim, '%d/%m/%Y')
-               # tempo = datahfim - datahini
-    
-                if datahini == datahfim:
-                    intervalo = 0
-                else:
-                    intervalo = (datahfim - datahini).days
-                #mes = datahini.month
-                # nome = "SBSC,SBAR,SBBH,SBBR,SBBV,SBCB,SBCG,SBCP,SBCT,SBCY,SBEN,SBES,SBFL,SBFN,SBFS,SBFZ,SBGL,SBGO,SBGR,SBIL,SBJF,SBJP,SBLB,SBME,SBMM,SBMO,SBMQ,SBNF,SBNT,SBPA,SBPJ,SBPV,SBRB,SBRF,SBRJ,SBSL,SBSP,SBST,SBSV,SBTE,SBMN,SBBE,SBVT,SBSG"
-                nome = estacao1
-                for i in range(intervalo + 1):
-                    # abre o Firefox
-                    #browser = webdriver.Firefox(executable_path='geckodriver.exe')
-                    # browser=webbrowser.open('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet', new=2)
-                    # browser = webdriver.Chrome(executable_path='chrome.EXE')
-                    # chama a página da redemet para consulta
-    
-                    # browser.get('https://redemet.decea.gov.br/?i=produtos&p=consulta-de-mensagens-opmet')
-                    browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                    #browser.get('https://redemet.decea.mil.br/old/modal/consulta-de-mensagens/')
-                    # browser.get('https://www.redemet.aer.mil.br/old/?i=produtos&p=consulta-de-mensagens-opmet')
-                    # if (datahi.day + i)==31:
-                    if i != 0:
-                        datacoris = datahini + timedelta(days=i)
-                        datacoris = datacoris + timedelta(minutes=0)
-                        datacorfs = datacoris + timedelta(hours=23)
-                        # datacori=datahf
-                    else:
-                        # datacori = datahini + timedelta(days=i)
-                        datacoris = datahini + timedelta(minutes=0)
-                        datacorfs = datahini + timedelta(hours=23)
-
-                    datacoris = datetime.strftime(datacoris, '%d/%m/%Y %H:%M')
-                    # #datacori = datetime.strftime(datacori, '%d/%m/%Y %H:%M')
-                    # datacorf=  datacori + timedelta(hours=23)
-                    datacorfs = datetime.strftime(datacorfs, '%d/%m/%Y %H:%M')
-                    datacorfs = datacorfs[0:10] + ' 23:00'
-    
-                    # espera 5s
-                    time.sleep(15)
-                    # tira a checkbox para mensagem recente
-                    #driver.find_element(By.ID, url) 
-                    el = browser.find_element(By.ID, "consulta_recente")
-                    el.click()
-                    #browser.find_element_by_id("consulta_recente").click()
-    
-                    # preenche o nome das estações para consulta
-                    
-                    element = browser.find_element(By.ID, "msg_localidade")
-                    element.send_keys(nome)
-    
-                    # preenche a data inicial e final
-    
-                    element = browser.find_element(By.ID, "consulta_data_ini").clear()
-                    
-                    element = browser.find_element(By.ID,"consulta_data_ini").click()
-                    element = browser.find_element(By.ID,"consulta_data_ini").send_keys(datacoris)
-                    element = browser.find_element(By.ID,"consulta_data_fim").clear()
-                    element = browser.find_element(By.ID,"consulta_data_fim").click()
-                    element = browser.find_element(By.ID,"consulta_data_fim").send_keys(datacorfs)
-    
-                    # envia a consulta
-                    botao = browser.find_element(By.ID,"consulta_localidade")
-                    time.sleep(20)
-                    botao.click()
-    
-                    # espera 10s
-                    time.sleep(20)
-    
-                    ## coloca todo o resultado numa página
-                    # select_fr = Select(browser.find_element_by_name("msg_resultado_length"))
-                    # select_fr.select_by_index(3)
-    
-                    table = browser.find_element(By.ID,'msg_resultado')
-    
-                    # df = pd.read_html(str(table))
-                    # print(table)
-                    table_html = table.get_attribute('outerHTML')
-                    # print(df[0])
-    
-                    # print(table)
-                    if i == 0:
-                        df = pd.read_html(str(table_html))
-                        df = df[0]
-                    else:
-                        df2 = pd.read_html(str(table_html))
-                        df2 = df2[0]
-    
-                        df = df.append(df2, ignore_index=True)
-                        print(df)
-    
-                    # print(df.loc[(df["Localidade"] == 'SBSC')])
-                    df.to_csv("metar.csv", header=True)
-                    #browser.quit()
-                print(df)
-                # df = df.drop(columns=['Unnamed: 0'])
-                os.chdir("/mount/src/edomenico/area1")
-                df.to_csv("metar.csv", header=True)
-                # df.to_csv('example.csv')
-                return df
+                        # df = df.drop(columns=['Unnamed: 0'])
+            os.chdir("/mount/src/edomenico/area1")
+            df.to_csv("metar.csv", header=True)
+            # df.to_csv('example.csv')
+            return df
         start_date = datetime.today()
         end_date = datetime.today()
         
@@ -979,7 +940,10 @@ def main():
             areasel=area_2
             areaprev = 2
             estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
+        if tipo=='REDEMET':    
+            pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
+        else:
+            pdf= baixa_aws(areasel)
         
         pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
@@ -2576,17 +2540,28 @@ def main():
                 #if st.button('Consultar'):
                     progress_text = "Processando... Aguarde."
                     my_bar = st.progress(0, text=progress_text)
-                    pt = rest(1,to_data,from_data)
+                    pt = rest(1,to_data,from_data,'REDEMET')
                     my_bar.progress(50, text="Em andamento...")
                         # for percent_complete in range(100):
                         #     time.sleep(0.01)
-                    pt = rest(2,to_data,from_data)
+                    pt = rest(2,to_data,from_data,'REDEMET')
         
                     my_bar.progress(100, text="Terminou")
             #st.divider()
             on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
-            #if on3:
-               # if st.button('Atualizar_AWC'):
+            if on3:
+                too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                to_data = st.date_input('Inicio:', start_date)
+                from_data = st.date_input('Fim:', end_date)
+                if st.button('Atualizar_AWC'):
+                    progress_text = "Processando... Aguarde."
+                    my_bar = st.progress(0, text=progress_text)
+                    pt1 = rest(1,to_data,from_data,'AWC')
+                    my_bar.progress(50, text="Em andamento...")
+                    pt1 = rest(2,to_data,from_data,'AWC')
+        
+                    my_bar.progress(100, text="Terminou")
+                    
             
             on2 = st.toggle('Consultar outro período')
             
