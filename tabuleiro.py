@@ -899,9 +899,9 @@ def main():
             
                         # df = df.drop(columns=['Unnamed: 0'])
             #os.chdir("/mount/src/edomenico/area1")
-            df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
+            #df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
             # df.to_csv('example.csv')
-            return df
+            return file
         start_date = datetime.today()
         end_date = datetime.today()
         
