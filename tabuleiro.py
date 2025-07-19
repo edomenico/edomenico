@@ -2553,13 +2553,14 @@ def main():
             on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
             if on3:
                 too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                
+                to_data = st.date_input('Inicio:', start_date)
+                from_data = st.date_input('Fim:', end_date)
                 if st.button('Atualizar_AWC'):
                     progress_text = "Processando... Aguarde."
                     my_bar = st.progress(0, text=progress_text)
-                    pt1 = rest(1,'AWC')
+                    pt1 = rest(1,to_data,from_data,'AWC')
                     my_bar.progress(50, text="Em andamento...")
-                    pt1 = rest(2,'AWC')
+                    pt1 = rest(2,to_data,from_data,'AWC')
         
                     my_bar.progress(100, text="Terminou")
                     
