@@ -940,7 +940,8 @@ def main():
             areasel=area_2
             areaprev = 2
             estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        if tipo=='REDEMET':    
+        if tipo=='REDEMET':
+            print('area sel - redemet',areasel)
             pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
         else:
             print('area sel',areasel)
