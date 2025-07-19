@@ -894,11 +894,11 @@ def main():
         
             p = 1
             data_df = pd.DataFrame(metar, columns=['Data', 'Mensagem'])
-            file = data_df.to_csv("metar.csv")
+            file = data_df.to_csv("metar111.csv")
         
             
                         # df = df.drop(columns=['Unnamed: 0'])
-            os.chdir("/mount/src/edomenico/area1")
+            #os.chdir("/mount/src/edomenico/area1")
             df.to_csv("metar111.csv", header=True)
             # df.to_csv('example.csv')
             return df
