@@ -2525,9 +2525,9 @@ def main():
     with st.sidebar:
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
-            on = st.toggle('Atualizar os dados (Áreas 1 e 2) - Redemet')
+            on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
 
-            #selarea = st.radio("["Redemet", "AWC"],horizontal=True)
+            selori = st.radio("["Redemet", "AWC"],horizontal=True)
             
             if on:    
                
