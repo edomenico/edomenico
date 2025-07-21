@@ -2533,11 +2533,12 @@ def main():
             if on: 
                 selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
                 if selori=="Redemet":
-                    if st.button('Atualizar'):
+                    
                
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
                         to_data = st.date_input('Inicio:', start_date)
                         from_data = st.date_input('Fim:', end_date)
+                        if st.button('Atualizar'):
                         progress_text = "Processando... Aguarde."
                         my_bar = st.progress(0, text=progress_text)
                         pt = rest(1,to_data,from_data,'REDEMET')
