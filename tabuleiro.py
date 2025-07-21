@@ -2530,7 +2530,8 @@ def main():
             
             selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
             
-            if on:    
+            if on: 
+                selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
                
                 too_data = format(datetime.utcnow(), "%d/%m/%Y")
                 to_data = st.date_input('Inicio:', start_date)
