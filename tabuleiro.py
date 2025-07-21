@@ -2537,16 +2537,6 @@ def main():
                     too_data = format(datetime.utcnow(), "%d/%m/%Y")
                     to_data = st.date_input('Inicio:', start_date)
                     from_data = st.date_input('Fim:', end_date)
-                else:
-                    too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                    to_data = too_data
-                    from_data = too_data
-        
-                if st.button('Atualizar'):
-                #if atualizardados=='Último dia':
-        
-        
-                #if st.button('Consultar'):
                     progress_text = "Processando... Aguarde."
                     my_bar = st.progress(0, text=progress_text)
                     pt = rest(1,to_data,from_data,'REDEMET')
@@ -2556,6 +2546,24 @@ def main():
                     pt = rest(2,to_data,from_data,'REDEMET')
         
                     my_bar.progress(100, text="Terminou")
+                else:
+                    too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                    to_data = too_data
+                    from_data = too_data
+                    progress_text = "Processando... Aguarde."
+                    my_bar = st.progress(0, text=progress_text)
+                    pt1 = rest(1,to_data,from_data,'AWC')
+                    my_bar.progress(50, text="Em andamento...")
+                    pt1 = rest(2,to_data,from_data,'AWC')
+        
+                    my_bar.progress(100, text="Terminou")
+        
+                if st.button('Atualizar'):
+                #if atualizardados=='Último dia':
+        
+        
+                #if st.button('Consultar'):
+                    
             #st.divider()
             #on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
             #if on3:
