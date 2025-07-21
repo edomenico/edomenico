@@ -2532,11 +2532,15 @@ def main():
             
             if on: 
                 selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
+                if selori=="Redemet":
                
-                too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                to_data = st.date_input('Inicio:', start_date)
-                from_data = st.date_input('Fim:', end_date)
-        
+                    too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                    to_data = st.date_input('Inicio:', start_date)
+                    from_data = st.date_input('Fim:', end_date)
+                else:
+                    too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                    to_data = too_data
+                    from_data = too_data
         
                 if st.button('Atualizar'):
                 #if atualizardados=='Último dia':
@@ -2553,19 +2557,19 @@ def main():
         
                     my_bar.progress(100, text="Terminou")
             #st.divider()
-            on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
-            if on3:
-                too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                to_data = too_data
-                from_data = too_data
-                if st.button('Atualizar_AWC'):
-                    progress_text = "Processando... Aguarde."
-                    my_bar = st.progress(0, text=progress_text)
-                    pt1 = rest(1,to_data,from_data,'AWC')
-                    my_bar.progress(50, text="Em andamento...")
-                    pt1 = rest(2,to_data,from_data,'AWC')
+            #on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
+            #if on3:
+            #    too_data = format(datetime.utcnow(), "%d/%m/%Y")
+            #    to_data = too_data
+            #    from_data = too_data
+            #    if st.button('Atualizar_AWC'):
+            #        progress_text = "Processando... Aguarde."
+            #        my_bar = st.progress(0, text=progress_text)
+             #       pt1 = rest(1,to_data,from_data,'AWC')
+             #       my_bar.progress(50, text="Em andamento...")
+            #        pt1 = rest(2,to_data,from_data,'AWC')
         
-                    my_bar.progress(100, text="Terminou")
+            #        my_bar.progress(100, text="Terminou")
                     
             
             on2 = st.toggle('Consultar outro período')
