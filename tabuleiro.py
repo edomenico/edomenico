@@ -2528,7 +2528,7 @@ def main():
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
 
             
-            selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
+           # selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
             
             if on: 
                 selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
