@@ -2841,7 +2841,7 @@ def main2():
                                     sep=',',
                                     decimal='.')
         #st.markdown("# Page 2 ❄️")
-        start_date = datetime.today()
+        start_date = datetime.today()- timedelta(days=10)
         end_date = datetime.today()
         #to_date = datetime.today()
         title=''
@@ -2851,7 +2851,7 @@ def main2():
             st.write('Escolha o período para visualizar')
             #st.write('(a partir de 01/02/2024)')
             to_data = st.date_input('Início ', start_date,format="DD/MM/YYYY")
-            datai=to_data- timedelta(days=10)
+            datai=to_data
             #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
