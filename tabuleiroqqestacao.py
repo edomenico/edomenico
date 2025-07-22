@@ -2851,7 +2851,7 @@ def main2():
             st.write('Escolha o período para visualizar')
             #st.write('(a partir de 01/02/2024)')
             to_data = st.date_input('Início ', start_date,format="DD/MM/YYYY")
-            datai=to_data
+            datai=to_data- timedelta(days=10)
             #from_data = st.date_input('Fim:', end_date,format="DD/MM/YYYY")
             if st.button('Iniciar'):
                 progress_text = "Processando... Aguarde."
