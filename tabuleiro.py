@@ -2582,7 +2582,7 @@ def main():
         
             #        my_bar.progress(100, text="Terminou")
                     
-            
+            st.divider()
             on2 = st.toggle('Consultar outro período')
             
             if on2:
