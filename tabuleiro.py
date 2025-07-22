@@ -848,9 +848,9 @@ def main():
         
             metari = []
             dataaux = datetime.utcnow()
-            dataaux = datetime.utcnow() - timedelta(hours=72)
+            dataaux = datetime.utcnow() - timedelta(hours=96)
             mesnow = datetime.utcnow().month
-            mesant = (datetime.utcnow() - timedelta(hours=72)).month
+            mesant = (datetime.utcnow() - timedelta(hours=96)).month
             # diaini = list_item[0].contents[0].split()[1][0:2]
             controledia = False
             controlemens = False
