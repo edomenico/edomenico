@@ -2841,7 +2841,7 @@ def main2():
                                     sep=',',
                                     decimal='.')
         #st.markdown("# Page 2 ❄️")
-        start_date = datetime.today()
+        start_date = datetime.today()- timedelta(days=9)
         end_date = datetime.today()
         #to_date = datetime.today()
         title=''
