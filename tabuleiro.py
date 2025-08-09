@@ -1341,7 +1341,7 @@ def main():
                                           """)
 
             if diaini == 31:
-                if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 8 or mesini == 10 or mesini == 12:
+                if mesini == 1 or mesini == 3 or mesini == 5 or mesini == 7 or mesini == 8 or mesini == 10 or mesini == 12:
                     p.xaxis.formatter = FuncTickFormatter(code="""
                                    var mapping = {1: 31, 2: 1, 3: 2, 4: 3, 5:4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9};
                                    return mapping[tick];
