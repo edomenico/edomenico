@@ -547,7 +547,7 @@ def main():
                                 dryt.append('NaN')
                             else:
                                 dryt.append(float(mensagem1[j][0:2]))
-                            if (mensagem1[j][3:5]) == '//' or (mensagem1[j][3:5]) == '/ ':
+                            if (mensagem1[j][3:5]) == '//' or (mensagem1[j][3:5]) == '/ ' or (mensagem1[j][3:5]) == '/':
                                 dewp.append('NaN')
                             else:
                                 if mensagem1[j][3:5].find('M') > -1:
