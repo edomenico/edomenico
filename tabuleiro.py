@@ -722,6 +722,7 @@ def main():
     
     
             #-----------------------juntar arquivos
+            print('ESTADO: ',estado)
             arqiago = pd.read_csv('metar_trat_'+str(estado)+'.csv',
                                   sep=',',
                                   decimal='.')
