@@ -2641,6 +2641,7 @@ def main():
                     "Área 2",
                     area_2)
                 noarea = 2
+        nome_escolhido=nomedaestacao
         st.markdown(
             """
             
@@ -2785,9 +2786,12 @@ def main():
                 df1.drop('data', inplace=True, axis=1)
                 df1.drop('data1', inplace=True, axis=1)
                 st.table(df1)
+
     
-    
-    p=tabuleiro(nomedaestacao,noarea,datainicial)
+    if nome_escolhido==nomedaestacao:
+        p=tabuleiro(nomedaestacao,noarea,datainicial)
+    else:
+        nome_escolhido=""
         
     import streamlit.components.v1 as components
     #from streamlit_bokeh import streamlit_bokeh
