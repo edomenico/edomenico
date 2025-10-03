@@ -2834,7 +2834,4 @@ st.set_page_config(
         layout="wide",
     )
 #st.session_state
-#main()
-if __name__ == '__main__':
-    #if streamlit._is_running_with_streamlit:
-    main()
+main()
