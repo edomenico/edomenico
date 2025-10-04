@@ -2612,7 +2612,7 @@ with st.container(border=True):
             st.divider()
     
             #col1, col2 = st.columns(2)
-        if selarea=="Área 1":
+if selarea=="Área 1":
                 #with col1:
                     #st.header('Área 1')
                 nomedaestacao= st.radio(
@@ -2620,7 +2620,7 @@ with st.container(border=True):
                         area_1)
                 noarea=1
     
-        else:
+else:
                # st.header('Área 2')
                 nomedaestacao=  st.radio(
                     "Área 2",
