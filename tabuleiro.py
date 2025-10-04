@@ -904,13 +904,13 @@ def baixa_aws(ar):
             # df.to_csv('example.csv')
             return file
 start_date = datetime.today()
-        end_date = datetime.today()
+end_date = datetime.today()
         
-        area = ['Área 1', 'Área 2']
-        area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+area = ['Área 1', 'Área 2']
+area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
                   'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SNRU','SBFN', 'SBPL',
                   'SBPJ']
-        area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW','SBRB','SWEI','SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
+area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW','SBRB','SWEI','SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
                   'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
                   'SBBV']
         # st.set_page_config(
@@ -933,24 +933,24 @@ start_date = datetime.today()
        # to_data = datainicio.strftime("%d/%m/%Y")
        # from_data = to_data
     
-        if areas==1:
+if areas==1:
             areasel=area_1
             areaprev = 1
             estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
-        else:
+else:
             areasel=area_2
             areaprev = 2
             estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        if tipo=='REDEMET':
+if tipo=='REDEMET':
             print('area sel - redemet',areasel)
             pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
-        else:
+else:
             print('area sel',areasel)
             pdf= baixa_aws(areaprev)
         
-        pdff=trata_redemet(areaprev)
+pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
- def _data_url_to_image(data_url: str) -> Image:
+def _data_url_to_image(data_url: str) -> Image:
             """Convert DataURL string to the image."""
             _, _data_url = data_url.split(";base64,")
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
