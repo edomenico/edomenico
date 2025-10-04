@@ -2729,9 +2729,9 @@ with col3:
                 
                 col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
 
-            st.divider()
+st.divider()
 
-        with st.container():
+with st.container():
 
 
                 col1, col2= st.columns((5, 5))
@@ -2746,7 +2746,7 @@ with col3:
                     weather_pie(df)
             st.divider()
 
-        with st.expander(label="Mostrar dados:"):
+with st.expander(label="Mostrar dados:"):
                 df1=df
 
                 # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
@@ -2774,7 +2774,7 @@ with col3:
     
 p=tabuleiro(nomedaestacao,noarea,datainicial)
         
-    import streamlit.components.v1 as components
+import streamlit.components.v1 as components
     #from streamlit_bokeh import streamlit_bokeh
     
     #streamlit_bokeh(p)
