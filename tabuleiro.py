@@ -2532,9 +2532,9 @@ with st.container(border=True):
             
            # selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
             
-        if on: 
+if on: 
                 selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
-        if selori=="Redemet":
+if selori=="Redemet":
                     
                
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
@@ -2550,7 +2550,7 @@ with st.container(border=True):
                             pt = rest(2,to_data,from_data,'REDEMET')
                 
                             my_bar.progress(100, text="Terminou")
-        else:
+else:
                 if st.button('Atualizar'):
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
                         to_data = too_data
@@ -2584,10 +2584,10 @@ with st.container(border=True):
         
             #        my_bar.progress(100, text="Terminou")
                     
-        st.divider()
-        on2 = st.toggle('Consultar outro período')
+st.divider()
+on2 = st.toggle('Consultar outro período')
             
-        if on2:
+if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/05/25)'],horizontal=True)
                 if selecionaperiodo=='Últimos 10 dias':
                     datainicial = datetime.utcnow() - timedelta(9)
@@ -2595,7 +2595,7 @@ with st.container(border=True):
                     too_data = st.date_input('Dia Inicial:', start_datee)
                     datainicial=too_data
                    # datainicial= datainicial-timedelta(9)
-        else:
+else:
                 datainicial = datetime.utcnow() - timedelta(9)
             ong=st.toggle('Mostrar gráfico')
         
