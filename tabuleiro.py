@@ -2597,7 +2597,7 @@ if on2:
                    # datainicial= datainicial-timedelta(9)
 else:
                 datainicial = datetime.utcnow() - timedelta(9)
-            ong=st.toggle('Mostrar gráfico')
+                ong=st.toggle('Mostrar gráfico')
         
         
         #st.divider()
