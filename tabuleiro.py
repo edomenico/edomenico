@@ -44,8 +44,8 @@ from bokeh.resources import CDN
 from bokeh.embed import file_html
 
 
-
-def umidade(ta,td):
+def main():
+    def umidade(ta,td):
         if str(ta) =='--' or str(ta) =='//'or str(td) =='//'or str(td)=='--' or int(td) > int(ta):
             ur='--'
         else:
@@ -66,7 +66,7 @@ def umidade(ta,td):
                     urr=100
                 ur=str(int(urr))
         return ur
-def obterarq(estacaop,areap,datainicial):
+    def obterarq(estacaop,areap,datainicial):
         import plotly.graph_objects as go
         #import metpy.calc as mpcalc
         #from metpy.units import units
@@ -133,7 +133,7 @@ def obterarq(estacaop,areap,datainicial):
 
         return arqi
 
-def weather_pie(df):
+    def weather_pie(df):
         ###"""Container for pie chart of weather conditions"""
         df['tp'].replace({'<NA>': float('nan'), pd.NA: 'Nil'}, inplace=True)
         labels = list(set(df['tp']))
@@ -142,7 +142,7 @@ def weather_pie(df):
         st.plotly_chart(fig, use_container_width=True)
 
 
-def min_max2(df):
+    def min_max2(df):
             from datetime import datetime
             import plotly
             import plotly.express as px
@@ -182,7 +182,7 @@ def min_max2(df):
             st.plotly_chart(fig, use_container_width=True)
             return
 
-def vento2(df):
+    def vento2(df):
         ##"""Container for temperature time series"""
         # vento_df = pd.DataFrame(
         #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
@@ -195,7 +195,7 @@ def vento2(df):
         st.plotly_chart(fig, use_container_width=True)
         return
 
-def temp_time_series2(df):
+    def temp_time_series2(df):
         ###"""Container for temperature time series"""
         temp_time_df = pd.DataFrame(
             {'temp': df['dryt'], 'ur': df['ur'], 'timestamp': df['data_hora']})
@@ -213,7 +213,7 @@ def temp_time_series2(df):
         # fig.update_yaxes(title="Temperature (°C)", range=[df['min_temp'].min(), df['max_temp'].max()])
         st.plotly_chart(fig, use_container_width=True)
     
-def rest(areas,to_data,from_data,tipo):
+    def rest(areas,to_data,from_data,tipo):
         import re
         from bs4 import BeautifulSoup
         from selenium import webdriver
@@ -261,7 +261,7 @@ def rest(areas,to_data,from_data,tipo):
         import os
         import glob
     
-def trata_redemet(areasele):
+        def trata_redemet(areasele):
             
             import matplotlib.pyplot as plt
             import matplotlib.dates as md
@@ -753,7 +753,7 @@ def trata_redemet(areasele):
             return df1
 
            
-def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+        def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
             
             import datetime
             import time
@@ -820,7 +820,7 @@ def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
             return arquivo
     
         
-def baixa_aws(ar):
+        def baixa_aws(ar):
             import urllib.request
             import re
             from bs4 import BeautifulSoup
@@ -903,14 +903,14 @@ def baixa_aws(ar):
             #df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
             # df.to_csv('example.csv')
             return file
-start_date = datetime.today()
-end_date = datetime.today()
+        start_date = datetime.today()
+        end_date = datetime.today()
         
-area = ['Área 1', 'Área 2']
-area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+        area = ['Área 1', 'Área 2']
+        area_1 = ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
                   'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SNRU','SBFN', 'SBPL',
                   'SBPJ']
-area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW','SBRB','SWEI','SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
+        area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW','SBRB','SWEI','SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
                   'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF', 'SBUA', 'SBEG',
                   'SBBV']
         # st.set_page_config(
@@ -933,29 +933,29 @@ area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW','SBRB','SWEI','SBCY', 'SBPV', 'SBCZ', '
        # to_data = datainicio.strftime("%d/%m/%Y")
        # from_data = to_data
     
-if areas==1:
+        if areas==1:
             areasel=area_1
             areaprev = 1
             estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
-else:
+        else:
             areasel=area_2
             areaprev = 2
             estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SBCI,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-if tipo=='REDEMET':
+        if tipo=='REDEMET':
             print('area sel - redemet',areasel)
             pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
-else:
+        else:
             print('area sel',areasel)
             pdf= baixa_aws(areaprev)
         
-pdff=trata_redemet(areaprev)
+        pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
-def _data_url_to_image(data_url: str) -> Image:
+        def _data_url_to_image(data_url: str) -> Image:
             """Convert DataURL string to the image."""
             _, _data_url = data_url.split(";base64,")
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
-def tabuleiro(est,areatrab,datainicio):
+    def tabuleiro(est,areatrab,datainicio):
         print('DATAINICIO')
         print(datainicio)
         
@@ -2498,43 +2498,43 @@ def tabuleiro(est,areatrab,datainicio):
                 #print(f"Unexpected {err=}, {type(err)=}")
             return source_code
 
-  # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
+    # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
     #                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
     #                 ,tab25, tab26, tab27, tab28 = st.tabs(
     #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
-pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+    pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
-pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+    pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
                                     sep=',',
                                     decimal='.')
     
     
-atudados_area1=0
-atudados_area2=0
-area = ['Área 1', 'Área 2']
-area_1 = ['SBJR','SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+    atudados_area1=0
+    atudados_area2=0
+    area = ['Área 1', 'Área 2']
+    area_1 = ['SBJR','SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
               'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG','SNRU', 'SBFN', 'SBPL',
               'SBPJ']
-area_2 = ['SBRD', 'SBVH', 'SBJI','SSKW','SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
+    area_2 = ['SBRD', 'SBVH', 'SBJI','SSKW','SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF','SBUY', 'SBUA', 'SBEG',
               'SBBV']
-start_date = datetime.today()
-end_date = datetime.today()
-start_datee = datetime.today()
-with st.sidebar:
+    start_date = datetime.today()
+    end_date = datetime.today()
+    start_datee = datetime.today()
+    with st.sidebar:
         st.write('Gerenciamento dos dados')
-with st.container(border=True):
+        with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
 
             
            # selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
             
-if on: 
+            if on: 
                 selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
-if selori=="Redemet":
+                if selori=="Redemet":
                     
                
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
@@ -2550,8 +2550,8 @@ if selori=="Redemet":
                             pt = rest(2,to_data,from_data,'REDEMET')
                 
                             my_bar.progress(100, text="Terminou")
-else:
-                if st.button('Atualizar'):
+                else:
+                    if st.button('Atualizar'):
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
                         to_data = too_data
                         from_data = too_data
@@ -2584,10 +2584,10 @@ else:
         
             #        my_bar.progress(100, text="Terminou")
                     
-st.divider()
-on2 = st.toggle('Consultar outro período')
+            st.divider()
+            on2 = st.toggle('Consultar outro período')
             
-if on2:
+            if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/05/25)'],horizontal=True)
                 if selecionaperiodo=='Últimos 10 dias':
                     datainicial = datetime.utcnow() - timedelta(9)
@@ -2595,14 +2595,14 @@ if on2:
                     too_data = st.date_input('Dia Inicial:', start_datee)
                     datainicial=too_data
                    # datainicial= datainicial-timedelta(9)
-else:
+            else:
                 datainicial = datetime.utcnow() - timedelta(9)
-                ong=st.toggle('Mostrar gráfico')
+            ong=st.toggle('Mostrar gráfico')
         
         
         #st.divider()
-st.write('Visualização dos dados')
-with st.container(border=True):
+        st.write('Visualização dos dados')
+        with st.container(border=True):
            # st.divider()
             
             
@@ -2612,7 +2612,7 @@ with st.container(border=True):
             st.divider()
     
             #col1, col2 = st.columns(2)
-if selarea=="Área 1":
+            if selarea=="Área 1":
                 #with col1:
                     #st.header('Área 1')
                 nomedaestacao= st.radio(
@@ -2620,13 +2620,13 @@ if selarea=="Área 1":
                         area_1)
                 noarea=1
     
-else:
+            else:
                # st.header('Área 2')
                 nomedaestacao=  st.radio(
                     "Área 2",
                     area_2)
                 noarea = 2
-st.markdown(
+        st.markdown(
             """
             
             e-mail: edomenico813@gmail.com
@@ -2634,11 +2634,11 @@ st.markdown(
            
             """
         )
-if ong:
+    if ong:
         print('antes de entrar')
         print(datainicial)
         df = obterarq(nomedaestacao, noarea, datainicial)
-with st.container():
+        with st.container():
             df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
             df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
             df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
@@ -2722,16 +2722,16 @@ with st.container():
                 col2.metric("Tempo presente", stp)
                 col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
                 col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
-with col3:
+            with col3:
                 # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                 #col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
                 col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
                 
                 col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
 
-st.divider()
+            st.divider()
 
-with st.container():
+            with st.container():
 
 
                 col1, col2= st.columns((5, 5))
@@ -2744,9 +2744,9 @@ with st.container():
                     temp_time_series2(df)
                 with col4:
                     weather_pie(df)
-st.divider()
+            st.divider()
 
-with st.expander(label="Mostrar dados:"):
+            with st.expander(label="Mostrar dados:"):
                 df1=df
 
                 # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
@@ -2772,13 +2772,13 @@ with st.expander(label="Mostrar dados:"):
                 st.table(df1)
     
     
-p=tabuleiro(nomedaestacao,noarea,datainicial)
+    p=tabuleiro(nomedaestacao,noarea,datainicial)
         
-import streamlit.components.v1 as components
+    import streamlit.components.v1 as components
     #from streamlit_bokeh import streamlit_bokeh
     
     #streamlit_bokeh(p)
-st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
+    st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
     #st.components.v1.html(p)
     #st.bokeh_chart(p)
     #st.bokeh_chart(p, use_container_width=True)
@@ -2812,11 +2812,13 @@ st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
         #else:
         #    sys.argv = ["streamlit", "run", sys.argv[0]]
         #    #app.run_server(debug=True, port=8881)
-          #  sys.exit(stcli.main())    
+          #  sys.exit(stcli.main())
 st.set_page_config(
         page_title="Tabuleiro - CMA-GL",
         page_icon="✅",
         layout="wide",
     )
 #st.session_state
+main()
+
 
