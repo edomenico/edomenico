@@ -2504,37 +2504,37 @@ def tabuleiro(est,areatrab,datainicio):
     #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
     #      'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SBFN', 'SBPL',
     #      'SBPJ'])
-    pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
+pt1 = pd.read_csv('/mount/src/edomenico/metar_trat_teste1.csv',
                                     sep=',',
                                     decimal='.')
-    pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
+pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
                                     sep=',',
                                     decimal='.')
     
     
-    atudados_area1=0
-    atudados_area2=0
-    area = ['Área 1', 'Área 2']
-    area_1 = ['SBJR','SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
+atudados_area1=0
+atudados_area2=0
+area = ['Área 1', 'Área 2']
+area_1 = ['SBJR','SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
               'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG','SNRU', 'SBFN', 'SBPL',
               'SBPJ']
-    area_2 = ['SBRD', 'SBVH', 'SBJI','SSKW','SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
+area_2 = ['SBRD', 'SBVH', 'SBJI','SSKW','SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SBCI', 'SBMA', 'SBCJ', 'SBHT',
               'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF','SBUY', 'SBUA', 'SBEG',
               'SBBV']
-    start_date = datetime.today()
-    end_date = datetime.today()
-    start_datee = datetime.today()
-    with st.sidebar:
+start_date = datetime.today()
+end_date = datetime.today()
+start_datee = datetime.today()
+with st.sidebar:
         st.write('Gerenciamento dos dados')
-        with st.container(border=True):
+with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
 
             
            # selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
             
-            if on: 
+        if on: 
                 selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
-                if selori=="Redemet":
+        if selori=="Redemet":
                     
                
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
@@ -2550,8 +2550,8 @@ def tabuleiro(est,areatrab,datainicio):
                             pt = rest(2,to_data,from_data,'REDEMET')
                 
                             my_bar.progress(100, text="Terminou")
-                else:
-                    if st.button('Atualizar'):
+        else:
+                if st.button('Atualizar'):
                         too_data = format(datetime.utcnow(), "%d/%m/%Y")
                         to_data = too_data
                         from_data = too_data
@@ -2584,10 +2584,10 @@ def tabuleiro(est,areatrab,datainicio):
         
             #        my_bar.progress(100, text="Terminou")
                     
-            st.divider()
-            on2 = st.toggle('Consultar outro período')
+        st.divider()
+        on2 = st.toggle('Consultar outro período')
             
-            if on2:
+        if on2:
                 selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/05/25)'],horizontal=True)
                 if selecionaperiodo=='Últimos 10 dias':
                     datainicial = datetime.utcnow() - timedelta(9)
@@ -2595,14 +2595,14 @@ def tabuleiro(est,areatrab,datainicio):
                     too_data = st.date_input('Dia Inicial:', start_datee)
                     datainicial=too_data
                    # datainicial= datainicial-timedelta(9)
-            else:
+        else:
                 datainicial = datetime.utcnow() - timedelta(9)
             ong=st.toggle('Mostrar gráfico')
         
         
         #st.divider()
-        st.write('Visualização dos dados')
-        with st.container(border=True):
+st.write('Visualização dos dados')
+with st.container(border=True):
            # st.divider()
             
             
@@ -2612,7 +2612,7 @@ def tabuleiro(est,areatrab,datainicio):
             st.divider()
     
             #col1, col2 = st.columns(2)
-            if selarea=="Área 1":
+        if selarea=="Área 1":
                 #with col1:
                     #st.header('Área 1')
                 nomedaestacao= st.radio(
@@ -2620,13 +2620,13 @@ def tabuleiro(est,areatrab,datainicio):
                         area_1)
                 noarea=1
     
-            else:
+        else:
                # st.header('Área 2')
                 nomedaestacao=  st.radio(
                     "Área 2",
                     area_2)
                 noarea = 2
-        st.markdown(
+st.markdown(
             """
             
             e-mail: edomenico813@gmail.com
@@ -2634,11 +2634,11 @@ def tabuleiro(est,areatrab,datainicio):
            
             """
         )
-    if ong:
+if ong:
         print('antes de entrar')
         print(datainicial)
         df = obterarq(nomedaestacao, noarea, datainicial)
-        with st.container():
+with st.container():
             df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
             df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
             df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
@@ -2722,7 +2722,7 @@ def tabuleiro(est,areatrab,datainicio):
                 col2.metric("Tempo presente", stp)
                 col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
                 col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
-            with col3:
+        with col3:
                 # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                 #col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
                 col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
@@ -2731,7 +2731,7 @@ def tabuleiro(est,areatrab,datainicio):
 
             st.divider()
 
-            with st.container():
+        with st.container():
 
 
                 col1, col2= st.columns((5, 5))
@@ -2746,7 +2746,7 @@ def tabuleiro(est,areatrab,datainicio):
                     weather_pie(df)
             st.divider()
 
-            with st.expander(label="Mostrar dados:"):
+        with st.expander(label="Mostrar dados:"):
                 df1=df
 
                 # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
