@@ -66,7 +66,7 @@ def umidade(ta,td):
                     urr=100
                 ur=str(int(urr))
         return ur
-    def obterarq(estacaop,areap,datainicial):
+def obterarq(estacaop,areap,datainicial):
         import plotly.graph_objects as go
         #import metpy.calc as mpcalc
         #from metpy.units import units
@@ -133,7 +133,7 @@ def umidade(ta,td):
 
         return arqi
 
-    def weather_pie(df):
+def weather_pie(df):
         ###"""Container for pie chart of weather conditions"""
         df['tp'].replace({'<NA>': float('nan'), pd.NA: 'Nil'}, inplace=True)
         labels = list(set(df['tp']))
@@ -142,7 +142,7 @@ def umidade(ta,td):
         st.plotly_chart(fig, use_container_width=True)
 
 
-    def min_max2(df):
+def min_max2(df):
             from datetime import datetime
             import plotly
             import plotly.express as px
@@ -182,7 +182,7 @@ def umidade(ta,td):
             st.plotly_chart(fig, use_container_width=True)
             return
 
-    def vento2(df):
+def vento2(df):
         ##"""Container for temperature time series"""
         # vento_df = pd.DataFrame(
         #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
@@ -195,7 +195,7 @@ def umidade(ta,td):
         st.plotly_chart(fig, use_container_width=True)
         return
 
-    def temp_time_series2(df):
+def temp_time_series2(df):
         ###"""Container for temperature time series"""
         temp_time_df = pd.DataFrame(
             {'temp': df['dryt'], 'ur': df['ur'], 'timestamp': df['data_hora']})
@@ -213,7 +213,7 @@ def umidade(ta,td):
         # fig.update_yaxes(title="Temperature (°C)", range=[df['min_temp'].min(), df['max_temp'].max()])
         st.plotly_chart(fig, use_container_width=True)
     
-    def rest(areas,to_data,from_data,tipo):
+def rest(areas,to_data,from_data,tipo):
         import re
         from bs4 import BeautifulSoup
         from selenium import webdriver
@@ -261,7 +261,7 @@ def umidade(ta,td):
         import os
         import glob
     
-        def trata_redemet(areasele):
+def trata_redemet(areasele):
             
             import matplotlib.pyplot as plt
             import matplotlib.dates as md
@@ -753,7 +753,7 @@ def umidade(ta,td):
             return df1
 
            
-        def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
+def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
             
             import datetime
             import time
@@ -820,7 +820,7 @@ def umidade(ta,td):
             return arquivo
     
         
-        def baixa_aws(ar):
+def baixa_aws(ar):
             import urllib.request
             import re
             from bs4 import BeautifulSoup
@@ -903,7 +903,7 @@ def umidade(ta,td):
             #df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
             # df.to_csv('example.csv')
             return file
-        start_date = datetime.today()
+start_date = datetime.today()
         end_date = datetime.today()
         
         area = ['Área 1', 'Área 2']
@@ -950,12 +950,12 @@ def umidade(ta,td):
         
         pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
-        def _data_url_to_image(data_url: str) -> Image:
+ def _data_url_to_image(data_url: str) -> Image:
             """Convert DataURL string to the image."""
             _, _data_url = data_url.split(";base64,")
             return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
-    def tabuleiro(est,areatrab,datainicio):
+def tabuleiro(est,areatrab,datainicio):
         print('DATAINICIO')
         print(datainicio)
         
@@ -2498,7 +2498,7 @@ def umidade(ta,td):
                 #print(f"Unexpected {err=}, {type(err)=}")
             return source_code
 
-    # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
+  # tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 \
     #                 , tab14, tab15, tab16, tab17, tab18, tab19, tab20, tab21, tab22, tab23, tab24 \
     #                 ,tab25, tab26, tab27, tab28 = st.tabs(
     #     ['SBJR', 'SBES', 'SBME', 'SBCP', 'SBFS', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC', 'SBJE',
