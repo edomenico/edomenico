@@ -2744,7 +2744,7 @@ with st.container():
                     temp_time_series2(df)
                 with col4:
                     weather_pie(df)
-            st.divider()
+st.divider()
 
 with st.expander(label="Mostrar dados:"):
                 df1=df
