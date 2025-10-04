@@ -2722,7 +2722,7 @@ with st.container():
                 col2.metric("Tempo presente", stp)
                 col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
                 col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
-        with col3:
+with col3:
                 # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
                 #col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
                 col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
@@ -2772,13 +2772,13 @@ with st.container():
                 st.table(df1)
     
     
-    p=tabuleiro(nomedaestacao,noarea,datainicial)
+p=tabuleiro(nomedaestacao,noarea,datainicial)
         
     import streamlit.components.v1 as components
     #from streamlit_bokeh import streamlit_bokeh
     
     #streamlit_bokeh(p)
-    st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
+st.components.v1.html(p,  height=2400,width=1700, scrolling=True)
     #st.components.v1.html(p)
     #st.bokeh_chart(p)
     #st.bokeh_chart(p, use_container_width=True)
