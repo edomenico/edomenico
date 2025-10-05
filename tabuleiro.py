@@ -2822,10 +2822,10 @@ st.components.v1.html(p, height=2400, width=1700, scrolling=True)
 #  sys.exit(stcli.main())
 
 
-st.set_page_config(
-    page_title="Tabuleiro - CMA-GL",
-    page_icon="✅",
-    layout="wide",
-)
+#st.set_page_config(
+#    page_title="Tabuleiro - CMA-GL",
+ #   page_icon="✅",
+#    layout="wide",
+#)
 # st.session_state
 
