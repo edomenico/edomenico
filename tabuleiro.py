@@ -2785,7 +2785,13 @@ def main():
     import streamlit.components.v1 as components
     # from streamlit_bokeh import streamlit_bokeh
     
-    
+    while True:
+        # Código para buscar e atualizar dados
+        
+        
+        
+        # Aguarda por uma hora antes de repetir
+        time.sleep(15) # 3600 segundos = 1 hora
     
     # streamlit_bokeh(p)
     st.components.v1.html(p, height=2400, width=1700, scrolling=True)
