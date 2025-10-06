@@ -2822,13 +2822,7 @@ st.components.v1.html(p, height=2400, width=1700, scrolling=True)
 #  sys.exit(stcli.main())
 
 
-st.set_page_config(
-    # Title and icon for the browser's tab bar:
-    page_title="Tabuleiro - AWS",
-    page_icon="🌦️",
-    # Make the content take up the width of the page:
-    layout="wide",
-)
+
 # st.session_state
 while True:
         # Código para buscar e atualizar dados
