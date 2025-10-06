@@ -2788,9 +2788,9 @@ def main():
    
     while True:
         # Código para buscar e atualizar dados
-        data = fetch_and_process_data() 
-        st.write(data) 
-        
+        #data = fetch_and_process_data() 
+        #st.write(data) 
+        main()
         # Aguarda por uma hora antes de repetir
         time.sleep(3600) # 3600 segundos = 1 hora
     # streamlit_bokeh(p)
