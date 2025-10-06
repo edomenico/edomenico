@@ -2783,6 +2783,12 @@ if ong:
 p = tabuleiro(nomedaestacao, noarea, datainicial)
 
 import streamlit.components.v1 as components
+while True:
+        # Código para buscar e atualizar dados
+        
+                
+        # Aguarda por uma hora antes de repetir
+        time.sleep(30)
 # from streamlit_bokeh import streamlit_bokeh
 
 # streamlit_bokeh(p)
@@ -2824,10 +2830,5 @@ st.components.v1.html(p, height=2400, width=1700, scrolling=True)
 
 
 # st.session_state
-while True:
-        # Código para buscar e atualizar dados
-        
-                
-        # Aguarda por uma hora antes de repetir
-        time.sleep(30)
+
 
