@@ -2786,7 +2786,13 @@ def main():
     # from streamlit_bokeh import streamlit_bokeh
     
    
-    
+    while True:
+        # Código para buscar e atualizar dados
+        data = fetch_and_process_data() 
+        st.write(data) 
+        
+        # Aguarda por uma hora antes de repetir
+        time.sleep(3600) # 3600 segundos = 1 hora
     # streamlit_bokeh(p)
     st.components.v1.html(p, height=2400, width=1700, scrolling=True)
     # st.components.v1.html(p)
@@ -2826,5 +2832,5 @@ def main():
     
    
     # st.session_state
-
+main()
 
