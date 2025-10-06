@@ -2824,18 +2824,11 @@ def main():
     
    
     # st.session_state
-if 'estado_dados' not in st.session_state:
-    st.session_state.estado_dados = None
 while True:
-    # Lê os dados mais recentes
-    #dados = ler_dados_atuais()
-
-    # Atualiza os dados no session state
-    st.session_state.estado_dados = main()
-
-    # Mostra os dados no Streamlit (pode ser um st.json, st.line_chart, etc.)
-    st.json(st.session_state.estado_dados)
-
-    # Espera 1 hora antes da próxima atualização
-    time.sleep(60 * 60) # 60 segundos * 60 minutos = 1 hora
+        # Código para buscar e atualizar dados
+        main() 
+        
+        
+        # Aguarda por uma hora antes de repetir
+        time.sleep(3600) # 3600 segundos = 1 hora
 
