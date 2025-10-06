@@ -2830,5 +2830,10 @@ st.set_page_config(
     layout="wide",
 )
 # st.session_state
-
+while True:
+        # Código para buscar e atualizar dados
+        
+                
+        # Aguarda por uma hora antes de repetir
+        time.sleep30) # 3600 segundos = 1 hora
 
