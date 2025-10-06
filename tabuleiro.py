@@ -2793,7 +2793,7 @@ while True:
         
                 
         # Aguarda por uma hora antes de repetir
-        time.sleep(10)
+        time.sleep(3600)
 # st.components.v1.html(p)
 # st.bokeh_chart(p)
 # st.bokeh_chart(p, use_container_width=True)
