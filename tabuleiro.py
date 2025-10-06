@@ -2790,7 +2790,7 @@ def main():
         
         
         # Aguarda por uma hora antes de repetir
-        time.sleep(3600) # 3600 segundos = 1 hora
+        time.sleep(15) # 3600 segundos = 1 hora
     
     
     # streamlit_bokeh(p)
