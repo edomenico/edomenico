@@ -2835,5 +2835,5 @@ while True:
         
                 
         # Aguarda por uma hora antes de repetir
-        time.sleep30) # 3600 segundos = 1 hora
+        time.sleep(30)
 
