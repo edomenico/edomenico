@@ -2822,13 +2822,7 @@ def main():
     #  sys.exit(stcli.main())
     
     
-    st.set_page_config(
-        # Title and icon for the browser's tab bar:
-        page_title="Tabuleiro - AWS",
-        page_icon="🌦️",
-        # Make the content take up the width of the page:
-        layout="wide",
-    )
+   
     # st.session_state
 if 'estado_dados' not in st.session_state:
     st.session_state.estado_dados = None
