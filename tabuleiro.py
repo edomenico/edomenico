@@ -2540,300 +2540,300 @@ area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ'
 start_date = datetime.today()
 end_date = datetime.today()
 start_datee = datetime.today()
-
-with st.sidebar:
-    st.write('Gerenciamento dos dados')
-    with st.container(border=True):
-        on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
-
-        # selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
-
-        if on:
-            selori = st.radio("Escolha a origem", ["Redemet", "AWC"], horizontal=True)
-            if selori == "Redemet":
-
-                too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                to_data = st.date_input('Inicio:', start_date)
-                from_data = st.date_input('Fim:', end_date)
-                if st.button('Atualizar'):
-                    progress_text = "Processando... Aguarde."
-                    my_bar = st.progress(0, text=progress_text)
-                    pt = rest(1, to_data, from_data, 'REDEMET')
-                    my_bar.progress(50, text="Em andamento...")
-                    # for percent_complete in range(100):
-                    #     time.sleep(0.01)
-                    pt = rest(2, to_data, from_data, 'REDEMET')
-
-                    my_bar.progress(100, text="Terminou")
-            else:
-                if st.button('Atualizar'):
-                    too_data = format(datetime.utcnow(), "%d/%m/%Y")
-                    to_data = too_data
-                    from_data = too_data
-                    progress_text = "Processando... Aguarde."
-                    my_bar = st.progress(0, text=progress_text)
-                    pt1 = rest(1, to_data, from_data, 'AWC')
-                    my_bar.progress(50, text="Em andamento...")
-                    pt1 = rest(2, to_data, from_data, 'AWC')
-
-                    my_bar.progress(100, text="Terminou")
-
-            # if atualizardados=='Último dia':
-
-            # if st.button('Consultar'):
-
-        # st.divider()
-        # on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
-        # if on3:
-        #    too_data = format(datetime.utcnow(), "%d/%m/%Y")
-        #    to_data = too_data
-        #    from_data = too_data
-        #    if st.button('Atualizar_AWC'):
-        #        progress_text = "Processando... Aguarde."
-        #        my_bar = st.progress(0, text=progress_text)
-        #       pt1 = rest(1,to_data,from_data,'AWC')
-        #       my_bar.progress(50, text="Em andamento...")
-        #        pt1 = rest(2,to_data,from_data,'AWC')
-
-        #        my_bar.progress(100, text="Terminou")
-
-        st.divider()
-        on2 = st.toggle('Consultar outro período')
-
-        if on2:
-            selecionaperiodo = st.radio('Escolha o período',
-                                        ['Últimos 10 dias', 'Selecionar dia inicial (a partir de 01/05/25)'],
-                                        horizontal=True)
-            if selecionaperiodo == 'Últimos 10 dias':
-                datainicial = datetime.utcnow() - timedelta(9)
-            else:
-                too_data = st.date_input('Dia Inicial:', start_datee)
-                datainicial = too_data
-            # datainicial= datainicial-timedelta(9)
-        else:
-            datainicial = datetime.utcnow() - timedelta(9)
-        ong = st.toggle('Mostrar gráfico')
-
-    # st.divider()
-    st.write('Visualização dos dados')
-    with st.container(border=True):
-        # st.divider()
-
-        selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
-        st.divider()
-
-        # col1, col2 = st.columns(2)
-        if selarea == "Área 1":
-            # with col1:
-            # st.header('Área 1')
-            nomedaestacao = st.radio(
-                "Área 1",
-                area_1)
-            noarea = 1
-
-        else:
-            # st.header('Área 2')
-            nomedaestacao = st.radio(
-                "Área 2",
-                area_2)
-            noarea = 2
-    st.markdown(
-        """
-
-        e-mail: edomenico813@gmail.com
-
-
-        """
-    )
-
-
-if ong:
-    print('antes de entrar')
-    print(datainicial)
-    df = obterarq(nomedaestacao, noarea, datainicial)
-    with st.container():
-        df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
-        df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
-        df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
-        # df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
-        df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
-        df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
-        # df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
-        df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
-        df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
-        df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
-        df['altn3'] = pd.to_numeric(df['altn3'], downcast='signed')
-        df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
-        # df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
-
-        st.header(df['estacao'].iloc[-1])
-        # st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
-        st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            # col1.metric("Temperatura(°C)", f"{(int(df['dryt'].iloc[-1]))}")
-            col1.metric("Temperatura(°C)", f"{(df['dryt'].iloc[-1])}")
-            if df['qn1'].iloc[-1] == 'FEW':
-                sceu = 'Poucas nuvens'
-            elif df['qn1'].iloc[-1] == 'SCT':
-                sceu = 'Parcialmente nublado'
-            elif df['qn1'].iloc[-1] == 'BKN':
-                sceu = 'Nublado'
-            elif df['qn1'].iloc[-1] == 'OVC':
-                sceu = 'Encoberto'
-            else:
-                sceu = 'Claro'
-
-            # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
-            col1.metric("Céu", sceu)
-            col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
-
-            with col2:
-                if df['tp'].iloc[-1] == 'BR':
-                    stp = 'Névoa úmida'
-                elif df['tp'].iloc[-1] == 'RA':
-                    stp = 'Chuva moderada'
-                elif df['tp'].iloc[-1] == 'TS':
-                    stp = 'Trovoada'
-                elif df['tp'].iloc[-1] == 'TSRA':
-                    stp = 'Trovoada com chuva'
-                elif df['tp'].iloc[-1] == '+TSRA':
-                    stp = 'Trovoada com chuva forte'
-                elif df['tp'].iloc[-1] == '-TSRA':
-                    stp = 'Trovoada com chuva leve'
-                elif df['tp'].iloc[-1] == '+RA':
-                    stp = 'Chuva forte'
-                elif df['tp'].iloc[-1] == '-RA':
-                    stp = 'Chuva leve'
-                elif df['tp'].iloc[-1] == 'HZ':
-                    stp = 'Névoa seca'
-                elif df['tp'].iloc[-1] == 'FU':
-                    stp = 'Fumaça'
-                elif df['tp'].iloc[-1] == 'DZ':
-                    stp = 'Chuvisco moderado'
-                elif df['tp'].iloc[-1] == '-DZ':
-                    stp = 'Chuvisco leve'
-                elif df['tp'].iloc[-1] == '+DZ':
-                    stp = 'Chuvisco forte'
-                elif df['tp'].iloc[-1] == 'SHRA':
-                    stp = 'Pancada de chuva moderada'
-                elif df['tp'].iloc[-1] == '-SHRA':
-                    stp = 'Pancada de chuva leve'
-                elif df['tp'].iloc[-1] == '+SHRA':
-                    stp = 'Pancada de chuva forte'
-                elif df['tp'].iloc[-1] == 'VCSH':
-                    stp = 'Pancada de chuva na vizinhança'
-                elif df['tp'].iloc[-1] == 'VCTS':
-                    stp = 'Trovoada na vizinhança'
-                elif df['tp'].iloc[-1] == 'FG':
-                    stp = 'Nevoeiro'
-                elif df['tp'].iloc[-1] == 'BCFG':
-                    stp = 'Banco de nevoeiro'
-                else:
-                    stp = 'Nil'
-            # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
-            col2.metric("Tempo presente", stp)
-            col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
-            col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
-        with col3:
-            # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
-            # col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
-            col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
-
-            col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
-
-        st.divider()
-
-        with st.container():
-
-            col1, col2 = st.columns((5, 5))
-            with col1:
-                min_max2(df)
-            with col2:
-                vento2(df)
-            col3, col4 = st.columns((5, 5))
-            with col3:
-                temp_time_series2(df)
-            with col4:
-                weather_pie(df)
-        st.divider()
-
-        with st.expander(label="Mostrar dados:"):
-            df1 = df
-
-            # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
-            # df1['dewp'] = pd.to_numeric(df1['dewp'], downcast='signed')
-            # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
-            # df1['vis'] = pd.to_numeric(df1['vis'], downcast='signed')
-            # df1['wspd'] = pd.to_numeric(df1['wspd'], downcast='signed')
-            # df1['wdir'] = pd.to_numeric(df1['wdir'], downcast='signed')
-            # df1['gust'] = pd.to_numeric(df1['gust'], downcast='signed')
-            # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
-            # df1['altn1'] = pd.to_numeric(df1['altn1'], downcast='signed')
-            # df1['altn2'] = pd.to_numeric(df1['altn2'], downcast='signed')
-            # df1['altn3'] = pd.to_numeric(df1['altn3'], downcast='signed')
-            # df1['altn4'] = pd.to_numeric(df1['altn4'], downcast='signed')
-            # df1['altncb'] = pd.to_numeric(df1['altncb'], downcast='signed')
-            df1.drop('data_hora', inplace=True, axis=1)
-            df1.drop('drytt', inplace=True, axis=1)
-            df1.drop('dewpt', inplace=True, axis=1)
-            df1.drop('metar', inplace=True, axis=1)
-            df1.drop('speci', inplace=True, axis=1)
-            df1.drop('data', inplace=True, axis=1)
-            df1.drop('data1', inplace=True, axis=1)
-            st.table(df1)
-with st.spinner('Loading...'):
-    p = tabuleiro(nomedaestacao, noarea, datainicial)
+while True:
+    with st.sidebar:
+        st.write('Gerenciamento dos dados')
+        with st.container(border=True):
+            on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
     
-    import streamlit.components.v1 as components
+            # selori = st.radio("Escolha a origem",["Redemet", "AWC"],horizontal=True)
+    
+            if on:
+                selori = st.radio("Escolha a origem", ["Redemet", "AWC"], horizontal=True)
+                if selori == "Redemet":
+    
+                    too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                    to_data = st.date_input('Inicio:', start_date)
+                    from_data = st.date_input('Fim:', end_date)
+                    if st.button('Atualizar'):
+                        progress_text = "Processando... Aguarde."
+                        my_bar = st.progress(0, text=progress_text)
+                        pt = rest(1, to_data, from_data, 'REDEMET')
+                        my_bar.progress(50, text="Em andamento...")
+                        # for percent_complete in range(100):
+                        #     time.sleep(0.01)
+                        pt = rest(2, to_data, from_data, 'REDEMET')
+    
+                        my_bar.progress(100, text="Terminou")
+                else:
+                    if st.button('Atualizar'):
+                        too_data = format(datetime.utcnow(), "%d/%m/%Y")
+                        to_data = too_data
+                        from_data = too_data
+                        progress_text = "Processando... Aguarde."
+                        my_bar = st.progress(0, text=progress_text)
+                        pt1 = rest(1, to_data, from_data, 'AWC')
+                        my_bar.progress(50, text="Em andamento...")
+                        pt1 = rest(2, to_data, from_data, 'AWC')
+    
+                        my_bar.progress(100, text="Terminou")
+    
+                # if atualizardados=='Último dia':
+    
+                # if st.button('Consultar'):
+    
+            # st.divider()
+            # on3 = st.toggle('Atualizar pelo AWC - 72h anteriores')
+            # if on3:
+            #    too_data = format(datetime.utcnow(), "%d/%m/%Y")
+            #    to_data = too_data
+            #    from_data = too_data
+            #    if st.button('Atualizar_AWC'):
+            #        progress_text = "Processando... Aguarde."
+            #        my_bar = st.progress(0, text=progress_text)
+            #       pt1 = rest(1,to_data,from_data,'AWC')
+            #       my_bar.progress(50, text="Em andamento...")
+            #        pt1 = rest(2,to_data,from_data,'AWC')
+    
+            #        my_bar.progress(100, text="Terminou")
+    
+            st.divider()
+            on2 = st.toggle('Consultar outro período')
+    
+            if on2:
+                selecionaperiodo = st.radio('Escolha o período',
+                                            ['Últimos 10 dias', 'Selecionar dia inicial (a partir de 01/05/25)'],
+                                            horizontal=True)
+                if selecionaperiodo == 'Últimos 10 dias':
+                    datainicial = datetime.utcnow() - timedelta(9)
+                else:
+                    too_data = st.date_input('Dia Inicial:', start_datee)
+                    datainicial = too_data
+                # datainicial= datainicial-timedelta(9)
+            else:
+                datainicial = datetime.utcnow() - timedelta(9)
+            ong = st.toggle('Mostrar gráfico')
+    
+        # st.divider()
+        st.write('Visualização dos dados')
+        with st.container(border=True):
+            # st.divider()
+    
+            selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
+            st.divider()
+    
+            # col1, col2 = st.columns(2)
+            if selarea == "Área 1":
+                # with col1:
+                # st.header('Área 1')
+                nomedaestacao = st.radio(
+                    "Área 1",
+                    area_1)
+                noarea = 1
+    
+            else:
+                # st.header('Área 2')
+                nomedaestacao = st.radio(
+                    "Área 2",
+                    area_2)
+                noarea = 2
+        st.markdown(
+            """
+    
+            e-mail: edomenico813@gmail.com
+    
+    
+            """
+        )
+    
+    
+    if ong:
+        print('antes de entrar')
+        print(datainicial)
+        df = obterarq(nomedaestacao, noarea, datainicial)
+        with st.container():
+            df['dryt'] = pd.to_numeric(df['dryt'], downcast='signed')
+            df['dewp'] = pd.to_numeric(df['dewp'], downcast='signed')
+            df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
+            # df['vis'] = pd.to_numeric(df['vis'], downcast='signed')
+            df['wspd'] = pd.to_numeric(df['wspd'], downcast='signed')
+            df['wdir'] = pd.to_numeric(df['wdir'], downcast='signed')
+            # df['gust'] = pd.to_numeric(df['gust'], downcast='signed')
+            df['pres'] = pd.to_numeric(df['pres'], downcast='signed')
+            df['altn1'] = pd.to_numeric(df['altn1'], downcast='signed')
+            df['altn2'] = pd.to_numeric(df['altn2'], downcast='signed')
+            df['altn3'] = pd.to_numeric(df['altn3'], downcast='signed')
+            df['altn4'] = pd.to_numeric(df['altn4'], downcast='signed')
+            # df['altncb'] = pd.to_numeric(df['altncb'], downcast='signed')
+    
+            st.header(df['estacao'].iloc[-1])
+            # st.subheader(str(df['datahora'].iloc[0][0:16]) + 'UTC')
+            st.subheader(str(df['data_hora'].iloc[-1])[0:16] + 'UTC')
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                # col1.metric("Temperatura(°C)", f"{(int(df['dryt'].iloc[-1]))}")
+                col1.metric("Temperatura(°C)", f"{(df['dryt'].iloc[-1])}")
+                if df['qn1'].iloc[-1] == 'FEW':
+                    sceu = 'Poucas nuvens'
+                elif df['qn1'].iloc[-1] == 'SCT':
+                    sceu = 'Parcialmente nublado'
+                elif df['qn1'].iloc[-1] == 'BKN':
+                    sceu = 'Nublado'
+                elif df['qn1'].iloc[-1] == 'OVC':
+                    sceu = 'Encoberto'
+                else:
+                    sceu = 'Claro'
+    
+                # col1.metric("Céu", f"{df['ceu'].iloc[0]}")
+                col1.metric("Céu", sceu)
+                col1.metric("Umidade(%)", f"{df['ur'].iloc[-1]}")
+    
+                with col2:
+                    if df['tp'].iloc[-1] == 'BR':
+                        stp = 'Névoa úmida'
+                    elif df['tp'].iloc[-1] == 'RA':
+                        stp = 'Chuva moderada'
+                    elif df['tp'].iloc[-1] == 'TS':
+                        stp = 'Trovoada'
+                    elif df['tp'].iloc[-1] == 'TSRA':
+                        stp = 'Trovoada com chuva'
+                    elif df['tp'].iloc[-1] == '+TSRA':
+                        stp = 'Trovoada com chuva forte'
+                    elif df['tp'].iloc[-1] == '-TSRA':
+                        stp = 'Trovoada com chuva leve'
+                    elif df['tp'].iloc[-1] == '+RA':
+                        stp = 'Chuva forte'
+                    elif df['tp'].iloc[-1] == '-RA':
+                        stp = 'Chuva leve'
+                    elif df['tp'].iloc[-1] == 'HZ':
+                        stp = 'Névoa seca'
+                    elif df['tp'].iloc[-1] == 'FU':
+                        stp = 'Fumaça'
+                    elif df['tp'].iloc[-1] == 'DZ':
+                        stp = 'Chuvisco moderado'
+                    elif df['tp'].iloc[-1] == '-DZ':
+                        stp = 'Chuvisco leve'
+                    elif df['tp'].iloc[-1] == '+DZ':
+                        stp = 'Chuvisco forte'
+                    elif df['tp'].iloc[-1] == 'SHRA':
+                        stp = 'Pancada de chuva moderada'
+                    elif df['tp'].iloc[-1] == '-SHRA':
+                        stp = 'Pancada de chuva leve'
+                    elif df['tp'].iloc[-1] == '+SHRA':
+                        stp = 'Pancada de chuva forte'
+                    elif df['tp'].iloc[-1] == 'VCSH':
+                        stp = 'Pancada de chuva na vizinhança'
+                    elif df['tp'].iloc[-1] == 'VCTS':
+                        stp = 'Trovoada na vizinhança'
+                    elif df['tp'].iloc[-1] == 'FG':
+                        stp = 'Nevoeiro'
+                    elif df['tp'].iloc[-1] == 'BCFG':
+                        stp = 'Banco de nevoeiro'
+                    else:
+                        stp = 'Nil'
+                # col2.metric("Tempo presente", f"{(df['tp'].iloc[0])}")
+                col2.metric("Tempo presente", stp)
+                col2.metric("Visibilidade(m)", f"{(df['vis'].iloc[-1])}")
+                col2.metric("Pressão(hPa)", f"{(df['pres'].iloc[-1])}")
+            with col3:
+                # col3.metric("Tempo", f"{df['tp'].iloc[0]}")
+                # col3.metric("Rajada(kt)", f"{(df['gust'].iloc[-1])}")
+                col3.metric("Vento(graus/kt)", f"{(df['wdir'].iloc[-1])} / {(df['wspd'].iloc[-1])}")
+    
+                col3.metric("Altura nuvens baixas(x100ft)", f"{(df['altn1'].iloc[-1])}")
+    
+            st.divider()
+    
+            with st.container():
+    
+                col1, col2 = st.columns((5, 5))
+                with col1:
+                    min_max2(df)
+                with col2:
+                    vento2(df)
+                col3, col4 = st.columns((5, 5))
+                with col3:
+                    temp_time_series2(df)
+                with col4:
+                    weather_pie(df)
+            st.divider()
+    
+            with st.expander(label="Mostrar dados:"):
+                df1 = df
+    
+                # df1['dryt']=pd.to_numeric(df1['dryt'], downcast='signed')
+                # df1['dewp'] = pd.to_numeric(df1['dewp'], downcast='signed')
+                # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
+                # df1['vis'] = pd.to_numeric(df1['vis'], downcast='signed')
+                # df1['wspd'] = pd.to_numeric(df1['wspd'], downcast='signed')
+                # df1['wdir'] = pd.to_numeric(df1['wdir'], downcast='signed')
+                # df1['gust'] = pd.to_numeric(df1['gust'], downcast='signed')
+                # df1['pres'] = pd.to_numeric(df1['pres'], downcast='signed')
+                # df1['altn1'] = pd.to_numeric(df1['altn1'], downcast='signed')
+                # df1['altn2'] = pd.to_numeric(df1['altn2'], downcast='signed')
+                # df1['altn3'] = pd.to_numeric(df1['altn3'], downcast='signed')
+                # df1['altn4'] = pd.to_numeric(df1['altn4'], downcast='signed')
+                # df1['altncb'] = pd.to_numeric(df1['altncb'], downcast='signed')
+                df1.drop('data_hora', inplace=True, axis=1)
+                df1.drop('drytt', inplace=True, axis=1)
+                df1.drop('dewpt', inplace=True, axis=1)
+                df1.drop('metar', inplace=True, axis=1)
+                df1.drop('speci', inplace=True, axis=1)
+                df1.drop('data', inplace=True, axis=1)
+                df1.drop('data1', inplace=True, axis=1)
+                st.table(df1)
+    with st.spinner('Loading...'):
+        p = tabuleiro(nomedaestacao, noarea, datainicial)
+        
+        import streamlit.components.v1 as components
+        break
+    #while True:
+            # Código para buscar e atualizar dados
+            
+                    
+            # Aguarda por uma hora antes de repetir
+            
+    # from streamlit_bokeh import streamlit_bokeh
+    
+    # streamlit_bokeh(p)
+    st.components.v1.html(p, height=2400, width=1700, scrolling=True)
+    time.sleep(3600)
+    # st.components.v1.html(p)
+    # st.bokeh_chart(p)
+    # st.bokeh_chart(p, use_container_width=True)
+    
+    # from streamlit_bokeh_events import streamlit_bokeh_events
+    # event_result = streamlit_bokeh_events(
+    #     events="TestSelectEvent",
+    #     bokeh_plot=p,
+    #     key="foo",
+    #     debounce_time=1000,
+    # )
+    # st.subheader("Raw Event Data")
+    # st.write(event_result)
+    # st.bokeh_chart(html_content,use_container_width=True)
+    # st.write(p)
+    # if st.button('Atualizar dados'):
+    #    if noarea==1:
+    #       pt1 = rest(noarea)
+    #       atudados_area1=1
+    
+    #      pt2 = rest(2)
+    #     atudados_area2=2
+    
+    # barra_lateral = st.sid,ebar.empty()
+    # area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
+    # if __name__ == '__main__':
+    
+    # if streamlit._is_running_with_streamlit:
+    #   main()
+    # else:
+    #    sys.argv = ["streamlit", "run", sys.argv[0]]
+    #    #app.run_server(debug=True, port=8881)
+    #  sys.exit(stcli.main())
+    
+    
     break
-#while True:
-        # Código para buscar e atualizar dados
-        
-                
-        # Aguarda por uma hora antes de repetir
-        
-# from streamlit_bokeh import streamlit_bokeh
-
-# streamlit_bokeh(p)
-st.components.v1.html(p, height=2400, width=1700, scrolling=True)
-time.sleep(3600)
-# st.components.v1.html(p)
-# st.bokeh_chart(p)
-# st.bokeh_chart(p, use_container_width=True)
-
-# from streamlit_bokeh_events import streamlit_bokeh_events
-# event_result = streamlit_bokeh_events(
-#     events="TestSelectEvent",
-#     bokeh_plot=p,
-#     key="foo",
-#     debounce_time=1000,
-# )
-# st.subheader("Raw Event Data")
-# st.write(event_result)
-# st.bokeh_chart(html_content,use_container_width=True)
-# st.write(p)
-# if st.button('Atualizar dados'):
-#    if noarea==1:
-#       pt1 = rest(noarea)
-#       atudados_area1=1
-
-#      pt2 = rest(2)
-#     atudados_area2=2
-
-# barra_lateral = st.sid,ebar.empty()
-# area_seleciona = st.sidebar.selectbox("Seleciona a área:", area)
-# if __name__ == '__main__':
-
-# if streamlit._is_running_with_streamlit:
-#   main()
-# else:
-#    sys.argv = ["streamlit", "run", sys.argv[0]]
-#    #app.run_server(debug=True, port=8881)
-#  sys.exit(stcli.main())
-
-
-
-# st.session_state
+    # st.session_state
 
 
