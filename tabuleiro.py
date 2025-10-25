@@ -2788,7 +2788,7 @@ while True:
         import streamlit.components.v1 as components
         st.components.v1.html(p, height=2400, width=1700, scrolling=True)
         time.sleep(30)
-        #st.stop()
+        break
         
     #while True:
             # Código para buscar e atualizar dados
