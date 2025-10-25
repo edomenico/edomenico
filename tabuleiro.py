@@ -2786,7 +2786,7 @@ while True:
         p = tabuleiro(nomedaestacao, noarea, datainicial)
         
         import streamlit.components.v1 as components
-        break
+        
     #while True:
             # Código para buscar e atualizar dados
             
