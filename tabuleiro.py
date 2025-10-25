@@ -2786,6 +2786,9 @@ while True:
         p = tabuleiro(nomedaestacao, noarea, datainicial)
         
         import streamlit.components.v1 as components
+        st.components.v1.html(p, height=2400, width=1700, scrolling=True)
+        time.sleep(3600)
+        break
         
     #while True:
             # Código para buscar e atualizar dados
@@ -2796,8 +2799,7 @@ while True:
     # from streamlit_bokeh import streamlit_bokeh
     
     # streamlit_bokeh(p)
-        st.components.v1.html(p, height=2400, width=1700, scrolling=True)
-        time.sleep(3600)
+        
     # st.components.v1.html(p)
     # st.bokeh_chart(p)
     # st.bokeh_chart(p, use_container_width=True)
@@ -2833,7 +2835,7 @@ while True:
     #  sys.exit(stcli.main())
     
     
-        break
+        
     # st.session_state
 
 
