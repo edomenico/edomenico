@@ -2784,11 +2784,11 @@ while True:
                 st.table(df1)
     with st.spinner('Loading...'):
         p = tabuleiro(nomedaestacao, noarea, datainicial)
-        
+        import sys
         import streamlit.components.v1 as components
         st.components.v1.html(p, height=2400, width=1700, scrolling=True)
         time.sleep(3600)
-        break
+        sys.exit()
         
     #while True:
             # Código para buscar e atualizar dados
