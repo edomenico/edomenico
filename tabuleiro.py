@@ -2603,7 +2603,7 @@ def main():
             on2 = st.toggle('Consultar outro período')
             
             if on2:
-                selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/08/25)'],horizontal=True)
+                selecionaperiodo= st.radio('Escolha o período',['Últimos 10 dias','Selecionar dia inicial (a partir de 01/10/25)'],horizontal=True)
                 if selecionaperiodo=='Últimos 10 dias':
                     datainicial = datetime.utcnow() - timedelta(9)
                 else:
