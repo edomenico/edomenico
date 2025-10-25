@@ -2785,8 +2785,8 @@ while True:
     with st.spinner('Loading...'):
         p = tabuleiro(nomedaestacao, noarea, datainicial)
         import sys
-        import streamlit.components.v1 as components
-        st.components.v1.html(p, height=2400, width=1700, scrolling=True)
+        #import streamlit.components.v1 as components
+       # st.components.v1.html(p, height=2400, width=1700, scrolling=True)
         
     st.stop()
         
