@@ -2540,6 +2540,7 @@ area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ'
 start_date = datetime.today()
 end_date = datetime.today()
 start_datee = datetime.today()
+
 with st.sidebar:
     st.write('Gerenciamento dos dados')
     with st.container(border=True):
@@ -2785,6 +2786,7 @@ with st.spinner('Loading...'):
     p = tabuleiro(nomedaestacao, noarea, datainicial)
     
     import streamlit.components.v1 as components
+    break
 #while True:
         # Código para buscar e atualizar dados
         
