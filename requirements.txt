@@ -40,6 +40,9 @@ lxml~=4.6.3
 webdriver-manager
 pygithub
 tzwhere==3.0.3
+folium==0.14.0
+streamlit-folium==0.13.0
+
 
 
 
