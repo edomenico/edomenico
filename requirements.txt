@@ -7,6 +7,7 @@ argcomplete==1.12.3
 argon2-cffi==21.1.0
 async-timeout==4.0.2
 asynctest==0.13.0
+plotly~=5.3.1
 attrs==21.2.0
 backcall==0.2.0
 backports.zoneinfo==0.2.1
@@ -187,3 +188,4 @@ widgetsnbextension==3.6.1
 wslink==1.9.2
 yarl==1.8.2
 zipp==3.6.0
+
