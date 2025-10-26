@@ -30,7 +30,7 @@ from datetime import datetime
 from datetime import timezone as tmz
 import pytz
 from tzwhere import tzwhere
-import folium
+#import folium
 #from streamlit_folium import folium_static
 
 def vento2(df):
@@ -254,3 +254,4 @@ with st.spinner('Loading...'):
     #          'List of 40,000+ world cities: [https://simplemaps.com/data/world-cities](https://simplemaps.com/data/world-cities) \n\n' +
     #          'Github repository: [streamlit-weather-app](https://github.com/ndakov/streamlit-weather-app)')
     # st.write('Thanks for stopping by. Cheers!')
+
