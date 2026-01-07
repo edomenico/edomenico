@@ -2519,7 +2519,7 @@ pt2 = pd.read_csv('/mount/src/edomenico/metar_trat_teste2.csv',
 atudados_area1 = 0
 atudados_area2 = 0
 area = ['Área 1', 'Área 2']
-area_1 = ['SBJR', 'SBMI, 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC',
+area_1 = ['SBJR', 'SBMI', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS', 'SBAC',
           'SBJE',
           'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SNRU', 'SBFN',
           'SBPL',
