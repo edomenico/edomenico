@@ -696,8 +696,8 @@ def rest(areas, to_data, from_data, tipo):
                 else:
                     metar.append(mens)
                     speci.append('-')
-                if estacao[k] == 'SWPI':
-                    yyyyyyyyy = 1
+                #if estacao[k] == 'SWPI':
+                #    yyyyyyyyy = 1
                 if vis[k] == '////':
                     vis[k] = '-9999'
                 if len(wspd) != len(pres):
