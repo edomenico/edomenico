@@ -2013,7 +2013,9 @@ def tabuleiro(est, areatrab, datainicio):
             # x_text_font_size = "40px"
 
             # print(arqi.group)
-            r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
+            r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#1EA1A1")
+            #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
+            
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#ff8000")
