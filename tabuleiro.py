@@ -2014,8 +2014,12 @@ def tabuleiro(est, areatrab, datainicio):
 
             # print(arqi.group)
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#1EA1A1")
-            r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
-            #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
+            if selcor=='Branca':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
+            else
+            
+                
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
             
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
@@ -2543,7 +2547,7 @@ while True:
     with st.sidebar:
         with st.container(border=True):
             st.write('Cor de fundo')
-            selcor = st.radio("Escolha a cor", ["Azul", "Marrom"], horizontal=True)
+            selcor = st.radio("Escolha a cor", ["Azul", "Cinza", "Branca", "Verde", "Amarela", "Vermelha", "Preta","Rosa","Marrom"])
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
