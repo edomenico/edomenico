@@ -2024,7 +2024,7 @@ def tabuleiro(est, areatrab, datainicio):
             elif selcor=='Rosa':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FFAAD9")
             elif selcor=='Vermelha':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FF2929")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#D01C1F")
             elif selcor=='Amarela':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#F3E692")
             elif selcor=='Verde':
