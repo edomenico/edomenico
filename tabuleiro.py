@@ -2014,12 +2014,27 @@ def tabuleiro(est, areatrab, datainicio):
 
             # print(arqi.group)
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#1EA1A1")
-            if selcor=='Branca':
+            if selcor=='Azul':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6)
+            elif selcor=='Branca':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
+            elif selcor=='Preta':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#363333")
+
+            elif selcor=='Rosa':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FFAAD9")
+            elif selcor=='Vermelha':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FF2929")
+            elif selcor=='Amarela':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#F3E692")
+            elif selcor=='Verde':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#21FF4E")
+            
+            
             else:
             
                 
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#B18061")
             
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
