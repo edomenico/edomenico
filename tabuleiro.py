@@ -2048,6 +2048,29 @@ def main():
                 # colors = cm[ix]
 
                 # x_text_font_size = "40px"
+                if selcor=='Azul':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6)
+                elif selcor=='Branca':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
+                elif selcor=='Preta':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#101010")
+
+                elif selcor=='Rosa':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FFAAD9")
+                elif selcor=='Vermelha':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#D01C1F")
+                elif selcor=='Amarela':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#F3E692")
+                elif selcor=='Verde':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#21FF4E")
+                elif selcor=='Marrom':
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#773F1A")
+                   
+                elif selcor== 'Cinza':
+            
+                
+                    r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#3E3A44")
+            
 
                 # print(arqi.group)
                 #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
@@ -2557,6 +2580,9 @@ def main():
     end_date = datetime.today()
     start_datee = datetime.today()
     with st.sidebar:
+        with st.container(border=True):
+            st.write('Cor de fundo')
+            selcor = st.radio("Escolha a cor", ["Azul", "Cinza", "Branca", "Verde", "Amarela", "Vermelha", "Preta","Rosa","Marrom"])
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
