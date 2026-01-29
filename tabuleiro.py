@@ -2541,6 +2541,9 @@ end_date = datetime.today()
 start_datee = datetime.today()
 while True:
     with st.sidebar:
+         with st.container(border=True):
+            st.write('Cor de fundo')
+            selcor = st.radio("Escolha a cor", ["Azul", "Marrom"], horizontal=True)
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
