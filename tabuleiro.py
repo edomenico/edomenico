@@ -2030,9 +2030,8 @@ def tabuleiro(est, areatrab, datainicio):
             elif selcor=='Verde':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#21FF4E")
             elif selcor=='Marrom':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color=" #773F1A")
-            
-            
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#773F1A")
+                   
             elif selcor== 'Cinza':
             
                 
