@@ -2036,7 +2036,7 @@ def tabuleiro(est, areatrab, datainicio):
             else:
             
                 
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#6F6564")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#3E3A44")
             
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
