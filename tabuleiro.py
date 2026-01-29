@@ -2019,7 +2019,7 @@ def tabuleiro(est, areatrab, datainicio):
             elif selcor=='Branca':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
             elif selcor=='Preta':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#363333")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#000003")
 
             elif selcor=='Rosa':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FFAAD9")
