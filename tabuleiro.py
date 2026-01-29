@@ -2033,7 +2033,7 @@ def tabuleiro(est, areatrab, datainicio):
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color=" #773F1A")
             
             
-            else:
+            elif selcor== 'Cinza':
             
                 
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#3E3A44")
