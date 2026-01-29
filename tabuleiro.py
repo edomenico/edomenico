@@ -2029,12 +2029,14 @@ def tabuleiro(est, areatrab, datainicio):
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#F3E692")
             elif selcor=='Verde':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#21FF4E")
+            elif selcor=='Marrom':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color=" #773F1A")
             
             
             else:
             
                 
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#B18061")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#6F6564")
             
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
