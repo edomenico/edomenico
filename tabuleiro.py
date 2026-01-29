@@ -2016,7 +2016,7 @@ def tabuleiro(est, areatrab, datainicio):
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#1EA1A1")
             if selcor=='Branca':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
-            else
+            else:
             
                 
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#7d80b0")
