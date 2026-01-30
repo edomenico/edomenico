@@ -2077,7 +2077,7 @@ def main():
                 #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
                 #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
                 #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#ff8000")
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6)  # , legend_field="dryt")
+                #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6)  # , legend_field="dryt")
                 # #              color=factor_cmap('metal', palette=list(cmap.values()), factors=list(cmap.keys())))
                 # #
 
