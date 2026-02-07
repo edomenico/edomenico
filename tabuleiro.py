@@ -2563,7 +2563,7 @@ while True:
     with st.sidebar:
         with st.container(border=True):
             st.write('Cor de fundo')
-            selcor = st.radio("Escolha a cor", ["Azul", "Cinza", "Branca", "Verde", "Amarela", "Vermelha", "Preta","Rosa","Marrom"])
+            selcor = st.radio("Escolha a cor", ["Azul", "Azul claro", "Branca", "Rosa", "Vermelha", "Amarela", "Verde","Marrom","Cinza"])
         st.write('Gerenciamento dos dados')
         with st.container(border=True):
             on = st.toggle('Atualizar os dados (Áreas 1 e 2)')
