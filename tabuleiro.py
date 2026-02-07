@@ -2016,26 +2016,26 @@ def tabuleiro(est, areatrab, datainicio):
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#1EA1A1")
             if selcor=='Azul':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6)
+            elif selcor=='Azul claro':
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#a6cee3")
             elif selcor=='Branca':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#DFE3E8")
-            elif selcor=='Preta':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#101010")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#eaeaea")
 
             elif selcor=='Rosa':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#FFAAD9")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#d93b43")
             elif selcor=='Vermelha':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#D01C1F")
             elif selcor=='Amarela':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#F3E692")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#e08d49")
             elif selcor=='Verde':
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#21FF4E")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#599d7A")
             elif selcor=='Marrom':
                 r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#773F1A")
                    
             elif selcor== 'Cinza':
             
                 
-                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#3E3A44")
+                r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#999d9a")
             
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6,color="#cc80ff")
             #r = p.rect("group", "period", width=1.0, height=1, source=arqi, fill_alpha=0.6, color="#575961")
