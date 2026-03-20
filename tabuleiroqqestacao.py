@@ -2182,6 +2182,8 @@ def main2():
                         auxqn1[inuv]='NSC'
                     if int(arqi['vis'][inuv]) != 99 and arqi['qn1'][inuv] == "" and auxqn1[inuv]!='NSC':
                         auxqn1[inuv]='NSC'
+                    if int(arqi['vis'][inuv]) == 99 and arqi['qn1'][inuv] == "" and arqi['tp'][inuv]!="":
+                        auxqn1[inuv] = 'NSC'
                 
                 arqi['qn1'] = auxqn1[:]
                 arqi['qn1'].mask(arqi['qn1'] == '0', '', inplace=True)
