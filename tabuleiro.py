@@ -379,8 +379,7 @@ def rest(areas, to_data, from_data, tipo):
 
                     # campo 3 vento
                     # arqi.Mensagem[i][arqi.Mensagem[i].find('KT')
-                    if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find(
-                            'SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SNRU') > -1:
+                    if mensagem1[j].find('SB') > -1 or mensagem1[j].find('SSKW') > -1 or mensagem1[j].find('SWPI') > -1 or mensagem1[j].find('SWEI') > -1 or mensagem1[j].find('SNRU') > -1 or mensagem1[j].find('SWGN') > -1:
                         estacao.append(mensagem1[j])
                     # if estacao[k] == 'SBFZ':
                     #      GGGGGGGGG = 1
@@ -946,8 +945,8 @@ def rest(areas, to_data, from_data, tipo):
         areaprev = 2
         estacaov=[]
         estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        #estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
-        estacaov.append('SBRD,SBVH,SBUY,SBJI,SBRB')
+        estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
+        #estacaov.append('SBRD,SBVH,SBUY,SBJI,SBRB')
         #estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
         estacaov.append('SBCY,SBPV,SBCZ,SBTT,SBIZ')
         #estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
