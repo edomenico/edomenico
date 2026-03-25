@@ -40,7 +40,7 @@ from bokeh.transform import dodge, factor_cmap
 # from metpy.units import units
 from PIL import Image
 
-global diaini, mesini,estacaov,,estacaovv
+global diaini, mesini,estacaov,estacaovv
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 
