@@ -1177,7 +1177,8 @@ def main2():
                 datainicio = dia + '/' + mes + '/' + ano
 
                  # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
-                url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacao1 + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini='+ ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM&page_tam=200'
+                #url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacao1 + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini='+ ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM&page_tam=200'
+                url = 'https://api-redemet.decea.mil.br/mensagens/metar/SBGL?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini='+ ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM&page_tam=200'
                 print('cheguei 1')
                 print(url)
                 res = requests.get(url)
