@@ -1190,7 +1190,8 @@ def main2():
                 s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
                 s = s.replace('null', '"placeholder"')
                 s = s.replace('- ', ',')
-                p = s.split(',')
+                s=s.replace('\/','/')
+                p = s.split('"mens":')
                 print('cheguei 2')
                 print(p)
                
