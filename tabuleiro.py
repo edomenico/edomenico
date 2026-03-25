@@ -765,7 +765,7 @@ def rest(areas, to_data, from_data, tipo):
         arquivo = []
         f.write(cab)
         arquivo.append(cab)
-        for k in range(0,len(estacao1)):
+        for k in range(0,len(estacaov)):
             for j in range(0, intervalo + 1, 1):
                 datahinic = datahini + timedelta(days=j)
                 ano = str(datahinic)[0:4]
