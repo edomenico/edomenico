@@ -40,7 +40,7 @@ from bokeh.transform import dodge, factor_cmap
 # from metpy.units import units
 from PIL import Image
 
-global diaini, mesini
+global diaini, mesini,estacaov
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 
@@ -950,7 +950,7 @@ def rest(areas, to_data, from_data, tipo):
         estacaov.append('SBEG, SBBV,')
     if tipo == 'REDEMET':
         print('area sel - redemet', areasel)
-        pdf = redemet_baixa2(1, areasel, to_data, from_data, estacaov)
+        pdf = redemet_baixa2(1, areasel, to_data, from_data, estacaov[])
     else:
         print('area sel', areasel)
         pdf = baixa_aws(areaprev)
