@@ -808,7 +808,7 @@ def rest(areas, to_data, from_data, tipo):
                     arquivo.append(montalinha)
                     montalinha=montalinha.replace('"', '')
                     f.write("\n" + montalinha)
-        f.close
+        #f.close
         return arquivo
 
     def baixa_aws(ar):
@@ -928,10 +928,11 @@ def rest(areas, to_data, from_data, tipo):
     # datainicio = datetime.utcnow()
     # to_data = datainicio.strftime("%d/%m/%Y")
     # from_data = to_data
-    estacaov=[]
+    
     if areas == 1:
         areasel = area_1
         areaprev = 1
+        estacaov=[]
         estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMI,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
         estacaov.append('SBJR,SBAC,SBAR,SBCB,SBCP,SBES')
         estacaov.append('SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP')
@@ -941,13 +942,14 @@ def rest(areas, to_data, from_data, tipo):
     else:
         areasel = area_2
         areaprev = 2
+        estacaov=[]
         estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,')
-        estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,')
-        estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,')
+        estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
+        estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
+        estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
         estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO,')
-        estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,')
-        estacaov.append('SBEG, SBBV,')
+        estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
+        estacaov.append('SBEG,SBBV')
     if tipo == 'REDEMET':
         print('area sel - redemet', areasel)
         pdf = redemet_baixa2(1, areasel, to_data, from_data)
