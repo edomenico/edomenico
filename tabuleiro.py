@@ -742,7 +742,7 @@ def rest(areas, to_data, from_data, tipo):
 
         return df1
 
-    def redemet_baixa2(escolha, ar, datahini, datahfim,areas):
+    def redemet_baixa2(escolha, ar, datahini, datahfim):
 
         import datetime
         import time
@@ -764,10 +764,7 @@ def rest(areas, to_data, from_data, tipo):
         cab = ',Localidade,Tipo,Data,Mensagem'
         arquivo = []
         f.write(cab)
-        if areas==1:
-            estca=estacaov
-        else:
-            estca=estacaovv
+        
         arquivo.append(cab)
         for k in range(0,len(estca)):
             for j in range(0, intervalo + 1, 1):
@@ -779,8 +776,7 @@ def rest(areas, to_data, from_data, tipo):
                 if areas==1:
                 # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
                     url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaov[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini=' + ano + mes + dia + '00&data_fim=' + ano + mes + dia + '23&saida_html=SIM&page_tam=200'
-                else:
-                    url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaovv[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini=' + ano + mes + dia + '00&data_fim=' + ano + mes + dia + '23&saida_html=SIM&page_tam=200'
+               
                 print('cheguei 1')
                 print(url)
                 res = requests.get(url)
@@ -948,17 +944,17 @@ def rest(areas, to_data, from_data, tipo):
     else:
         areasel = area_2
         areaprev = 2
-        estacaovv=[]
+        estacaov=[]
         estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        estacaovv.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
-        estacaovv.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
-        estacaovv.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
-        estacaovv.append('SWPI,SBBE,SBMQ,SBSN,SBSO,')
-        estacaovv.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
-        estacaovv.append('SBEG,SBBV')
+        estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
+        estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
+        estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
+        estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO,')
+        estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
+        estacaov.append('SBEG,SBBV')
     if tipo == 'REDEMET':
         print('area sel - redemet', areasel)
-        pdf = redemet_baixa2(1, areasel, to_data, from_data,areas)
+        pdf = redemet_baixa2(1, areasel, to_data, from_data)
     else:
         print('area sel', areasel)
         pdf = baixa_aws(areaprev)
