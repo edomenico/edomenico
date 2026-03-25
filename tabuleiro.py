@@ -700,7 +700,7 @@ def rest(areas, to_data, from_data, tipo):
                     if len(pres) != len(dryt):
                         dryt.append('NaN')
                         dewp.append('NaN')
-                
+                print('Estacao: ', estacao[k])
                 df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [
                     dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
                                 altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [
@@ -2594,11 +2594,11 @@ while True:
                     if st.button('Atualizar'):
                         progress_text = "Processando... Aguarde."
                         my_bar = st.progress(0, text=progress_text)
-                        pt = rest(2, to_data, from_data, 'REDEMET')
+                        pt = rest(1, to_data, from_data, 'REDEMET')
                         my_bar.progress(50, text="Em andamento...")
                         # for percent_complete in range(100):
                         #     time.sleep(0.01)
-                        pt = rest(1, to_data, from_data, 'REDEMET')
+                        pt = rest(2, to_data, from_data, 'REDEMET')
     
                         my_bar.progress(100, text="Terminou")
                 else:
