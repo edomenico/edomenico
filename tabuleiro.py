@@ -808,7 +808,7 @@ def rest(areas, to_data, from_data, tipo):
                     arquivo.append(montalinha)
                     montalinha=montalinha.replace('"', '')
                     f.write("\n" + montalinha)
-        # f.close
+        f.close
         return arquivo
 
     def baixa_aws(ar):
