@@ -2594,11 +2594,11 @@ while True:
                     if st.button('Atualizar'):
                         progress_text = "Processando... Aguarde."
                         my_bar = st.progress(0, text=progress_text)
-                        pt = rest(1, to_data, from_data, 'REDEMET')
+                        pt = rest(2, to_data, from_data, 'REDEMET')
                         my_bar.progress(50, text="Em andamento...")
                         # for percent_complete in range(100):
                         #     time.sleep(0.01)
-                        pt = rest(2, to_data, from_data, 'REDEMET')
+                        pt = rest(1, to_data, from_data, 'REDEMET')
     
                         my_bar.progress(100, text="Terminou")
                 else:
