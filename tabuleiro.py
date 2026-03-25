@@ -814,6 +814,7 @@ def main():
 
                     montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
                     arquivo.append(montalinha)
+                    montalinha=montalinha.replace('"', '')
                     f.write("\n" + montalinha)
             #f.close
             return arquivo
