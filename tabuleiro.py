@@ -305,12 +305,7 @@ def rest(areas, to_data, from_data, tipo):
         estado = areasele
         areatrab = areasele
 
-        arqi = pd.read_csv('metar111.csv',
-                           sep=',',
-                           # index_col=0,
-                           parse_dates=True,
-                           dayfirst=True,
-                           decimal='.', on_bad_lines='skip')
+        arqi = pd.read_csv('metar111.csv',sep=',', encoding='utf-8')
         wspd = []
         wdir = []
         estacao = []
