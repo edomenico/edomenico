@@ -931,7 +931,7 @@ def rest(areas, to_data, from_data, tipo):
     # datainicio = datetime.utcnow()
     # to_data = datainicio.strftime("%d/%m/%Y")
     # from_data = to_data
-    estacao=[]
+    estacaov=[]
     if areas == 1:
         areasel = area_1
         areaprev = 1
