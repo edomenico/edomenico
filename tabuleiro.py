@@ -950,7 +950,7 @@ def rest(areas, to_data, from_data, tipo):
         #estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
        
         #estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
-        #estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
+        estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
         estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
         estacaov.append('SBEG,SBBV')
     if tipo == 'REDEMET':
