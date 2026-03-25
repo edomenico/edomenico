@@ -773,9 +773,9 @@ def rest(areas, to_data, from_data, tipo):
                 mes = str(datahinic)[5:7]
                 dia = str(datahinic)[8:10]
                 datainicio = dia + '/' + mes + '/' + ano
-                if areas==1:
+                
                 # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
-                    url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaov[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini=' + ano + mes + dia + '00&data_fim=' + ano + mes + dia + '23&saida_html=SIM&page_tam=200'
+                url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaov[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini=' + ano + mes + dia + '00&data_fim=' + ano + mes + dia + '23&saida_html=SIM&page_tam=200'
                
                 print('cheguei 1')
                 print(url)
