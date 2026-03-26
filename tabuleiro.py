@@ -979,8 +979,8 @@ def main():
             estacaov.append('SBJR,SBAC,SBAR,SBCB,SBCP,SBES')
             estacaov.append('SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP')
             estacaov.append('SBJU,SBKG,SBME,SBMI,SBMO,SBMS')
-            estacaov.append('SBPB,SBPJ,SBPL,SBPS,SBRF')
-            estacaov.append('SBSL,SBSG,SBTE,SBVT,SNRU')
+            estacaov.append('SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ')
+            estacaov.append('SBSL,SBSG,SBTE,SBVT,SNRU,SBNT')
         else:
             areasel = area_2
             areaprev = 2
