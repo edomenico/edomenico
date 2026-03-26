@@ -39,7 +39,7 @@ from bokeh.sampledata.periodic_table import elements
 from bokeh.transform import dodge, factor_cmap
 #from metpy.units import units
 from PIL import Image
-global diaini, mesini
+global diaini, mesini,estacaov,estacaovv
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 
@@ -310,12 +310,7 @@ def main():
             estado=areasele
             areatrab=areasele
     
-            arqi = pd.read_csv('metar111.csv',
-                               sep=',',
-                               # index_col=0,
-                               parse_dates=True,
-                               dayfirst=True,
-                               decimal='.',on_bad_lines='skip')
+            arqi = pd.read_csv('metar111.csv',sep=',', encoding='utf-8')
             wspd = []
             wdir = []
             estacao = []
@@ -752,8 +747,8 @@ def main():
             return df1
 
            
-        def redemet_baixa2(escolha, ar, datahini, datahfim, estacao1):
-            
+        def redemet_baixa2(escolha, ar, datahini, datahfim):
+
             import datetime
             import time
             import requests
@@ -763,59 +758,63 @@ def main():
             from pandas.io.json import json_normalize
             from bs4 import BeautifulSoup
             dtini = '20240426'
-            #estacao1=estacao1[0:len(estacao1)-1]
+            # estacao1=estacao1[0:len(estacao1)-1]
             f = open("metar111.csv", "w")
-            if (datahfim - datahini).days==0:
-                intervalo=0
+            if (datahfim - datahini).days == 0:
+                intervalo = 0
             else:
-                intervalo=(datahfim - datahini).days
+                intervalo = (datahfim - datahini).days
             print('cheguei aqui 3')
             print(intervalo)
             cab = ',Localidade,Tipo,Data,Mensagem'
             arquivo = []
             f.write(cab)
+            
             arquivo.append(cab)
-
-            for j in range(0,intervalo+1,1):
-                datahinic=datahini + timedelta(days=j)
-                ano = str(datahinic)[0:4]
-                mes = str(datahinic)[5:7]
-                dia = str(datahinic)[8:10]
-                datainicio = dia + '/' + mes + '/' + ano
-
-                 # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
-                url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local='+estacao1+'&msg=metar&data_ini=' + ano+mes+dia + '00&data_fim=' + ano+mes+dia + '23&saida_html=SIM'
-                print('cheguei 1')
-                print(url)
-                res = requests.get(url)
-                soup = BeautifulSoup(res.content, "lxml")
-                s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
-                s = s.replace('null', '"placeholder"')
-                s = s.replace('- ', ',')
-                p = s.split(',')
-                print('cheguei 2')
-                print(p)
-               
-                for i in range(1, len(p), 1):
-                    if p[i].find('METAR') > -1:
-                        b = 'METAR'
-                    else:
-                        b = 'SPECI'
-                    if p[i].find('SB') > -1:
-                        a = p[i][p[i].find('SB'):p[i].find('SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
-                    elif p[i].find('SSKW') > -1:
-                        a = 'SSKW'
-                    elif p[i].find('SWPI') > -1:
-                        a = 'SWPI'
-                    elif p[i].find('SWEI') > -1:
-                        a = 'SWEI'
-                    elif p[i].find('SNRU') > -1:
-                        a = 'SNRU'
-
-                    montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
-                    arquivo.append(montalinha)
-                    montalinha=montalinha.replace('"', '')
-                    f.write("\n" + montalinha)
+            for k in range(0,len(estacaov)):
+                for j in range(0, intervalo + 1, 1):
+                    datahinic = datahini + timedelta(days=j)
+                    ano = str(datahinic)[0:4]
+                    mes = str(datahinic)[5:7]
+                    dia = str(datahinic)[8:10]
+                    datainicio = dia + '/' + mes + '/' + ano
+                    
+                    # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msg=metar&data_ini=2023041900&data_fim=2023041923&saida_html=SIM'
+                    url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaov[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T'+'&msg=metar&data_ini=' + ano + mes + dia + '00&data_fim=' + ano + mes + dia + '23&saida_html=SIM&page_tam=200'
+                   
+                    print('cheguei 1')
+                    print(url)
+                    res = requests.get(url)
+                    soup = BeautifulSoup(res.content, "lxml")
+                    s = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')')
+                    s = s.replace('null', '"placeholder"')
+                    s = s.replace('- ', ',')
+                    s=s.replace('\/','/')
+                    p = s.split('"mens":')
+                    print('cheguei 2')
+                    print(p)
+        
+                    for i in range(1, len(p), 1):
+                        if p[i].find('METAR') > -1:
+                            b = 'METAR'
+                        else:
+                            b = 'SPECI'
+                        if p[i].find('SB') > -1:
+                            a = p[i][p[i].find('SB'):p[i].find(
+                                'SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                        elif p[i].find('SSKW') > -1:
+                            a = 'SSKW'
+                        elif p[i].find('SWPI') > -1:
+                            a = 'SWPI'
+                        elif p[i].find('SWEI') > -1:
+                            a = 'SWEI'
+                        elif p[i].find('SNRU') > -1:
+                            a = 'SNRU'
+        
+                        montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                        arquivo.append(montalinha)
+                        montalinha=montalinha.replace('"', '')
+                        f.write("\n" + montalinha)
             #f.close
             return arquivo
     
@@ -973,14 +972,30 @@ def main():
        # from_data = to_data
     
         if areas==1:
-            areasel=area_1
+            areasel = area_1
             areaprev = 1
-            estacao = 'SBJR,SBMI,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
+            estacaov=[]
+            estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMI,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
+            estacaov.append('SBJR,SBAC,SBAR,SBCB,SBCP,SBES')
+            estacaov.append('SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP')
+            estacaov.append('SBJU,SBKG,SBME,SBMI,SBMO,SBMS')
+            estacaov.append('SBPB,SBPJ,SBPL,SBPS,SBRF')
+            estacaov.append('SBSL,SBSG,SBTE,SBVT,SNRU')
         else:
-            areasel=area_2
+            areasel = area_2
             areaprev = 2
+            estacaov=[]
             estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-        pdf= redemet_baixa2(1, areasel, to_data, from_data,estacao)
+            estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
+            #estacaov.append('SBRD,SBVH,SBUY,SBJI,SBRB')
+            estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
+            #estacaov.append('SBCY,SBPV,SBCZ,SBTT,SBIZ')
+            estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
+            #estacaov.append('SBMA,SBCJ,SBHT,SBTB,SBOI')
+            estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
+            estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
+            estacaov.append('SBEG,SBBV')
+        pdf= redemet_baixa2(1, areasel, to_data, from_data)
         
         pdff=trata_redemet(areaprev)
         #edited_df = st.data_editor(pdff)
