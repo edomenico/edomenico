@@ -994,7 +994,7 @@ def main():
             estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
             estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
             estacaov.append('SBEG,SBBV')
-            estacaov.append('SBRJ')
+            #estacaov.append('SBRJ')
         pdf= redemet_baixa2(1, areasel, to_data, from_data)
         
         pdff=trata_redemet(areaprev)
