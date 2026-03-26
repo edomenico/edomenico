@@ -976,25 +976,25 @@ def main():
             areaprev = 1
             estacaov=[]
             estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMI,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
-            #estacaov.append('SBJR,SBAC,SBAR,SBCB,SBCP,SBES')
-            #estacaov.append('SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP')
-            #estacaov.append('SBJU,SBKG,SBME,SBMI,SBMO,SBMS')
-            #estacaov.append('SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ')
-            #estacaov.append('SBSL,SBSG,SBTE,SBVT,SNRU,SBNT')
-            estacaov.append('SBNT')
-            estacaov.append('SBRJ')
+            estacaov.append('SBJR,SBAC,SBAR,SBCB,SBCP,SBES')
+            estacaov.append('SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP')
+            estacaov.append('SBJU,SBKG,SBME,SBMI,SBMO,SBMS')
+            estacaov.append('SBPB,SBPJ,SBPL,SBPS,SBRF,SBRJ')
+            estacaov.append('SBSL,SBSG,SBTE,SBVT,SNRU,SBNT')
+            #estacaov.append('SBNT')
+            #estacaov.append('SBRJ')
         else:
             areasel = area_2
             areaprev = 2
             estacaov=[]
             estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
-            #estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
-            #estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
-            #estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
-            #estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
-            #estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
-            #estacaov.append('SBEG,SBBV')
-            #estacaov.append('SBRJ')
+            estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
+            estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
+            estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
+            estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
+            estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
+            estacaov.append('SBEG,SBBV')
+            estacaov.append('SBRJ')
         pdf= redemet_baixa2(1, areasel, to_data, from_data)
         
         pdff=trata_redemet(areaprev)
