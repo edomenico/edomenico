@@ -822,70 +822,71 @@ def rest(areas, to_data, from_data, tipo):
         from datetime import datetime, timedelta
         # importe as funções BeautifulSoup para analisar os dados retornados do site
         from bs4 import BeautifulSoup
-
+        
+        for k in range(0,len(estacaoaws)):
         # especifique o URL
-        if ar == 1:
-            #url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=html&hours=96"
-            url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=raw&taf=false&hours=96"
-            #url = "https://aviationweather.gov/data/metar/?ids=SBGL%2CSBRJ&hours=96#"                                                                                                                                                                                  # https://aviationweather.gov/api/data/metar?ids=sbgl%2Csbrj&format=raw&taf=false&hours=1.5
-        else:
-            # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
-            url = 'https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&&format=raw&taf=false&hours=96'
-            #url = "https://aviationweather.gov/data/metar/?ids=SBCY%2CSBPV&hours=96#"   
-        # Consulte o site e retorne o html para a variável 'page'
-
-        res = requests.get(url)
-        soup = BeautifulSoup(res.content, "lxml")
-
-        # Parse o html na variável 'page' e armazene-o no formato BeautifulSoup
-        p = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')').split('\n\n\n')
-        metar = []
-        data = []
-
-        metari = []
-        dataaux = datetime.utcnow()
-        dataaux = datetime.utcnow() - timedelta(hours=96)
-        mesnow = datetime.utcnow().month
-        mesant = (datetime.utcnow() - timedelta(hours=96)).month
-        # diaini = list_item[0].contents[0].split()[1][0:2]
-        controledia = False
-        controlemens = False
-        for i in range(0, len(p), 1):
-            if p[i].find('METAR') > -1:
-                b = 'METAR'
-                controlemens = True
-            elif p[i].find('SPECI') > -1:
-                b = 'SPECI'
-                controlemens = True
-            if p[i].find('UTC') > -1:
-                # diaini=p[i] [p[i].find('UTC') -5 :p[i].find('UTC') -3]
-                diaini = p[i][p[i].find('UTC') + 4:p[i].find('UTC') + 6]
-                controledia = True
-
-            if p[i].find('Text:') > -1:
-                inicio = p[i].find('Text:')
-                a = p[i][p[i].find('SB'):p[i].find(
-                    'SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
-            elif p[i].find('SSKW') > -1:
-                a = 'SSKW'
-            elif p[i].find('SWPI') > -1:
-                a = 'SWPI'
-            elif p[i].find('SWEI') > -1:
-                a = 'SWEI'
-            elif p[i].find('SNRU') > -1:
-                a = 'SNRU'
-            if controlemens == True:
-                montalinha = p[i][p[i].find('Text:') + 5: len(p[i])] + '='
-                controlemens = False
-            if controledia == True:
-                mes = mesnow
-                ano = datetime.utcnow().year
-                dataini = str(diaini) + '/' + str(mes) + '/' + str(ano)
-                metar.append([dataini, 'METAR ' + montalinha])
-
-                controledia = False
-            # montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+            if ar == 1:
+                #url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=html&hours=96"
+                #url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=raw&taf=false&hours=96"
+                url='https://aviationweather.gov/api/data/metar?ids='+estacaoaws[k]+'&format=raw&taf=false&hours=96&date=202603290000'                                                                                                                                                                                 # https://aviationweather.gov/api/data/metar?ids=sbgl%2Csbrj&format=raw&taf=false&hours=1.5
+            else:
+                # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
+                #url = 'https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&&format=raw&taf=false&hours=96'
+                url='https://aviationweather.gov/api/data/metar?ids='+estacaoaws[k]+'&format=raw&taf=false&hours=96&date=202603290000' 
+            # Consulte o site e retorne o html para a variável 'page'
+    
+            res = requests.get(url)
+            soup = BeautifulSoup(res.content, "lxml")
+    
+            # Parse o html na variável 'page' e armazene-o no formato BeautifulSoup
+            p = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')').split('\n\n\n')
+            metar = []
+            data = []
+    
+            metari = []
+            dataaux = datetime.utcnow()
+            dataaux = datetime.utcnow() - timedelta(hours=96)
+            mesnow = datetime.utcnow().month
+            mesant = (datetime.utcnow() - timedelta(hours=96)).month
             # diaini = list_item[0].contents[0].split()[1][0:2]
+            controledia = False
+            controlemens = False
+            for i in range(0, len(p), 1):
+                if p[i].find('METAR') > -1:
+                    b = 'METAR'
+                    controlemens = True
+                elif p[i].find('SPECI') > -1:
+                    b = 'SPECI'
+                    controlemens = True
+                if p[i].find('UTC') > -1:
+                    # diaini=p[i] [p[i].find('UTC') -5 :p[i].find('UTC') -3]
+                    diaini = p[i][p[i].find('UTC') + 4:p[i].find('UTC') + 6]
+                    controledia = True
+    
+                if p[i].find('Text:') > -1:
+                    inicio = p[i].find('Text:')
+                    a = p[i][p[i].find('SB'):p[i].find(
+                        'SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                elif p[i].find('SSKW') > -1:
+                    a = 'SSKW'
+                elif p[i].find('SWPI') > -1:
+                    a = 'SWPI'
+                elif p[i].find('SWEI') > -1:
+                    a = 'SWEI'
+                elif p[i].find('SNRU') > -1:
+                    a = 'SNRU'
+                if controlemens == True:
+                    montalinha = p[i][p[i].find('Text:') + 5: len(p[i])] + '='
+                    controlemens = False
+                if controledia == True:
+                    mes = mesnow
+                    ano = datetime.utcnow().year
+                    dataini = str(diaini) + '/' + str(mes) + '/' + str(ano)
+                    metar.append([dataini, 'METAR ' + montalinha])
+    
+                    controledia = False
+                # montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                # diaini = list_item[0].contents[0].split()[1][0:2]
 
         p = 1
         data_df = pd.DataFrame(metar, columns=['Data', 'Mensagem'])
@@ -935,26 +936,39 @@ def rest(areas, to_data, from_data, tipo):
         areasel = area_1
         areaprev = 1
         estacaov=[]
+        estacaoaws=[]
         #estacao = 'SBJR,SBAC,SBAR,SBCB,SBCP,SBES,SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP,SBJU,SBKG,SBME,SBMI,SBMO,SBMS,SBNT,SBPB,SNRU,SBPJ,SBPL,SBPS,SBRF,SBRJ,SBSL,SBSG,SBTE,SBVT,'
         estacaov.append('SBJR,SBAC,SBAR,SBCB,SBCP,SBES')
         estacaov.append('SBFS,SBFN,SBFZ,SBGL,SBJE,SBJP')
         estacaov.append('SBJU,SBKG,SBME,SBMI,SBMO,SBMS')
-        estacaov.append('SBPB,SBPJ,SBPL,SBPS,SBRF')
-        estacaov.append('SBSL,SBSG,SBTE,SBVT,SNRU')
+        estacaov.append('SBRJ,SBPB,SBPJ,SBPL,SBPS,SBRF')
+        estacaov.append('SBNT,SBSL,SBSG,SBTE,SBVT,SNRU')
+
+        estacaoaws.append('SBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES')
+        estacaoaws.append('SBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP')
+        estacaoaws.append('SBJU%2CSBKG%2CSBME%2CSBMI%2CSBMO%2CSBMS')
+        estacaoaws.append('SBRJ%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF')
+        estacaoaws.append('SBNT%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU ')
         
     else:
         areasel = area_2
         areaprev = 2
         estacaov=[]
+        estacaoaws=[]
         estacao = 'SBRD,SBVH,SWEI,SBUY,SBJI,SBRB,SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ,SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI,SWPI,SBBE,SBMQ,SBSN,SBSO,SBSI,SBAT,SBIH,SBMY,SBTF,SBUA,SBEG,SBBV,'
         estacaov.append('SBRD,SBVH,SWEI,SBUY,SBJI,SBRB')
         estacaov.append('SSKW,SBCY,SBPV,SBCZ,SBTT,SBIZ')
-       
         estacaov.append('SWGN,SBMA,SBCJ,SBHT,SBTB,SBOI')
-       
         estacaov.append('SWPI,SBBE,SBMQ,SBSN,SBSO')
         estacaov.append('SBSI,SBAT,SBIH,SBMY,SBTF,SBUA')
         estacaov.append('SBEG,SBBV')
+
+        estacaoaws.append('SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB')
+        estacaoaws.append('SSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ')
+        estacaoaws.append('SWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI')
+        estacaoaws.append('SWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO')
+        estacaoaws.append('SBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA')
+        estacaoaws.append('SBEG%2CSBBV')
     if tipo == 'REDEMET':
         print('area sel - redemet', areasel)
         pdf = redemet_baixa2(1, areasel, to_data, from_data)
