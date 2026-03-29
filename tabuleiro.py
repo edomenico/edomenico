@@ -714,7 +714,7 @@ def rest(areas, to_data, from_data, tipo):
 
         # -----------------------juntar arquivos
         print('ESTADO: ', estado)
-        arqiago = pd.read_csv('metar_trat_' + str(estado) + '.csv',
+        arqiago = pd.read_csv('/mount/src/edomenico/metar_trat_' + str(estado) + '.csv',
                               sep=',',
                               decimal='.')
         # x = [datetime.strptime(d, '%d/%m/%Y %H:%M') for d in arqiago.datahora]
