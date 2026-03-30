@@ -811,97 +811,103 @@ def rest(areas, to_data, from_data, tipo):
                     f.write("\n" + montalinha)
         #f.close
         return arquivo
-
     def baixa_aws(ar):
-        import urllib.request
-        import re
-        from bs4 import BeautifulSoup
-        import requests
-        import pandas as pd
+            import urllib.request
+            import re
+            from bs4 import BeautifulSoup
+            import requests
+            import pandas as pd
 
-        from datetime import datetime, timedelta
-        # importe as funções BeautifulSoup para analisar os dados retornados do site
-        from bs4 import BeautifulSoup
-        
-        for k in range(0,len(estacaoaws)):
-        # especifique o URL
-            if ar == 1:
-                #url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=html&hours=96"
-                #url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=raw&taf=false&hours=96"
-                url='https://aviationweather.gov/api/data/metar?ids='+estacaoaws[k]+'&format=raw&taf=false&hours=120&date=20260300000'                                                                                                                                                                                 # https://aviationweather.gov/api/data/metar?ids=sbgl%2Csbrj&format=raw&taf=false&hours=1.5
-            else:
-                # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
-                #url = 'https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&&format=raw&taf=false&hours=96'
-                url='https://aviationweather.gov/api/data/metar?ids='+estacaoaws[k]+'&format=raw&taf=false&hours=120&date=20260300000' 
-            # Consulte o site e retorne o html para a variável 'page'
-    
-            res = requests.get(url)
-            soup = BeautifulSoup(res.content, "lxml")
-    
-            # Parse o html na variável 'page' e armazene-o no formato BeautifulSoup
-            p = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')').split('\n\n\n')
-            metar = []
-            data = []
-    
-            metari = []
-            dataaux = datetime.utcnow()
-            dataaux = datetime.utcnow() - timedelta(hours=96)
-            mesnow = datetime.utcnow().month
-            mesant = (datetime.utcnow() - timedelta(hours=96)).month
-            # diaini = list_item[0].contents[0].split()[1][0:2]
-            controledia = False
-            controlemens = False
-            for i in range(0, len(p), 1):
-                if p[i].find('METAR') > -1:
-                    b = 'METAR'
-                    controlemens = True
-                    controledia = True
-                    diaini = p[i][11:13]
-                elif p[i].find('SPECI') > -1:
-                    b = 'SPECI'
-                    controlemens = True
-                    controledia = True
-                    diaini = p[i][11:13]
-                if p[i].find('UTC') > -1:
-                    # diaini=p[i] [p[i].find('UTC') -5 :p[i].find('UTC') -3]
-                    diaini = p[i][p[i].find('UTC') + 4:p[i].find('UTC') + 6]
-                    controledia = True
-    
-                if p[i].find('Text:') > -1:
-                    inicio = p[i].find('Text:')
-                    a = p[i][p[i].find('SB'):p[i].find(
-                        'SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
-                elif p[i].find('SSKW') > -1:
-                    a = 'SSKW'
-                elif p[i].find('SWPI') > -1:
-                    a = 'SWPI'
-                elif p[i].find('SWEI') > -1:
-                    a = 'SWEI'
-                elif p[i].find('SNRU') > -1:
-                    a = 'SNRU'
-                if controlemens == True:
-                    montalinha = p[i][p[i].find('Text:') + 5: len(p[i])] + '='
-                    controlemens = False
-                if controledia == True:
-                    mes = mesnow
-                    ano = datetime.utcnow().year
-                    dataini = str(diaini) + '/' + str(mes) + '/' + str(ano)
-                    metar.append([dataini, 'METAR ' + montalinha])
-    
-                    controledia = False
-                # montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
-                # diaini = list_item[0].contents[0].split()[1][0:2]
+            from datetime import datetime, timedelta
+            # importe as funções BeautifulSoup para analisar os dados retornados do site
+            from bs4 import BeautifulSoup
+            f = open("metar111.csv", "w")
+            cab = ',Localidade,Tipo,Data,Mensagem'
+            arquivo = []
+            f.write(cab)
 
-        p = 1
-        data_df = pd.DataFrame(metar, columns=['Data', 'Mensagem'])
-        file = data_df.to_csv("metar111.csv")
+            for k in range(0, len(estacaoaws)):
+                # especifique o URL
+                if ar == 1:
+                    # url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=html&hours=96"
+                    # url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=raw&taf=false&hours=96"
+                    url = 'https://aviationweather.gov/api/data/metar?ids=' + estacaoaws[
+                        k] + '&format=raw&taf=false&hours=24&date=202603290000'  # https://aviationweather.gov/api/data/metar?ids=sbgl%2Csbrj&format=raw&taf=false&hours=1.5
+                else:
+                    # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
+                    # url = 'https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&&format=raw&taf=false&hours=96'
+                    url = 'https://aviationweather.gov/api/data/metar?ids=' + estacaoaws[
+                        k] + '&format=raw&taf=false&hours=120&date=202603300000'
+                    # Consulte o site e retorne o html para a variável 'page'
 
-        # df = df.drop(columns=['Unnamed: 0'])
-        # os.chdir("/mount/src/edomenico/area1")
-        # df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
-        # df.to_csv('example.csv')
-        return file
+                res = requests.get(url)
+                soup = BeautifulSoup(res.content, "lxml")
 
+                # Parse o html na variável 'page' e armazene-o no formato BeautifulSoup
+                pp = soup.select('html')[0].text.strip('jQuery1720724027235122559_1542743885014(').strip(')').split('\n\n\n')
+                p=pp[0].split('\n')
+                dataaux = datetime.utcnow()
+                dataaux = datetime.utcnow() - timedelta(hours=96)
+                mes = datetime.utcnow().month
+                diaini=datetime.utcnow().day
+                ano = datetime.utcnow().year
+                #mesant = (datetime.utcnow() - timedelta(hours=96)).month
+                #diaini = list_item[0].contents[0].split()[1][0:2]
+                controledia = False
+                controlemens = False
+                for i in range(0, len(p), 1):
+                    if p[i].find('METAR') > -1:
+                        b = 'METAR'
+                        controlemens = True
+                        controledia = True
+                        diaini = p[i][11:13]
+                    elif p[i].find('SPECI') > -1:
+                        b = 'SPECI'
+                        controlemens = True
+                        controledia = True
+                    if p[i].find('UTC') > -1:
+                        # diaini=p[i] [p[i].find('UTC') -5 :p[i].find('UTC') -3]
+                        diaini = p[i][p[i].find('UTC') + 4:p[i].find('UTC') + 6]
+                        controledia = True
+
+                    if p[i].find('SB') > -1:
+                        a = p[i][p[i].find('SB'):p[i].find('SB') + 4]  # or p[i].find('SSKW') > -1 or mensagem1[i].find('SWPI') > -1 or mensagem1[i].find('SWEI') > -1:
+                    elif p[i].find('SSKW') > -1:
+                        a = 'SSKW'
+                    elif p[i].find('SWPI') > -1:
+                        a = 'SWPI'
+                    elif p[i].find('SWEI') > -1:
+                        a = 'SWEI'
+                    elif p[i].find('SNRU') > -1:
+                        a = 'SNRU'
+                    #if controlemens == True:
+                    datainicio = str(diaini) + '/' + str(mes) + '/' + str(ano)
+                    montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' +p[i][p[i].find('Text:') + 6: len(p[i])] + '='
+                        #controlemens = False
+                    #if controledia == True:
+                        #mes = mesnow
+                       # ano = datetime.utcnow().year
+                    #dataini = str(diaini) + '/' + str(mes) + '/' + str(ano)
+                        #metar.append([dataini, 'METAR ' + montalinha])
+
+                        #controledia = False
+
+                    arquivo.append(montalinha)
+
+                    f.write("\n" + montalinha)
+                    # montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                    # diaini = list_item[0].contents[0].split()[1][0:2]
+
+           # p = 1
+           # data_df = pd.DataFrame(metar, columns=['Data', 'Mensagem'])
+           # file = data_df.to_csv("metar111.csv")
+
+            # df = df.drop(columns=['Unnamed: 0'])
+            # os.chdir("area1")
+            # df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
+            # df.to_csv('example.csv')
+            f.close
+            return arquivo
     start_date = datetime.today()
     end_date = datetime.today()
 
