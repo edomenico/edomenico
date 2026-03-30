@@ -906,7 +906,7 @@ def rest(areas, to_data, from_data, tipo):
             # os.chdir("area1")
             # df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
             # df.to_csv('example.csv')
-            f.close
+            #f.close
             return arquivo
     start_date = datetime.today()
     end_date = datetime.today()
