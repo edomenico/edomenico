@@ -826,18 +826,20 @@ def rest(areas, to_data, from_data, tipo):
             arquivo = []
             f.write(cab)
 
+
             for k in range(0, len(estacaoaws)):
                 # especifique o URL
+                dataconsulta=datetime.utcnow().strftime('%Y%m%d%H'+'00')
                 if ar == 1:
                     # url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=html&hours=96"
                     # url = "https://aviationweather.gov/api/data/metar?ids=SBMI%2CSBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES%2CSBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP%2CSBJU%2CSBKG%2CSBME%2CSBMO%2CSBMS%2CSBNT%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF%2CSBRJ%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU&format=raw&taf=false&hours=96"
                     url = 'https://aviationweather.gov/api/data/metar?ids=' + estacaoaws[
-                        k] + '&format=raw&taf=false&hours=24&date=202603290000'  # https://aviationweather.gov/api/data/metar?ids=sbgl%2Csbrj&format=raw&taf=false&hours=1.5
+                        k] + '&format=raw&taf=false&hours=96&date='+dataconsulta  # https://aviationweather.gov/api/data/metar?ids=sbgl%2Csbrj&format=raw&taf=false&hours=1.5
                 else:
                     # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
                     # url = 'https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&&format=raw&taf=false&hours=96'
                     url = 'https://aviationweather.gov/api/data/metar?ids=' + estacaoaws[
-                        k] + '&format=raw&taf=false&hours=120&date=202603300000'
+                        k] + '&format=raw&taf=false&hours=96&date'+dataconsulta
                     # Consulte o site e retorne o html para a variável 'page'
 
                 res = requests.get(url)
@@ -882,7 +884,9 @@ def rest(areas, to_data, from_data, tipo):
                         a = 'SNRU'
                     #if controlemens == True:
                     datainicio = str(diaini) + '/' + str(mes) + '/' + str(ano)
-                    montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' +p[i][p[i].find('Text:') + 6: len(p[i])] + '='
+                    auxlinha= b+p[i][p[i].find('Text:') + 6: len(p[i])] + '='
+                    #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ','+p[i][p[i].find('Text:') + 6: len(p[i])] + '='
+                    montalinha=str(i) + ',' + a + ',' + b + ',' + datainicio + ','+auxlinha
                         #controlemens = False
                     #if controledia == True:
                         #mes = mesnow
@@ -906,7 +910,7 @@ def rest(areas, to_data, from_data, tipo):
             # os.chdir("area1")
             # df.to_csv("metar111.csv",encoding='utf-8', index=False,date_format='%d/%m/%Y %H:%M')
             # df.to_csv('example.csv')
-            #f.close
+            f.close
             return arquivo
     start_date = datetime.today()
     end_date = datetime.today()
