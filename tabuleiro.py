@@ -699,7 +699,7 @@ def rest(areas, to_data, from_data, tipo):
                     if len(pres) != len(dryt):
                         dryt.append('NaN')
                         dewp.append('NaN')
-                #print('Estacaoporra2: ', estacao[k])
+                print('Estacaoporra2: ', estacao[k])
                 df.loc[k] = [estacao[k]] + [datahora[k]] + [wspd[k]] + [wdir[k]] + [gust[k]] + [dryt[k]] + [
                     dewp[k]] + [pres[k]] + [vis[k]] + [tp[k]] + [
                                 altn1[k]] + [qn1[k]] + [altn2[k]] + [qn2[k]] + [altn3[k]] + [qn3[k]] + [
@@ -887,7 +887,7 @@ def rest(areas, to_data, from_data, tipo):
                     auxlinha= b+p[i][p[i].find('Text:') + 6: len(p[i])] + '='
                     #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ','+p[i][p[i].find('Text:') + 6: len(p[i])] + '='
                     montalinha=str(i) + ',' + a + ',' + b + ',' + datainicio + ','+auxlinha
-                    print('montalinha: ' , montalinha)
+                    #print('montalinha: ' , montalinha)
                         #controlemens = False
                     #if controledia == True:
                         #mes = mesnow
