@@ -340,7 +340,8 @@ def rest(areas, to_data, from_data, tipo):
                 mensagem1 = 'NAN'
 
             elif arqi.Mensagem[i].find('COR') > -1:
-                novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
+                #novamens = 'METAR ' + arqi.Mensagem[i][arqi.Mensagem[i].find('COR') + 4:len(arqi.Mensagem[i])]
+                novamens=arqi.Mensagem[i].replace("COR", "")
 
                 mensagem1 = novamens.split()
                 mens = novamens
