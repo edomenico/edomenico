@@ -961,8 +961,10 @@ def rest(areas, to_data, from_data, tipo):
         estacaoaws.append('SBJR%2CSBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES')
         estacaoaws.append('SBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP')
         estacaoaws.append('SBJU%2CSBKG%2CSBME%2CSBMI%2CSBMO%2CSBMS')
-        estacaoaws.append('SBRJ%2CSBPB%2CSBPJ%2CSBPL%2CSBPS%2CSBRF')
-        estacaoaws.append('SBNT%2CSBSL%2CSBSG%2CSBTE%2CSBVT%2CSNRU ')
+        estacaoaws.append('SBRJ%2CSBPB%2CSBPJ')
+        estacaoaws.append('SBPL%2CSBPS%2CSBRF')
+        estacaoaws.append('SBNT%2CSBSL%2CSBSG')
+        estacaoaws.append('SBTE%2CSBVT%2CSNRU')
         
     else:
         areasel = area_2
