@@ -888,7 +888,7 @@ def rest(areas, to_data, from_data, tipo):
                     auxlinha= b+p[i][p[i].find('Text:') + 6: len(p[i])] + '='
                     #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ','+p[i][p[i].find('Text:') + 6: len(p[i])] + '='
                     montalinha=str(i) + ',' + a + ',' + b + ',' + datainicio + ','+auxlinha
-                    #print('montalinha: ' , montalinha)
+                    print('montalinha: ' , montalinha)
                         #controlemens = False
                     #if controledia == True:
                         #mes = mesnow
