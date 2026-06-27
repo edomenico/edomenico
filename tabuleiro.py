@@ -1989,11 +1989,11 @@ def tabuleiro(est, areatrab, datainicio):
             Tooltips = """
                <div>
                 <font color = "red"
-                ##<i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
-                ##&nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
-
                 <i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
-                &nbsp&nbsp&nbsp&nbsp Tmáx: @hmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
+                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
+
+               # <i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
+                #&nbsp&nbsp&nbsp&nbsp Tmáx: @hmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
                 
                 
                 </font>
