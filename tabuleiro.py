@@ -1668,7 +1668,7 @@ def tabuleiro(est, areatrab, datainicio):
                 for bb in range(0, len(arqi['datahora2']), 1):
                     if ccmax['datahora2'].dt.day[bbb] == arqi['datahora2'].dt.day[bb]:
                         tmax.append(ccmax.drytt[bbb])
-                        hmax.append(arqi['datahora2'][bbb])
+                        hmax.append(arqi['datahora2'][bb])
                         tmin.append(ccmin.drytt[bbb])
                     # vmax.append(ccmax.wspd[bbb])
                     # vmin.append(ccmin.wspd[bbb])
