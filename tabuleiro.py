@@ -1653,7 +1653,7 @@ def tabuleiro(est, areatrab, datainicio):
             ur = []
             tmax = []
             tmin = []
-            hmax= []
+            #hmax= []
             # vmax = []
             # vmin = []
             arqi['drytt'] = arqi['dryt']
@@ -1668,7 +1668,7 @@ def tabuleiro(est, areatrab, datainicio):
                 for bb in range(0, len(arqi['datahora2']), 1):
                     if ccmax['datahora2'].dt.day[bbb] == arqi['datahora2'].dt.day[bb]:
                         tmax.append(ccmax.drytt[bbb])
-                        hmax.append(arqi['datahora2'][bbb])
+                        #hmax.append(arqi['datahora2'][bbb])
                         tmin.append(ccmin.drytt[bbb])
                     # vmax.append(ccmax.wspd[bbb])
                     # vmin.append(ccmin.wspd[bbb])
@@ -1988,10 +1988,10 @@ def tabuleiro(est, areatrab, datainicio):
             Tooltips = """
                <div>
                 <font color = "red"
-                #<i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
-                #&nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
                 <i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
-                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp Hmax: @hmax°C&nbsp&nbsp</b>
+                &nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp </b>
+                #<i><b>Estação: </i>  @estacao</tr> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Datahora: @datahora&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  UR: @ur%
+                #&nbsp&nbsp&nbsp&nbsp Tmáx: @tmax°C&nbsp&nbsp Tmin: @tmin°C&nbsp&nbsp Hmax: @hmax°C&nbsp&nbsp</b>
                 </font>
                 <div>
 
