@@ -1,4 +1,4 @@
-import time  # to simulate a real time data, time loop
+5import time  # to simulate a real time data, time loop
 #import rosadosventos
 import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
@@ -3028,7 +3028,7 @@ st.set_page_config(
         layout="wide",
     )
 st.session_state
-#main2()
+main2()
 
 
 
