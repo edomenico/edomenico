@@ -1,5 +1,5 @@
 import time  # to simulate a real time data, time loop
-
+n
 # import redemet
 import numpy as np  # np mean, np random
 import pandas as pd  # read csv, df manipulation
@@ -2856,7 +2856,7 @@ while True:
                 df1.drop('data1', inplace=True, axis=1)
                 st.table(df1)
     with st.spinner('Loading...'):
-        p = tabuleiro(nomedaestacao, noarea, datainicial)
+        #p = tabuleiro(nomedaestacao, noarea, datainicial)
         import sys
         import streamlit.components.v1 as components
         st.components.v1.html(p, height=2400, width=1700, scrolling=True)
