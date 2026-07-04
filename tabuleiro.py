@@ -2013,7 +2013,7 @@ def tabuleiro(est, areatrab, datainicio):
             # </div>
             # """
 
-            # p = figure(title="Tabuleiro: "+arqi.estacao[0]+' '+datatit, plot_width=1500, plot_height=2300,
+            p = figure(title="Tabuleiro: "+arqi.estacao[0]+' '+datatit, plot_width=1500, plot_height=2300,
             #            x_range=groups, y_range=list(reversed(periods)),x_axis_location="above",
             #            toolbar_location=None, tooltips=TOOLTIPS,border_fill_color='gray',background_fill_color='gray',)
             p = figure(title="Tabuleiro: " + arqi.estacao[0] + ' ' + datatit, width=1500, height=2300,
