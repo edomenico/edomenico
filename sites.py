@@ -136,19 +136,24 @@ def main():
     st.write("Previsão para cidades")
 
     city_name = st.text_input("Nome da Cidade", value="cabo frio")
-    if st.button("Get Weather Data"):
-        forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48, value=96, step=12)
-        parameter_options = st.multiselect(
-            "Choose weather parameters to display:",
-            options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
-            default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
-        )
+    forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=0, max_value=96, value=96, step=12)
+    if st.button("Obter dados"):
+        #forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=96, value=96, step=12)
+        #parameter_options = st.multiselect(
+        #    "Choose weather parameters to display:",
+        #   options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
+        #    default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
+        #)
         lat, lon = get_coordinates(city_name)
+       
+        
         #lat=-22.88
         #lon=-42.01
         if lat and lon:
             data = get_weather_data(lat, lon, forecast_duration)
             if data:
+                st.write(lat)
+                st.write(lon)
                 # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
                 times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i in
                          range(forecast_duration)]
