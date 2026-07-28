@@ -199,10 +199,10 @@ def main():
     
     
                 temperatura(df)
-               # vento(df)
-               # visibilidade(df)
-               # nuvembaixa(df)
-               # precipitacao(df)
+                vento(df)
+                visibilidade(df)
+                nuvembaixa(df)
+                precipitacao(df)
 
 
 
