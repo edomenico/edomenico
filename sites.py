@@ -154,7 +154,7 @@ def main():
                          range(forecast_duration)]
                 df = pd.DataFrame({"Time": times})
                 df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
-                time.sleep(10)
+                
                 df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
                 df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
                 df["Wind Speed (kt)"] = df["Wind Speed (m/s)"] * 0.539957
