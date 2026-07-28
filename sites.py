@@ -137,7 +137,7 @@ def main():
 
     city_name = st.text_input("Nome da Cidade", value="cabo frio")
     if st.button("Get Weather Data"):
-        forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48, value=48, step=12)
+        forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48, value=96, step=12)
         parameter_options = st.multiselect(
             "Choose weather parameters to display:",
             options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
