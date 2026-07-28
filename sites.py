@@ -29,7 +29,7 @@ def main():
 
     def get_weather_data(lat, lon, hours):
         #url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation&forecast_days=4"
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m&forecast_days=4"
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={-22.8}&longitude={-42.8}&hourly=temperature_2m&forecast_days=4"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -143,7 +143,9 @@ def main():
             options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
             default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
         )
-        lat, lon = get_coordinates(city_name)
+        #lat, lon = get_coordinates(city_name)
+        lat=-22.88
+        lon=-42.01
         if lat and lon:
             data = get_weather_data(lat, lon, forecast_duration)
             if data:
