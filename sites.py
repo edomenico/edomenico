@@ -28,8 +28,8 @@ def main():
             return None, None
 
     def get_weather_data(lat, lon, hours):
-        #url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation&forecast_days=4"
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={-22.8}&longitude={-42.8}&hourly=temperature_2m&forecast_days=4"
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation&forecast_days=4"
+        #url = f"https://api.open-meteo.com/v1/forecast?latitude={-22.8}&longitude={-42.8}&hourly=temperature_2m&forecast_days=4"
         response = requests.get(url)
 
         if response.status_code == 200:
