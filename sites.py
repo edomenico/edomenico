@@ -143,9 +143,9 @@ def main():
             options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
             default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
         )
-        #lat, lon = get_coordinates(city_name)
-        lat=-22.88
-        lon=-42.01
+        lat, lon = get_coordinates(city_name)
+        #lat=-22.88
+        #lon=-42.01
         if lat and lon:
             data = get_weather_data(lat, lon, forecast_duration)
             if data:
@@ -154,14 +154,14 @@ def main():
                          range(forecast_duration)]
                 df = pd.DataFrame({"Time": times})
                 df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
-                #df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
-                #df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
-                #df["Wind Speed (kt)"] = df["Wind Speed (m/s)"] * 0.539957
-                #df["Wind Speed (kt)"] = df["Wind Speed (kt)"].astype(int)
-                #df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
-                #df["visibility"] = data['hourly']['visibility'][:forecast_duration]
-               # df["cloud_cover_low"] = data['hourly']['cloud_cover_low'][:forecast_duration]
-               # df["precipitation"] = data['hourly']['precipitation'][:forecast_duration]
+                df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
+                df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
+                df["Wind Speed (kt)"] = df["Wind Speed (m/s)"] * 0.539957
+                df["Wind Speed (kt)"] = df["Wind Speed (kt)"].astype(int)
+                df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
+                df["visibility"] = data['hourly']['visibility'][:forecast_duration]
+                df["cloud_cover_low"] = data['hourly']['cloud_cover_low'][:forecast_duration]
+                df["precipitation"] = data['hourly']['precipitation'][:forecast_duration]
     
         # if st.button("Get Weather Data"):
         #     lat, lon = get_coordinates(city_name)
