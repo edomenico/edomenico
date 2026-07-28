@@ -1,227 +1,219 @@
-import re
-from bs4 import BeautifulSoup
-from selenium import webdriver
-import pandas as pd
+import streamlit as st
+import sys
+from datetime import datetime, timedelta
+from streamlit import runtime
+from streamlit.web import cli as stcli
+import numpy as np
+def main():
+    import requests
+    import streamlit as st
+    from datetime import datetime, timedelta,timezone
+    import pandas as pd
 
-# Set up the Chrome driver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+    def get_coordinates(city_name):
+        url = f"https://nominatim.openstreetmap.org/search?q={city_name}&format=json&limit=1"
+        headers = {"User-Agent": "WeatherDashboardApp/1.0 (edomenico813@gmail.com)"}
+        response = requests.get(url, headers=headers)
 
-
-def daraz(url):
-    # Create Chrome options
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-
-    # Create the driver with the options
-    driver = webdriver.Chrome(options=chrome_options)
-
-    # Load the page with Selenium
-    driver.get(url)
-
-    # Wait up to 10 seconds for the page to load
-    # Wait for the page to finish loading all JavaScript
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-
-    # Get the HTML of the page and pass it to BeautifulSoup
-    html = driver.page_source
-    soup = BeautifulSoup(html, 'html.parser')
-
-    # Use a regular expression to match classes that have a similar pattern
-    pattern = re.compile(r'gridItem--\w+')
-
-    # Find all tags that have classes matching the pattern
-    matching_tags = soup.find_all(class_=pattern)
-
-    driver.close()
-
-    # Append the matching classes to a list
-    matching_classes = []
-    for tag in matching_tags:
-        for class_name in tag['class']:
-            if pattern.match(class_name):
-                matching_class = str(tag)
-                matching_classes.append(matching_class)
-
-    # Extract the price for each class content
-    prices = []
-    names = []
-    img_links = []
-    for class_content in matching_classes:
-        soup = BeautifulSoup(class_content, 'html.parser')
-        price_tag = soup.find(class_=re.compile('currency--\w+'))
-        if price_tag:
-            price = price_tag.text.strip()
-            prices.append(price)
+        if response.status_code == 200:
+            location_data = response.json()
+            if location_data:
+                location = location_data[0]
+                return float(location['lat']), float(location['lon'])
+            else:
+                st.warning("City not found. Try adding the country name (e.g., 'Paris, France').")
+                return None, None
         else:
-            prices.append(None)
+            st.error(f"API request failed with status code {response.status_code}: {response.text}")
+            return None, None
 
-        image = soup.find(class_=re.compile('image--\w+'))
-        if image:
-            image_link = image['src']
-            alt_text = image['alt']
-            names.append(alt_text)
-            img_links.append(image_link)
+    def get_weather_data(lat, lon, hours):
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation&forecast_days=4"
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            return response.json()
         else:
-            names.append(None)
-            img_links.append(None)
+            st.error("Failed to retrieve weather data.")
+            return None
+    def temperatura(df):
+        from datetime import datetime
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+      # import numpy as np
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
 
-    x = "https://icms-image.slatic.net/images/ims-web/217b267f-b12e-4693-9d1d-7a77d2265b91.png"
-    df = pd.DataFrame(
-        {'Site': '<img src="' + x + '" width="60" >', 'Product Name': names, 'Price': prices, 'Image Link': img_links})
-    return df.iloc[[0]]
+        fig = px.scatter(title='Temperatura prevista')
+        fig.add_scatter(x=df['Time'], y=df["Temperature (°C)"], name='Temperatura (°C)')
+        #fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
+        fig.update_yaxes(title="Temperatura(°C)")
+        fig.update_xaxes(title="Data")
+        st.plotly_chart(fig, use_container_width=True)
+        return
+
+    def visibilidade(df):
+        from datetime import datetime
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+      # import numpy as np
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        fig = px.scatter(title='Visibilidade prevista')
+        fig.add_scatter(x=df['Time'], y=df["visibility"], name='Visibilidade(m)')
+        #fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
+        fig.update_yaxes(title="Visibilidade(m)")
+        fig.update_xaxes(title="Data")
+        st.plotly_chart(fig, use_container_width=True)
+        return
+    def nuvembaixa(df):
+        from datetime import datetime
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+      # import numpy as np
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        fig = px.scatter(title='Cobertura de nuvem baixa')
+        fig.add_scatter(x=df['Time'], y=df["cloud_cover_low"], name='Nuvem baixa')
+        #fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
+        fig.update_yaxes(title="Nuvem baixa")
+        fig.update_xaxes(title="Data")
+        st.plotly_chart(fig, use_container_width=True)
+        return
+
+    def precipitacao(df):
+        from datetime import datetime
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+      # import numpy as np
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        fig = px.scatter(title='Precipitação(mm)')
+        fig.add_scatter(x=df['Time'], y=df["precipitation"], name='Precipitação(mm)')
+        #fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
+        fig.update_yaxes(title="Precipitação(mm)")
+        fig.update_xaxes(title="Data")
+        st.plotly_chart(fig, use_container_width=True)
+        return
+
+    def vento(df):
+        from datetime import datetime
+        import plotly
+        import plotly.express as px
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+      # import numpy as np
+        ##"""Container for temperature time series"""
+        # vento_df = pd.DataFrame(
+        #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
+
+        fig = px.scatter(title='Vento')
+        fig.add_scatter(x=df['Time'], y=df["Wind Speed (kt)"], name='Intensidade(kt)')
+        fig.add_scatter(x=df['Time'], y=df['Wind Direction (°)'], name='Dir.vento(graus)')
+        fig.update_yaxes(title="Valor")
+        fig.update_xaxes(title="Data")
+        st.plotly_chart(fig, use_container_width=True)
+        return
 
 
-def kapruka(url):
-    # Create Chrome options
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    st.title("Previsão Numérica🌤️")
+    st.write("Previsão para cidades")
 
-    # Create the driver with the options
-    driver = webdriver.Chrome(options=chrome_options)
+    city_name = st.text_input("Nome da Cidade", value="cabo frio")
+    forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48, value=96, step=12)
+    parameter_options = st.multiselect(
+        "Choose weather parameters to display:",
+        options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
+        default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
+    )
+    lat, lon = get_coordinates(city_name)
+    if lat and lon:
+        data = get_weather_data(lat, lon, forecast_duration)
+        if data:
+            # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
+            times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i in
+                     range(forecast_duration)]
+            df = pd.DataFrame({"Time": times})
+            df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
+            df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
+            df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
+            df["Wind Speed (kt)"] = df["Wind Speed (m/s)"] * 0.539957
+            df["Wind Speed (kt)"] = df["Wind Speed (kt)"].astype(int)
+            df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
+            df["visibility"] = data['hourly']['visibility'][:forecast_duration]
+            df["cloud_cover_low"] = data['hourly']['cloud_cover_low'][:forecast_duration]
+            df["precipitation"] = data['hourly']['precipitation'][:forecast_duration]
 
-    # Load the page with Selenium
-    driver.get(url)
-
-    # Wait up to 10 seconds for the page to load
-    # Wait for the page to finish loading all JavaScript
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
-
-    # Get the HTML of the page and pass it to BeautifulSoup
-    html = driver.page_source
-    soup = BeautifulSoup(html, 'html.parser')
-
-    # Use a regular expression to match classes that have a similar pattern
-    pattern = re.compile(r'catalogueV2Repeater')
-
-    # Find all tags that have classes matching the pattern
-    matching_tags = soup.find_all(class_='catalogueV2Repeater')
-
-    driver.close()
-
-    # Append the matching classes to a list
-    matching_classes = []
-    for tag in matching_tags:
-        for class_name in tag['class']:
-            if pattern.match(class_name):
-                matching_class = str(tag)
-                matching_classes.append(matching_class)
-
-    # Extract the price for each class content
-    prices = []
-    names = []
-    img_links = []
-    for class_content in matching_classes:
-        soup = BeautifulSoup(class_content, 'html.parser')
-        price_tag = soup.find(class_='catalogueV2Local')
-        if price_tag:
-            price = price_tag.text.strip()
-            prices.append(price)
-        else:
-            prices.append(None)
-
-        image = soup.find(class_='CatalogueV2ImageWrapper')
-        if image:
-            # Use regular expression to extract the src attribute value
-            match = re.search(r'src="([^"]+)"', str(image))
-            if match:
-                image_link = match.group(1)
-            else:
-                image_link = None
-
-            # Use regular expression to extract the alt attribute value
-            match = re.search(r'alt="([^"]+)"', str(image))
-            if match:
-                alt_text = match.group(1)
-            else:
-                alt_text = None
-
-            names.append(alt_text)
-            img_links.append("https://www.kapruka.com" + image_link)
-
-    x = "https://www.kapruka.com/images/kapruka_logo_square.png"
-    df = pd.DataFrame(
-        {'Site': '<img src="' + x + '" width="60" >', 'Product Name': names, 'Price': prices, 'Image Link': img_links})
-    return df.iloc[[0]]
+    # if st.button("Get Weather Data"):
+    #     lat, lon = get_coordinates(city_name)
+    #     if lat and lon:
+    #         data = get_weather_data(lat, lon, forecast_duration)
+    #         if data:
+    #             #times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
+    #             times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i in range(forecast_duration)]
+    #             df = pd.DataFrame({"Time": times})
+    #
+    #             if "Temperature (°C)" in parameter_options:
+    #                 df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
+    #                 st.subheader(f"Temperatura prevista")
+    #                 st.line_chart(df.set_index("Time")["Temperature (°C)"])
+    #
+    #             if "Humidity (%)" in parameter_options:
+    #                 df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
+    #                 st.subheader(f"Umidade prevista")
+    #                 st.line_chart(df.set_index("Time")["Humidity (%)"])
+    #
+    #             if "Wind Speed (m/s)" in parameter_options:
+    #                 df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
+    #                 df["Wind Speed (kt)"] = df["Wind Speed (m/s)"]*0.539957
+    #                 df["Wind Speed (kt)"]=df["Wind Speed (kt)"].astype(int)
+    #                 st.subheader(f"Intensidade do vento")
+    #                 st.line_chart(df.set_index("Time")["Wind Speed (kt)"])
+    #             if "Wind Direction (°)" in parameter_options:
+    #                 df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
+    #
+    #                 st.subheader(f"Direção do vento")
+    #                 st.line_chart(df.set_index("Time")["Wind Direction (°)"])
+    # st.subheader("Current Weather Summary")
+    # #col1, col2, col3,col4 = st.columns(4)
 
 
-def wasi(url):
-    # Create Chrome options
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    temperatura(df)
+    vento(df)
+    visibilidade(df)
+    nuvembaixa(df)
+    precipitacao(df)
 
-    # Create the driver with the options
-    driver = webdriver.Chrome(options=chrome_options)
 
-    # Load the page with Selenium
-    driver.get(url)
 
-    # Wait up to 10 seconds for the page to load
-    # Wait for the page to finish loading all JavaScript
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.XPATH, "//body[not(@class='loading')]")))
+    #datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+    #col1.metric("🌡️ Temperature(°)", df.loc[df['Time'] ==datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime("%d/%m/%Y %H:%M:%S"),'Temperature (°C)'].iloc[0])
+    #df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+    #    "%d/%m/%Y %H:%M:%S"), 'wind_speed_10m]'.iloc[0])
+    #col2.metric("💧 Humidity(%)", df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+    #    "%d/%m/%Y %H:%M:%S"), 'Humidity (%)'].iloc[0])
+    #col3.metric("🌬️ Wind Speed(kt)", df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+     #   "%d/%m/%Y %H:%M:%S"), 'Wind Speed (kt)'].iloc[0])
+    #col4.metric("🌬️ Wind Direction (°))",
+     #           df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+     #               "%d/%m/%Y %H:%M:%S"), 'Wind Direction (°)'].iloc[0])
 
-    # Get the HTML of the page and pass it to BeautifulSoup
-    html = driver.page_source
-    soup = BeautifulSoup(html, 'html.parser')
+# Executar a página selecionada
 
-    # Use a regular expression to match classes that have a similar pattern
-    pattern = re.compile(r'product-inner')
-
-    # Find all tags that have classes matching the pattern
-    matching_tags = soup.find_all(class_='product-inner')
-
-    driver.close()
-
-    # Append the matching classes to a list
-    matching_classes = []
-    for tag in matching_tags:
-        for class_name in tag['class']:
-            if pattern.match(class_name):
-                matching_class = str(tag)
-                matching_classes.append(matching_class)
-
-    # Extract the price for each class content
-    prices = []
-    names = []
-    img_links = []
-    for class_content in matching_classes:
-        soup = BeautifulSoup(class_content, 'html.parser')
-        price_tag = soup.find(class_='woocommerce-Price-amount amount')
-        if price_tag:
-            # Use regular expression to extract the number
-            match = re.search(r'[0-9,]+(?:\.[0-9]+)?', str(price_tag))
-            if match:
-                price = match.group()
-                prices.append("Rs " + price)
-            else:
-                prices.append(None)
-
-        image = soup.find(class_='mf-product-thumbnail')
-        if image:
-            # Use regular expression to extract the src attribute value
-            match = re.search(r'src="([^"]+)"', str(image))
-            if match:
-                image_link = match.group(1)
-                print(image_link)
-            else:
-                image_link = None
-
-            # Use regular expression to extract the alt attribute value
-            match = re.search(r'alt="([^"]+)"', str(image))
-            if match:
-                alt_text = match.group(1)
-            else:
-                alt_text = None
-
-            names.append(alt_text)
-            img_links.append(image_link)
-
-    x = "https://www.wasi.lk/wp-content/uploads/2019/11/wasilk-header-logo-250x66.png"
-    df = pd.DataFrame(
-        {'Site': '<img src="' + x + '" width="60" >', 'Product Name': names, 'Price': prices, 'Image Link': img_links})
-    return df.iloc[[0]]
+main()
+    
