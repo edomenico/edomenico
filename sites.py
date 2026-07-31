@@ -7,7 +7,7 @@ import numpy as np
 def main():
     import requests
     import streamlit as st
-    from datetime import datetime, timedelta,timezone,time
+    from datetime import datetime, timedelta,timezone
     import pandas as pd
 
     def get_coordinates(city_name):
@@ -29,7 +29,6 @@ def main():
 
     def get_weather_data(lat, lon, hours):
         url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation&forecast_days=4"
-        #url = f"https://api.open-meteo.com/v1/forecast?latitude={-22.8}&longitude={-42.8}&hourly=temperature_2m&forecast_days=4"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -131,99 +130,129 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
         return
 
+    def principal():
 
+        city_name = st.text_input("Nome da Cidade", value="cabo frio")
+        if st.button("Get Weather Data"):
+            forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48,
+                                          value=96, step=12)
+            parameter_options = st.multiselect(
+                "Choose weather parameters to display:",
+                options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
+                default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
+            )
+            lat, lon = get_coordinates(city_name)
+            if lat and lon:
+                data = get_weather_data(lat, lon, forecast_duration)
+                if data:
+                    # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
+                    times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i
+                             in
+                             range(forecast_duration)]
+                    df = pd.DataFrame({"Time": times})
+                    df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
+                    df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
+                    df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
+                    df["Wind Speed (kt)"] = df["Wind Speed (m/s)"] * 0.539957
+                    df["Wind Speed (kt)"] = df["Wind Speed (kt)"].astype(int)
+                    df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
+                    df["visibility"] = data['hourly']['visibility'][:forecast_duration]
+                    df["cloud_cover_low"] = data['hourly']['cloud_cover_low'][:forecast_duration]
+                    df["precipitation"] = data['hourly']['precipitation'][:forecast_duration]
+
+                    # if st.button("Get Weather Data"):
+                    #     lat, lon = get_coordinates(city_name)
+                    #     if lat and lon:
+                    #         data = get_weather_data(lat, lon, forecast_duration)
+                    #         if data:
+                    #             #times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
+                    #             times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i in range(forecast_duration)]
+                    #             df = pd.DataFrame({"Time": times})
+                    #
+                    #             if "Temperature (°C)" in parameter_options:
+                    #                 df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
+                    #                 st.subheader(f"Temperatura prevista")
+                    #                 st.line_chart(df.set_index("Time")["Temperature (°C)"])
+                    #
+                    #             if "Humidity (%)" in parameter_options:
+                    #                 df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
+                    #                 st.subheader(f"Umidade prevista")
+                    #                 st.line_chart(df.set_index("Time")["Humidity (%)"])
+                    #
+                    #             if "Wind Speed (m/s)" in parameter_options:
+                    #                 df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
+                    #                 df["Wind Speed (kt)"] = df["Wind Speed (m/s)"]*0.539957
+                    #                 df["Wind Speed (kt)"]=df["Wind Speed (kt)"].astype(int)
+                    #                 st.subheader(f"Intensidade do vento")
+                    #                 st.line_chart(df.set_index("Time")["Wind Speed (kt)"])
+                    #             if "Wind Direction (°)" in parameter_options:
+                    #                 df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
+                    #
+                    #                 st.subheader(f"Direção do vento")
+                    #                 st.line_chart(df.set_index("Time")["Wind Direction (°)"])
+                    # st.subheader("Current Weather Summary")
+                    # #col1, col2, col3,col4 = st.columns(4)
+
+                    temperatura(df)
+                    vento(df)
+                    visibilidade(df)
+                    nuvembaixa(df)
+                    precipitacao(df)
+
+    # datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+    # col1.metric("🌡️ Temperature(°)", df.loc[df['Time'] ==datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime("%d/%m/%Y %H:%M:%S"),'Temperature (°C)'].iloc[0])
+    # df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+    #    "%d/%m/%Y %H:%M:%S"), 'wind_speed_10m]'.iloc[0])
+    # col2.metric("💧 Humidity(%)", df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+    #    "%d/%m/%Y %H:%M:%S"), 'Humidity (%)'].iloc[0])
+    # col3.metric("🌬️ Wind Speed(kt)", df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+    #   "%d/%m/%Y %H:%M:%S"), 'Wind Speed (kt)'].iloc[0])
+    # col4.metric("🌬️ Wind Direction (°))",
+    #           df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
+    #               "%d/%m/%Y %H:%M:%S"), 'Wind Direction (°)'].iloc[0])
+
+    # Executar a página selecionada
     st.title("Previsão Numérica🌤️")
     st.write("Previsão para cidades")
+    area = ['Área 1', 'Área 2']
 
-    city_name = st.text_input("Nome da Cidade", value="cabo frio")
-    forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=0, max_value=96, value=96, step=12)
-    if st.button("Obter dados"):
-        #forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=96, value=96, step=12)
-        #parameter_options = st.multiselect(
-        #    "Choose weather parameters to display:",
-        #   options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
-        #    default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
-        #)
-        lat, lon = get_coordinates(city_name)
-       
+    area_1 = ['SBJR', 'SBMI', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
+              'SBAC',
+              'SBJE',
+              'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SNRU', 'SBFN',
+              'SBPL',
+              'SBPJ']
+    area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SWGN', 'SBMA',
+              'SBCJ', 'SBHT',
+              'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF', 'SBUY',
+              'SBUA', 'SBEG',
+              'SBBV']
+    while True:
+        with st.sidebar:
+            st.write('Visualização dos dados')
+            with st.container(border=True):
+                # st.divider()
+
+                selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
+                st.divider()
+                if selarea == "Área 1":
+                    # with col1:
+                    # st.header('Área 1')
+                    nomedaestacao = st.radio("Área 1",area_1)
+                    noarea = 1
+
+                else:
+                    # st.header('Área 2')
+                    nomedaestacao = st.radio("Área 2",area_2)
+                    noarea = 2
+                st.markdown(
+                    """
         
-        #lat=-22.88
-        #lon=-42.01
-        if lat and lon:
-            data = get_weather_data(lat, lon, forecast_duration)
-            if data:
-                st.write(lat)
-                st.write(lon)
-                # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
-                times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i in
-                         range(forecast_duration)]
-                df = pd.DataFrame({"Time": times})
-                df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
-                
-                df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
-                df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
-                df["Wind Speed (kt)"] = df["Wind Speed (m/s)"] * 0.539957
-                df["Wind Speed (kt)"] = df["Wind Speed (kt)"].astype(int)
-                df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
-                df["visibility"] = data['hourly']['visibility'][:forecast_duration]
-                df["cloud_cover_low"] = data['hourly']['cloud_cover_low'][:forecast_duration]
-                df["precipitation"] = data['hourly']['precipitation'][:forecast_duration]
-    
-        # if st.button("Get Weather Data"):
-        #     lat, lon = get_coordinates(city_name)
-        #     if lat and lon:
-        #         data = get_weather_data(lat, lon, forecast_duration)
-        #         if data:
-        #             #times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
-        #             times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i in range(forecast_duration)]
-        #             df = pd.DataFrame({"Time": times})
-        #
-        #             if "Temperature (°C)" in parameter_options:
-        #                 df["Temperature (°C)"] = data['hourly']['temperature_2m'][:forecast_duration]
-        #                 st.subheader(f"Temperatura prevista")
-        #                 st.line_chart(df.set_index("Time")["Temperature (°C)"])
-        #
-        #             if "Humidity (%)" in parameter_options:
-        #                 df["Humidity (%)"] = data['hourly']['relative_humidity_2m'][:forecast_duration]
-        #                 st.subheader(f"Umidade prevista")
-        #                 st.line_chart(df.set_index("Time")["Humidity (%)"])
-        #
-        #             if "Wind Speed (m/s)" in parameter_options:
-        #                 df["Wind Speed (m/s)"] = data['hourly']['wind_speed_10m'][:forecast_duration]
-        #                 df["Wind Speed (kt)"] = df["Wind Speed (m/s)"]*0.539957
-        #                 df["Wind Speed (kt)"]=df["Wind Speed (kt)"].astype(int)
-        #                 st.subheader(f"Intensidade do vento")
-        #                 st.line_chart(df.set_index("Time")["Wind Speed (kt)"])
-        #             if "Wind Direction (°)" in parameter_options:
-        #                 df["Wind Direction (°)"] = data['hourly']['wind_direction_10m'][:forecast_duration]
-        #
-        #                 st.subheader(f"Direção do vento")
-        #                 st.line_chart(df.set_index("Time")["Wind Direction (°)"])
-        # st.subheader("Current Weather Summary")
-        # #col1, col2, col3,col4 = st.columns(4)
-    
-    
-                temperatura(df)
-                vento(df)
-                visibilidade(df)
-                nuvembaixa(df)
-                precipitacao(df)
-
-
-
-    #datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
-    #col1.metric("🌡️ Temperature(°)", df.loc[df['Time'] ==datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime("%d/%m/%Y %H:%M:%S"),'Temperature (°C)'].iloc[0])
-    #df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
-    #    "%d/%m/%Y %H:%M:%S"), 'wind_speed_10m]'.iloc[0])
-    #col2.metric("💧 Humidity(%)", df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
-    #    "%d/%m/%Y %H:%M:%S"), 'Humidity (%)'].iloc[0])
-    #col3.metric("🌬️ Wind Speed(kt)", df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
-     #   "%d/%m/%Y %H:%M:%S"), 'Wind Speed (kt)'].iloc[0])
-    #col4.metric("🌬️ Wind Direction (°))",
-     #           df.loc[df['Time'] == datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime(
-     #               "%d/%m/%Y %H:%M:%S"), 'Wind Direction (°)'].iloc[0])
-
-# Executar a página selecionada
+                    e-mail: edomenico813@gmail.com
+            
+            
+                    """
+                )
 
 main()
     
