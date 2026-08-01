@@ -144,11 +144,11 @@ def main():
         #   options=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"],
         #    default=["Temperature (°C)", "Humidity (%)", "Wind Speed (m/s)", "Wind Direction (°)"]
         #)
-        lat, lon = get_coordinates(city_name)
+       # lat, lon = get_coordinates(city_name)
        
         
-        #lat=-22.88
-        #lon=-42.01
+        lat=-22.88
+        lon=-42.01
         if lat and lon:
             data = get_weather_data(lat, lon, forecast_duration)
             if data:
