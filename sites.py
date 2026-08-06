@@ -29,7 +29,7 @@ def main():
             return None, None
 
     def get_weather_data(lat, lon, hours):
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation&forecast_days=4"
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -165,6 +165,7 @@ def main():
                     df["visibility"] = data['hourly']['visibility'][:forecast_duration]
                     df["cloud_cover_low"] = data['hourly']['cloud_cover_low'][:forecast_duration]
                     df["precipitation"] = data['hourly']['precipitation'][:forecast_duration]
+                    df["codigo"] = data['hourly']['weather_code'][:forecast_duration]
 
                     # if st.button("Get Weather Data"):
                     #     lat, lon = get_coordinates(city_name)
