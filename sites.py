@@ -233,7 +233,7 @@ def main():
     while True:
         with st.sidebar:
             st.write('Visualização dos dados')
-            with st.container(border=True,width="stretch"):
+            with st.container(border=True):
                 # st.divider()
 
                 selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
