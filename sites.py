@@ -205,7 +205,17 @@ def main():
                     nuvembaixa(df)
                     precipitacao(df)
                     with st.expander(label="Mostrar dados:"):
-                        st.table(df)
+                        df2=df
+                        df2.drop('Wind Speed (m/s)', inplace=True, axis=1)
+                        df2.rename(columns={'Temperature (°C)': 'dryt'}, inplace=True)
+                        df2.rename(columns={'Humidity (%)': 'relh'}, inplace=True)
+                        df2.rename(columns={'Wind Speed (kt)': 'wspd'}, inplace=True)
+                        df2.rename(columns={'Wind Direction (°)': 'wdir'}, inplace=True)
+                        df2.rename(columns={'visibility': 'visi'}, inplace=True)
+                        df2.rename(columns={'cloud_cover_low': 'nuvb'}, inplace=True)
+                        df2.rename(columns={'precipitation': 'prp'}, inplace=True)
+
+                        st.table(df2)
 
     # datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
     # col1.metric("🌡️ Temperature(°)", df.loc[df['Time'] ==datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0).strftime("%d/%m/%Y %H:%M:%S"),'Temperature (°C)'].iloc[0])
