@@ -134,7 +134,44 @@ def main():
 
     st.title("Previsão Numérica🌤️")
     st.write("Previsão para cidades")
+    area_1 = ['SBJR', 'SBMI', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
+              'SBAC',
+              'SBJE',
+              'SBPB', 'SBAR', 'SBMO', 'SBRF', 'SBJP', 'SBSG', 'SBFZ', 'SBSL', 'SBTE', 'SBJU', 'SBKG', 'SNRU', 'SBFN',
+              'SBPL',
+              'SBPJ']
+    area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ', 'SBTT', 'SBIZ', 'SWGN', 'SBMA',
+              'SBCJ', 'SBHT',
+              'SBTB', 'SBOI', 'SBBE', 'SBMQ', 'SBSN', 'SBSO', 'SBSI', 'SBAT', 'SBIH', 'SWPI', 'SBMY', 'SBTF', 'SBUY',
+              'SBUA', 'SBEG',
+              'SBBV']
+    while True:
+        with st.sidebar:
+            st.write('Visualização dos dados')
+            with st.container(border=True):
+                # st.divider()
 
+                selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
+                st.divider()
+                if selarea == "Área 1":
+                    # with col1:
+                    # st.header('Área 1')
+                    nomedaestacao = st.radio("Área 1",area_1)
+                    noarea = 1
+
+                else:
+                    # st.header('Área 2')
+                    nomedaestacao = st.radio("Área 2",area_2)
+                    noarea = 2
+                st.markdown(
+                    """
+        
+                    e-mail: edomenico813@gmail.com
+            
+            
+                    """
+                )
+                break
     city_name = st.text_input("Nome da Cidade", value="cabo frio")
     forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=0, max_value=96, value=96, step=12)
     if st.button("Obter dados"):
