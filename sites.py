@@ -208,6 +208,8 @@ def main():
                 visibilidade(df)
                 nuvembaixa(df)
                 precipitacao(df)
+                with st.expander(label="Mostrar dados:"):
+                    st.table(df)
 
 
 
