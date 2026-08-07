@@ -5,11 +5,13 @@ from streamlit import runtime
 from streamlit.web import cli as stcli
 from streamlit_toggle import toggle
 import numpy as np
+
 def main():
     import requests
     import streamlit as st
     from datetime import datetime, timedelta,timezone
     import pandas as pd
+    global selusuario
 
     def get_coordinates(city_name):
         url = f"https://nominatim.openstreetmap.org/search?q={city_name}&format=json&limit=1"
@@ -29,7 +31,12 @@ def main():
             return None, None
 
     def get_weather_data(lat, lon, hours):
-        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
+
+        if selusuario == "Previsor CMA-1GL":
+
+            url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
+        else:
+            url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -48,7 +55,7 @@ def main():
         # vento_df = pd.DataFrame(
         #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
 
-        fig = px.scatter(title='Temperatura prevista')
+        fig = px.scatter(title='Temperatura')
         fig.add_scatter(x=df['Time'], y=df["Temperature (°C)"], name='Temperatura (°C)')
         #fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
         fig.update_yaxes(title="Temperatura(°C)")
@@ -67,7 +74,7 @@ def main():
         # vento_df = pd.DataFrame(
         #     {'dir.vento': df['dir vento'], 'int.vento': df['int vento'], 'timestamp': df['timestamp']})
 
-        fig = px.scatter(title='Visibilidade prevista')
+        fig = px.scatter(title='Visibilidade')
         fig.add_scatter(x=df['Time'], y=df["visibility"], name='Visibilidade(m)')
         #fig.add_scatter(x=df['data_hora'], y=df['wdir'], name='Dir.vento(graus)')
         fig.update_yaxes(title="Visibilidade(m)")
@@ -232,7 +239,7 @@ def main():
 
     # Executar a página selecionada
     st.title("Previsão Numérica🌤️")
-    st.write("Previsão para cidades")
+    st.write("Fonte:  Open-Meteo combina os resultados de modelos meteorológicos de múltiplos serviços meteorológicos")
     area = ['Área 1', 'Área 2']
 
     area_1 = ['SBJR', 'SBMI', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
@@ -243,34 +250,46 @@ def main():
               'SBUA', 'SBEG','SBBV']
     while True:
         with st.sidebar:
-            st.write('Visualização dos dados')
+            st.write('Escolha as opções para visualizar')
             with st.container(border=True):
                 # st.divider()
+                selusuario=st.radio("Escolha o usuário", ["Previsor CMA-1GL", "Público Geral"], horizontal=True)
 
-                selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
-                #ong = st.toggle('Obter Dados')
-                st.divider()
-                if selarea == "Área 1":
-                    # with col1:
-                    # st.header('Área 1')
-                    nomedaestacao = st.radio("Área 1",area_1)
-                    noarea = 1
-                    areaselecionada=area_1
+                if selusuario=="Previsor CMA-1GL":
+                    selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
+                    #ong = st.toggle('Obter Dados')
+                    st.divider()
+                    if selarea == "Área 1":
+                        # with col1:
+                        # st.header('Área 1')
+                        nomedaestacao = st.radio("Área 1",area_1)
+                        noarea = 1
+                        areaselecionada=area_1
+                    else:
+                        # st.header('Área 2')
+                        nomedaestacao = st.radio("Área 2",area_2)
+                        noarea = 2
+                        areaselecionada = area_2
                 else:
-                    # st.header('Área 2')
-                    nomedaestacao = st.radio("Área 2",area_2)
-                    noarea = 2
-                    areaselecionada = area_2
+                    city_name = st.text_input("Nome da Cidade", value="cabo frio")
+                    if st.button("Ok"):
+
+                        lat, lon = get_coordinates(city_name)
+                    else:
+                        lat, lon = get_coordinates(city_name)
+
+
                 st.markdown(
                     """
-        
+            
                     e-mail: edomenico813@gmail.com
-            
-            
+                
+                
                     """
                 )
         with st.spinner('Loading...'):
-            lat, lon = obter_lat_lon(nomedaestacao, noarea, areaselecionada)
+            if selusuario == "Previsor CMA-1GL":
+                lat, lon = obter_lat_lon(nomedaestacao, noarea, areaselecionada)
             principal(lat, lon)
         break
 
