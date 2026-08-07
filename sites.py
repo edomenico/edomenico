@@ -239,7 +239,7 @@ def main():
 
     # Executar a página selecionada
     st.title("Previsão Numérica🌤️")
-    st.write("Fonte:  Open-Meteo combina os resultados de modelos meteorológicos de múltiplos serviços meteorológicos")
+    st.write("Fonte:  Open-Meteo combina os resultados de modelos de vários serviços meteorológicos")
     area = ['Área 1', 'Área 2']
 
     area_1 = ['SBJR', 'SBMI', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
