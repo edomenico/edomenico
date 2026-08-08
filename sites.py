@@ -295,7 +295,7 @@ def main():
             principal(lat, lon)
         break
     if selusuario=="Previsor CMA-1GL":
-        st.write("Lat",lat[0])
+        st.write("Lat",lat)
     else:
         st.write("Lat",lat)
 
