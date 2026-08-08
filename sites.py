@@ -240,6 +240,11 @@ def main():
     # Executar a página selecionada
     st.title("Previsão Numérica🌤️")
     st.write("Fonte:  Open-Meteo combina os resultados de modelos de vários serviços meteorológicos")
+    if selusuario=="Previsor CMA-1GL":
+        st.write("Lat",lat[0])
+    else:
+        st.write("Lat",lat)
+        
     area = ['Área 1', 'Área 2']
 
     area_1 = ['SBJR', 'SBMI', 'SBES', 'SBME', 'SBFS', 'SBCP', 'SBRJ', 'SBCB', 'SBVT', 'SBPS', 'SBGL', 'SBNT', 'SBMS',
