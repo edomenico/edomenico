@@ -300,6 +300,7 @@ def main():
         st.write("Lat",lat)
     else:
         st.write("Lat",lat)
+        st.write("Lon",lon)
 
 
 main()
