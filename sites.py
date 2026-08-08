@@ -298,6 +298,7 @@ def main():
         break
     if selusuario=="Previsor CMA-1GL":
         st.write("Lat",lat)
+        st.write("Lon",lon)
     else:
         st.write("Lat",lat)
         st.write("Lon",lon)
