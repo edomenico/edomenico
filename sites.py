@@ -240,10 +240,7 @@ def main():
     # Executar a página selecionada
     st.title("Previsão Numérica🌤️")
     st.write("Fonte:  Open-Meteo combina os resultados de modelos de vários serviços meteorológicos")
-    if selusuario=="Previsor CMA-1GL":
-        st.write("Lat",lat[0])
-    else:
-        st.write("Lat",lat)
+    
         
     area = ['Área 1', 'Área 2']
 
@@ -297,6 +294,10 @@ def main():
                 lat, lon = obter_lat_lon(nomedaestacao, noarea, areaselecionada)
             principal(lat, lon)
         break
+    if selusuario=="Previsor CMA-1GL":
+        st.write("Lat",lat[0])
+    else:
+        st.write("Lat",lat)
 
 
 main()
