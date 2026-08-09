@@ -35,8 +35,8 @@ def main():
         if selusuario == "Previsor CMA-1GL":
 
             #url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
-            #url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&models=best_match&forecast_days=4"
-            url = f"https://ensemble-api.open-meteo.com/v1/forecast?latitude=-22&longitude=-43&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
+            url = f"https://api.open-meteo.com/v1/forecast?latitude={lat[0]}&longitude={lon[0]}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&models=best_match&forecast_days=4"
+            #url = f"https://ensemble-api.open-meteo.com/v1/forecast?latitude=-22&longitude=-43&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
         else:
             url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,cloud_cover_low,precipitation,weather_code&forecast_days=4"
         response = requests.get(url)
@@ -158,6 +158,8 @@ def main():
 
             #lat, lon = get_coordinates(city_name)
             if lat and lon:
+                print'LAT: ', lat
+                print'Lon: ', lon
                 data = get_weather_data(lat, lon, forecast_duration)
                 if data:
                     # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
