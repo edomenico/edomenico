@@ -296,12 +296,12 @@ def main():
                 lat, lon = obter_lat_lon(nomedaestacao, noarea, areaselecionada)
             principal(lat, lon)
         break
-    if selusuario=="Previsor CMA-1GL":
-        st.write("Lat",lat)
-        st.write("Lon",lon)
-    else:
-        st.write("Lat",lat)
-        st.write("Lon",lon)
+    #if selusuario=="Previsor CMA-1GL":
+     #   st.write("Lat",lat)
+     #   st.write("Lon",lon)
+    #else:
+    #    st.write("Lat",lat)
+    #    st.write("Lon",lon)
 
 
 main()
