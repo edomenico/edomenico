@@ -15,7 +15,7 @@ def main():
 
     def get_coordinates(city_name):
         url = f"https://nominatim.openstreetmap.org/search?q={city_name}&format=json&limit=1"
-        headers = {"User-Agent": "WeatherDashboardApp/1.0 (eduardo.aloise@navbrasil.gov.br)"}
+        headers = {"User-Agent": "WeatherDashboardApp/1.0 (edomenico813@gmail.com)"}
         response = requests.get(url, headers=headers)
 
         if response.status_code == 200:
