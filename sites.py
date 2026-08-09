@@ -157,7 +157,8 @@ def main():
                                           value=96, step=12)
 
             #lat, lon = get_coordinates(city_name)
-            if lat and lon:
+            #if lat and lon:
+            if lat != lon:
                 print('LAT: ', lat)
                 print('Lon: ', lon)
                 data = get_weather_data(lat, lon, forecast_duration)
