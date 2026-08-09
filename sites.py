@@ -158,8 +158,8 @@ def main():
 
             #lat, lon = get_coordinates(city_name)
             if lat and lon:
-                print'LAT: ', lat
-                print'Lon: ', lon
+                print('LAT: ', lat)
+                print('Lon: ', lon)
                 data = get_weather_data(lat, lon, forecast_duration)
                 if data:
                     # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
