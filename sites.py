@@ -245,7 +245,7 @@ def main():
     # Executar a página selecionada
     st.title("Previsão Numérica🌤️")
     st.write("Fonte:  Open-Meteo combina os resultados de modelos de vários serviços meteorológicos")
-    st.write("Lat: ", lat , "  Lon: ", lon)
+    st.write("Lat: " +str(lat) + "  Lon: " + str(lon))
     
         
     area = ['Área 1', 'Área 2']
