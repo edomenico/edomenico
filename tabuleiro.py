@@ -2717,8 +2717,7 @@ while True:
     
             """
         )
-    
-    
+    break
     if ong:
         print('antes de entrar')
         print(datainicial)
