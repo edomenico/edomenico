@@ -155,6 +155,8 @@ def main():
 
             forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48,
                                           value=96, step=12)
+            st.write("Lat",lat)
+            st.write("Lon",lon)
 
             #lat, lon = get_coordinates(city_name)
             #if lat and lon:
@@ -246,8 +248,7 @@ def main():
     st.title("Previsão Numérica🌤️")
     st.write("Fonte:  Open-Meteo combina os resultados de modelos de vários serviços meteorológicos")
     #st.write("Lat: " +str(lat) + "  Lon: " + str(lon))
-    st.write("Lat",lat)
-    st.write("Lon",lon)
+    
     
         
     area = ['Área 1', 'Área 2']
