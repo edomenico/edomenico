@@ -155,8 +155,7 @@ def main():
 
             forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48,
                                           value=96, step=12)
-            st.write("Latitude: ",str(lat))
-            st.write("Longitude: ",str(lon))
+            
             #st.write("Lon",lon)
 
             #lat, lon = get_coordinates(city_name)
@@ -165,6 +164,8 @@ def main():
                 print('LAT: ', lat)
                 print('Lon: ', lon)
                 data = get_weather_data(lat, lon, forecast_duration)
+                st.write("Latitude: ",str(lat))
+                st.write("Longitude: ",str(lon))
                 if data:
                     # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
                     times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i
