@@ -155,8 +155,8 @@ def main():
 
             forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48,
                                           value=96, step=12)
-            st.write("Lat",str(lat))
-            st.write("Lon",lon)
+            st.write("Lat: ",str(lat)," Lon: ",str(lon))
+            #st.write("Lon",lon)
 
             #lat, lon = get_coordinates(city_name)
             #if lat and lon:
