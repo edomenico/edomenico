@@ -164,7 +164,7 @@ def main():
                 print('LAT: ', lat)
                 print('Lon: ', lon)
                 data = get_weather_data(lat, lon, forecast_duration)
-                st.write("Latitude: ",str(lat))
+                st.write("Latitude: ",str(lat)[1:7)
                 st.write("Longitude: ",str(lon))
                 if data:
                     # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
