@@ -164,8 +164,12 @@ def main():
                 print('LAT: ', lat)
                 print('Lon: ', lon)
                 data = get_weather_data(lat, lon, forecast_duration)
-                st.write("Latitude: ",str(lat)[1:7])
-                st.write("Longitude: ",str(lon))
+                if selusuario == "Previsor CMA-1GL":
+                    st.write("Latitude: ",str(lat)[1:7])
+                    st.write("Longitude: ",str(lon)[1:7])
+                else:
+                    st.write("Latitude: ",str(lat))
+                    st.write("Longitude: ",str(lon))
                 if data:
                     # times = [datetime.now() + timedelta(hours=i) for i in range(forecast_duration)]
                     times = [datetime.combine(datetime.today().date(), datetime.min.time()) + timedelta(hours=i) for i
