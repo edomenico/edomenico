@@ -288,7 +288,7 @@ def main():
                         noarea = 2
                         areaselecionada = area_2
                 else:
-                    city_name = st.text_input("Nome da Cidade", value="cabo frio")
+                    city_name = st.text_input("Nome da Cidade", value="cabo frio, Brasil")
                     if st.button("Ok"):
 
                         lat, lon = get_coordinates(city_name)
