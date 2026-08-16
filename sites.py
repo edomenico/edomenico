@@ -310,7 +310,11 @@ def main():
             principal(lat, lon)
         break
     
-
+st.set_page_config(
+        page_title="Tabuleiro - CMA-GL",
+        page_icon="✅",
+        layout="wide",
+    )
 main()
     
 
