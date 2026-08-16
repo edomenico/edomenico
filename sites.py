@@ -151,7 +151,7 @@ def main():
 
     def principal(lat,lon):
 
-        #city_name = st.text_input("Nome da Cidade", value="cabo frio")
+        #city_name = st.text_input("Nome da Cidade", value="cabo frio,Brasil")
 
             forecast_duration = st.slider("Selecione a duração da previsão(horas)", min_value=12, max_value=48,
                                           value=96, step=12)
