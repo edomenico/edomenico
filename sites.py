@@ -270,7 +270,7 @@ def main():
             st.write('Escolha as opções para visualizar')
             with st.container(border=True):
                 # st.divider()
-                selusuario=st.radio("Escolha o usuário", ["Previsor CMA-1GL", "Público Geral"], horizontal=True)
+                selusuario=st.radio("Escolha o usuário", ["Público Geral","Previsor CMA-1GL"], horizontal=True)
 
                 if selusuario=="Previsor CMA-1GL":
                     selarea = st.radio("Escolha a área", ["Área 1", "Área 2"], horizontal=True)
@@ -311,7 +311,7 @@ def main():
         break
     
 st.set_page_config(
-        page_title="Tabuleiro - CMA-GL",
+        page_title="Open-Meteo",
         page_icon="✅",
         layout="wide",
     )
