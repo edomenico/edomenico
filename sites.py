@@ -44,7 +44,8 @@ def main():
         if response.status_code == 200:
             return response.json()
         else:
-            st.error("Failed to retrieve weather data."+"response.status_code")
+            st.error("Failed to retrieve weather data.")
+            st.error(f"API request failed with status code {response.status_code}: {response.text}")
             return None
     def temperatura(df):
         from datetime import datetime
