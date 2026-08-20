@@ -2861,7 +2861,7 @@ while True:
         time.sleep(30)
         
         
-    break
+        break
         
     #while True:
             # Código para buscar e atualizar dados
