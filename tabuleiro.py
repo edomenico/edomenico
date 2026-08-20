@@ -839,7 +839,7 @@ def rest(areas, to_data, from_data, tipo):
                     # wiki = "https://www.aviationweather.gov/metar/data?ids=SBRD%2CSBVH%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSBCI%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&format=raw&date=&hours=24"
                     # url = 'https://aviationweather.gov/api/data/metar?ids=SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB%2CSSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ%2CSWGN%2CSBMA%2CSBCJ%2CSBHT%2CSBTB%2CSBOI%2CSWPI%2CSBBE%2CSBMQ%2CSBSN%2CSBSO%2CSBSI%2CSBAT%2CSBIH%2CSBMY%2CSBTF%2CSBUA%2CSBEG%2CSBBV&&format=raw&taf=false&hours=96'
                     url = 'https://aviationweather.gov/api/data/metar?ids=' + estacaoaws[
-                        k] + '&format=raw&taf=false&hours=96&date'+dataconsulta
+                        k] + '&format=raw&taf=false&hours=96#&date'+dataconsulta
                     # Consulte o site e retorne o html para a variável 'page'
 
                 res = requests.get(url)
