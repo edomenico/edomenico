@@ -2609,6 +2609,7 @@ area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ'
 start_date = datetime.today()
 end_date = datetime.today()
 start_datee = datetime.today()
+nomecompara=""
 while True:
     with st.sidebar:
         with st.container(border=True):
@@ -2853,15 +2854,16 @@ while True:
                 df1.drop('data', inplace=True, axis=1)
                 df1.drop('data1', inplace=True, axis=1)
                 st.table(df1)
-    #with st.spinner('Loading...'):
-    p = tabuleiro(nomedaestacao, noarea, datainicial)
-    import sys
-    import streamlit.components.v1 as components
-    st.components.v1.html(p, height=2400, width=1700, scrolling=True)
-    time.sleep(30)
-        
-        
-    break
+    with st.spinner('Loading...'):
+            if nomedaestacao != nomecompara:
+                nomecompara=nomedaestacao
+                p = tabuleiro(nomedaestacao, noarea, datainicial)
+                import sys
+                import streamlit.components.v1 as components
+
+                st.components.v1.html(p, height=2400, width=1700, scrolling=True)
+                time.sleep(30)
+            break
         
     #while True:
             # Código para buscar e atualizar dados
