@@ -2853,7 +2853,7 @@ while True:
                 df1.drop('data', inplace=True, axis=1)
                 df1.drop('data1', inplace=True, axis=1)
                 st.table(df1)
-with st.spinner('Loading...'):
+    with st.spinner('Loading...'):
         p = tabuleiro(nomedaestacao, noarea, datainicial)
         import sys
         import streamlit.components.v1 as components
@@ -2861,7 +2861,7 @@ with st.spinner('Loading...'):
         time.sleep(30)
         
         
-#break
+    break
         
     #while True:
             # Código para buscar e atualizar dados
