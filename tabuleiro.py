@@ -39,11 +39,11 @@ from bokeh.transform import dodge, factor_cmap
 # from metpy.units import units
 from PIL import Image
 
-global diaini, mesini,estacaov,estacaovv,estacaoaws
+global diaini, mesini,estacaov,estacaovv,estacaoaws,nomecompara
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 
-
+nomecompara=""
 
 def umidade(ta, td):
     if str(ta) == '--' or str(ta) == '//' or str(td) == '//' or str(td) == '--' or int(td) > int(ta):
@@ -2609,7 +2609,7 @@ area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ'
 start_date = datetime.today()
 end_date = datetime.today()
 start_datee = datetime.today()
-nomecompara=""
+
 while True:
     with st.sidebar:
         with st.container(border=True):
