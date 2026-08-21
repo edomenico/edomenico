@@ -2857,7 +2857,7 @@ while nomedaestacao==nomecompara:
                 df1.drop('data1', inplace=True, axis=1)
                 st.table(df1)
    # with st.spinner('Loading...'):
-    if nomedaestacao != nomecompara:
+    #if nomedaestacao != nomecompara:
                 nomecompara=nomedaestacao
                 p = tabuleiro(nomedaestacao, noarea, datainicial)
                 import sys
@@ -2865,7 +2865,7 @@ while nomedaestacao==nomecompara:
 
                 st.components.v1.html(p, height=2400, width=1700, scrolling=True)
                 time.sleep(30)
-                #break
+                break
         
     #while True:
             # Código para buscar e atualizar dados
