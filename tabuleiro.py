@@ -2854,8 +2854,8 @@ while True:
                 df1.drop('data', inplace=True, axis=1)
                 df1.drop('data1', inplace=True, axis=1)
                 st.table(df1)
-    with st.spinner('Loading...'):
-            if nomedaestacao != nomecompara:
+   # with st.spinner('Loading...'):
+    if nomedaestacao != nomecompara:
                 nomecompara=nomedaestacao
                 p = tabuleiro(nomedaestacao, noarea, datainicial)
                 import sys
