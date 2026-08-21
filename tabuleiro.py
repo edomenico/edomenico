@@ -39,11 +39,12 @@ from bokeh.transform import dodge, factor_cmap
 # from metpy.units import units
 from PIL import Image
 
-global diaini, mesini,estacaov,estacaovv,estacaoaws,nomecompara
+global diaini, mesini,estacaov,estacaovv,estacaoaws,nomecompara,nomedaestacao
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 
 nomecompara=""
+nomedaestacao=""
 
 def umidade(ta, td):
     if str(ta) == '--' or str(ta) == '//' or str(td) == '//' or str(td) == '--' or int(td) > int(ta):
@@ -2610,7 +2611,8 @@ start_date = datetime.today()
 end_date = datetime.today()
 start_datee = datetime.today()
 
-while True:
+#while True:
+while nomedaestacao==nomecompara:
     with st.sidebar:
         with st.container(border=True):
             st.write('Cor de fundo')
