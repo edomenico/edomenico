@@ -2863,7 +2863,7 @@ while True:
 
                 st.components.v1.html(p, height=2400, width=1700, scrolling=True)
                 time.sleep(30)
-                break
+                #break
         
     #while True:
             # Código para buscar e atualizar dados
