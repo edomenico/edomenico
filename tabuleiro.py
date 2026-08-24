@@ -2610,7 +2610,7 @@ area_2 = ['SBRD', 'SBVH', 'SBJI', 'SSKW', 'SBRB', 'SWEI', 'SBCY', 'SBPV', 'SBCZ'
 start_date = datetime.today()
 end_date = datetime.today()
 start_datee = datetime.today()
-
+st.set_page_config(layout="wide")
 #while True:
 while nomedaestacao==nomecompara:
     with st.sidebar:
