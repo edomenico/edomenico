@@ -2858,14 +2858,14 @@ while nomedaestacao==nomecompara:
                 st.table(df1)
    # with st.spinner('Loading...'):
     #if nomedaestacao != nomecompara:
-                nomecompara=nomedaestacao
-                p = tabuleiro(nomedaestacao, noarea, datainicial)
-                import sys
-                import streamlit.components.v1 as components
+                #nomecompara=nomedaestacao
+    p = tabuleiro(nomedaestacao, noarea, datainicial)
+    import sys
+    import streamlit.components.v1 as components
 
-                st.components.v1.html(p, height=2400, width=1700, scrolling=True)
-                time.sleep(30)
-                break
+    st.components.v1.html(p, height=2400, width=1700, scrolling=True)
+    time.sleep(30)
+               #break
         
     #while True:
             # Código para buscar e atualizar dados
