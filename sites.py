@@ -316,7 +316,7 @@ st.set_page_config(
         page_icon="✅",
         layout="wide",
     )
-st.set_page_config(layout="wide")
+
 main()
     
 
