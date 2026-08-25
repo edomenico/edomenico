@@ -12,7 +12,7 @@ def main():
     from datetime import datetime, timedelta,timezone
     import pandas as pd
     global selusuario
-    st.set_page_config(layout="wide")
+    
     def get_coordinates(city_name):
         url = f"https://nominatim.openstreetmap.org/search?q={city_name}&format=json&limit=1"
         headers = {"User-Agent": "WeatherDashboardApp/1.0 (eduardo.aloise@navbrasil.gov.br)"}
@@ -316,6 +316,7 @@ st.set_page_config(
         page_icon="✅",
         layout="wide",
     )
+st.set_page_config(layout="wide")
 main()
     
 
