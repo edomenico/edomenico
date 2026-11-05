@@ -94,20 +94,20 @@ def main():
 
 
     file = "estacaomodelos.csv"
-    data = pd.read_csv(file, sep=',')
+    data = pd.read_csv(file)
 
     # Select Country
 
     country_data = data.loc[data.loc[:, "estacao"] == nomedaestacao, :]
 
-    df = pd.read_csv("estacaomodelos.csv")
+    #df = pd.read_csv("estacaomodelos.csv")
 
-    df1=df[df['estacao'] ==nomedaestacao]
-    lat=float(df1['lat'])
-    lon = float(df1['lon'])
+    #df1=df[df['estacao'] ==nomedaestacao]
+    #lat=float(df1['lat'])
+    #lon = float(df1['lon'])
 
-    #lat = float(country_data.loc[:,"lat"])
-    #lon = float(country_data.loc[:,"lon"])
+    lat = float(country_data.loc[:,"lat"])
+    lon = float(country_data.loc[:,"lon"])
 
 #    st.set_page_config(layout='wide')
     #st.title('Previsão do tempo e Localização')
