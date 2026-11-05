@@ -103,8 +103,8 @@ def main():
     df = pd.read_csv("estacaomodelos.csv")
 
     df1=df[df['estacao'] ==nomedaestacao]
-    lat=df1['lat']
-    lon = df1['lon']
+    lat=float(df1['lat'])
+    lon = float(df1['lon'])
 
     #lat = float(country_data.loc[:,"lat"])
     #lon = float(country_data.loc[:,"lon"])
