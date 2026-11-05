@@ -27,6 +27,14 @@ def main():
         df['id'] = df['nome'] + '-' + df['uf']
         df['color'] = (cc.glasbey * 23)[:len(df)]
         return df
+    def obter_lat_lon(nomedaestacao):
+        df = pd.read_csv("estacaomodelos.csv")
+
+        df1=df[df['estacao'] ==nomedaestacao]
+        lat1=df1['lat']
+        lon1 = df1['lon']
+
+        return lat1.values,lon1.values
 
     def get_previsao(lat,lon):
         siglas = get_siglas()
