@@ -13,7 +13,7 @@ def main():
     import pandas as pd
     #@st.cache_data
     def get_siglas():
-        df = pd.read_csv('C:/Users/edome/OneDrive/Área de Trabalho/similaridade/sigla.csv')
+        df = pd.read_csv('sigla.csv')
         df = df.rename(columns={'Sigla': 'tempo'})
         df = df.set_index('tempo')
         return df
@@ -93,7 +93,7 @@ def main():
             )
 
 
-    file = "C:/Users/edome/OneDrive/Área de Trabalho/similaridade/estacaomodelos.csv"
+    file = "estacaomodelos.csv"
     data = pd.read_csv(file, sep=',')
 
     # Select Country
