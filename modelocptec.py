@@ -94,7 +94,7 @@ def main():
 
 
     file = "estacaomodelos.csv"
-    data = pd.read_csv(file)
+    data = pd.read_csv(file, sep=','))
 
     # Select Country
 
