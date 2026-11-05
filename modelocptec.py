@@ -105,7 +105,7 @@ def main():
     #df1=df[df['estacao'] ==nomedaestacao]
     #lat=float(df1['lat'])
     #lon = float(df1['lon'])
-
+    print(country_data.loc[:,"lat"])
     lat = float(country_data.loc[:,"lat"])
     lon = float(country_data.loc[:,"lon"])
 
