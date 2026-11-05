@@ -100,10 +100,14 @@ def main():
 
     country_data = data.loc[data.loc[:, "estacao"] == nomedaestacao, :]
 
+    df = pd.read_csv("estacaomodelos.csv")
 
+    df1=df[df['estacao'] ==nomedaestacao]
+    lat=df1['lat']
+    lon = df1['lon']
 
-    lat = float(country_data.loc[:,"lat"])
-    lon = float(country_data.loc[:,"lon"])
+    #lat = float(country_data.loc[:,"lat"])
+    #lon = float(country_data.loc[:,"lon"])
 
 #    st.set_page_config(layout='wide')
     #st.title('Previsão do tempo e Localização')
