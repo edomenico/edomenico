@@ -39,8 +39,8 @@ def main():
     def get_previsao(lat,lon):
         siglas = get_siglas()
         df = pd.DataFrame()
-        lat=-22
-        lon=-43
+        lat=float(lat)
+        lon=float(lon)
         #for i in id.index:
             #lat = id.at[i, 'latitude']
             #long = id.at[i, 'longitude']
