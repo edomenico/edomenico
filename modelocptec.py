@@ -137,7 +137,7 @@ def main():
         cols[0].plotly_chart(make_fig(prev))
     #cols[0].write('dados: CPTEC/INPE')
     #plotly_chart(make_fig(prev))
-    st.write('dados: CPTEC/INPE - Estação: ',nomedaestacao,' Lat: ',lat, ' Lon: ', lon)
+    st.write('dados: CPTEC/INPE - Estação: ',nomedaestacao,' Lat: ',str(lat), ' Lon: ', str(lon))
 #    cols[1].map(dados.reset_index(tacao), zoom=3, color='color')
 
 st.set_page_config(
