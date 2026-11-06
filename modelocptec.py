@@ -5,7 +5,7 @@ import colorcet as cc
 from streamlit import runtime
 import sys
 from streamlit.web import cli as stcli
-
+global lat,lon
 def main():
 
 
