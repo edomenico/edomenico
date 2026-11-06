@@ -45,7 +45,7 @@ def main():
             #lat = id.at[i, 'latitude']
             #long = id.at[i, 'longitude']
         dfi = pd.concat([pd.read_xml(
-            f'http://servicos.cptec.inpe.br/XML/cidade/7dias/{lat}/{lon}/previsaoLatLon.xml', encoding='cp1252'),
+            f'http://servicos.cptec.inpe.br/XML/cidade/7dias/lat/lon/previsaoLatLon.xml', encoding='cp1252'),
                             pd.read_xml(f'http://servicos.cptec.inpe.br/XML/cidade/{lat}/{lon}/estendidaLatLon.xml',
                                         encoding='cp1252')
                             ])
