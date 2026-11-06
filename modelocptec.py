@@ -141,7 +141,7 @@ def main():
 #    cols[1].map(dados.reset_index(tacao), zoom=3, color='color')
 
 st.set_page_config(
-        page_title="Tabuleiro - CMA-GL",
+        page_title="Previsão temperatura máxima/mínima - CPTEC",
         page_icon="✅",
         layout="wide",
     )
