@@ -304,7 +304,7 @@ def main():
                             </style>
                             """, unsafe_allow_html=True)
 
-            st.table(df)
+            st.dataframe(df)
             
            # st.table(df, width="stretch")
             html = df.to_html(index=False)
