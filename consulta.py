@@ -195,7 +195,7 @@ def main():
                 print('cheguei 2')
                 print(p)
 
-                for i in range(1, len(p), 1):
+                for i in range(0, len(p), 1):
                     if p[i].find('METAR') > -1:
                         b = 'METAR'
                     else:
