@@ -302,12 +302,12 @@ def main():
 
             #pdf_bytes = gerar_pdf_tabela(df)
 
-            st.download_button(
-                label="Baixar tabela em PDF",
-                data=pdf_bytes,
-                file_name="tabela.pdf",
-                mime="application/pdf",
-            )
+            #st.download_button(
+             #   label="Baixar tabela em PDF",
+             #   data=pdf_bytes,
+              #  file_name="tabela.pdf",
+               # mime="application/pdf",
+           # )
 
 st.set_page_config(
         page_title="Consulta Redemet",
