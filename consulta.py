@@ -53,10 +53,10 @@ def main():
         from bs4 import BeautifulSoup
         estacaoasw=[]
         arquivo = []
-        cab = ',Localidade,Tipo,Data,Mensagem'
+       
         f = open("metarteste.csv", "w")
-        f.write(cab)
-        arquivo.append(cab)
+        
+        
         data_hora1 = datetime.combine(datai, horai)
         data_hora2 = datetime.combine(dataf, horaf)
         diferenca = data_hora2 - data_hora1
@@ -298,6 +298,7 @@ def main():
 
             #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
             df.index = [""] * len(df)
+            df.columns = [""] * len(df.columns)
             st.markdown(
                     """
                     <style>
