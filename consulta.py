@@ -295,7 +295,7 @@ def main():
 
             #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
             df.index = [""] * len(df)
-            st.table(df,use_container_width=True)
+            st.table(df, width="stretch")
             html = df.to_html(index=False)
             #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
