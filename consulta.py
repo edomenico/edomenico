@@ -212,7 +212,7 @@ def main():
                     arquivo.append(montalinha)
                     montalinha = montalinha.replace('"', '')
                     f.write("\n" + montalinha)
-        f.close
+        f.close()
         return arquivo
 
 
