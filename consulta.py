@@ -312,9 +312,11 @@ def main():
                     """,
                     unsafe_allow_html=True,
                 )
+            if tipo=="Metar":
 
-            #st.table(df)
-            st.dataframe(df, use_container_width=True,row_height=80)
+                st.table(df)
+            else:
+                st.dataframe(df, use_container_width=True,row_height=80)
             
            # st.table(df, width="stretch")
             html = df.to_html(index=False)
