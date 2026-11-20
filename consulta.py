@@ -309,12 +309,6 @@ def main():
                 mime="application/pdf",
             )
 
-if __name__ == '__main__':
-    if runtime.exists():
-        main()
-    else:
-        sys.argv = ["streamlit", "run", sys.argv[0]]
-        sys.exit(stcli.main())
 st.set_page_config(
         page_title="Consulta Redemet",
         page_icon="✅",
