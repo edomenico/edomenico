@@ -149,7 +149,7 @@ def main():
             estacaoaws.append('SBBV%2C')
         elif area == 3:
             estacaoaws = []
-            estacaoaws.append("SBGR"+estacao+'%2C')
+            estacaoaws.append('SBGR%2C'+estacao+'%2C')
 
 
 
@@ -313,7 +313,7 @@ def main():
                 )
 
             #st.table(df)
-            st.dataframe(df, use_container_width=True,row_height=80)
+            st.dataframe(df, use_container_width=True,row_height=20)
             
            # st.table(df, width="stretch")
             html = df.to_html(index=False)
