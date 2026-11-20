@@ -297,7 +297,7 @@ def main():
             df.index = [""] * len(df)
             st.table(df)
             html = df.to_html(index=False)
-            convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
+            #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
 
             #pdf_bytes = gerar_pdf_tabela(df)
