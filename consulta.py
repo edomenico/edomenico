@@ -161,7 +161,7 @@ def main():
             # estacaoaws.append('SBEG%2CSBBV')
         for k in range(0, len(estacaoaws)):
 
-            for j in range(1, intervalo + 1, 1):
+            for j in range(0, intervalo + 1, 1):
 
                 #datainic = datahini + timedelta(days=j)
                 anoi = str(datai)[0:4]
