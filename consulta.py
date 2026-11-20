@@ -66,7 +66,7 @@ def main():
 
         if area==1:
             estacaoaws = []
-            #estacaoaws.append('SBGR%2C')
+            estacaoaws.append('SBJR%2C')
             estacaoaws.append('SBJR%2C')
             estacaoaws.append('SBMI%2C')
             estacaoaws.append('SBES%2C')
