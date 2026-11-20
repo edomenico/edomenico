@@ -149,7 +149,7 @@ def main():
             estacaoaws.append('SBBV%2C')
         elif area == 3:
             estacaoaws = []
-            estacaoaws.append('SBGR%2C'+estacao+'%2C')
+            estacaoaws.append(estacao+'%2C')
 
 
 
@@ -260,6 +260,7 @@ def main():
                     area=2
                 if area == 'Estação':
                     estacao = (st.text_input('Escolha a estação:')).upper()
+                    estacao="SBGR"+estacao
                     area=3
 
                 col5, col6 = st.columns(2)
