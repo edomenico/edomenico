@@ -295,14 +295,16 @@ def main():
 
             #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
             df.index = [""] * len(df)
-            st.markdown("""
-                            <style>
-                            /* Impede a quebra de linha nas células e cabeçalhos do st.table */
-                            [data-testid="stTable"] td, [data-testid="stTable"] th {
-                            white-space: nowrap;
-                            }
-                            </style>
-                            """, unsafe_allow_html=True)
+            st.markdown(
+                    """
+                    <style>
+                    [data-testid="stTable"] table {
+                        white-space: nowrap;
+                    }
+                    </style>
+                    """,
+                    unsafe_allow_html=True,
+                )
 
             st.table(df)
             
