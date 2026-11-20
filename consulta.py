@@ -307,7 +307,7 @@ def main():
                 )
 
             #st.table(df)
-            st.dataframe(df, use_container_width=True)
+            st.dataframe(df, use_container_width=True,row_height=80)
             
            # st.table(df, width="stretch")
             html = df.to_html(index=False)
