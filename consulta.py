@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, date
 from datetime import datetime, timezone
 
 from streamlit import runtime
-from streamlit_toggle import toggle
+
 from streamlit.web import cli as stcli
 import streamlit  as st
 global estacao,df
