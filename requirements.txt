@@ -7,9 +7,6 @@ requests
 bs4
 beautifulsoup4
 virocon
-csv2pdf
-io
-fpdf
 
 
 
