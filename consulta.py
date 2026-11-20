@@ -112,7 +112,7 @@ def main():
             # estacaoaws.append('SBTE%2CSBVT%2CSNRU')
         elif area==2:
             estacaoaws = []
-            #estacaoaws.append('SBGR%2C')
+            estacaoaws.append('SBRD%2C')
             estacaoaws.append('SBRD%2C')
             estacaoaws.append('SBVH%2C')
             estacaoaws.append('SBJI%2C')
