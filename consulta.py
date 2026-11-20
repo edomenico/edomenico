@@ -260,7 +260,7 @@ def main():
                     area=2
                 if area == 'Estação':
                     estacao = (st.text_input('Escolha a estação:')).upper()
-                    estacao="SBGR"+estacao
+                    #estacao="SBGR"+estacao
                     area=3
 
                 col5, col6 = st.columns(2)
@@ -314,7 +314,7 @@ def main():
                 )
 
             #st.table(df)
-            st.dataframe(df, use_container_width=True,row_height=60)
+            st.dataframe(df, use_container_width=True,row_height=80)
             
            # st.table(df, width="stretch")
             html = df.to_html(index=False)
