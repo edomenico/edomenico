@@ -12,10 +12,10 @@ from streamlit import runtime
 from streamlit.web import cli as stcli
 import streamlit  as st
 global estacao,df
-from csv2pdf import convert
-from io import BytesIO
+#from csv2pdf import convert
+#from io import BytesIO
 
-from fpdf import FPDF
+#from fpdf import FPDF
 
 
 def main():
@@ -265,15 +265,16 @@ def main():
 
 
                 with col6   :
-                    if st.button("Imprimir", use_container_width=True):
-                        pdf_bytes = gerar_pdf_tabela(df)
+                    if st.button("Salvar pdf", use_container_width=True):
+                        st.write("Em implementação")
+                        #pdf_bytes = gerar_pdf_tabela(df)
 
-                        st.download_button(
-                            label="Baixar tabela em PDF",
-                            data=pdf_bytes,
-                            file_name="tabela.pdf",
-                            mime="application/pdf",
-                        )
+                       # st.download_button(
+                        #    label="Baixar tabela em PDF",
+                        #    data=pdf_bytes,
+                       #     file_name="tabela.pdf",
+                       #     mime="application/pdf",
+                      #  )
 
 
 
@@ -299,7 +300,7 @@ def main():
             convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
 
-            pdf_bytes = gerar_pdf_tabela(df)
+            #pdf_bytes = gerar_pdf_tabela(df)
 
             st.download_button(
                 label="Baixar tabela em PDF",
