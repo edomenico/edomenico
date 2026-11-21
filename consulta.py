@@ -314,7 +314,7 @@ def main():
                 )
             if tipo=="Metar":
 
-                st.dataframe(df)
+                st.dataframe(df,height=300)
             else:
                 st.dataframe(df, use_container_width=True,row_height=80)
             
