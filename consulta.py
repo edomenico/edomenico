@@ -15,7 +15,7 @@ global estacao,df
 #from csv2pdf import convert
 #from io import BytesIO
 
-#from fpdf import FPDF
+from fpdf import FPDF
 
 
 def main():
