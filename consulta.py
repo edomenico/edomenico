@@ -297,13 +297,13 @@ def main():
 
 
                 with col6:
-                        pdf_bytes = df_to_pdf_bytes(df)
-                        st.download_button(
-                            label="Baixar tabela em PDF",
-                            data=pdf_bytes,
-                            file_name="dataframe.pdf",
-                            mime="application/pdf",
-                            )
+                    pdf_bytes = df_to_pdf_bytes(df)
+                    st.download_button(
+                        label="Baixar tabela em PDF",
+                        data=pdf_bytes,
+                        file_name="dataframe.pdf",
+                        mime="application/pdf",
+                        )
                         #pdf_bytes = gerar_pdf_tabela(df)
 
                        # st.download_button(
