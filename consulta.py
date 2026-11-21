@@ -223,9 +223,9 @@ def main():
 
 
 
-    clicou=False
-    st.set_page_config(layout="wide")
-    while True:
+   clicou=False
+   st.set_page_config(layout="wide")
+   while True:
         with st.sidebar:
             with st.container(border=True):
                 # end_date = datetime.today()
@@ -287,7 +287,7 @@ def main():
 
 
 
-        break
+      break
 
     if tipo=="Metar" or tipo=="TAF":
 
