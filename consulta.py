@@ -43,7 +43,7 @@ def main():
     
       out = pdf.output()
       return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode("latin-1")
-    def consulta(tipo,datai,horai,dataf,horaf,area):
+   def consulta(tipo,datai,horai,dataf,horaf,area):
 
         import datetime
         import time
