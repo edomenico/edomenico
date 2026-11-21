@@ -350,8 +350,7 @@ def main():
             #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
 
-            pdf_bytes = df_to_pdf_bytes(df))
-
+            pdf_bytes = df_to_pdf_bytes(df)
             st.download_button(
                 label="Baixar tabela em PDF",
                 data=pdf_bytes,
