@@ -300,12 +300,13 @@ def main():
                         df = pd.read_csv("arquivo_limpo.csv")
                         df.index = [""] * len(df)
                         df.columns = [""] * len(df.columns)
+                        
 
 
 
             #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
-            df.index = [""] * len(df)
-            df.columns = [""] * len(df.columns)
+                        df.index = [""] * len(df)
+                        df.columns = [""] * len(df.columns)
 
 
                 with col6:
