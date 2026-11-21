@@ -38,7 +38,7 @@ def main():
           pdf.set_font("Helvetica", size=8)
           for _, row in df.iterrows():
             for val in row:
-              pdf.cell(col_width, row_height, str(val)[:30], border=1)
+              pdf.cell(col_width, row_height, str(val)[:150], border=1)
             pdf.ln(row_height)
 
           out = pdf.output()
