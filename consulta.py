@@ -298,7 +298,7 @@ def main():
 
 
                 with col6:
-                    if clicou== True:
+                    if st.button("Salvar pdf", use_container_width=True):
                         st.write("em implantação")
                         #pdf_bytes = df_to_pdf_bytes(df)
                         #st.download_button(
