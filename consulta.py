@@ -19,6 +19,27 @@ from fpdf import FPDF
 
 
 def main():
+    def gerar_pdf(dataframe):
+        pdf = FPDF(orientation="L", unit="mm", format="A4") # "L" = Paisagem (ajuda com muitas colunas)
+        pdf.add_page()
+        pdf.set_font("Helvetica", size=9)
+        
+        # Cria tabela nativa que ajusta larguras e quebra linhas automaticamente
+        with pdf.table(col_widths=(30, 180, 40)) as table:
+            # Cabeçalho
+            row = table.row()
+            for col in dataframe.columns:
+                row.cell(str(col))
+            # Dados
+            for _, data_row in dataframe.iterrows():
+                row = table.row()
+                for item in data_row:
+                    row.cell(str(item))
+                    
+        return bytes(pdf.output())
+
+
+    
     def df_to_pdf_bytes(df: pd.DataFrame) -> bytes:
           pdf = FPDF(orientation="L", unit="mm", format="A4")
           pdf.add_page()
@@ -300,12 +321,18 @@ def main():
                         df = pd.read_csv("arquivo_limpo.csv")
                         df.index = [""] * len(df)
                         df.columns = [""] * len(df.columns)
-                        pdf_bytes = df_to_pdf_bytes(df)
+                        #pdf_bytes = df_to_pdf_bytes(df)
+                        #st.download_button(
+                        #    label="Baixar tabela em PDF",
+                         #   data=pdf_bytes,
+                         #   file_name="dataframe.pdf",
+                         #   mime="application/pdf",
+                         #   )
                         st.download_button(
-                            label="Baixar tabela em PDF",
-                            data=pdf_bytes,
-                            file_name="dataframe.pdf",
-                            mime="application/pdf",
+                            label="Baixar PDF formatado",
+                            data=gerar_pdf(df),
+                            file_name="relatorio.pdf",
+                            mime="application/pdf"
                             )
                         
 
