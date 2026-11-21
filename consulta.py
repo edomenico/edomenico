@@ -296,7 +296,7 @@ def main():
                         clicou=True
 
 
-                with col6   :
+                with col6:
                         pdf_bytes = df_to_pdf_bytes(df)
                         st.download_button(
                             label="Baixar tabela em PDF",
