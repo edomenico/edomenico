@@ -313,7 +313,7 @@ def main():
                 )
             if tipo=="Metar":
 
-                st.dataframe(df,height=1000)
+                st.dataframe(df,height=1000,hide_index=not index)
             else:
                 st.dataframe(df, use_container_width=True,row_height=80,height=1000)
             
