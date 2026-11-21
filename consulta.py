@@ -299,6 +299,13 @@ def main():
                 with col6   :
                     if st.button("Salvar pdf", use_container_width=True):
                         st.write("Em implementação")
+                        pdf_bytes = df_to_pdf_bytes(df)
+                        st.download_button(
+                            label="Baixar tabela em PDF",
+                            data=pdf_bytes,
+                            file_name="dataframe.pdf",
+                            mime="application/pdf",
+                        )
                         #pdf_bytes = gerar_pdf_tabela(df)
 
                        # st.download_button(
@@ -342,12 +349,7 @@ def main():
 
                 st.dataframe(df,height=1000,hide_index=True)
                 #st.dataframe(df.set_index(df.columns[0]))
-                st.download_button(
-                        label="Baixar tabela em PDF",
-                        data=pdf_bytes,
-                        file_name="dataframe.pdf",
-                        mime="application/pdf",
-                    )
+                
             else:
                 st.dataframe(df, use_container_width=True,row_height=80,height=1000,hide_index=True)
             
