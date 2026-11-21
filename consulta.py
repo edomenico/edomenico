@@ -300,7 +300,7 @@ def main():
                 with col6:
                     if st.button("Salvar pdf", use_container_width=True):
                         st.write("em implantação")
-                        #pdf_bytes = df_to_pdf_bytes(df)
+                        pdf_bytes = df_to_pdf_bytes(df)
                         #st.download_button(
                             #label="Baixar tabela em PDF",
                             #data=pdf_bytes,
