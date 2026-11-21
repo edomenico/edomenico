@@ -335,16 +335,7 @@ def main():
             #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
             df.index = [""] * len(df)
             df.columns = [""] * len(df.columns)
-            st.markdown(
-                    """
-                    <style>
-                    [data-testid="stTable"] table {
-                        white-space: nowrap;
-                    }
-                    </style>
-                    """,
-                    unsafe_allow_html=True,
-                )
+            
             if tipo=="Metar":
 
                 st.dataframe(df,height=1000,hide_index=True)
@@ -357,6 +348,14 @@ def main():
             html = df.to_html(index=False)
             #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
+            
+            pdf_bytes = df_to_pdf_bytes(df)
+            st.download_button(
+                label="Baixar tabela em PDF",
+                data=pdf_bytes,
+                file_name="dataframe.pdf",
+                mime="application/pdf",
+            )
 
             
 
