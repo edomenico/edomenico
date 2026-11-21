@@ -291,19 +291,21 @@ def main():
 
                 col5, col6 = st.columns(2)
                 with col5:
+                    
                     if st.button("Consultar", use_container_width=True):
                         pdf=consulta(tipo, datai, horai, dataf, horaf, area)
                         clicou=True
 
 
                 with col6:
-                    pdf_bytes = df_to_pdf_bytes(df)
-                    st.download_button(
-                        label="Baixar tabela em PDF",
-                        data=pdf_bytes,
-                        file_name="dataframe.pdf",
-                        mime="application/pdf",
-                        )
+                    if clicou== True:
+                        pdf_bytes = df_to_pdf_bytes(df)
+                        st.download_button(
+                            label="Baixar tabela em PDF",
+                            data=pdf_bytes,
+                            file_name="dataframe.pdf",
+                            mime="application/pdf",
+                            )
                         #pdf_bytes = gerar_pdf_tabela(df)
 
                        # st.download_button(
