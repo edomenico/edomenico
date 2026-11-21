@@ -305,8 +305,7 @@ def main():
 
 
             #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
-                        df.index = [""] * len(df)
-                        df.columns = [""] * len(df.columns)
+                       
 
 
                 with col6:
