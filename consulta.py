@@ -25,7 +25,7 @@ def main():
         pdf.set_font("Helvetica", size=9)
         
         # Cria tabela nativa que ajusta larguras e quebra linhas automaticamente
-        with pdf.table(col_widths=(30, 180, 40)) as table:
+        with pdf.table(col_widths=(300, 300, 300)) as table:
             # Cabeçalho
             row = table.row()
             for col in dataframe.columns:
