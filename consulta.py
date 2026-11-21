@@ -132,7 +132,6 @@ def main():
             estacaoaws.append('SBTB%2C')
             estacaoaws.append('SBOI%2C')
             estacaoaws.append('SBBE%2C')
-            estacaoaws.append('SBRF%2C')
             estacaoaws.append('SBMQ%2C')
             estacaoaws.append('SBSN%2C')
             estacaoaws.append('SBSO%2C')
