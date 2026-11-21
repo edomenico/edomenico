@@ -26,7 +26,7 @@ def main():
 
   # Calcula largura simples por coluna
           col_width = (pdf.w - 20) / max(len(df.columns), 1)
-          row_height = 7
+          row_height = 20
 
           # Cabeçalho
           pdf.set_font("Helvetica", style="B", size=9)
