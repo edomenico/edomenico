@@ -19,6 +19,33 @@ global estacao,df
 
 
 def main():
+    def df_to_pdf_bytes(df: pd.DataFrame) -> bytes:
+          pdf = FPDF(orientation="L", unit="mm", format="A4")
+          pdf.add_page()
+          pdf.set_font("Helvetica", size=9)
+
+  # Calcula largura simples por coluna
+          col_width = (pdf.w - 20) / max(len(df.columns), 1)
+          row_height = 7
+
+          # Cabeçalho
+          pdf.set_font("Helvetica", style="B", size=9)
+          for col in df.columns:
+            pdf.cell(col_width, row_height, str(col)[:25], border=1)
+          pdf.ln(row_height)
+
+          # Linhas
+          pdf.set_font("Helvetica", size=8)
+          for _, row in df.iterrows():
+            for val in row:
+              pdf.cell(col_width, row_height, str(val)[:30], border=1)
+            pdf.ln(row_height)
+
+          out = pdf.output()
+          return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode("latin-1")
+
+
+
     def gerar_pdf_tabela(dataframe: pd.DataFrame) -> bytes:
         pdf = FPDF()
         pdf.add_page()
