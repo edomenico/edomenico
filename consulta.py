@@ -19,29 +19,30 @@ global estacao,df
 
 
 def main():
-    def gerar_pdf_tabela(dataframe: pd.DataFrame) -> bytes:
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Helvetica", "B", 14)
-        pdf.cell(0, 10, "Relatório de Tabela", ln=True)
-        pdf.set_font("Helvetica", "B", 10)
-
-        col_w = pdf.epw / len(dataframe.columns)
-        row_h = 8
-
-        for col in dataframe.columns:
-            pdf.cell(col_w, row_h, str(col), border=1)
-        pdf.ln(row_h)
-
-        pdf.set_font("Helvetica", "", 10)
-        for _, row in dataframe.iterrows():
-            for val in row:
-                pdf.cell(col_w, row_h, str(val), border=1)
-            pdf.ln(row_h)
-
-        buf = BytesIO()
-        pdf.output(buf)
-        return buf.getvalue()
+   def df_to_pdf_bytes(df: pd.DataFrame) -> bytes:
+      pdf = FPDF(orientation="L", unit="mm", format="A4")
+      pdf.add_page()
+      pdf.set_font("Helvetica", size=9)
+    
+      # Calcula largura simples por coluna
+      col_width = (pdf.w - 20) / max(len(df.columns), 1)
+      row_height = 7
+    
+      # Cabeçalho
+      pdf.set_font("Helvetica", style="B", size=9)
+      for col in df.columns:
+        pdf.cell(col_width, row_height, str(col)[:25], border=1)
+      pdf.ln(row_height)
+    
+      # Linhas
+      pdf.set_font("Helvetica", size=8)
+      for _, row in df.iterrows():
+        for val in row:
+          pdf.cell(col_width, row_height, str(val)[:30], border=1)
+        pdf.ln(row_height)
+    
+      out = pdf.output()
+      return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode("latin-1")
     def consulta(tipo,datai,horai,dataf,horaf,area):
 
         import datetime
@@ -323,14 +324,14 @@ def main():
             #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
 
-            #pdf_bytes = gerar_pdf_tabela(df)
+            pdf_bytes = df_to_pdf_bytes(df)
 
-            #st.download_button(
-             #   label="Baixar tabela em PDF",
-             #   data=pdf_bytes,
-              #  file_name="tabela.pdf",
-               # mime="application/pdf",
-           # )
+            st.download_button(
+                label="Baixar tabela em PDF",
+                data=pdf_bytes,
+                file_name="dataframe.pdf",
+                mime="application/pdf",
+                )
 
 st.set_page_config(
         page_title="Consulta Redemet",
