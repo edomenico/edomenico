@@ -297,15 +297,13 @@ def main():
 
 
                 with col6   :
-                    if st.button("Salvar pdf", use_container_width=True):
-                        st.write("Em implementação")
                         pdf_bytes = df_to_pdf_bytes(df)
                         st.download_button(
                             label="Baixar tabela em PDF",
                             data=pdf_bytes,
                             file_name="dataframe.pdf",
                             mime="application/pdf",
-                        )
+                            )
                         #pdf_bytes = gerar_pdf_tabela(df)
 
                        # st.download_button(
@@ -349,13 +347,7 @@ def main():
             #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
             #clicou=False
             
-            pdf_bytes = df_to_pdf_bytes(df)
-            st.download_button(
-                label="Baixar tabela em PDF",
-                data=pdf_bytes,
-                file_name="dataframe.pdf",
-                mime="application/pdf",
-            )
+           
 
             
 
