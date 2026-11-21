@@ -295,6 +295,17 @@ def main():
                     if st.button("Consultar", use_container_width=True):
                         pdf=consulta(tipo, datai, horai, dataf, horaf, area)
                         clicou=True
+                        df = pd.read_csv("metarteste.csv")
+                        df.to_csv("arquivo_limpo.csv", index=False)
+                        df = pd.read_csv("arquivo_limpo.csv")
+                        df.index = [""] * len(df)
+                        df.columns = [""] * len(df.columns)
+
+
+
+            #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
+            df.index = [""] * len(df)
+            df.columns = [""] * len(df.columns)
 
 
                 with col6:
@@ -327,15 +338,15 @@ def main():
 
 
         if clicou:
-            df = pd.read_csv("metarteste.csv")
-            df.to_csv("arquivo_limpo.csv", index=False)
-            df = pd.read_csv("arquivo_limpo.csv")
+            #df = pd.read_csv("metarteste.csv")
+            #df.to_csv("arquivo_limpo.csv", index=False)
+            #df = pd.read_csv("arquivo_limpo.csv")
 
 
 
-            #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
-            df.index = [""] * len(df)
-            df.columns = [""] * len(df.columns)
+            
+            #df.index = [""] * len(df)
+            #df.columns = [""] * len(df.columns)
             
             if tipo=="Metar":
 
