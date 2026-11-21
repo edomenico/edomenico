@@ -316,7 +316,7 @@ def main():
                 st.dataframe(df,height=1000,hide_index=True)
                 #st.dataframe(df.set_index(df.columns[0]))
             else:
-                st.dataframe(df, use_container_width=True,row_height=80,height=1000)
+                st.dataframe(df, use_container_width=True,row_height=80,height=1000,hide_index=True)
             
            # st.table(df, width="stretch")
             html = df.to_html(index=False)
