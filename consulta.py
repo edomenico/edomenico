@@ -342,7 +342,7 @@ def main():
 
                 st.dataframe(df,height=1000,hide_index=True)
                 #st.dataframe(df.set_index(df.columns[0]))
-                 st.download_button(
+                st.download_button(
                         label="Baixar tabela em PDF",
                         data=pdf_bytes,
                         file_name="dataframe.pdf",
