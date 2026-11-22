@@ -115,7 +115,7 @@ def main():
 
         if area == 1:
             estacaoaws = []
-            estacaoaws.append('SBJR%2C')
+            #estacaoaws.append('SBJR%2C')
             estacaoaws.append('SBJR%2C')
             estacaoaws.append('SBMI%2C')
             estacaoaws.append('SBES%2C')
@@ -158,7 +158,7 @@ def main():
             # estacaoaws.append('SBTE%2CSBVT%2CSNRU')
         elif area == 2:
             estacaoaws = []
-            estacaoaws.append('SBRD%2C')
+            #estacaoaws.append('SBRD%2C')
             estacaoaws.append('SBRD%2C')
             estacaoaws.append('SBVH%2C')
             estacaoaws.append('SBJI%2C')
@@ -194,7 +194,7 @@ def main():
             estacaoaws.append('SBBV%2C')
         elif area == 3:
             estacaoaws = []
-            estacaoaws.append('SBBV,' + estacao + '%2C')
+            estacaoaws.append(estacao + '%2C')
 
             # estacaoaws.append('SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB')
             # estacaoaws.append('SSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ')
