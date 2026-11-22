@@ -99,7 +99,7 @@ def main():
         from bs4 import BeautifulSoup
         estacaoasw = []
 
-        cab = 'Localidade,Tipo,Data,Mensagem'
+        cab = 'Localidade,Horário_inserção,Data,Mensagem'
         arquivo = []
 
         f = open("metarteste.csv", "w")
