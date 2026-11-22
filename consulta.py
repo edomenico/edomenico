@@ -325,7 +325,7 @@ def main():
                         df = pd.read_csv("metarteste.csv")
                         df.to_csv("arquivo_limpo.csv", index=False)
                         df = pd.read_csv("arquivo_limpo.csv")
-                        #df.drop(columns=["Data", "Mensagem"], inplace=True)
+                        df.drop(columns=["Data", "Mensagem"], inplace=True)
                         df.index = [""] * len(df)
                         #df.columns = [""] * len(df.columns)
                         #pdf_bytes = df_to_pdf_bytes(df)
