@@ -10,20 +10,21 @@ from datetime import datetime, timezone
 from streamlit import runtime
 
 from streamlit.web import cli as stcli
-import streamlit  as st
-global estacao,df
-#from csv2pdf import convert
-#from io import BytesIO
+import streamlit as st
+
+global estacao, df
+# from csv2pdf import convert
+# from io import BytesIO
 
 from fpdf import FPDF
 
 
 def main():
     def gerar_pdf(dataframe):
-        pdf = FPDF(orientation="L", unit="mm", format="A4") # "L" = Paisagem (ajuda com muitas colunas)
+        pdf = FPDF(orientation="L", unit="mm", format="A4")  # "L" = Paisagem (ajuda com muitas colunas)
         pdf.add_page()
         pdf.set_font("Helvetica", size=9)
-        
+
         # Cria tabela nativa que ajusta larguras e quebra linhas automaticamente
         with pdf.table(col_widths=(1000, 300, 0)) as table:
             # Cabeçalho
@@ -35,37 +36,33 @@ def main():
                 row = table.row()
                 for item in data_row:
                     row.cell(str(item))
-                    
+
         return bytes(pdf.output())
 
-
-    
     def df_to_pdf_bytes(df: pd.DataFrame) -> bytes:
-          pdf = FPDF(orientation="L", unit="mm", format="A4")
-          pdf.add_page()
-          pdf.set_font("Helvetica", size=9)
+        pdf = FPDF(orientation="L", unit="mm", format="A4")
+        pdf.add_page()
+        pdf.set_font("Helvetica", size=9)
 
-  # Calcula largura simples por coluna
-          col_width = (pdf.w - 20) / max(len(df.columns), 1)
-          row_height = 20
+        # Calcula largura simples por coluna
+        col_width = (pdf.w - 20) / max(len(df.columns), 1)
+        row_height = 20
 
-          # Cabeçalho
-          pdf.set_font("Helvetica", style="B", size=9)
-          for col in df.columns:
+        # Cabeçalho
+        pdf.set_font("Helvetica", style="B", size=9)
+        for col in df.columns:
             pdf.cell(col_width, row_height, str(col)[:70], border=1)
-          pdf.ln(row_height)
+        pdf.ln(row_height)
 
-          # Linhas
-          pdf.set_font("Helvetica", size=8)
-          for _, row in df.iterrows():
+        # Linhas
+        pdf.set_font("Helvetica", size=8)
+        for _, row in df.iterrows():
             for val in row:
-              pdf.cell(col_width, row_height, str(val)[:300], border=1)
+                pdf.cell(col_width, row_height, str(val)[:300], border=1)
             pdf.ln(row_height)
 
-          out = pdf.output()
-          return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode("latin-1")
-
-
+        out = pdf.output()
+        return bytes(out) if isinstance(out, (bytes, bytearray)) else out.encode("latin-1")
 
     def gerar_pdf_tabela(dataframe: pd.DataFrame) -> bytes:
         pdf = FPDF()
@@ -90,7 +87,8 @@ def main():
         buf = BytesIO()
         pdf.output(buf)
         return buf.getvalue()
-    def consulta(tipo,datai,horai,dataf,horaf,area):
+
+    def consulta(tipo, datai, horai, dataf, horaf, area):
 
         import datetime
         import time
@@ -99,25 +97,23 @@ def main():
         import json
         from datetime import datetime, timedelta, date
         from bs4 import BeautifulSoup
-        estacaoasw=[]
+        estacaoasw = []
+
         cab = 'Localidade,Tipo,Data,Mensagem'
         arquivo = []
 
         f = open("metarteste.csv", "w")
         f.write(cab)
         arquivo.append(cab)
-       
-        f = open("metarteste.csv", "w")
-        
-        
+
         data_hora1 = datetime.combine(datai, horai)
         data_hora2 = datetime.combine(dataf, horaf)
         diferenca = data_hora2 - data_hora1
-        intervalo=int(str(diferenca).split(":")[0])
-        horainicialint=int(str(horai).split(":")[0])
+        intervalo = int(str(diferenca).split(":")[0])
+        horainicialint = int(str(horai).split(":")[0])
         horafinalint = int(str(horaf).split(":")[0])
 
-        if area==1:
+        if area == 1:
             estacaoaws = []
             estacaoaws.append('SBJR%2C')
             estacaoaws.append('SBJR%2C')
@@ -153,9 +149,6 @@ def main():
             estacaoaws.append('SBPL%2C')
             estacaoaws.append('SBPJ%2C')
 
-
-
-
             # estacaoaws.append('SBAC%2CSBAR%2CSBCB%2CSBCP%2CSBES')
             # estacaoaws.append('SBFS%2CSBFN%2CSBFZ%2CSBGL%2CSBJE%2CSBJP')
             # estacaoaws.append('SBJU%2CSBKG%2CSBME%2CSBMI%2CSBMO%2CSBMS')
@@ -163,7 +156,7 @@ def main():
             # estacaoaws.append('SBPL%2CSBPS%2CSBRF')
             # estacaoaws.append('SBNT%2CSBSL%2CSBSG')
             # estacaoaws.append('SBTE%2CSBVT%2CSNRU')
-        elif area==2:
+        elif area == 2:
             estacaoaws = []
             estacaoaws.append('SBRD%2C')
             estacaoaws.append('SBRD%2C')
@@ -201,9 +194,7 @@ def main():
             estacaoaws.append('SBBV%2C')
         elif area == 3:
             estacaoaws = []
-            estacaoaws.append('SBBV,'+estacao+'%2C')
-
-
+            estacaoaws.append('SBBV,' + estacao + '%2C')
 
             # estacaoaws.append('SBRD%2CSBVH%2CSWEI%2CSBUY%2CSBJI%2CSBRB')
             # estacaoaws.append('SSKW%2CSBCY%2CSBPV%2CSBCZ%2CSBTT%2CSBIZ')
@@ -215,25 +206,26 @@ def main():
 
             for j in range(0, intervalo + 1, 1):
 
-                #datainic = datahini + timedelta(days=j)
+                # datainic = datahini + timedelta(days=j)
                 anoi = str(datai)[0:4]
                 mesi = str(datai)[5:7]
                 diai = str(datai)[8:10]
-                #horaii = str(int(horai[0:2])+int(j))
-                horaii = str(horainicialint+j)
+                # horaii = str(int(horai[0:2])+int(j))
+                horaii = str(horainicialint + j)
                 datainicio = diai + '/' + mesi + '/' + anoi
                 anof = str(datai)[0:4]
                 mesf = str(datai)[5:7]
                 diaf = str(datai)[8:10]
-                #horaff = str(int(horai[0:2])+int(j))
-
+                # horaff = str(int(horai[0:2])+int(j))
 
                 # url = 'https://redemet.decea.gov.br//api/consulta_automatica/index.php?local=sbbr,sbgl,sbsp&msni=2023041900&data_fim=2023041923&saida_html=SIM'g=metar&data_i
 
-                if tipo=="TAF":
-                    url = 'https://api-redemet.decea.mil.br/mensagens/taf/' + estacaoaws[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T' + '&msg=taf&data_ini=' + anoi + mesi + diai + horaii+'&data_fim=' + anof + mesf + diaf + horaii+'&saida_html=SIMhoraii&page_tam=200'
+                if tipo == "TAF":
+                    url = 'https://api-redemet.decea.mil.br/mensagens/taf/' + estacaoaws[
+                        k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T' + '&msg=taf&data_ini=' + anoi + mesi + diai + horaii + '&data_fim=' + anof + mesf + diaf + horaii + '&saida_html=SIMhoraii&page_tam=200'
                 else:
-                    url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaoaws[k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T' + '&msg=metar&data_ini=' + anoi + mesi + diai + horaii + '&data_fim=' + anof + mesf + diaf + horaii + '&saida_html=SIMhoraii&page_tam=200'
+                    url = 'https://api-redemet.decea.mil.br/mensagens/metar/' + estacaoaws[
+                        k] + '?api_key=bIV369CxQg0Zc8x0RoQPx75pXCfrBZqGZr1nfi2T' + '&msg=metar&data_ini=' + anoi + mesi + diai + horaii + '&data_fim=' + anof + mesf + diaf + horaii + '&saida_html=SIMhoraii&page_tam=200'
 
                 print('cheguei 1')
                 print(url)
@@ -264,7 +256,7 @@ def main():
                     elif p[i].find('SNRU') > -1:
                         a = 'SNRU'
 
-                    #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
+                    # montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
                     #montalinha = p[i][0:p[i].find('=') + 1]
                     montalinha = p[i][0:p[i].find('}]')]
                     arquivo.append(montalinha)
@@ -273,17 +265,14 @@ def main():
         f.close()
         return arquivo
 
-
-
-
-    clicou=False
+    clicou = False
     st.set_page_config(layout="wide")
     while True:
         with st.sidebar:
             with st.container(border=True):
                 # end_date = datetime.today()
                 # start_date = datetime.today()
-                tipo = st.radio("Escolha a mensagem",["Metar", "TAF"], horizontal=True)
+                tipo = st.radio("Escolha a mensagem", ["Metar", "TAF"], horizontal=True)
                 # diain = st.date_input('Dia Inicial:', start_date)
                 # diafi = st.date_input('Dia Final:', end_date)
                 hoje_zulu = datetime.now(timezone.utc).date()
@@ -292,115 +281,103 @@ def main():
                 col1, col2 = st.columns(2)
 
                 with col1:
-                    datai = st.date_input("Data Inicial", value=hoje_zulu,format="DD/MM/YYYY")
+                    datai = st.date_input("Data Inicial", value=hoje_zulu, format="DD/MM/YYYY")
                     dataf = st.date_input("Data Final", value=hoje_zulu, format="DD/MM/YYYY")
 
                 with col2:
-                    horai = st.time_input("Hora Inicial",value=agora_zulu,step=3600)
+                    horai = st.time_input("Hora Inicial", value=agora_zulu, step=3600)
                     horaf = st.time_input("Hora Final", value=agora_zulu, step=3600)
 
-                #col3, col4 = st.columns(2)
+                # col3, col4 = st.columns(2)
 
-                #with col3:
-                    #area1 = st.checkbox("Área_1",value=True)
-                area = st.radio("Escolha a área", ["Área 1", "Área 2","Estação"], horizontal=True)
+                # with col3:
+                # area1 = st.checkbox("Área_1",value=True)
+                area = st.radio("Escolha a área", ["Área 1", "Área 2", "Estação"], horizontal=True)
 
-                #with col4:
+                # with col4:
                 #    area2 = st.checkbox("Área_2")
-                if area =='Área 1':
-                    area=1
-                if area =='Área 2':
-                    area=2
+                if area == 'Área 1':
+                    area = 1
+                if area == 'Área 2':
+                    area = 2
                 if area == 'Estação':
                     estacao = (st.text_input('Escolha a estação:')).upper()
-                    #estacao="SBGR"+estacao
-                    area=3
+                    # estacao="SBGR"+estacao
+                    area = 3
 
                 col5, col6 = st.columns(2)
                 with col5:
-                    
+
                     if st.button("Consultar", use_container_width=True):
-                        pdf=consulta(tipo, datai, horai, dataf, horaf, area)
-                        clicou=True
+                        pdf = consulta(tipo, datai, horai, dataf, horaf, area)
+                        clicou = True
                         df = pd.read_csv("metarteste.csv")
                         df.to_csv("arquivo_limpo.csv", index=False)
                         df = pd.read_csv("arquivo_limpo.csv")
                         df.drop(columns=["Data", "Mensagem"], inplace=True)
                         df.index = [""] * len(df)
                         #df.columns = [""] * len(df.columns)
-                        #pdf_bytes = df_to_pdf_bytes(df)
-                        #st.download_button(
+                        #df.drop(columns=["Tipo", "Data", "Mensagem"], inplace=True)
+                        # pdf_bytes = df_to_pdf_bytes(df)
+                        # st.download_button(
                         #    label="Baixar tabela em PDF",
-                         #   data=pdf_bytes,
-                         #   file_name="dataframe.pdf",
-                         #   mime="application/pdf",
-                         #   )
+                        #   data=pdf_bytes,
+                        #   file_name="dataframe.pdf",
+                        #   mime="application/pdf",
+                        #   )
                         st.download_button(
                             label="Baixar PDF formatado",
                             data=gerar_pdf(df),
                             file_name="relatorio.pdf",
                             mime="application/pdf"
-                            )
-                        
+                        )
 
-
-
-            #st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
-                       
-
+                # st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
 
                 with col6:
                     if st.button("Salvar pdf", use_container_width=True):
                         st.write("em implantação")
-                        #pdf_bytes = df_to_pdf_bytes(df)
-                        #st.download_button(
-                            #label="Baixar tabela em PDF",
-                            #data=pdf_bytes,
-                            #file_name="dataframe.pdf",
-                            #mime="application/pdf",
-                           # )
-                        #pdf_bytes = gerar_pdf_tabela(df)
+                        # pdf_bytes = df_to_pdf_bytes(df)
+                        # st.download_button(
+                        # label="Baixar tabela em PDF",
+                        # data=pdf_bytes,
+                        # file_name="dataframe.pdf",
+                        # mime="application/pdf",
+                        # )
+                        # pdf_bytes = gerar_pdf_tabela(df)
 
-                       # st.download_button(
-                        #    label="Baixar tabela em PDF",
-                        #    data=pdf_bytes,
-                       #     file_name="tabela.pdf",
-                       #     mime="application/pdf",
-                      #  )
-
-
-
-
-
+                    # st.download_button(
+                    #    label="Baixar tabela em PDF",
+                    #    data=pdf_bytes,
+                    #     file_name="tabela.pdf",
+                    #     mime="application/pdf",
+                    #  )
 
         break
 
-    if tipo=="Metar" or tipo=="TAF":
-
+    if tipo == "Metar" or tipo == "TAF":
 
         if clicou:
-            #df = pd.read_csv("metarteste.csv")
-            #df.to_csv("arquivo_limpo.csv", index=False)
-            #df = pd.read_csv("arquivo_limpo.csv")
+            # df = pd.read_csv("metarteste.csv")
+            # df.to_csv("arquivo_limpo.csv", index=False)
+            # df = pd.read_csv("arquivo_limpo.csv")
 
+            # df.index = [""] * len(df)
+            # df.columns = [""] * len(df.columns)
 
+            if tipo == "Metar":
 
-            
-            #df.index = [""] * len(df)
-            #df.columns = [""] * len(df.columns)
-            
-            if tipo=="Metar":
+                #st.dataframe(df, height=1000, hide_index=True)
+                st.dataframe(df[["Localidade", "Tipo"]] , hide_index=True)
+                # st.dataframe(df.set_index(df.columns[0]))
 
-                st.dataframe(df,height=1000,hide_index=True)
-                #st.dataframe(df.set_index(df.columns[0]))
-                
             else:
-                st.dataframe(df, use_container_width=True,row_height=80,height=1000,hide_index=True)
-            
-           # st.table(df, width="stretch")
+                st.dataframe(df, use_container_width=True,  height=1000, hide_index=True)
+
+            # st.table(df, width="stretch")
             html = df.to_html(index=False)
-            #convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
-            #clicou=False
+            # convert("arquivo_limpo.csv", "relatorio.pdf", orientation="L", delimiter=";")
+            # clicou=False
             
            
 
