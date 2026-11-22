@@ -25,7 +25,7 @@ def main():
         pdf.set_font("Helvetica", size=9)
         
         # Cria tabela nativa que ajusta larguras e quebra linhas automaticamente
-        with pdf.table(col_widths=(1000, 0, 0)) as table:
+        with pdf.table(col_widths=(1000, 300, 0)) as table:
             # Cabeçalho
             row = table.row()
             for col in dataframe.columns:
@@ -100,7 +100,12 @@ def main():
         from datetime import datetime, timedelta, date
         from bs4 import BeautifulSoup
         estacaoasw=[]
+        cab = 'Localidade,Tipo,Data,Mensagem'
         arquivo = []
+
+        f = open("metarteste.csv", "w")
+        f.write(cab)
+        arquivo.append(cab)
        
         f = open("metarteste.csv", "w")
         
@@ -260,8 +265,8 @@ def main():
                         a = 'SNRU'
 
                     #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
-                    montalinha = p[i][0:p[i].find('=') + 1]
-                    #montalinha = p[i][0:p[i].find('}]')]
+                    #montalinha = p[i][0:p[i].find('=') + 1]
+                    montalinha = p[i][0:p[i].find('}]')]
                     arquivo.append(montalinha)
                     montalinha = montalinha.replace('"', '')
                     f.write("\n" + montalinha)
@@ -320,8 +325,9 @@ def main():
                         df = pd.read_csv("metarteste.csv")
                         df.to_csv("arquivo_limpo.csv", index=False)
                         df = pd.read_csv("arquivo_limpo.csv")
+                        df.drop(columns=["Data", "Mensagem"], inplace=True)
                         df.index = [""] * len(df)
-                        df.columns = [""] * len(df.columns)
+                        #df.columns = [""] * len(df.columns)
                         #pdf_bytes = df_to_pdf_bytes(df)
                         #st.download_button(
                         #    label="Baixar tabela em PDF",
