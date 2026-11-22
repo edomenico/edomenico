@@ -99,7 +99,7 @@ def main():
         from bs4 import BeautifulSoup
         estacaoasw = []
 
-        cab = 'Localidade,Horário_inserção,Data,Mensagem'
+        cab = 'Localidade,Data/hora,Data,Mensagem'
         arquivo = []
 
         f = open("metarteste.csv", "w")
@@ -368,7 +368,7 @@ def main():
             if tipo == "Metar":
 
                 #st.dataframe(df, height=1000, hide_index=True)
-                st.dataframe(df[["Localidade", "Tipo"]] , hide_index=True)
+                st.dataframe(df[["Localidade", "Data/hora"]] , hide_index=True)
                 # st.dataframe(df.set_index(df.columns[0]))
 
             else:
