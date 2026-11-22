@@ -25,7 +25,7 @@ def main():
         pdf.set_font("Helvetica", size=9)
         
         # Cria tabela nativa que ajusta larguras e quebra linhas automaticamente
-        with pdf.table(col_widths=(1000, 30, 0)) as table:
+        with pdf.table(col_widths=(1000, 0, 0)) as table:
             # Cabeçalho
             row = table.row()
             for col in dataframe.columns:
@@ -260,8 +260,8 @@ def main():
                         a = 'SNRU'
 
                     #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
-                    #montalinha = p[i][0:p[i].find('=') + 1]
-                    montalinha = p[i][0:p[i].find('}]')]
+                    montalinha = p[i][0:p[i].find('=') + 1]
+                    #montalinha = p[i][0:p[i].find('}]')]
                     arquivo.append(montalinha)
                     montalinha = montalinha.replace('"', '')
                     f.write("\n" + montalinha)
