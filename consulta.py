@@ -260,8 +260,8 @@ def main():
                         a = 'SNRU'
 
                     #montalinha = str(i) + ',' + a + ',' + b + ',' + datainicio + ',' + p[i][0:p[i].find('=') + 1]
-                    montalinha = p[i][0:p[i].find('=') + 1]
-                    #montalinha = p[i][0:p[i].find('}]')]
+                    #montalinha = p[i][0:p[i].find('=') + 1]
+                    montalinha = p[i][0:p[i].find('}]')]
                     arquivo.append(montalinha)
                     montalinha = montalinha.replace('"', '')
                     f.write("\n" + montalinha)
