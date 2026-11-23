@@ -368,7 +368,7 @@ def main():
             if tipo == "Metar":
 
                 #st.dataframe(df, height=1000, hide_index=True)
-                st.dataframe(df[["Localidade", "Data/hora"]] , hide_index=True)
+                #st.dataframe(df[["Localidade", "Data/hora"]] , hide_index=True)
                 st.dataframe(df, use_container_width=True,height=1000,hide_index=True)
                 # st.dataframe(df.set_index(df.columns[0]))
 
