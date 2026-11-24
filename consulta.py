@@ -286,7 +286,7 @@ def main():
 
                 with col2:
                     horai = st.time_input("Hora Inicial", value=agora_zulu, step=3600, key="hora")
-                    horaf = st.time_input("Hora Final", value=agora_zulu, step=3600, key="hora")
+                    horaf = st.time_input("Hora Final", value=agora_zulu, step=3600)
 
                 # col3, col4 = st.columns(2)
 
