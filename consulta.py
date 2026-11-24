@@ -285,8 +285,8 @@ def main():
                     dataf = st.date_input("Data Final", value=hoje_zulu, format="DD/MM/YYYY")
 
                 with col2:
-                    horai = st.time_input("Hora Inicial", value=agora_zulu, step=3600)
-                    horaf = st.time_input("Hora Final", value=agora_zulu, step=3600)
+                    horai = st.time_input("Hora Inicial", value=agora_zulu, step=3600, key="hora")
+                    horaf = st.time_input("Hora Final", value=agora_zulu, step=3600, key="hora")
 
                 # col3, col4 = st.columns(2)
 
