@@ -325,18 +325,26 @@ def main():
                         #   file_name="dataframe.pdf",
                         #   mime="application/pdf",
                         #   )
+                        #st.download_button(
+                        #    label="Baixar PDF formatado",
+                        #    data=gerar_pdf(df),
+                         #   file_name="relatorio.pdf",
+                         #   mime="application/pdf"
+                       # )
+
+                # st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
+
+                with col6:
+                    if clicou=="True":
                         st.download_button(
                             label="Baixar PDF formatado",
                             data=gerar_pdf(df),
                             file_name="relatorio.pdf",
                             mime="application/pdf"
                         )
-
-                # st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
-
-                with col6:
-                    if st.button("Salvar pdf", use_container_width=True):
-                        st.write("em implantação")
+                        
+                    #if st.button("Salvar pdf", use_container_width=True):
+                     #   st.write("em implantação")
                         # pdf_bytes = df_to_pdf_bytes(df)
                         # st.download_button(
                         # label="Baixar tabela em PDF",
