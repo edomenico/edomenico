@@ -335,7 +335,7 @@ def main():
                 # st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
 
                 with col6:
-                    if clicou=="True":
+                    #if clicou=="True":
                         st.download_button(
                             label="Baixar PDF formatado",
                             data=gerar_pdf(df),
