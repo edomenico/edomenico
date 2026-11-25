@@ -318,13 +318,13 @@ def main():
                         df.index = [""] * len(df)
                         #df.columns = [""] * len(df.columns)
                         #df.drop(columns=["Tipo", "Data", "Mensagem"], inplace=True)
-                        pdf_bytes = df_to_pdf_bytes(df)
-                        st.download_button(
-                           label="Baixar tabela em PDF",
-                           data=pdf_bytes,
-                           file_name="dataframe.pdf",
-                           mime="application/pdf",
-                           )
+                       # pdf_bytes = df_to_pdf_bytes(df)
+                       # st.download_button(
+                        #   label="Baixar tabela em PDF",
+                        #   data=pdf_bytes,
+                        #   file_name="dataframe.pdf",
+                        #   mime="application/pdf",
+                        #   )
                         #st.download_button(
                         #    label="Baixar PDF formatado",
                         #    data=gerar_pdf(df),
