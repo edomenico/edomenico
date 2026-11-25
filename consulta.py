@@ -343,7 +343,7 @@ def main():
                                 arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' TAF AREA ' + estacao
 
 
-                        else:
+                    else:
                             if tipo == "Metar":
                                 arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' METAR AREA ' + str(area)
                             else:
