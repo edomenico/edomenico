@@ -348,18 +348,18 @@ def main():
                                 arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' METAR AREA ' + str(area)
                             else:
                                 arquivopdf=str(datai.day)+str(datai.month)+str(datai.year)[2:4]+str(horai)[0:2] +' TAF AREA '+ str(area)
-
+                        
 
                         #st.button("Limpar", disabled=is_locked)
                         #st.button("Salvar pdf", use_container_width=True):
-                        if clicou == True:
+                    if clicou == True:
                             st.download_button(
                                 label="Salvar PDF",
                                 data=gerar_pdf(df),
                                 file_name=arquivopdf+".pdf",
                                 mime="application/pdf"
                             )
-                        else:
+                    else:
                             st.button("Salvar PDF", use_container_width=True)
 
         break
