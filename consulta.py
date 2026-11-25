@@ -335,6 +335,19 @@ def main():
                 # st.dataframe(df, use_container_width=True, height=1000,hide_index=True)
 
                 with col6:
+                    
+                    if area==3:
+                            if tipo=="Metar":
+                                arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' METAR AREA ' + estacao
+                            else:
+                                arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' TAF AREA ' + estacao
+
+
+                        else:
+                            if tipo == "Metar":
+                                arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' METAR AREA ' + str(area)
+                            else:
+                                arquivopdf=str(datai.day)+str(datai.month)+str(datai.year)[2:4]+str(horai)[0:2] +' TAF AREA '+ str(area)
 
 
                         #st.button("Limpar", disabled=is_locked)
@@ -343,7 +356,7 @@ def main():
                             st.download_button(
                                 label="Salvar PDF",
                                 data=gerar_pdf(df),
-                                file_name="relatorio.pdf",
+                                file_name=arquivopdf+".pdf",
                                 mime="application/pdf"
                             )
                         else:
