@@ -347,7 +347,7 @@ def main():
                             if tipo == "Metar":
                                 arquivopdf = str(datai.day) + str(datai.month) + str(datai.year)[2:4] + str(horai)[0:2] + ' METAR AREA ' + str(area)
                             else:
-                                arquivopdf=str(datai.day)+str(datai.month)+str(datai.year)[2:4]+str(horai)[0:2] +' TAF AREA '+ str(area) +'Z CONSULTA REDEMET'
+                                arquivopdf=str(datai.day)+str(datai.month)+str(datai.year)[2:4]+str(horai)[0:2] +'Z TAF AREA '+ str(area) +' CONSULTA REDEMET'
                         
 
                         #st.button("Limpar", disabled=is_locked)
